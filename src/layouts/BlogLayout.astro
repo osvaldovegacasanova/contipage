@@ -75,8 +75,8 @@ const breadcrumbLd = {
         </nav>
       </div>
       {heroSrc && (
-        <div class="max-w-5xl mx-auto mt-8 rounded-2xl overflow-hidden shadow-md">
-          <img src={heroSrc} alt={title} class="w-full h-auto object-cover" />
+        <div class="mx-auto mt-8 w-full max-w-[500px] aspect-square rounded-2xl overflow-hidden shadow-md">
+          <img src={heroSrc} alt={title} class="w-full h-full object-cover" />
         </div>
       )}
     </Container>
@@ -93,3 +93,29 @@ const breadcrumbLd = {
   <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
 </Layout>
+
+<style is:global>
+  @media (min-width: 768px) {
+    .prose .blog-figure {
+      float: none;
+      /* Reduce visual density around el texto */
+      margin: 2.75rem 0;
+      /* Secundarias al 60% del tamaño del cover (≈300px de 500px) */
+      max-width: 300px;
+    }
+    .prose .blog-figure:nth-of-type(odd) {
+      float: right;
+      margin: 2.75rem 0 2.75rem 2rem;
+    }
+    .prose .blog-figure:nth-of-type(even) {
+      float: left;
+      margin: 2.75rem 2rem 2.75rem 0;
+    }
+    /* Clear floats after article content */
+    .prose::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+  }
+</style>
