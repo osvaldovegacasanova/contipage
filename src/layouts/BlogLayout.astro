@@ -8,7 +8,7 @@ export interface Props {
   description?: string;
   pubDate?: string;
   updatedDate?: string;
-  heroImage?: string;
+  heroImage?: any;
   author?: string;
 }
 
@@ -16,8 +16,9 @@ const { title, description, pubDate, updatedDate, heroImage, author } = Astro.pr
 
 const siteOrigin = Astro.url?.origin ?? '';
 const canonicalUrl = Astro.url?.href ?? '';
-const resolvedHero = heroImage
-  ? (heroImage.startsWith('http') ? heroImage : `${siteOrigin}${heroImage}`)
+const heroSrc = typeof heroImage === 'string' ? heroImage : heroImage?.src;
+const resolvedHero = heroSrc
+  ? (heroSrc.startsWith('http') ? heroSrc : `${siteOrigin}${heroSrc}`)
   : undefined;
 
 const breadcrumb = [
@@ -73,9 +74,9 @@ const breadcrumbLd = {
           <span class="text-heading-2">{title}</span>
         </nav>
       </div>
-      {heroImage && (
+      {heroSrc && (
         <div class="max-w-5xl mx-auto mt-8 rounded-2xl overflow-hidden shadow-md">
-          <img src={heroImage} alt={title} class="w-full h-auto object-cover" />
+          <img src={heroSrc} alt={title} class="w-full h-auto object-cover" />
         </div>
       )}
     </Container>

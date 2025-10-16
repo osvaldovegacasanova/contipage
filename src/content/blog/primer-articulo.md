@@ -2,7 +2,7 @@
 title: "¿Qué es un compresor centrífugo?"
 description: "Introducción técnica a los principios de operación, componentes y ventajas de los compresores centrífugos."
 pubDate: 2025-01-15
-heroImage: "/images/logo.png"
+heroImage: "/blog/wind.png"
 tags: ["compresores", "centrífugo", "ingeniería"]
 author: "Continental Andes Blowers"
 ---
@@ -31,4 +31,3 @@ El gas ingresa axialmente al impulsor y se acelera radialmente por la acción de
 ## Aplicaciones
 
 PTAR, biogás, minería e industria de procesos, entre otras.
-

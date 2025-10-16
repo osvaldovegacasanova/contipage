@@ -2,6 +2,7 @@
 title: "Puesta en marcha segura: checklist esencial"
 description: "Lista de verificación para una puesta en marcha segura y eficiente de sopladores y compresores."
 pubDate: 2025-01-20
+heroImage: "/blog/solar3.png"
 tags: ["puesta en marcha", "mantenimiento", "seguridad"]
 author: "Equipo de Servicios"
 ---
@@ -25,4 +26,3 @@ Una puesta en marcha planificada minimiza riesgos y asegura rendimiento desde el
 ## Documentación
 
 Mantenga registros de pruebas y parámetros para optimización y trazabilidad.
-
