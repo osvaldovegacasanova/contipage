@@ -12,6 +12,6 @@ const { Content } = await post.render();
 const data = post.data;
 ---
 
-<BlogLayout title={data.title} description={data.description} pubDate={String(data.pubDate)} updatedDate={data.updatedDate ? String(data.updatedDate) : undefined} heroImage={data.heroImage}>
+<BlogLayout title={data.title} description={data.description} pubDate={String(data.pubDate)} updatedDate={data.updatedDate ? String(data.updatedDate) : undefined} heroImage={data.heroImage} author={data.author}>
   <Content />
 </BlogLayout>

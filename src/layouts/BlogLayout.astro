@@ -9,9 +9,45 @@ export interface Props {
   pubDate?: string;
   updatedDate?: string;
   heroImage?: string;
+  author?: string;
 }
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, author } = Astro.props as Props;
+
+const siteOrigin = Astro.url?.origin ?? '';
+const canonicalUrl = Astro.url?.href ?? '';
+const resolvedHero = heroImage
+  ? (heroImage.startsWith('http') ? heroImage : `${siteOrigin}${heroImage}`)
+  : undefined;
+
+const breadcrumb = [
+  { name: 'Inicio', item: `${siteOrigin}/` },
+  { name: 'Blog', item: `${siteOrigin}/blog` },
+  { name: title, item: canonicalUrl },
+];
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description: description,
+  datePublished: pubDate ? new Date(pubDate).toISOString() : undefined,
+  dateModified: (updatedDate ?? pubDate) ? new Date(updatedDate ?? pubDate!).toISOString() : undefined,
+  image: resolvedHero,
+  author: author ? { '@type': 'Person', name: author } : undefined,
+  mainEntityOfPage: canonicalUrl ? { '@type': 'WebPage', '@id': canonicalUrl } : undefined,
+};
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumb.map((b, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: b.name,
+    item: b.item,
+  })),
+};
 ---
 
 <Layout title={title}>
@@ -29,6 +65,13 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
             {updatedDate && <span>Actualizado: {new Date(updatedDate).toLocaleDateString()}</span>}
           </div>
         )}
+        <nav aria-label="Breadcrumb" class="mt-4 text-sm text-heading-3 opacity-80 flex justify-center gap-2">
+          <a href="/" class="hover:text-primary">Inicio</a>
+          <span>/</span>
+          <a href="/blog" class="hover:text-primary">Blog</a>
+          <span>/</span>
+          <span class="text-heading-2">{title}</span>
+        </nav>
       </div>
       {heroImage && (
         <div class="max-w-5xl mx-auto mt-8 rounded-2xl overflow-hidden shadow-md">
@@ -45,5 +88,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
       </article>
     </Container>
   </section>
-</Layout>
 
+  <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
+</Layout>
