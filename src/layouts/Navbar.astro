@@ -1,4 +1,4 @@
----
+﻿---
 import Container from "../components/shared/Container.astro";
 import Navitem from "../components/shared/Navitem.astro";
 import BtnLink from "../components/shared/BtnLink.astro";
@@ -6,7 +6,7 @@ import BtnThemeSwitch from "../components/shared/BtnThemeSwitch.astro";
 
 const navItems = [
   {
-    href: "#",
+    href: "#hero",
     text: "Home",
   },
   // {
@@ -14,24 +14,24 @@ const navItems = [
   //   text: "Hero",
   // },
   {
-    href: "#services",
-    text: "Services",
+    href: "#servicios",
+    text: "Servicios",
   },
   {
-    href: "#innovations",
-    text: "Innovations",
+    href: "#innovacion",
+    text: "Productos",
   },
   {
-    href: "#testimonials",
-    text: "Testimonials",
+    href: "#testimonios",
+    text: "Testimonios",
   },
   {
-    href: "#environment",
-    text: "Environment",
+    href: "#productos",
+    text: "Temporal",
   },
   {
-    href: "#projects",
-    text: "Projects",
+    href: "#",
+    text: "Artículos",
   },
 ];
 ---
@@ -43,9 +43,11 @@ const navItems = [
     <div class="min-w-max inline-flex relative">
       <!-- LOGO -->
       <a href="/" class="relative flex items-center gap-3">
-        <div class="relative h-7 overflow-hidden flex rounded-xl">
+        <div class="relative h-10 md:h-12 overflow-hidden flex items-center rounded-xl">
+          <img src="/images/logo.png" alt="Logo" class="h-10 md:h-12 w-auto dark:hidden" />
+          <img src="/images/logo_dark.png" alt="Logo" class="hidden dark:block h-10 md:h-12 w-auto" />
           <svg
-            class="fill-primary"
+            class="hidden fill-primary"
             id="logo-87"
             width="100%"
             height="100%"
@@ -126,7 +128,7 @@ const navItems = [
       </ul>
 
       <div
-        class="lg:min-w-max flex items-center sm:w-max w-full pb-6 lg:pb-0 border-b border-box-bg lg:border-0 px-6 lg:px-0"
+        class="hidden lg:min-w-max flex items-center sm:w-max w-full pb-6 lg:pb-0 border-b border-box-bg lg:border-0 px-6 lg:px-0"
       >
         <BtnLink
           text="Get Started"
@@ -165,3 +167,5 @@ const navItems = [
   </nav>
   <!-- </Container> -->
 </header>
+
+

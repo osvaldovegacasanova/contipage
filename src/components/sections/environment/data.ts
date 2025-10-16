@@ -1,19 +1,20 @@
-import img from "./assets/green-hands.png";
+﻿import img from "./assets/green-hands.png";
 
 export const environmentalImpactSection = {
-  title: "Environmental Impact",
-  subheading1_1: "Choosing [Company Name] for a",
-  subheading1_2: " Greener Tomorrow",
+  title: "Temporal",
+  subheading1_1: "Continental Andes Blowers en la",
+  subheading1_2: " Región Andina",
   description:
-    "At [Company Name], we are committed to making a positive impact on the environment. By choosing our sustainable energy solutions, you contribute to:",
+    "Somos la oficina de Continental Industrie para Chile, Perú, Argentina, Bolivia y Ecuador.\nMás de 25 años de experiencia nos permiten comprender las condiciones específicas de cada industria y proyecto.",
   impactPoints: [
-    "Reducing Carbon Emissions",
-    "Conserving Natural Resources",
-    "Preserving Biodiversity",
-    "Mitigating Climate Change",
-    "Promoting a Cleaner and Healthier Planet",
-  ],
+    "Cobertura: Chile, Perú, Argentina, Bolivia, Ecuador",
+    "+25 años en la región",
+    "Procesos: PTAR, biogás, minería e industria",
+    "Objetivos: eficiencia, seguridad y continuidad operacional",
+      ],
   visual: img,
-  callToAction: "Join Us in Building a Sustainable Future",
-  button: "Learn More",
+  callToAction: "Conózcanos y cuente con nuestro soporte",
+  button: "Contactar",
 };
+
+

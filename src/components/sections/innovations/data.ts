@@ -1,32 +1,36 @@
-import imgGrid from "./assets/inno-grid.webp";
+﻿import imgGrid from "./assets/singlestage.webp";
 import imgSolar from "./assets/inno-panel.webp";
 import imgWind from "./assets/inno-wind.webp";
 
 export const innovationsSection = {
-  title: "Latest Innovations",
-  subheading1_1: "Discover Our Cutting-edge",
-  subheading1_2: " Green Energy Technologies",
+  title: "Productos",
+  subheading1_1: "Sopladores Centrífugos",
+  subheading1_2: " Monoetapa y Multietapa",
   innovations: [
     {
-      title: "Smart Grid Integration",
-      description:
-        "Revolutionize energy distribution with our smart grid technology, optimizing efficiency, minimizing wastage, and adapting to demand fluctuations. Stay connected with innovative solutions for a sustainable, cost-effective energy ecosystem. Embrace the future with our cutting-edge smart grid integration, enhancing reliability and paving the way for efficiency and sustainability.",
+      title: "Compresor Centrífugo Monoetapa",
+      description: `Los compresores radiales tipo TC de Continental Industrie son equipos de flujo modernos para la compresión de grandes cantidades de aire o gas, desde 2,500 hasta 35,000 m3/h, con una presión de hasta 1,3 bar g.
+Gracias a las tolerancias de alta precisión y al control continuo de los parámetros mediante la aplicación de nuevas técnicas de tecnología aeroespacial, el mecanizado 3D de las palas del impulsor asegura una alta eficiencia de compresión (más del 85%) y un alto rendimiento general.`,
       visual: imgGrid,
     },
     {
-      title: "Advanced Solar Panel Design",
+      title: "Compresor Centrífugo Multietapa",
       description:
-        "Boost solar efficiency with our state-of-the-art solar panel designs. Our innovative technologies capture more sunlight, ensuring maximum energy production for your home or business. Experience enhanced sustainability and increased energy output with our advanced solar solutions.",
+        "Como resultado de nuestra preocupación por mejorar nuestro desempeño e invirtiendo gran parte de nuestros recursos en la investigación, Continental Industrie puede ofrecerle una gama completa de máquinas, que pueden suministrar desde 1.000 a 65.000 m3/hr de aire seco, limpio y sin pulsaciones alcanzando presiones relativas de hasta 1,8 bares o en vacío de hasta 6.700 mmH2O (WG).",
       visual: imgSolar,
     },
     {
-      title: "Next-gen Wind Turbines",
+      title: "Producto de Prueba",
       description:
-        "Transform your wind energy experience with our next-generation wind turbines. Our sleek design, enhanced efficiency, and minimal environmental impact underscore our commitment to innovation. Elevate your sustainable energy journey with cutting-edge wind solutions that prioritize both performance and environmental responsibility.",
+        "Como resultado de nuestra preocupación por mejorar nuestro desempeño e invirtiendo gran parte de nuestros recursos en la investigación, Continental Industrie puede ofrecerle una gama completa de máquinas, que pueden suministrar desde 1.000 a 65.000 m3/hr de aire seco, limpio y sin pulsaciones alcanzando presiones relativas de hasta 1,8 bares o en vacío de hasta 6.700 mmH2O (WG).",
       visual: imgWind,
     },
   ],
   visual: "innovations-section-image.jpg",
-  callToAction: "Explore the Future of Green Energy with [Company Name]",
-  button: "Learn More",
+  callToAction: "Solicite una puesta en marcha con nuestro equipo",
+  button: "Solicitar asesoría",
 };
+
+
+
+

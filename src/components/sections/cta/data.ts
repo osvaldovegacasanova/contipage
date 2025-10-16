@@ -4,30 +4,30 @@ import svg3 from "./assets/green-3.svg?raw";
 import svg4 from "./assets/green-4.svg?raw";
 
 export const getInvolvedSection = {
-  title: "Get Involved",
-  subheading1_1: "Join Us ",
-  subheading1_2: "in Building a Sustainable Future",
+  title: "Contáctenos",
+  subheading1_1: "Nos contactaremos ",
+  subheading1_2: "con usted a la brevedad",
   initiatives: [
     {
-      title: "Community Outreach",
+      title: "Oficina Comercial",
       description:
-        "Discover our community initiatives aimed at promoting awareness and education on sustainable living. Join us in creating a positive impact together.",
+        "Avenida Italia 850, Providencia, Santiago, Chile.",
       visual: svg2,
     },
     {
-      title: "Green Events",
+      title: "Bodegas",
       description:
-        "Participate in our upcoming green events. From tree-planting drives to eco-friendly workshops, be a part of the movement towards a healthier planet.",
+        "Pdte. Jorge Alessandri Rodríguez 11491, San Bernardo.",
       visual: svg4,
     },
     {
-      title: "Partnerships for Sustainability",
+      title: "Canales de contacto",
       description:
-        "Explore our partnerships with organizations dedicated to environmental conservation. Learn how you can contribute to sustainable practices through collaboration.",
+        "Tel/Fax: (+56 2) 2 461 94 18 · cba@continentalandes.com",
       visual: svg3,
     },
   ],
   visual: "get-involved-section-image.jpg",
-  callToAction: "Take Action Today for a Greener Tomorrow",
-  button: "Join Our Initiatives",
+  callToAction: "Envíenos su consulta técnica o comercial",
+  button: "Escríbanos",
 };

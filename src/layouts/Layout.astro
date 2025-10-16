@@ -1,4 +1,4 @@
----
+﻿---
 import Navbar from "./Navbar.astro";
 import Footer from "./Footer.astro";
 
@@ -9,17 +9,18 @@ export interface Props {
 const { title } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta
       name="description"
-      content="Energy template made with ASTROJS and TAILWINDCSS"
+      content="Web Site creado con Astro y TailwindCSS"
     />
-    <title>Energy template - {title}</title>
+    <title>{title}</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
@@ -125,3 +126,4 @@ const { title } = Astro.props;
     }
   </script>
 </html>
+

@@ -3,32 +3,32 @@ import img2 from "./assets/wind-person.png";
 import img3 from "./assets/amazonas2.png";
 
 export const projectsSection = {
-  title: "Featured Projects",
-  subheading1_1: "Explore Our Successful ",
-  subheading1_2: "Green Energy Endeavors",
+  title: "Productos",
+  subheading1_1: "Sopladores centrífugos ",
+  subheading1_2: "monoetapa y multietapa",
   projects: [
     {
-      title: "Solar-Powered Community",
+      title: "Sopladores Monoetapa",
       description:
-        "Empowering a community with sustainable solar energy solutions. Learn how [Company Name] brought clean and affordable electricity to homes, schools, and businesses.",
-      location: "Los Angeles, California, USA",
+        "Equipos compactos y eficientes para diversas aplicaciones industriales. Ficha técnica disponible en nuestro sitio web.",
+      location: "Región andina",
       visual: img1,
     },
     {
-      title: "Wind Farm Innovation",
+      title: "Sopladores Multietapa",
       description:
-        "Revolutionizing wind energy with our innovative wind farm. Discover how [Company Name] is harnessing the power of the wind to create a greener and more sustainable future.",
-      location: "Scottish Highlands, United Kingdom",
+        "Alto rendimiento y confiabilidad para mayores demandas de caudal y presión. Consulte la ficha técnica en línea.",
+      location: "Región andina",
       visual: img2,
     },
     {
-      title: "Hydropower Plant Success",
+      title: "Soluciones a medida",
       description:
-        "A journey into our hydropower success story. Explore how [Company Name] transforms the energy of flowing water into a reliable and eco-friendly power source.",
-      location: "Amazon Rainforest, South America",
+        "Diseño y suministro de sistemas completos de aire o gas, control e instrumentación según requerimientos.",
+      location: "Proyectos en Latinoamérica",
       visual: img3,
     },
   ],
-  callToAction: "Embark on a Green Energy Journey with [Company Name]",
-  button: "View More Projects",
+  callToAction: "Consulte por disponibilidad y especificaciones",
+  button: "Ver productos",
 };

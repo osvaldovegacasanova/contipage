@@ -1,0 +1,171 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+type Shade = { label: string; hex: string };
+type Group = { name: string; title: string; shades: Shade[] };
+
+const groups: Group[] = [
+  {
+    name: "base",
+    title: "Base",
+    shades: [
+      { label: "50", hex: "#f9f9f9" },
+      { label: "100", hex: "#efefef" },
+      { label: "200", hex: "#e6e6e6" },
+      { label: "300", hex: "#dbdbdb" },
+      { label: "400", hex: "#d1d1d1" },
+      { label: "500", hex: "#c7c7c7" },
+      { label: "600", hex: "#bdbdbd" },
+      { label: "700", hex: "#b3b3b3" },
+      { label: "800", hex: "#a8a8a8" },
+      { label: "900", hex: "#9e9e9e" },
+      { label: "950", hex: "#949494" },
+      { label: "DEFAULT", hex: "#f9f9f9" },
+    ],
+  },
+  {
+    name: "base-dark",
+    title: "Base (oscuro)",
+    shades: [
+      { label: "50", hex: "#808080" },
+      { label: "100", hex: "#757575" },
+      { label: "200", hex: "#6b6b6b" },
+      { label: "300", hex: "#616161" },
+      { label: "400", hex: "#575757" },
+      { label: "500", hex: "#4d4d4d" },
+      { label: "600", hex: "#424242" },
+      { label: "700", hex: "#383838" },
+      { label: "800", hex: "#2e2e2e" },
+      { label: "900", hex: "#242424" },
+      { label: "950", hex: "#1a1a1a" },
+      { label: "DEFAULT", hex: "#1a1a1a" },
+    ],
+  },
+  {
+    name: "accent",
+    title: "Acento",
+    shades: [
+      { label: "50", hex: "#ffffff" },
+      { label: "100", hex: "#c7c7c7" },
+      { label: "200", hex: "#b3b3b3" },
+      { label: "300", hex: "#949494" },
+      { label: "400", hex: "#707070" },
+      { label: "500", hex: "#545454" },
+      { label: "600", hex: "#3d3d3d" },
+      { label: "700", hex: "#292929" },
+      { label: "800", hex: "#1c1c1c" },
+      { label: "900", hex: "#141414" },
+      { label: "950", hex: "#000000" },
+      { label: "DEFAULT", hex: "#000000" },
+      { label: "light", hex: "#ffffff" },
+      { label: "dark", hex: "#000000" },
+    ],
+  },
+  {
+    name: "primary",
+    title: "Primario",
+    shades: [
+      { label: "50", hex: "#f1fcf1" },
+      { label: "100", hex: "#e0f9df" },
+      { label: "200", hex: "#c2f1c1" },
+      { label: "300", hex: "#92e491" },
+      { label: "400", hex: "#5acf59" },
+      { label: "500", hex: "#34b433" },
+      { label: "DEFAULT", hex: "#228B22" },
+      { label: "600", hex: "#228b22" },
+      { label: "700", hex: "#207521" },
+      { label: "800", hex: "#1e5d1f" },
+      { label: "900", hex: "#1a4d1b" },
+      { label: "950", hex: "#092a0b" },
+    ],
+  },
+  {
+    name: "secondary",
+    title: "Secundario",
+    shades: [
+      { label: "50", hex: "#edfaff" },
+      { label: "100", hex: "#d6f2ff" },
+      { label: "200", hex: "#b5eaff" },
+      { label: "300", hex: "#83dfff" },
+      { label: "400", hex: "#48cbff" },
+      { label: "DEFAULT", hex: "#1eadff" },
+      { label: "500", hex: "#1eadff" },
+      { label: "600", hex: "#068fff" },
+      { label: "700", hex: "#007bff" },
+      { label: "800", hex: "#085ec5" },
+      { label: "900", hex: "#0d519b" },
+      { label: "950", hex: "#0e315d" },
+    ],
+  },
+  {
+    name: "cta",
+    title: "CTA",
+    shades: [
+      { label: "50", hex: "#ffffe7" },
+      { label: "100", hex: "#feffc1" },
+      { label: "200", hex: "#fffd86" },
+      { label: "300", hex: "#fff441" },
+      { label: "400", hex: "#ffe60d" },
+      { label: "DEFAULT", hex: "#ffd700" },
+      { label: "500", hex: "#ffd700" },
+      { label: "600", hex: "#d19e00" },
+      { label: "700", hex: "#a67102" },
+      { label: "800", hex: "#89580a" },
+      { label: "900", hex: "#74480f" },
+      { label: "950", hex: "#442604" },
+    ],
+  },
+];
+
+function hexToRgb(hex: string) {
+  const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  if (!m) return { r: 0, g: 0, b: 0 };
+  return { r: parseInt(m[1], 16), g: parseInt(m[2], 16), b: parseInt(m[3], 16) };
+}
+
+function getTextColor(hex: string) {
+  const { r, g, b } = hexToRgb(hex);
+  // Relative luminance calculation
+  const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+  return luminance > 0.6 ? "#111111" : "#FFFFFF";
+}
+---
+
+<Layout title="Paleta de colores">
+  <main class="px-6 py-12 space-y-12">
+    <h1 class="text-3xl font-bold">Paleta de colores</h1>
+    <p class="text-heading-3">
+      Muestra de colores definidos en Tailwind (swatch y código HEX).
+    </p>
+
+    {groups.map((group) => (
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold">
+          {group.title}
+          <span class="ml-2 text-sm opacity-60">({group.name})</span>
+        </h2>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          {group.shades.map((s) => {
+            const color = s.hex;
+            const text = getTextColor(s.hex);
+            return (
+              <div class="rounded-lg overflow-hidden border border-box-border shadow-sm">
+                <div
+                  style={`background:${color};color:${text}`}
+                  class="h-24 flex items-center justify-center text-sm font-semibold"
+                >
+                  {group.name}-{s.label}
+                </div>
+                <div class="px-3 py-2 text-sm flex items-center justify-between">
+                  <span class="opacity-70">HEX</span>
+                  <code class="font-mono">{color}</code>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+  </main>
+</Layout>
+

@@ -8,52 +8,52 @@ import img5 from "./assets/smart-grid.png";
 import img6 from "./assets/green.png";
 
 export const servicesSectionData = {
-  title: "Our Sustainable Energy Solutions",
+  title: "Servicios",
   subheading: {
-    text1_1: "Experience a Revolution in Energy Solutions - ",
-    text1_2: "Embrace Innovation, Embrace Sustainability.",
+    text1_1: "Acompañamos todo el ciclo de vida - ",
+    text1_2: "Instalación, operación y soporte.",
     text2:
-      "We're here to Empower Your Life and Spaces with Clean, Renewable Energy, Paving the Way for a Brighter and Greener Tomorrow.",
+      "Garantizamos eficiencia, seguridad y continuidad operacional en cada proyecto.",
   },
   services: [
     {
-      title: "Solar Power Solutions",
+      title: "Puesta en Marcha",
       briefDescription:
-        "Harness the power of the sun with our state-of-the-art solar panels. Generate clean energy for your home or business and reduce your carbon footprint.",
+        "Chequeo de montaje y condición inicial, configuración, calibración y ajuste de parámetros de operación para equipos nuevos o reacondicionados.",
       visual: img1,
     },
     {
-      title: "Wind Energy Harvesting",
+      title: "Mantenimiento de Equipos",
       briefDescription:
-        "Embrace the power of the wind. Our wind energy solutions provide a sustainable and efficient way to generate electricity, ensuring a greener future.",
+        "Planes preventivos, predictivos y proactivos para asegurar la disponibilidad y desempeño de sus sopladores.",
       visual: img2,
     },
     {
-      title: "Hydropower Systems",
+      title: "Contratos de Mantenimiento",
       briefDescription:
-        "Flow with nature. Our hydropower systems harness the energy of flowing water, delivering reliable and eco-friendly electricity to your doorstep.",
+        "Servicios programados según su necesidad (mensual, trimestral o semestral) para continuidad sin detenciones.",
       visual: img3,
     },
     {
-      title: "Energy Storage Solutions",
+      title: "Ingeniería de Proyectos",
       briefDescription:
-        "Store excess energy efficiently. Our cutting-edge energy storage solutions ensure uninterrupted power supply, even during cloudy days or low-wind periods.",
+        "Diseño, fabricación y montaje de sistemas de aire o gas, control e instrumentación y regulación de caudal.",
       visual: img4,
     },
     {
-      title: "Smart Grid Technology",
+      title: "Suministro de Repuestos",
       briefDescription:
-        "Navigate the future with our smart grid technology. Optimize energy distribution, monitor consumption, and contribute to a more sustainable and efficient energy ecosystem.",
+        "Disponibilidad de piezas y componentes originales para minimizar tiempos de parada.",
       visual: img5,
     },
     {
-      title: "Energy-efficient Lighting",
+      title: "Capacitación Técnica",
       briefDescription:
-        "Illuminate your space responsibly. Our energy-efficient lighting solutions provide bright, sustainable, and cost-effective illumination for homes and businesses.",
+        "Formación para personal de operación y mantención enfocada en seguridad y eficiencia.",
       visual: img6,
     },
   ],
   callToAction:
-    "Discover the Future of Green Energy. Choose Your Sustainable Solution Today!",
-  buttonText: "Explore More",
+    "Asegure la continuidad operacional con nuestro soporte experto.",
+  buttonText: "Solicitar información",
 };

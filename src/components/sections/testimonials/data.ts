@@ -1,35 +1,37 @@
-import img1 from "./assets/person1.png";
+﻿import img1 from "./assets/person1.png";
 import img2 from "./assets/person2.png";
 import img3 from "./assets/person3.png";
 
 export const testimonialsSection = {
-  title: "What Our Customers Say",
-  subheading1_1: "Hear from Those",
-  subheading1_2: " Who Have Embraced Sustainable Living",
+  title: "Testimonios",
+  subheading1_1: "Profesionales con amplia",
+  subheading1_2: " experiencia en la industria",
   testimonials: [
     {
-      name: "Emily Johnson",
+      name: "Carlos Suárez",
       visual: img1,
-      occupation: "Homeowner",
+      occupation: "Ventas",
       quote:
-        "Switching to [Company Name] was the best decision I made. Our home is now powered by clean energy, and I feel great knowing I'm contributing to a healthier planet.",
+        "c.suarez@continentalandes.com · +56 9 9679 4151",
     },
     {
-      name: "Carlos Rodriguez",
+      name: "Miguel Urbina",
       visual: img2,
-      occupation: "Business Owner",
+      occupation: "Repuestos",
       quote:
-        "As a business owner, sustainability is crucial. [Company Name] provided us with a seamless transition to green energy, and we've seen a positive impact on both the environment and our operating costs.",
+        "m.urbina@continentalandes.com · +56 9 6645 0740",
     },
     {
-      name: "Sophie Chen",
+      name: "Vanessa Pajares",
       visual: img3,
-      occupation: "Environmental Advocate",
+      occupation: "Servicios",
       quote:
-        "I'm passionate about the environment, and [Company Name] aligns perfectly with my values. Their commitment to renewable energy and reducing carbon footprint is commendable.",
+        "v.pajares@continentalandes.com · +56 9 6659 0216",
     },
   ],
   visual: "customer-testimonials-image.jpg",
-  callToAction: "Join Our Growing Community of Satisfied Customers",
-  button: "Get Started",
+  callToAction: "Contácte a nuestro equipo para asesoría técnica",
+  button: "Contactar",
 };
+
+
