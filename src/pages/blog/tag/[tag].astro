@@ -1,0 +1,65 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Container from "../../../components/shared/Container.astro";
+import Title2 from "../../../components/shared/Title2.astro";
+import Paragraph from "../../../components/shared/Paragraph.astro";
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const tags = new Set<string>();
+  posts.forEach(p => (p.data.tags || []).forEach(t => tags.add(t)));
+  return Array.from(tags).map(tag => ({ params: { tag } }));
+}
+
+const tagParam = decodeURIComponent(Astro.params.tag || '');
+const posts = (await getCollection('blog'))
+  .filter(p => (p.data.tags || []).includes(tagParam))
+  .sort((a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate));
+const allTags = Array.from(new Set((await getCollection('blog')).flatMap(p => p.data.tags || [])));
+---
+
+<Layout title={`Blog · #${tagParam}`}>
+  <section class="pt-28 md:pt-32">
+    <Container size="wide">
+      <div class="text-center max-w-2xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-heading-1">#{tagParam}</h1>
+        <Paragraph className="mt-3 text-heading-3">Artículos etiquetados con “{tagParam}”.</Paragraph>
+      </div>
+    </Container>
+  </section>
+
+  <section class="py-6 md:py-10">
+    <Container>
+      {allTags.length > 0 && (
+        <div class="flex flex-wrap gap-2 justify-center">
+          <a href="/blog" class="px-3 py-1 rounded-full border border-box-border bg-box-bg hover:border-primary transition text-sm">Todas</a>
+          {allTags.map((t) => (
+            <a href={`/blog/tag/${encodeURIComponent(t)}/`} class={`px-3 py-1 rounded-full border border-box-border transition text-sm ${t === tagParam ? 'bg-primary text-accent-light border-primary' : 'bg-box-bg hover:border-primary'}`}>#{t}</a>
+          ))}
+        </div>
+      )}
+    </Container>
+  </section>
+
+  <section class="py-4 md:py-8">
+    <Container>
+      {posts.length === 0 ? (
+        <p class="text-center opacity-70">No hay artículos con esta etiqueta.</p>
+      ) : (
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map(({ data, slug }) => (
+            <a href={`/blog/${slug}/`} class="group block rounded-2xl border border-box-border hover:border-primary transition p-5 bg-box-bg">
+              {data.heroImage && (
+                <img src={data.heroImage} alt={data.title} class="w-full h-44 object-cover rounded-xl mb-4" />
+              )}
+              <Title2>{data.title}</Title2>
+              <Paragraph className="mt-2 text-heading-3">{data.description}</Paragraph>
+              <div class="mt-3 text-sm opacity-70">{new Date(data.pubDate).toLocaleDateString()}</div>
+            </a>
+          ))}
+        </div>
+      )}
+    </Container>
+  </section>
+</Layout>

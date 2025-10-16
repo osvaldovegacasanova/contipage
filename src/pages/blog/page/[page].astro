@@ -1,25 +1,32 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import Container from "../../components/shared/Container.astro";
-import Title2 from "../../components/shared/Title2.astro";
-import Paragraph from "../../components/shared/Paragraph.astro";
+import Layout from "../../../layouts/Layout.astro";
+import Container from "../../../components/shared/Container.astro";
+import Title2 from "../../../components/shared/Title2.astro";
+import Paragraph from "../../../components/shared/Paragraph.astro";
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog')).sort((a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate));
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const PAGE_SIZE = 6;
+  const totalPages = Math.ceil(posts.length / PAGE_SIZE);
+  return Array.from({ length: totalPages }, (_, i) => ({ params: { page: String(i + 1) } }));
+}
+
+const page = Number(Astro.params.page ?? '1');
 const PAGE_SIZE = 6;
+const posts = (await getCollection('blog')).sort((a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate));
 const totalPages = Math.ceil(posts.length / PAGE_SIZE);
-const page = 1;
 const sliceStart = (page - 1) * PAGE_SIZE;
 const pagePosts = posts.slice(sliceStart, sliceStart + PAGE_SIZE);
 const allTags = Array.from(new Set(posts.flatMap(p => p.data.tags || [])));
 ---
 
-<Layout title="Blog">
+<Layout title={`Blog · Página ${page}`}>
   <section class="pt-28 md:pt-32">
     <Container size="wide">
       <div class="text-center max-w-2xl mx-auto">
         <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-heading-1">Blog</h1>
-        <Paragraph className="mt-3 text-heading-3">Noticias, guías y artículos técnicos sobre sopladores y compresores centrífugos.</Paragraph>
+        <Paragraph className="mt-3 text-heading-3">Página {page} de {totalPages}</Paragraph>
       </div>
     </Container>
   </section>
@@ -58,7 +65,7 @@ const allTags = Array.from(new Set(posts.flatMap(p => p.data.tags || [])));
     <section class="pb-12">
       <Container>
         <div class="flex justify-center gap-2">
-          <a aria-label="Página anterior" class={`px-3 py-1 rounded border ${page === 1 ? 'opacity-40 pointer-events-none' : 'hover:border-primary'}`} href={page === 1 ? undefined : `/blog/page/${page-1}/`}>
+          <a aria-label="Página anterior" class={`px-3 py-1 rounded border ${page === 1 ? 'opacity-40 pointer-events-none' : 'hover:border-primary'}`} href={page === 1 ? undefined : (page - 1 === 1 ? '/blog' : `/blog/page/${page-1}/`)}>
             «
           </a>
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
@@ -72,3 +79,4 @@ const allTags = Array.from(new Set(posts.flatMap(p => p.data.tags || [])));
     </section>
   )}
 </Layout>
+
