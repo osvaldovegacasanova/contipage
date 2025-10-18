@@ -20,7 +20,7 @@ Gracias a las tolerancias de alta precisión y al control continuo de los parám
       visual: imgSolar,
     },
     {
-      title: "Producto de Prueba",
+      title: "Impulsores de Gas",
       description:
         "Como resultado de nuestra preocupación por mejorar nuestro desempeño e invirtiendo gran parte de nuestros recursos en la investigación, Continental Industrie puede ofrecerle una gama completa de máquinas, que pueden suministrar desde 1.000 a 65.000 m3/hr de aire seco, limpio y sin pulsaciones alcanzando presiones relativas de hasta 1,8 bares o en vacío de hasta 6.700 mmH2O (WG).",
       visual: imgWind,

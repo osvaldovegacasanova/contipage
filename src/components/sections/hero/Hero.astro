@@ -13,9 +13,9 @@ const heroSection = {
   headline2: "aire industrial",
   headline3: "",
   headline4: "que impulsan tus procesos.",
-  subheading1: "Desde la instalación hasta el mantenimiento,",
+  subheading1: "Venta, Puesta en Marcha, Mantención y Soporte",
   subheading2:
-    "Aseguramos que sus sistemas operen con eficiencia, seguridad y sin detenciones.",
+    "Sopladores Centrífugos Monoetapa y Multietapa.",
   subheading3: "",
   buttonText: "Solicitar asesoría",
   backgroundImage: "hero-background-image.jpg",
@@ -29,13 +29,29 @@ const { className = "" } = Astro.props;
 ---
 
 <section class={`relative ${className} w-full scroll-mt-40 lg:scroll-mt-44 bg-base-100 dark:bg-base-dark-900`} id="hero">
+  {/** Background video: lazy-loaded, reduced motion and save-data aware */}
+  <div class="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+    <video
+      id="hero-bg-video"
+      class="opacity-0 transition-opacity duration-500 h-full w-full object-cover"
+      muted
+      playsinline
+      loop
+      autoplay
+      aria-hidden="true"
+      preload="none"
+      poster={heroImg.src}
+    >
+    </video>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/40"></div>
+  </div>
   <Container size="wide">
-    <div class="pt-28 md:pt-32 lg:pt-40">
-      <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-6 md:gap-10">
+    <div class="pt-28 md:pt-32 lg:pt-40 pb-16 md:pb-20 lg:pb-24 relative z-10">
+      <div class="grid grid-cols-1 items-center gap-6 md:gap-10">
       <div
-        class="order-1 flex flex-col items-center md:items-start text-center md:text-left px-6 md:px-10"
+        class="order-1 flex flex-col items-center md:items-start text-center md:text-left px-6 md:px-10 text-white"
       >
-        <Title className="!text-3xl sm:!text-4xl md:!text-6xl lg:!text-7xl">
+        <Title className="!text-3xl sm:!text-4xl md:!text-6xl lg:!text-7xl text-white">
           {heroSection.headline1}
           <GradiantText>
             {" " + heroSection.headline2}
@@ -44,7 +60,7 @@ const { className = "" } = Astro.props;
           </GradiantText>
           {heroSection.headline4}
         </Title>
-        <SubTitle className="mt-6 md:mt-8 leading-relaxed italic max-w-xl">
+        <SubTitle className="mt-6 md:mt-8 leading-relaxed italic max-w-xl text-white/90">
           {heroSection.subheading1}
           <br />
           {heroSection.subheading2}
@@ -55,23 +71,87 @@ const { className = "" } = Astro.props;
           <CtaButton>{heroSection.buttonText}</CtaButton>
         </div>
       </div>
-      <div class="order-2 relative px-0 md:p-0">
-        <div class="w-full aspect-[16/10] sm:aspect-[4/3] md:aspect-auto md:h-full rounded-2xl overflow-hidden">
-          <LazyImage
-            src={heroImg}
-            alt="Una imagen de un aerogenerador."
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <svg
-          class="fill-base-100 dark:fill-base-dark-900 z-10 absolute top-0 start-0 h-full hidden md:block"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 500 400"
-        >
-          <path d="M0 0l0 400L100 0Z"></path>
-        </svg>
-      </div>
       </div>
     </div>
   </Container>
+  <script>
+    // @ts-nocheck
+    // Lazy-load background video with format and size selection.
+    (function () {
+      const el = document.getElementById('hero-bg-video');
+      if (!(el instanceof HTMLVideoElement)) return;
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const navAny = navigator;
+      const saveData = !!(navAny && navAny.connection && navAny.connection.saveData);
+      if (prefersReducedMotion || saveData) return; // Respect user preferences
+
+      const container = document.getElementById('hero') || el;
+      const isMobile = window.matchMedia('(max-width: 640px)').matches;
+
+      const canPlay = (type) => typeof el.canPlayType === 'function' && el.canPlayType(type) !== '';
+
+      function buildCandidates() {
+        const bases = isMobile ? ['parte1-mobile', 'parte1'] : ['parte1'];
+        const formats = [
+          { ext: 'webm', type: 'video/webm' },
+          { ext: 'mp4', type: 'video/mp4' },
+        ].filter(f => canPlay(f.type));
+        const urls = [];
+        for (const base of bases) {
+          for (const f of formats) urls.push(`/videos/${base}.${f.ext}`);
+        }
+        return urls;
+      }
+
+      function loadAndPlay() {
+        const candidates = buildCandidates();
+        let idx = 0;
+
+        function tryNext() {
+          if (idx >= candidates.length) return; // give up; poster remains
+          const url = candidates[idx++];
+          el.onerror = () => tryNext();
+          el.onloadeddata = () => {
+            el.onerror = null;
+            el.onloadeddata = null;
+            el.classList.remove('opacity-0');
+            const p = el.play?.();
+            if (p && typeof p.catch === 'function') p.catch(() => {});
+          };
+          el.src = url;
+          el.load();
+        }
+
+        tryNext();
+      }
+
+      const io = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            loadAndPlay();
+            io.disconnect();
+            break;
+          }
+        }
+      }, { rootMargin: '200px' });
+
+      io.observe(container);
+    })();
+  </script>
+
+  <style>
+    /* Ensure section has a visual fallback via poster until video loads */
+    :global(#hero) {
+      background-image: url({heroImg.src});
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      :global(#hero) {
+        background-attachment: scroll;
+      }
+    }
+  </style>
 </section>
