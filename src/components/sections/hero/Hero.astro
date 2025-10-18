@@ -33,7 +33,7 @@ const { className = "" } = Astro.props;
   <div class="pointer-events-none absolute inset-0 z-0 overflow-hidden">
     <video
       id="hero-bg-video"
-      class="opacity-0 transition-opacity duration-500 h-full w-full object-cover"
+      class="opacity-0 transition-opacity duration-500 h-full w-full object-cover hidden sm:block"
       muted
       playsinline
       loop
@@ -88,6 +88,7 @@ const { className = "" } = Astro.props;
 
       const container = document.getElementById('hero') || el;
       const isMobile = window.matchMedia('(max-width: 640px)').matches;
+      if (isMobile) return; // Mobile: do not load video, use background image instead
 
       const canPlay = (type) => typeof el.canPlayType === 'function' && el.canPlayType(type) !== '';
 
@@ -147,6 +148,12 @@ const { className = "" } = Astro.props;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+    }
+    /* Mobile: use the provided slider image, no video */
+    @media (max-width: 640px) {
+      :global(#hero) {
+        background-image: url('/images/slider-bg3.webp');
+      }
     }
     @media (prefers-reduced-motion: reduce) {
       :global(#hero) {
