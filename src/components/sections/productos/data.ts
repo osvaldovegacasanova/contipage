@@ -1,10 +1,5 @@
-const img1 = "/images/featured-solar-person.png";
-const img2 = "/images/featured-wind-person.png";
-const img3 = "/images/featured-amazonas2.png";
-const imgMono = "/images/singlestage_draw.webp";
+﻿const imgMono = "/images/singlestage_draw.webp";
 const imgMulti = "/images/multistage_draw.webp";
-const imgSolar = "/images/innovations-inno-panel.webp";
-const imgWind = "/images/innovations-inno-wind.webp";
 const imgGas = "/images/gas.webp";
 
 export const productosSection = {
@@ -15,21 +10,21 @@ export const productosSection = {
     {
       title: "Sopladores Monoetapa",
       description:
-        "Equipos compactos y eficientes para diversas aplicaciones industriales. Ficha técnica disponible en nuestro sitio web.",
+        "Los compresores radiales tipo TC de Continental Industrie son equipos de flujo modernos para la compresión de grandes cantidades de aire o gas, desde 2.500 hasta 35.000 m3/h, con una presión de hasta 1,3 bar g. Gracias a las tolerancias de alta precisión y al control continuo de los parámetros mediante la aplicación de nuevas técnicas de tecnología aeroespacial, el mecanizado 3D de las palas del impulsor asegura una alta eficiencia de compresión (más del 85%) y un alto rendimiento general.",
       location: "Productos",
       visual: imgMono,
     },
     {
       title: "Sopladores Multietapa",
       description:
-        "Alto rendimiento y confiabilidad para mayores demandas de caudal y presión. Consulte la ficha técnica en línea.",
+        "Como resultado de nuestra preocupación por mejorar nuestro desempeño e invirtiendo gran parte de nuestros recursos en investigación, Continental Industrie puede ofrecerle una gama completa de máquinas, que pueden suministrar desde 1.000 a 65.000 m3/h de aire seco, limpio y sin pulsaciones alcanzando presiones relativas de hasta 1,8 bares o en vacío de hasta 6.700 mmH2O (WG).",
       location: "Productos",
       visual: imgMulti,
     },
     {
       title: "Soluciones a medida",
       description:
-        "Diseño y suministro de sistemas completos de aire o gas, control e instrumentación según requerimientos.",
+        "Nuestro catálogo incluye soluciones para manejo de gases de proceso, con configuraciones que permiten trabajar en continuo manteniendo estabilidad operativa y eficiencia energética, incluso en ambientes exigentes.",
       location: "Productos",
       visual: imgGas,
     },

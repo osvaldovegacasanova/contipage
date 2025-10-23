@@ -9,7 +9,7 @@ const img_ingenieria = "/images/slider42-02.jpg";
 export const servicesSectionData = {
   title: "Servicios",
   subheading: {
-    text1_1: "Soporte Oficial de Continental Blowers para la Región Andina:",
+    text1_1: "Somos el Soporte Oficial de Continental Blowers para la Región Andina:",
     text1_2: "Instalación, mantención y soporte.",
     text2:
       "Acompañamos todo el ciclo de vida de cada máquina. Garantizamos eficiencia, seguridad y continuidad operacional en cada proyecto.",
