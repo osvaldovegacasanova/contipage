@@ -1,6 +1,6 @@
-﻿import img1 from "./assets/person1.png";
-import img2 from "./assets/person2.png";
-import img3 from "./assets/person3.png";
+const img1 = "/images/testimonials-person1.png";
+const img2 = "/images/testimonials-person2.png";
+const img3 = "/images/testimonials-person3.png";
 
 export const testimonialsSection = {
   title: "Testimonios",
@@ -33,5 +33,4 @@ export const testimonialsSection = {
   callToAction: "Contácte a nuestro equipo para asesoría técnica",
   button: "Contactar",
 };
-
 

@@ -1,11 +1,11 @@
 ---
-import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import Title3 from "../../../shared/Title3.astro";
 import LazyImage from "../../../shared/LazyImage.astro";
 
 export interface Props {
   name: string;
-  visual: ImageMetadata;
+  visual: string | ImageMetadata;
   occupation: string;
   quote: string;
 }

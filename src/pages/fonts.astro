@@ -1,0 +1,179 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const sample = "Aá Bbé Ccé Ddé Éé Ff Gg Hh Ii Jj Kk Ll Mm Nn Ññ Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz — 0123456789";
+const weights = [100,200,300,400,500,600,700,800,900];
+const codeSample = `function ejemplo(a: number, b: number) {
+  const suma = a + b; // áéíóú ñ Ñ
+  return \`Resultado: \${suma}\`;
+}`;
+const titleRows: Array<{ section: string; font: string; weight: { cls: string; value: number }; sizes: Record<string, string>; ref: string }> = [
+  {
+    section: 'Hero (h1 principal)',
+    font: 'Raleway (font-sans)',
+    weight: { cls: 'font-bold', value: 700 },
+    sizes: { base: 'text-3xl', sm: 'text-4xl', md: 'text-6xl', lg: 'text-7xl' },
+    ref: 'src/components/sections/hero/Hero.astro:54',
+  },
+  {
+    section: 'Servicios (Title2)',
+    font: 'Raleway (font-sans)',
+    weight: { cls: 'font-bold', value: 700 },
+    sizes: { base: 'inherit (sin text-*)' },
+    ref: 'src/components/sections/services/KeyServices.astro:14',
+  },
+  {
+    section: 'Industrias (Title2)',
+    font: 'Raleway (font-sans)',
+    weight: { cls: 'font-bold', value: 700 },
+    sizes: { base: 'inherit (sin text-*)' },
+    ref: 'src/components/sections/areas/KeyAreas.astro:15',
+  },
+  {
+    section: 'Productos (Title2)',
+    font: 'Raleway (font-sans)',
+    weight: { cls: 'font-bold', value: 700 },
+    sizes: { base: 'inherit (sin text-*)' },
+    ref: 'src/components/sections/productos/Productos.astro:16',
+  },
+  {
+    section: 'Proceso (Title2)',
+    font: 'Raleway (font-sans)',
+    weight: { cls: 'font-bold', value: 700 },
+    sizes: { base: 'inherit (sin text-*)' },
+    ref: 'src/components/sections/proceso/Proceso.astro:18',
+  },
+  {
+    section: 'Impacto ambiental (Title2)',
+    font: 'Raleway (font-sans)',
+    weight: { cls: 'font-bold', value: 700 },
+    sizes: { base: 'inherit (sin text-*)' },
+    ref: 'src/components/sections/environment/EnvironmentalImpact.astro:19',
+  },
+  {
+    section: 'Testimonios (Title2)',
+    font: 'Raleway (font-sans)',
+    weight: { cls: 'font-bold', value: 700 },
+    sizes: { base: 'inherit (sin text-*)' },
+    ref: 'src/components/sections/testimonials/CustomerTestimonials.astro:16',
+  },
+  {
+    section: 'CTA (Title2)',
+    font: 'Raleway (font-sans)',
+    weight: { cls: 'font-bold', value: 700 },
+    sizes: { base: 'inherit (sin text-*)' },
+    ref: 'src/components/sections/cta/GetInvolved.astro:16',
+  },
+  {
+    section: 'Títulos de tarjetas (Title3)',
+    font: 'Raleway (font-sans)',
+    weight: { cls: 'font-bold', value: 700 },
+    sizes: { base: 'text-2xl' },
+    ref: 'src/components/shared/Title3.astro:12',
+  },
+  {
+    section: 'Blog índice y tag (h1)',
+    font: 'Raleway (font-sans)',
+    weight: { cls: 'font-extrabold', value: 800 },
+    sizes: { base: 'text-4xl', md: 'text-5xl' },
+    ref: 'src/pages/blog/index.astro:16, src/pages/blog/tag/[tag].astro:18',
+  },
+  {
+    section: 'Blog artículo (h1)',
+    font: 'Raleway (font-sans)',
+    weight: { cls: 'font-extrabold', value: 800 },
+    sizes: { base: 'text-4xl', md: 'text-5xl' },
+    ref: 'src/layouts/BlogLayout.astro:43',
+  },
+  {
+    section: 'Subtítulo común (SubTitle2)',
+    font: 'Raleway (font-sans)',
+    weight: { cls: 'font-extrabold', value: 800 },
+    sizes: { base: 'text-lg', md: 'text-4xl' },
+    ref: 'src/components/shared/SubTitle2.astro:13',
+  },
+];
+---
+
+<Layout title="Catálogo de fuentes">
+  <main class="px-6 py-12 space-y-12 max-w-5xl mx-auto">
+    <header class="space-y-2">
+      <h1 class="text-3xl font-bold">Catálogo de fuentes</h1>
+      <p class="opacity-80">Vista rápida de las familias y pesos usados en el sitio.</p>
+      <div class="text-sm opacity-70">
+        <p>
+          Primaria: <code class="font-mono">font-sans</code> → Raleway (Google Fonts) + stack por defecto.
+        </p>
+        <p>
+          Monoespaciada: <code class="font-mono">font-mono</code> → stack por defecto de Tailwind.
+        </p>
+      </div>
+    </header>
+
+    <section class="space-y-6">
+      <h2 class="text-2xl font-semibold">Sans (Raleway)</h2>
+      <div class="grid grid-cols-1 gap-6">
+        {weights.map((w) => (
+          <div class="rounded-xl border border-box-border bg-box-bg p-5">
+            <div class="flex items-baseline justify-between mb-2">
+              <p class="text-sm opacity-70">
+                font: <code class="font-mono">font-sans</code> · weight: <code class="font-mono">{w}</code>
+              </p>
+              <span class="text-xs opacity-60">Raleway {w}</span>
+            </div>
+            <p style={`font-weight:${w}`} class="font-sans text-2xl md:text-3xl">
+              The quick brown fox salta sobre el perro perezoso.
+            </p>
+            <p style={`font-weight:${w}`} class="font-sans mt-2 opacity-80">
+              {sample}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold">Monoespaciada (font-mono)</h2>
+      <div class="rounded-xl border border-box-border bg-box-bg p-5">
+        <p class="text-sm opacity-70 mb-2">
+          font: <code class="font-mono">font-mono</code>
+        </p>
+        <pre class="font-mono text-lg md:text-xl whitespace-pre-wrap">{codeSample}</pre>
+      </div>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold">Guía de uso</h2>
+      <ul class="list-disc pl-6 space-y-1 text-sm opacity-80">
+        <li>Usa <code class="font-mono">font-sans</code> para títulos y cuerpo de texto.</li>
+        <li>Usa <code class="font-mono">font-mono</code> solo para código o datos tabulares.</li>
+        <li>Puedes ajustar el peso con clases como <code class="font-mono">font-light</code>, <code class="font-mono">font-normal</code>, <code class="font-mono">font-semibold</code>, <code class="font-mono">font-bold</code>.</li>
+      </ul>
+    </section>
+
+    <section class="space-y-4">
+      <h2 class="text-2xl font-semibold">Títulos por sección</h2>
+      <div class="rounded-xl border border-box-border bg-box-bg">
+        {titleRows.map((row) => (
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-2 items-baseline border-b last:border-b-0 border-box-border p-4">
+            <div class="font-semibold">{row.section}</div>
+            <div class="opacity-80">{row.font}</div>
+            <div class="text-sm opacity-80">
+              <code class="font-mono">{row.weight.cls}</code>
+              <span class="opacity-60"> ({row.weight.value})</span>
+            </div>
+            <div class="md:col-span-2 text-sm opacity-80">
+              {Object.entries(row.sizes).map(([bp, cls]) => (
+                <span class="inline-block mr-3 mb-1"><code class="font-mono">{bp}</code>: <code class="font-mono">{cls}</code></span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="text-sm opacity-60 mt-1">
+        Nota: Title2 no define tamaño explícito; hereda el tamaño base. En Hero y Blog los tamaños se fijan con utilidades <code class="font-mono">text-*</code> por breakpoint.
+      </p>
+    </section>
+  </main>
+  
+</Layout>

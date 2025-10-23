@@ -1,6 +1,6 @@
 ---
 import Paragraph from "../../../shared/Paragraph.astro";
-import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import Title2 from "../../../shared/Title2.astro";
 import Title3 from "../../../shared/Title3.astro";
 import LazyImage from "../../../shared/LazyImage.astro";
@@ -8,7 +8,7 @@ import LazyImage from "../../../shared/LazyImage.astro";
 export interface Props {
   title: string;
   description: string;
-  visual: ImageMetadata;
+  visual: string | ImageMetadata;
 }
 
 const { title, description, visual } = Astro.props;

@@ -1,8 +1,8 @@
-﻿---
+---
 title: "¿Qué es un compresor centrífugo?"
 description: "Introducción técnica a los principios de operación, componentes y ventajas de los compresores centrífugos."
 pubDate: 2025-01-15
-heroImage: "/blog/wind.webp"
+heroImage: "/images/blog-wind.webp"
 tags: ["compresores", "centrífugo", "ingeniería"]
 author: "Continental Andes Blowers"
 ---
@@ -11,10 +11,10 @@ author: "Continental Andes Blowers"
 
 <p class="text-xl font-semibold text-heading-2 mt-2">
   Una guía clara para entender sus principios y ventajas.
-</p>
+  </p>
 
 <figure class="blog-figure my-8 w-full md:w-auto max-w-[500px] aspect-square rounded-2xl overflow-hidden shadow-md">
-  <img src="/blog/smart-grid.webp" alt="Esquema moderno de red energética" class="w-full h-full object-cover" />
+  <img src="/images/blog-smart-grid.webp" alt="Esquema moderno de red energética" class="w-full h-full object-cover" />
   <figcaption class="text-sm opacity-70 mt-2 text-center">Visualización moderna de sistemas energéticos.</figcaption>
 </figure>
 

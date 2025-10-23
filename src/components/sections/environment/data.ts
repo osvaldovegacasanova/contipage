@@ -1,4 +1,4 @@
-﻿import img from "./assets/green-hands.png";
+const img = "/images/environment-green-hands.png";
 
 export const environmentalImpactSection = {
   title: "Temporal",
@@ -16,5 +16,4 @@ export const environmentalImpactSection = {
   callToAction: "Conózcanos y cuente con nuestro soporte",
   button: "Contactar",
 };
-
 

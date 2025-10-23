@@ -1,6 +1,6 @@
 ---
 import { Image, Picture } from "astro:assets";
-import heroImg from "./assets/hero3.jpg";
+const heroImg = "/images/hero-hero3.jpg";
 import CtaButton from "../../shared/CtaButton.astro";
 import Container from "../../shared/Container.astro";
 import GradiantText from "../../shared/GradiantText.astro";
@@ -9,14 +9,14 @@ import Title from "../../shared/Title.astro";
 import LazyImage from "../../shared/LazyImage.astro";
 
 const heroSection = {
-  headline1: "Soluciones de",
-  headline2: "aire industrial",
+  headline1: "Transformamos el",
+  headline2: "Aire",
   headline3: "",
-  headline4: "que impulsan tus procesos.",
-  subheading1: "Venta, Puesta en Marcha, Mantención y Soporte",
+  headline4: "en una herramienta.",
+  subheading1: "Más de 45.000 máquinas instaladas a nivel mundial.",
   subheading2:
-    "Sopladores Centrífugos Monoetapa y Multietapa.",
-  subheading3: "",
+    "Somos el soporte de Continental Blowers en Chile",
+  subheading3: "y en la Región Andina.",
   buttonText: "Solicitar asesoría",
   backgroundImage: "hero-background-image.jpg",
 };
@@ -40,13 +40,13 @@ const { className = "" } = Astro.props;
       autoplay
       aria-hidden="true"
       preload="none"
-      poster={heroImg.src}
+      poster={heroImg}
     >
     </video>
-    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/40"></div>
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
   </div>
   <Container size="wide">
-    <div class="pt-28 md:pt-32 lg:pt-40 pb-16 md:pb-20 lg:pb-24 relative z-10">
+    <div class="pt-28 md:pt-32 lg:pt-40 pb-6 md:pb-8 lg:pb-10 relative z-10">
       <div class="grid grid-cols-1 items-center gap-6 md:gap-10">
       <div
         class="order-1 flex flex-col items-center md:items-start text-center md:text-left px-6 md:px-10 text-white"
@@ -144,7 +144,7 @@ const { className = "" } = Astro.props;
   <style>
     /* Ensure section has a visual fallback via poster until video loads */
     :global(#hero) {
-      background-image: url({heroImg.src});
+      background-image: url({heroImg});
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;

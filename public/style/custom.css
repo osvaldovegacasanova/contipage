@@ -34,6 +34,15 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Central title font-weight control */
+:root {
+  --title-weight: 500; /* change to 700 or 800 to test */
+}
+
+.title-fw {
+  font-weight: var(--title-weight);
+}
+
 /* body {
   font-family: "Raleway", sans-serif;
 } */

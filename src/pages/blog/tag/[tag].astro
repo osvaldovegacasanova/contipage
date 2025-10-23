@@ -23,7 +23,7 @@ const allTags = Array.from(new Set((await getCollection('blog')).flatMap(p => p.
   <section class="pt-28 md:pt-32">
     <Container size="wide">
       <div class="text-center max-w-2xl mx-auto">
-        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-heading-1">#{tagParam}</h1>
+        <h1 class="text-4xl md:text-5xl title-fw tracking-tight text-heading-1">#{tagParam}</h1>
         <Paragraph className="mt-3 text-heading-3">Artículos etiquetados con “{tagParam}”.</Paragraph>
       </div>
     </Container>

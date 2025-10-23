@@ -1,15 +1,16 @@
 ---
 export interface Props {
   className?: string;
+  containerClass?: string;
 }
 
-const { className } = Astro.props;
+const { className = "", containerClass = "" } = Astro.props;
 ---
 
 <div
-  class="border border-base-400 dark:border-base-dark-400 text-base-800 dark:text-base-dark-100 rounded-full mb-10 w-fit"
+  class={`border border-[#2e2e2e] text-[#2e2e2e] rounded-full mb-10 w-fit self-start text-left ${containerClass}`}
 >
-  <h2 class=`font-bold leading-tight mx-2 my-1 ${className} `>
+  <h2 class={`title-fw leading-tight mx-2 my-1 ${className}`}>
     <slot />
   </h2>
 </div>

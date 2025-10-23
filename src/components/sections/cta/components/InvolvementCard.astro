@@ -1,6 +1,5 @@
 ---
 import Paragraph from "../../../shared/Paragraph.astro";
-import { Image } from "astro:assets";
 
 import Title3 from "../../../shared/Title3.astro";
 
@@ -19,11 +18,7 @@ const { title, description, visual } = Astro.props;
   <div class="grid grid-cols-1 content-between h-full mx-6 mb-6">
     <div class="flex">
       <div class="h-[50px] w-[50px] m-6">
-        <div
-          class="fill:accent dark:fill-accent-light dark:opacity-70 shrink-0 h-full"
-        >
-          <Fragment set:html={visual} />
-        </div>
+        <img src={visual} alt="" class="shrink-0 h-full w-full object-contain dark:opacity-70" />
       </div>
       <Title3 className="dark:opacity-70 self-center">
         {title}

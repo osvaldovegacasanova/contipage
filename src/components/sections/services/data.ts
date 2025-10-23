@@ -1,25 +1,29 @@
-import img1 from "./assets/solar3.png";
-import img2 from "./assets/wind.png";
-// TODO
-import img3 from "./assets/hydro.png";
-import img4 from "./assets/storage.png";
-// TODO
-import img5 from "./assets/smart-grid.png";
-import img6 from "./assets/green.png";
+const img1 = "/images/puesta_en_marcha.webp";
+const img2 = "/images/mantenimiento.webp";
+const img3 = "/images/services-hydro.png";
+const img4 = "/images/services-storage.png";
+const img5 = "/images/services-respuestos_400_533.jpg";
+const img6 = "/images/capacidad_tecnica.webp";
 
 export const servicesSectionData = {
   title: "Servicios",
   subheading: {
-    text1_1: "Acompañamos todo el ciclo de vida - ",
-    text1_2: "Instalación, operación y soporte.",
+    text1_1: "Acompañamos todo el ciclo de vida de cada máquina:",
+    text1_2: "Instalación, mantención y soporte.",
     text2:
       "Garantizamos eficiencia, seguridad y continuidad operacional en cada proyecto.",
   },
   services: [
     {
+      title: "Ingeniería de Proyectos",
+      briefDescription:
+        "Diseño, fabricación y montaje de sistemas de suministro de aire o gas, control e instrumentación, sistemas de regulación de caudal.",
+      visual: img4,
+    },
+    {
       title: "Puesta en Marcha",
       briefDescription:
-        "Chequeo de montaje y condición inicial, configuración, calibración y ajuste de parámetros de operación para equipos nuevos o reacondicionados.",
+        "Chequeo de montaje y condición inicial de equipos nuevos y reacondicionados, configuración, calibración y ajuste de parámetros de operación.",
       visual: img1,
     },
     {
@@ -34,14 +38,9 @@ export const servicesSectionData = {
         "Servicios programados según su necesidad (mensual, trimestral o semestral) para continuidad sin detenciones.",
       visual: img3,
     },
+
     {
-      title: "Ingeniería de Proyectos",
-      briefDescription:
-        "Diseño, fabricación y montaje de sistemas de aire o gas, control e instrumentación y regulación de caudal.",
-      visual: img4,
-    },
-    {
-      title: "Suministro de Repuestos",
+      title: "Repuestos",
       briefDescription:
         "Disponibilidad de piezas y componentes originales para minimizar tiempos de parada.",
       visual: img5,

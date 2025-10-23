@@ -1,7 +1,7 @@
-import svg1 from "./assets/green-1.svg?raw";
-import svg2 from "./assets/green-2.svg?raw";
-import svg3 from "./assets/green-3.svg?raw";
-import svg4 from "./assets/green-4.svg?raw";
+const svg1 = "/images/cta-green-1.svg";
+const svg2 = "/images/cta-green-2.svg";
+const svg3 = "/images/cta-green-3.svg";
+const svg4 = "/images/cta-green-4.svg";
 
 export const getInvolvedSection = {
   title: "Contáctenos",
