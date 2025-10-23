@@ -4,21 +4,23 @@ const img3 = "/images/services-hydro.png";
 const img4 = "/images/services-storage.png";
 const img5 = "/images/services-respuestos_400_533.jpg";
 const img6 = "/images/capacidad_tecnica.webp";
+const img_ingenieria = "/images/slider42-02.jpg";
 
 export const servicesSectionData = {
   title: "Servicios",
   subheading: {
-    text1_1: "Acompañamos todo el ciclo de vida de cada máquina:",
+    text1_1: "Soporte Oficial de Continental Blowers para la Región Andina:",
     text1_2: "Instalación, mantención y soporte.",
     text2:
-      "Garantizamos eficiencia, seguridad y continuidad operacional en cada proyecto.",
+      "Acompañamos todo el ciclo de vida de cada máquina. Garantizamos eficiencia, seguridad y continuidad operacional en cada proyecto.",
+      
   },
   services: [
     {
       title: "Ingeniería de Proyectos",
       briefDescription:
         "Diseño, fabricación y montaje de sistemas de suministro de aire o gas, control e instrumentación, sistemas de regulación de caudal.",
-      visual: img4,
+      visual: img_ingenieria,
     },
     {
       title: "Puesta en Marcha",

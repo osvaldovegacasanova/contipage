@@ -2,6 +2,7 @@
 const imgMulti = "/images/multistage_draw.webp";
 const imgSolar = "/images/innovations-inno-panel.webp";
 const imgWind = "/images/innovations-inno-wind.webp";
+const imgGas = "/images/gas.webp";
 
 export const procesoSection = {
   title: "Proceso",
@@ -24,7 +25,7 @@ Gracias a las tolerancias de alta precisión y al control continuo de los parám
       title: "Sopladores de Gas",
       description:
         "Nuestro catálogo incluye soluciones para manejo de gases de proceso, con configuraciones que permiten trabajar en continuo manteniendo estabilidad operativa y eficiencia energética, incluso en ambientes exigentes.",
-      visual: imgWind,
+      visual: imgGas,
     },
   ],
   visual: imgSolar,
