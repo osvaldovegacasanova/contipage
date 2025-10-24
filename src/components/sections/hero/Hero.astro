@@ -149,10 +149,22 @@ const { className = "" } = Astro.props;
       background-position: center;
       background-repeat: no-repeat;
     }
+    :global(#hero)::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: transparent;
+      transition: background 0.3s ease;
+      z-index: 1;
+    }
     /* Mobile: use the provided slider image, no video */
     @media (max-width: 640px) {
       :global(#hero) {
         background-image: url('/images/slider-bg3.webp');
+      }
+      :global(#hero)::after {
+        background: rgba(0, 0, 0, 0.55);
       }
     }
     @media (prefers-reduced-motion: reduce) {
