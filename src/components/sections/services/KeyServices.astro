@@ -1,6 +1,8 @@
 ---
 import Container from "../../shared/Container.astro";
 import Title2 from "../../shared/Title2.astro";
+import SubTitle2 from "../../shared/SubTitle2.astro";
+import GradiantText from "../../shared/GradiantText.astro";
 import Paragraph from "../../shared/Paragraph.astro";
 import LazyImage from "../../shared/LazyImage.astro";
 import { servicesSectionData } from "./data.ts";
@@ -17,10 +19,10 @@ const { className } = Astro.props;
     <div class="space-y-8">
       <div class="space-y-3">
         <Title2>{servicesSectionData.title}</Title2>
-        <p class="font-semibold uppercase tracking-wide text-heading-2">
+        <SubTitle2 as="h2">
           {servicesSectionData.subheading.text1_1}
-          <span class="text-primary"> {servicesSectionData.subheading.text1_2}</span>
-        </p>
+          <GradiantText> {servicesSectionData.subheading.text1_2}</GradiantText>
+        </SubTitle2>
         <Paragraph className="max-w-3xl text-heading-3">
           {servicesSectionData.subheading.text2}
         </Paragraph>

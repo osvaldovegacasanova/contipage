@@ -1,4 +1,4 @@
----
+ï»¿---
 import EnvironmentalImpact from "../components/sections/environment/EnvironmentalImpact.astro";
 import Productos from "../components/sections/productos/Productos.astro";
 import GetInvolved from "../components/sections/cta/GetInvolved.astro";
@@ -7,19 +7,23 @@ import KeyServices from "../components/sections/services/KeyServices.astro";
 import KeyAreas from "../components/sections/areas/KeyAreas.astro";
 import Proceso from "../components/sections/proceso/Proceso.astro";
 import Layout from "../layouts/Layout.astro";
+import WhatsAppButton from "../components/WhatsAppButton.astro";
+import Nosotros from "../components/sections/nosotros/Nosotros.astro";
 ---
 
-<Layout title="Sopladores Centrífugos | Continental Andes Blowers">
+<Layout title="Sopladores Centrifugos | Continental Andes Blowers">
   <main class="flex flex-col gap-y-20 md:gap-y-40 overflow-hidden">
     <!-- Hero Section: -->
     <!-- High-quality image or animation of renewable energy sources. -->
     <!-- Headline and subheading centered on the page. -->
     <Hero />
 
+
+
     <Productos />
     <!-- Productos: -->
-    <!-- Destaca soluciones y equipos disponibles, con breve descripción y ubicación. -->
-    <!-- Mantén un llamado a profundizar en fichas técnicas o contacto comercial. -->
+    <!-- Destaca soluciones y equipos disponibles, con breve descripcion y ubicacion. -->
+    <!-- Manten un llamado a profundizar en fichas tecnicas o contacto comercial. -->
 
     <KeyServices />
     <!-- Key Services Overview: -->
@@ -27,13 +31,17 @@ import Layout from "../layouts/Layout.astro";
     <!-- Use engaging visuals and concise text to highlight the benefits. -->
     <!-- Include a call-to-action button leading to detailed service information. -->
 
+    <Nosotros />
+    <!-- Nosotros: -->
+    <!-- Presenta al equipo con informacion de contacto directo para soporte. -->
+
     <KeyAreas />
     <!-- Industries served: -->
 
     <Proceso />
     <!-- Proceso: -->
     <!-- Describe las etapas clave del proceso y diferencia soluciones mono/multietapa. -->
-    <!-- Refuerza la innovación continua y la experiencia en ingeniería. -->
+    <!-- Refuerza la innovacion continua y la experiencia en ingenieria. -->
 
     <EnvironmentalImpact />
     <!-- Environmental Impact: -->
@@ -47,4 +55,5 @@ import Layout from "../layouts/Layout.astro";
     <!-- Provide information on community initiatives, events, or partnerships. -->
     <!-- Include a call-to-action for users to join your community or subscribe to updates. -->
   </main>
+  <WhatsAppButton />
 </Layout>

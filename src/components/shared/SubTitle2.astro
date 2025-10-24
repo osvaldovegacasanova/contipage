@@ -1,14 +1,16 @@
 ---
-export interface Props {
+interface Props {
   className?: string;
+  as?: keyof HTMLElementTagNameMap;
 }
 
-const { className } = Astro.props;
+const { className = "", as = "p" } = Astro.props as Props;
+const Tag = as;
 ---
 
-<p
+<Tag
   class={`tracking-wide antialiased
    mb-8 text-lg md:text-4xl title-fw  ${className}`}
 >
   <slot />
-</p>
+</Tag>

@@ -17,7 +17,7 @@ const { className } = Astro.props;
     className="mx-auto flex flex-col items-center justify-center text-center"
   >
     <Title2>{productosSection.title}</Title2>
-    <SubTitle2>
+    <SubTitle2 as="h1">
       {productosSection.subheading1_1}
       <GradiantText> {productosSection.subheading1_2}</GradiantText>
     </SubTitle2>

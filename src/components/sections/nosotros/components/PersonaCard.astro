@@ -1,0 +1,42 @@
+﻿---
+import LazyImage from "../../../shared/LazyImage.astro";
+
+export interface Props {
+  name: string;
+  role: string;
+  email: string;
+  phone: string;
+  photo: string;
+}
+
+const { name, role, email, phone, photo } = Astro.props;
+const telHref = `tel:${phone.replace(/[^0-9+]/g, "")}`;
+---
+
+<div class="flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-lg ring-1 ring-black/5 dark:bg-base-dark-800">
+  <div class="relative h-64 w-full overflow-hidden">
+    <LazyImage
+      src={photo}
+      alt={`Retrato de ${name}`}
+      width="384"
+      height="384"
+      class="h-full w-full object-cover"
+    />
+  </div>
+  <div class="flex flex-1 flex-col gap-3 p-6 text-center">
+    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{name}</h3>
+    <p class="text-sm font-medium text-gray-600 dark:text-gray-300">{role}</p>
+    <a
+      href={`mailto:${email}`}
+      class="break-words text-sm font-semibold text-primary-600 transition hover:text-primary-500"
+    >
+      {email}
+    </a>
+    <a
+      href={telHref}
+      class="mt-2 inline-flex items-center justify-center gap-2 rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-primary-500 sm:hidden"
+    >
+      Llamar
+    </a>
+  </div>
+</div>
