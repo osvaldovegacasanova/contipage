@@ -1,32 +1,32 @@
-﻿const photoAna = "/images/testimonials-person1.png";
-const photoLuis = "/images/testimonials-person2.png";
-const photoMaria = "/images/testimonials-person3.png";
+﻿const photoCarlos = "/images/testimonials-person1.png";
+const photoMiguel = "/images/testimonials-person2.png";
+const photoVanessa = "/images/testimonials-person3.png";
 
 export const nosotrosSection = {
   title: "Nosotros",
-  subheading1_1: "Conoce al equipo",
-  subheading1_2: "Continental Andes",
+  subheading1_1: "Somos un equipo líder altamente especializado y con demostrada experiencia para satisfacer los requerimientos de la industria. Capacitamos a tu equipo en la ",
+  subheading1_2: "Operación y Mantención de cada planta.",
   members: [
     {
-      name: "Ana Perez",
-      role: "Gerente Comercial",
-      email: "ana.perez@continentalandes.cl",
-      phone: "+56911112222",
-      photo: photoAna,
+      name: "Carlos Suárez",
+      role: "Ventas",
+      email: "c.suarez@continentalandes.com",
+      phone: "+56 9 9679 4151",
+      photo: photoCarlos,
     },
     {
-      name: "Luis Rojas",
-      role: "Director Tecnico",
-      email: "luis.rojas@continentalandes.cl",
-      phone: "+56933334444",
-      photo: photoLuis,
+      name: "Miguel Urbina",
+      role: "Repuestos",
+      email: "m.urbina@continentalandes.com",
+      phone: "+56 9 6645 0740",
+      photo: photoMiguel,
     },
     {
-      name: "Maria Torres",
-      role: "Lider de Proyectos",
-      email: "maria.torres@continentalandes.cl",
-      phone: "+56955556666",
-      photo: photoMaria,
+      name: "Vanessa Pajares",
+      role: "Servicios",
+      email: "v.pajares@continentalandes.com",
+      phone: "+56 9 6659 0216",
+      photo: photoVanessa,
     },
   ],
 };

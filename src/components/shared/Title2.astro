@@ -8,9 +8,9 @@ const { className = "", containerClass = "" } = Astro.props;
 ---
 
 <div
-  class={`border border-[#2e2e2e] text-[#2e2e2e] rounded-full mb-10 w-fit self-start text-left ${containerClass}`}
+  class={`border border-[#2e2e2e] text-[#2e2e2e] rounded-full mb-10 w-fit self-start text-left dark:border-white/70 dark:text-white ${containerClass}`}
 >
-  <h2 class={`title-fw leading-tight mx-2 my-1 ${className}`}>
+  <h2 class={`title-fw leading-tight mx-2 my-1 dark:text-white ${className}`}>
     <slot />
   </h2>
 </div>

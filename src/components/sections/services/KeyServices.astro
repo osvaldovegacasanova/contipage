@@ -16,53 +16,78 @@ const { className } = Astro.props;
 
 <section id="servicios" class={`bg-box-bg/40 pt-4 md:pt-5 pb-12 md:pb-16 ${className}`}>
   <Container size="wide">
-    <div class="space-y-8">
-      <div class="space-y-3">
-        <Title2>{servicesSectionData.title}</Title2>
-        <SubTitle2 as="h2">
-          {servicesSectionData.subheading.text1_1}
-          <GradiantText> {servicesSectionData.subheading.text1_2}</GradiantText>
-        </SubTitle2>
-        <Paragraph className="max-w-3xl text-heading-3">
-          {servicesSectionData.subheading.text2}
-        </Paragraph>
-      </div>
+    <div class="grid gap-12 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] items-start">
+      <div class="space-y-8">
+        <div class="space-y-3">
+          <Title2>{servicesSectionData.title}</Title2>
+          <SubTitle2 as="h2">
+            {servicesSectionData.subheading.text1_1}
+            <GradiantText> {servicesSectionData.subheading.text1_2}</GradiantText>
+          </SubTitle2>
+          <Paragraph className="max-w-3xl text-heading-3">
+            {servicesSectionData.subheading.text2}
+          </Paragraph>
+        </div>
 
-      <div class="bg-body border border-box-border/60 rounded-3xl shadow-sm overflow-hidden">
-        <ul class="divide-y divide-box-border">
+        <ul class="space-y-8">
           {
-            servicesSectionData.services.map((service, index) => {
-              const isEven = index % 2 === 0;
-              const flexDirection = isEven ? "sm:flex-row" : "sm:flex-row-reverse";
-              const textAlignment = isEven ? "sm:text-left" : "sm:text-right";
-              const imageMargin = isEven
-                ? "sm:mr-6 sm:ml-0"
-                : "sm:ml-6 sm:mr-0";
-              return (
-                <li class={`flex flex-col gap-5 px-6 py-8 ${flexDirection} sm:items-center`}>
-                  <div
-                    class={`mx-auto flex h-[7.75rem] w-[7.75rem] flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-box-border bg-box-bg shadow-sm sm:mx-0 ${imageMargin}`}
-                  >
-                    <LazyImage
-                      src={service.visual}
-                      alt={service.title}
-                      class="h-full w-full object-cover"
-                      height="192"
-                    />
-                  </div>
-                  <div class={`flex-1 space-y-3 text-center ${textAlignment}`}>
-                    <h3 class="text-lg font-semibold uppercase tracking-wide text-primary">
-                      {service.title}
-                    </h3>
-                    <Paragraph className="text-heading-3 leading-relaxed">
-                      {service.briefDescription}
-                    </Paragraph>
-                  </div>
-                </li>
-              );
-            })
+            servicesSectionData.services.map((service) => (
+              <li class="flex flex-col items-center gap-5 border-b border-box-border/60 pb-8 last:border-none last:pb-0 sm:flex-row sm:items-start">
+                <div
+                  class="flex h-24 w-24 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-primary/40 bg-white shadow-md dark:bg-base-dark-900"
+                >
+                  <LazyImage
+                    src={service.visual}
+                    alt={service.title}
+                    class="h-full w-full object-cover"
+                    height="192"
+                    width="192"
+                  />
+                </div>
+                <div class="flex-1 space-y-2 text-center sm:text-left">
+                  <h3 class="text-lg font-semibold uppercase tracking-wide text-primary">
+                    {service.title}
+                  </h3>
+                  <Paragraph className="text-heading-3 leading-relaxed">
+                    {service.briefDescription}
+                  </Paragraph>
+                </div>
+              </li>
+            ))
           }
         </ul>
+      </div>
+      <div class="relative grid h-full w-full grid-rows-3 gap-6 overflow-hidden rounded-[4rem] bg-gradient-to-b from-white to-primary-100 p-6 shadow-2xl">
+        <div class="relative overflow-hidden rounded-3xl bg-white/60 p-4 shadow-lg">
+          <LazyImage
+            src="/images/TCB15_2.JPG"
+            alt="Equipo Continental Andes TCB15"
+            class="h-full w-full object-cover object-center"
+            width="800"
+            height="600"
+            loading="lazy"
+          />
+        </div>
+        <div class="relative overflow-hidden rounded-3xl bg-white/60 p-4 shadow-lg">
+          <LazyImage
+            src="/images/PLAQUETTE TC25.jpg"
+            alt="Plaqueta TC25"
+            class="h-full w-full object-cover object-center"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </div>
+        <div class="relative overflow-hidden rounded-3xl bg-white/60 p-4 shadow-lg">
+          <LazyImage
+            src="/images/TCH25 PARTES.jpg"
+            alt="Partes TCH25"
+            class="h-full w-full object-cover object-center"
+            width="600"
+            height="400"
+            loading="lazy"
+          />
+        </div>
       </div>
     </div>
   </Container>
