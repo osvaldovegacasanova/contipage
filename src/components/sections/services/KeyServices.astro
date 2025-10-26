@@ -7,6 +7,10 @@ import Paragraph from "../../shared/Paragraph.astro";
 import LazyImage from "../../shared/LazyImage.astro";
 import { servicesSectionData } from "./data.ts";
 
+const primaryServiceImage = "/images/TCB15_2.webp";
+const secondaryServiceImage = "/images/PLAQUETTE TC25.webp";
+const tertiaryServiceImage = "/images/TCH25 PARTES.webp";
+
 export interface Props {
   className?: string;
 }
@@ -60,7 +64,7 @@ const { className } = Astro.props;
       <div class="relative grid h-full w-full grid-rows-3 gap-6 overflow-hidden rounded-[4rem] bg-gradient-to-b from-white to-primary-100 p-6 shadow-2xl">
         <div class="relative overflow-hidden rounded-3xl bg-white/60 p-4 shadow-lg">
           <LazyImage
-            src="/images/TCB15_2.JPG"
+            src={primaryServiceImage}
             alt="Equipo Continental Andes TCB15"
             class="h-full w-full object-cover object-center"
             width="800"
@@ -70,7 +74,7 @@ const { className } = Astro.props;
         </div>
         <div class="relative overflow-hidden rounded-3xl bg-white/60 p-4 shadow-lg">
           <LazyImage
-            src="/images/PLAQUETTE TC25.jpg"
+            src={secondaryServiceImage}
             alt="Plaqueta TC25"
             class="h-full w-full object-cover object-center"
             width="600"
@@ -80,7 +84,7 @@ const { className } = Astro.props;
         </div>
         <div class="relative overflow-hidden rounded-3xl bg-white/60 p-4 shadow-lg">
           <LazyImage
-            src="/images/TCH25 PARTES.jpg"
+            src={tertiaryServiceImage}
             alt="Partes TCH25"
             class="h-full w-full object-cover object-center"
             width="600"
