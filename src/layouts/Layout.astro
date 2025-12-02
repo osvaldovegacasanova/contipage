@@ -170,7 +170,7 @@ const { title } = Astro.props;
       let ticking = false;
       const timers = new WeakMap();
 
-      function applyBreeze(shift, skew) {
+      function applyBreeze(shift: number, skew: number) {
         breezeTargets.forEach((node) => {
           const el = node;
           if (!(el instanceof HTMLElement)) return;
