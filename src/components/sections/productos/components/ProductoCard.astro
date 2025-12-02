@@ -47,7 +47,7 @@ const { title, description, location, visual } = Astro.props;
     </svg>
   </div>
   <div class="grid grid-cols-1 content-between w-full h-full p-6">
-    <Title3 className="dark:opacity-70">
+    <Title3 as="h2" className="dark:opacity-70">
       {title}
     </Title3>
     <div class="self-baseline">

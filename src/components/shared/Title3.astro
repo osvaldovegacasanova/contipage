@@ -1,11 +1,13 @@
 ---
 export interface Props {
   className?: string;
+  as?: keyof HTMLElementTagNameMap;
 }
 
-const { className = "" } = Astro.props;
+const { className = "", as = "h3" } = Astro.props as Props;
+const Tag = as;
 ---
 
-<h3 class={`text-2xl title-fw leading-tight mb-4 ${className}`}>
+<Tag class={`text-2xl title-fw leading-tight mb-4 ${className}`}>
   <slot />
-</h3>
+</Tag>

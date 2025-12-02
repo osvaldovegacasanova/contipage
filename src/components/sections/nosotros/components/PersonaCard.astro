@@ -14,16 +14,16 @@ const telHref = `tel:${phone.replace(/[^0-9+]/g, "")}`;
 ---
 
 <div class="flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-lg ring-1 ring-black/5 dark:bg-base-dark-800">
-  <div class="relative h-64 w-full overflow-hidden">
+  <div class="relative aspect-square w-full overflow-hidden">
     <LazyImage
       src={photo}
       alt={`Retrato de ${name}`}
-      width="384"
-      height="384"
+      width="346"
+      height="346"
       class="h-full w-full object-cover"
     />
   </div>
-  <div class="flex flex-1 flex-col gap-3 p-6 text-center">
+  <div class="flex flex-1 flex-col gap-2 px-6 py-4 text-center">
     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{name}</h3>
     <p class="text-sm font-medium text-gray-600 dark:text-gray-300">{role}</p>
     <a

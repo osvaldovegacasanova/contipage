@@ -1,9 +1,10 @@
-const img1 = "/images/services-hydro.png";
-const img2 = "/images/services-storage.png";
-const img3 = "/images/services-smart-grid.png";
-const img4 = "/images/services-solar3.png";
-const img5 = "/images/services-wind.png";
-const img6 = "/images/services-green.png";
+const imgMineria = "/images/aplicacion_mineria.webp";
+const imgBiogas = "/images/aplicacion_biogas.webp";
+const imgAgua = "/images/aplicacion_tratamiento_agua.webp";
+const imgCelulosa = "/images/aplicacion_celulosa.webp";
+const imgAlimentos = "/images/aplicacion_alimentaria.webp";
+const imgPetroquimica = "/images/aplicacion_petroquimica.webp";
+const imgCemento = "/images/aplicacion_cemento.webp";
 
 export const areasSectionData = {
   title: "Industrias",
@@ -15,40 +16,60 @@ export const areasSectionData = {
   },
   areas: [
     {
-      title: "Tratamiento de Aguas Servidas",
-      briefDescription:
-        "Aireación y procesos biológicos en plantas de agua potable y aguas residuales.",
-      visual: img1,
-    },
-    {
       title: "Minería",
-      briefDescription:
-        "Suministro de aire para transporte neumático, filtración y procesos metalúrgicos.",
-      visual: img2,
+      visual: imgMineria,
+      items: [
+        "Sopladores para flotación de minerales",
+        "Sopladores para transporte neumático",
+        "Sopladores para combustión",
+        "Sopladores para biolixiviación",
+      ],
     },
     {
-      title: "Industra Alimentaria",
-      briefDescription:
-        "Aplicaciones sanitarias, aire de proceso y control de atmósferas.",
-      visual: img3,
+      title: "Manejo de Biogás",
+      visual: imgBiogas,
+      items: [
+        "Booster en generación de energía con biogás",
+        "Sopladores para sistema de quema de biogás",
+        "Booster en la generación de biometano",
+      ],
     },
     {
-      title: "Química y Petroquímica",
-      briefDescription:
-        "Aireación, agitación y soporte a reacciones y tratamientos de gases.",
-      visual: img4,
+      title: "Tratamiento de Agua",
+      visual: imgAgua,
+      items: [
+        "Sopladores para aireación en reactores biológicos",
+        "Sopladores para manejo de biogás",
+        "Oxidación y agitación",
+      ],
     },
     {
-      title: "Cemento y Materiales",
-      briefDescription:
-        "Transporte neumático y fluidización en silos y hornos.",
-      visual: img5,
+      title: "Celulosa y Papel",
+      visual: imgCelulosa,
+      items: [
+        "Tratamiento de riles (residuo industrial líquido)",
+        "Sopladores para aireación",
+        "Bombas de vacío",
+      ],
     },
     {
-      title: "Pulpa y Papel",
-      briefDescription:
-        "Aire de procesos, secado y soporte a líneas de producción.",
-      visual: img6,
+      title: "Industria Alimentaria",
+      visual: imgAlimentos,
+      items: [
+        "Sopladores para transporte neumático",
+        "Bombas de vacío",
+        "Tratamiento de riles",
+      ],
+    },
+    {
+      title: "Industria Petroquímica",
+      visual: imgPetroquimica,
+      items: ["Sopladores para desulfurización de gases"],
+    },
+    {
+      title: "Cemento y Manejo de Materiales",
+      visual: imgCemento,
+      items: ["Sopladores para combustión", "Sopladores para fluidización","Sopladores para transporte neumático"],
     },
   ],
 };

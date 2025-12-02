@@ -9,10 +9,10 @@ const img_ingenieria = "/images/slider42-02.jpg";
 export const servicesSectionData = {
   title: "Servicios",
   subheading: {
-    text1_1: "Somos el Soporte Oficial de Continental Blowers para la Región Andina:",
-    text1_2: "Instalación, mantención y soporte.",
+    text1_1: "Máxima eficiencia con la mayor fiabilidad mecánica del mercado",
+    text1_2: "Puesta en marcha, instalación, mantención y soporte.",
     text2:
-      "Acompañamos todo el ciclo de vida de cada máquina. Garantizamos eficiencia, seguridad y continuidad operacional en cada proyecto.",
+      "La mayor disponibilidad operacional - Garantizamos eficiencia, seguridad y continuidad operacional en cada proyecto.",
       
   },
   services: [
@@ -31,20 +31,20 @@ export const servicesSectionData = {
     {
       title: "Mantenimiento de Equipos",
       briefDescription:
-        "Planes preventivos, predictivos y proactivos para asegurar la disponibilidad y desempeño de sus sopladores.",
+        "Planes preventivos, predictivos, proactivos y correctivos para asegurar la disponibilidad y desempeño de sus sopladores.",
       visual: img2,
     },
     {
       title: "Contratos de Mantenimiento",
       briefDescription:
-        "Servicios programados según su necesidad (mensual, trimestral o semestral) para continuidad sin detenciones.",
+        "Servicios programados según su necesidad (trimestral, semestral o anual) para continuidad sin detenciones.",
       visual: img3,
     },
 
     {
       title: "Repuestos",
       briefDescription:
-        "Disponibilidad de piezas y componentes originales para minimizar tiempos de parada.",
+        "Disponibilidad de componentes y accesorios originales para máxima confiabilidad.",
       visual: img5,
     },
     {

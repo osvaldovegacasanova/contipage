@@ -2,15 +2,21 @@
 export interface Props {
   className?: string;
   containerClass?: string;
+  as?: keyof HTMLElementTagNameMap;
 }
 
-const { className = "", containerClass = "" } = Astro.props;
+const {
+  className = "",
+  containerClass = "",
+  as = "p",
+} = Astro.props as Props;
+const Tag = as;
 ---
 
 <div
   class={`border border-[#2e2e2e] text-[#2e2e2e] rounded-full mb-10 w-fit self-start text-left dark:border-white/70 dark:text-white ${containerClass}`}
 >
-  <h2 class={`title-fw leading-tight mx-2 my-1 dark:text-white ${className}`}>
+  <Tag class={`title-fw leading-tight mx-2 my-1 dark:text-white ${className}`}>
     <slot />
-  </h2>
+  </Tag>
 </div>

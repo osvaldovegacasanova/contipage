@@ -1,4 +1,4 @@
----
+﻿---
 import { Image, Picture } from "astro:assets";
 const heroImg = "/images/hero-hero3.jpg";
 import CtaButton from "../../shared/CtaButton.astro";
@@ -15,7 +15,7 @@ const heroSection = {
   headline4: "en una herramienta.",
   subheading1: "Más de 45.000 máquinas instaladas a nivel mundial.",
   subheading2:
-    "Somos el soporte de Continental Blowers en Chile",
+    "Somos el soporte de Continental Industrie en Chile",
   subheading3: "y en la Región Andina.",
   buttonText: "Solicitar asesoría",
   backgroundImage: "hero-background-image.jpg",
@@ -67,9 +67,6 @@ const { className = "" } = Astro.props;
           <br />
           {heroSection.subheading3}
         </SubTitle>
-        <div class="pt-6 md:pt-8">
-          <CtaButton>{heroSection.buttonText}</CtaButton>
-        </div>
       </div>
       </div>
     </div>

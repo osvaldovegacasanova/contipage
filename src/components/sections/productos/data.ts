@@ -22,7 +22,7 @@ export const productosSection = {
       visual: imgMulti,
     },
     {
-      title: "Soluciones a medida",
+      title: "Sopladores de Gas",
       description:
         "Nuestro catálogo incluye soluciones para manejo de gases de proceso, con configuraciones que permiten trabajar en continuo manteniendo estabilidad operativa y eficiencia energética, incluso en ambientes exigentes.",
       location: "Productos",

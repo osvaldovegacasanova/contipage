@@ -1,12 +1,19 @@
-﻿const photoCarlos = "/images/testimonials-person1.png";
-const photoMiguel = "/images/testimonials-person2.png";
-const photoVanessa = "/images/testimonials-person3.png";
+﻿const photoCarlos = "/images/Carlos6.png";
+const photoMiguel = "/images/Miguel2.png";
+const photoVanessa = "/images/Vanessa.png";
 
 export const nosotrosSection = {
   title: "Nosotros",
   subheading1_1: "Somos un equipo líder altamente especializado y con demostrada experiencia para satisfacer los requerimientos de la industria. Capacitamos a tu equipo en la ",
   subheading1_2: "Operación y Mantención de cada planta.",
   members: [
+    {
+      name: "Vanessa Pajares",
+      role: "Servicios",
+      email: "v.pajares@continentalandes.com",
+      phone: "+56 9 6659 0216",
+      photo: photoVanessa,
+    },
     {
       name: "Carlos Suárez",
       role: "Ventas",
@@ -20,13 +27,6 @@ export const nosotrosSection = {
       email: "m.urbina@continentalandes.com",
       phone: "+56 9 6645 0740",
       photo: photoMiguel,
-    },
-    {
-      name: "Vanessa Pajares",
-      role: "Servicios",
-      email: "v.pajares@continentalandes.com",
-      phone: "+56 9 6659 0216",
-      photo: photoVanessa,
     },
   ],
 };

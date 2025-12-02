@@ -7,7 +7,7 @@ import Paragraph from "../../shared/Paragraph.astro";
 import LazyImage from "../../shared/LazyImage.astro";
 import { servicesSectionData } from "./data.ts";
 
-const primaryServiceImage = "/images/TCB15_2.webp";
+const primaryServiceImage = "/images/multistage-centrifugal-blowers-home.png";
 const secondaryServiceImage = "/images/PLAQUETTE TC25.webp";
 const tertiaryServiceImage = "/images/TCH25 PARTES.webp";
 
@@ -61,34 +61,34 @@ const { className } = Astro.props;
           }
         </ul>
       </div>
-      <div class="relative grid h-full w-full grid-rows-3 gap-6 overflow-hidden rounded-[4rem] bg-gradient-to-b from-white to-primary-100 p-6 shadow-2xl">
-        <div class="relative overflow-hidden rounded-3xl bg-white/60 p-4 shadow-lg">
+      <div class="relative grid h-full w-full grid-rows-3 gap-6 overflow-hidden rounded-[3rem] border border-primary/15 bg-white p-6 shadow-xl">
+        <div class="relative overflow-hidden rounded-3xl border border-primary/15 bg-white p-4 shadow-lg">
           <LazyImage
             src={primaryServiceImage}
             alt="Equipo Continental Andes TCB15"
             class="h-full w-full object-cover object-center"
-            width="800"
-            height="600"
+            width="680"
+            height="510"
             loading="lazy"
           />
         </div>
-        <div class="relative overflow-hidden rounded-3xl bg-white/60 p-4 shadow-lg">
+        <div class="relative overflow-hidden rounded-3xl border border-primary/15 bg-white p-4 shadow-lg">
           <LazyImage
             src={secondaryServiceImage}
             alt="Plaqueta TC25"
             class="h-full w-full object-cover object-center"
-            width="600"
-            height="400"
+            width="510"
+            height="340"
             loading="lazy"
           />
         </div>
-        <div class="relative overflow-hidden rounded-3xl bg-white/60 p-4 shadow-lg">
+        <div class="relative overflow-hidden rounded-3xl border border-primary/15 bg-white p-4 shadow-lg">
           <LazyImage
             src={tertiaryServiceImage}
             alt="Partes TCH25"
             class="h-full w-full object-cover object-center"
-            width="600"
-            height="400"
+            width="510"
+            height="340"
             loading="lazy"
           />
         </div>

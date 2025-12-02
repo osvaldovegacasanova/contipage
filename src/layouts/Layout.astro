@@ -125,5 +125,113 @@ const { title } = Astro.props;
       });
     }
   </script>
+  <script>
+    (function () {
+      if (typeof window === "undefined" || typeof document === "undefined") return;
+      const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+      if (prefersReducedMotion) return;
+      if (!("IntersectionObserver" in window)) return;
+
+      const targets = document.querySelectorAll("[data-scroll-blur], main img, main h2, main h3");
+      if (!targets.length) return;
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            const el = entry.target;
+            if (!(el instanceof HTMLElement)) continue;
+            if (entry.isIntersecting) {
+              el.classList.add("scroll-blur-visible");
+            } else {
+              el.classList.remove("scroll-blur-visible");
+            }
+          }
+        },
+        { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
+      );
+
+      targets.forEach((el) => {
+        if (!(el instanceof HTMLElement)) return;
+        el.classList.add("scroll-blur", "scroll-breeze");
+        io.observe(el);
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      if (typeof window === "undefined" || typeof document === "undefined") return;
+      const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+      if (prefersReducedMotion) return;
+
+      const breezeTargets = document.querySelectorAll(".scroll-breeze");
+      if (!breezeTargets.length) return;
+
+      let lastY = window.scrollY;
+      let ticking = false;
+      const timers = new WeakMap();
+
+      function applyBreeze(shift, skew) {
+        breezeTargets.forEach((node) => {
+          const el = node;
+          if (!(el instanceof HTMLElement)) return;
+          el.style.setProperty("--scroll-breeze-shift", `${shift}px`);
+          el.style.setProperty("--scroll-breeze-skew", `${skew}deg`);
+          const existing = timers.get(el);
+          if (existing) window.clearTimeout(existing);
+          const timeout = window.setTimeout(() => {
+            el.style.setProperty("--scroll-breeze-shift", "0px");
+            el.style.setProperty("--scroll-breeze-skew", "0deg");
+            timers.delete(el);
+          }, 220);
+          timers.set(el, timeout);
+        });
+      }
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (ticking) return;
+          ticking = true;
+          window.requestAnimationFrame(() => {
+            const currentY = window.scrollY;
+            const delta = currentY - lastY;
+            lastY = currentY;
+            const shift = Math.max(-30, Math.min(30, delta * 1.2));
+            const skew = Math.max(-4, Math.min(4, delta * 0.15));
+            applyBreeze(shift, skew);
+            ticking = false;
+          });
+        },
+        { passive: true }
+      );
+    })();
+  </script>
+  <style is:global>
+    .scroll-blur {
+      --scroll-blur-translate-y: 30px;
+      --scroll-breeze-shift: 0px;
+      --scroll-breeze-skew: 0deg;
+      filter: blur(12px);
+      opacity: 0;
+      transform: translateY(var(--scroll-blur-translate-y)) translateX(var(--scroll-breeze-shift))
+        skewX(var(--scroll-breeze-skew));
+      transition: filter 0.6s ease, opacity 0.6s ease, transform 0.6s ease;
+    }
+    .scroll-blur.scroll-blur-visible {
+      filter: blur(0);
+      opacity: 1;
+      --scroll-blur-translate-y: 0px;
+    }
+    .scroll-breeze {
+      will-change: transform;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-blur {
+        filter: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
 </html>
 

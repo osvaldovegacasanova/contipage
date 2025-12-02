@@ -1,0 +1,40 @@
+---
+import LazyImage from "../../../shared/LazyImage.astro";
+import Title3 from "../../../shared/Title3.astro";
+
+export interface Props {
+  title: string;
+  visual: string;
+  items: string[];
+}
+
+const { title, visual, items } = Astro.props;
+---
+
+<article
+  class="flex h-full flex-col overflow-hidden rounded-3xl border border-primary/10 bg-white shadow-lg dark:bg-base-dark-800 dark:shadow-dark"
+>
+  <div class="relative aspect-[3/4] w-full overflow-hidden">
+    <LazyImage
+      src={visual}
+      alt={`Industria ${title}`}
+      width="900"
+      height="1200"
+      class="h-full w-full object-cover"
+      loading="lazy"
+    />
+  </div>
+  <div class="flex flex-1 flex-col gap-4 p-6">
+    <Title3 as="h3" className="text-primary mb-0">
+      {title}
+    </Title3>
+    <ul class="space-y-2 text-heading-3">
+      {items.map((item) => (
+        <li class="flex items-start gap-2 text-sm leading-relaxed">
+          <span class="mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</article>
