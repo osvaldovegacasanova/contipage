@@ -31,15 +31,19 @@ const { className } = Astro.props;
             <InvolvementCard
               title={initiative.title}
               description={initiative.description}
-              visual={initiative.visual}
+              icon={initiative.icon}
             />
           );
         })
       }
     </div>
 
-    <div class="flex justify-center">
-      <EmailForm />
-    </div>
+    {
+      !getInvolvedSection.emailFormHidden && (
+        <div class="flex justify-center">
+          <EmailForm />
+        </div>
+      )
+    }
   </Container>
 </section>

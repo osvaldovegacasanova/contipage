@@ -10,14 +10,14 @@
   * `Proceso` -> `/#proceso`
   * `Testimonios` -> `/#testimonios`
   * `Temporal` -> `/#temporal`
-  * `Art�culos` -> `/blog`
+  * `Art�culos` -> `/blog`
 - Theme switch button includes sr-only label `cambiar tema`
 - Mobile menu toggle includes sr-only label `togglenav`
 - Logo image: `/images/logo_dark.png` (alt `Logo`)
 
 ### Footer (`src/layouts/Footer.astro`)
 - Branding link text: `Continental Andes`
-- Tagline paragraph: `Impulsamos la sostenibilidad mediante soluciones innovadoras para un mañana más verde.`
+- Tagline paragraph: `Somos el soporte de Continental Industrie en Chile y en la Región Andina..`
 - Social icons reuse sr-only text: `enlace social`
 - Navigation columns:
   * `Empresa`: `Acerca de`, `Blog`, `Empleos`, `Socios`, `Empleos`

@@ -18,12 +18,12 @@ const navItems = [
     text: "Servicios",
   },
   {
-    href: "/#proceso",
-    text: "Proceso",
+    href: "/#nosotros",
+    text: "Nosotros",
   },
   {
-    href: "/#testimonios",
-    text: "Testimonios",
+    href: "/#industrias",
+    text: "Industrias",
   },
   {
     href: "/#temporal",
@@ -32,6 +32,7 @@ const navItems = [
   {
     href: "/blog",
     text: "Artículos",
+    hidden: true,
   },
 ];
 ---
@@ -121,6 +122,7 @@ const navItems = [
       >
         {
           navItems.map((item) => {
+            if (item.hidden) return null;
             return <Navitem {...item} />;
           })
         }

@@ -46,25 +46,29 @@ const footerSupport = [
 const footerCompany = [
   {
     itemText: "Acerca de",
-    itemLink: "#",
+    itemLink: "#nosotros",
   },
   {
     itemText: "Blog",
     itemLink: "#",
+    hidden: true,
   },
   {
     itemText: "Empleos",
     itemLink: "#",
+    hidden: true,
   },
   {
     itemText: "Socios",
     itemLink: "#",
+    hidden: true,
   },
-  {
-    itemText: "Empleos",
-    itemLink: "#",
-  },
+
 ];
+
+const footerCompanyHidden = true;
+const footerSupportHidden = true;
+const footerLegalHidden = true;
 const footerLegal = [
   {
     itemText: "Reclamos",
@@ -95,14 +99,14 @@ const footerLegal = [
               </div>
             </a>
             <Paragraph className={"mt-8"}>
-              Impulsamos la sostenibilidad mediante soluciones innovadoras para un
-              mañana más verde.
+              Somos el soporte de Continental Industrie en Chile
+y en la Región Andina.
             </Paragraph>
           </div>
 
           <!-- social links -->
           <div class="min-h-max flex items-center gap-4 text-heading-3 mt-8">
-            <a href="#" class="transition hover:text-heading-1 hover:scale-105">
+            <a href="#" class="hidden transition hover:text-heading-1 hover:scale-105" aria-hidden="true">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -134,7 +138,7 @@ const footerLegal = [
               <span class="sr-only">enlace social</span>
             </a>
 
-            <a href="#" class="transition hover:text-heading-1 hover:scale-105">
+            <a href="#" class="hidden transition hover:text-heading-1 hover:scale-105" aria-hidden="true">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -150,7 +154,7 @@ const footerLegal = [
               <span class="sr-only">enlace social</span>
             </a>
 
-            <a href="#" class="transition hover:text-heading-1 hover:scale-105">
+            <a href="#" class="hidden transition hover:text-heading-1 hover:scale-105" aria-hidden="true">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -168,14 +172,30 @@ const footerLegal = [
           </div>
         </div>
 
-        <GroupFooterNav>
-          <FooterNav title={"Empresa"} navItems={footerCompany} />
-        </GroupFooterNav>
+        {
+          !footerCompanyHidden && (
+            <GroupFooterNav>
+              <FooterNav title={"Empresa"} navItems={footerCompany} />
+            </GroupFooterNav>
+          )
+        }
 
-        <GroupFooterNav>
-          <FooterNav title={"Soporte"} navItems={footerSupport} />
-          <FooterNav title={"Recursos"} navItems={footerLegal} />
-        </GroupFooterNav>
+        {
+          !(footerSupportHidden && footerLegalHidden) && (
+            <GroupFooterNav>
+              {
+                !footerSupportHidden && (
+                  <FooterNav title={"Soporte"} navItems={footerSupport} />
+                )
+              }
+              {
+                !footerLegalHidden && (
+                  <FooterNav title={"Recursos"} navItems={footerLegal} />
+                )
+              }
+            </GroupFooterNav>
+          )
+        }
       </div>
     </Container>
     <div class="py-2 relative">
@@ -184,7 +204,7 @@ const footerLegal = [
           class="flex justify-between items-center gap-6 md:text-lg text-heading-3"
         >
           <div>
-            &copy; <span id="year"></span> {nombre_empresa}. Todos los derechos reservados (v0.1)
+            &copy; <span id="year"></span> {nombre_empresa}. Todos los derechos reservados (v1.0)
           </div>
           <div>
             Hecho por <a

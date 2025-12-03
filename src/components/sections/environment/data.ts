@@ -27,4 +27,5 @@ export const environmentalImpactSection = {
   visual: img,
   callToAction: "Conózcanos y cuente con nuestro soporte",
   button: "Solicitar Agenda para Reunión",
+  buttonHidden: true,
 };

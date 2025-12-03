@@ -16,6 +16,7 @@ const {title, navItems} = Astro.props
     </h2>
     <ul class="space-y-3 font-medium md:text-lg text-heading-3 dark:text-gray-200">
         {navItems.map((navItem)=>(
+            navItem.hidden ? null : (
             <li>
                 <a
                     href={navItem.itemLink}
@@ -24,7 +25,7 @@ const {title, navItems} = Astro.props
                     {navItem.itemText}
                 </a>
             </li>
-        ))
+        )))
 
         }
     </ul>
