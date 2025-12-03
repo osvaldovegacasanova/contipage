@@ -7,19 +7,19 @@ export const getInvolvedSection = {
       title: "Oficina Comercial",
       description:
         "Avenida Italia 850, Providencia, Santiago, Chile.",
-      icon: "office",
+      icon: "office" as const,
     },
     {
       title: "Bodegas",
       description:
         "Pdte. Jorge Alessandri Rodríguez 11491, San Bernardo.",
-      icon: "warehouse",
+      icon: "warehouse" as const,
     },
     {
       title: "Contacto",
       description:
         "Tel: (+56 2) 2 461 94 18 · cba@continentalandes.com",
-      icon: "contact",
+      icon: "contact" as const,
     },
   ],
   visual: "get-involved-section-image.jpg",
