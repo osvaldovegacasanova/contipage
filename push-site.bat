@@ -37,6 +37,12 @@ echo [INFO] Commit: "!MSG!"
 
 REM === Agregar y commitear ===
 git add -A
+if %ERRORLEVEL% neq 0 (
+  echo [ERROR] Fallo el 'git add'. Hay archivos que Git no pudo agregar.
+  echo [INFO] Ejecuta: git status -sb
+  echo [INFO] Si ves un archivo raro como NUL, eliminalo o agregalo al .gitignore.
+  exit /b 1
+)
 git commit -m "!MSG!" || (
   echo [ERROR] Fallo el commit.
   exit /b 1

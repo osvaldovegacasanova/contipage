@@ -17,7 +17,7 @@
 
 ### Footer (`src/layouts/Footer.astro`)
 - Branding link text: `Continental Andes`
-- Tagline paragraph: `Somos el soporte de Continental Industrie en Chile y en la Región Andina..`
+- Tagline paragraph: `Impulsamos la sostenibilidad mediante soluciones innovadoras para un mañana más verde.`
 - Social icons reuse sr-only text: `enlace social`
 - Navigation columns:
   * `Empresa`: `Acerca de`, `Blog`, `Empleos`, `Socios`, `Empleos`

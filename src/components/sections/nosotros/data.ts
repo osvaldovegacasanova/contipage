@@ -1,6 +1,6 @@
 ﻿const photoCarlos = "/images/Carlos6.png";
 const photoMiguel = "/images/Miguel2.png";
-const photoVanessa = "/images/Vanessa.png";
+const photoVanessa = "/images/Vanessa2.png";
 
 export const nosotrosSection = {
   title: "Nosotros",

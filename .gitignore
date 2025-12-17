@@ -19,3 +19,9 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# local AI/editor tooling
+.claude/
+
+# Windows reserved-name file accidentally created via PowerShell redirection
+NUL

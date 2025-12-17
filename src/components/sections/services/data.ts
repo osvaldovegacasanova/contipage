@@ -1,4 +1,4 @@
-const img1 = "/images/puesta_en_marcha.webp";
+const img1 = "/images/puesta_en_marcha2.webp";
 const img2 = "/images/mantenimiento.webp";
 const img3 = "/images/services-hydro.png";
 const img4 = "/images/services-storage.png";
