@@ -1,0 +1,277 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Container from "../components/shared/Container.astro";
+import Title2 from "../components/shared/Title2.astro";
+import Title3 from "../components/shared/Title3.astro";
+import SubTitle2 from "../components/shared/SubTitle2.astro";
+import Paragraph from "../components/shared/Paragraph.astro";
+import GradiantText from "../components/shared/GradiantText.astro";
+import LazyImage from "../components/shared/LazyImage.astro";
+
+const pageTitle = "Soluciones para la Industria Minera - Continental Andes Blowers";
+const pageDescription = "Sopladores y compresores centrífugos especializados para aplicaciones mineras: flotación, transporte neumático, combustión y biolixiviación.";
+
+// Applications data (from KeyAreas)
+const applications = [
+  {
+    title: "Flotación de Minerales",
+    description: "Sistemas de aireación para procesos de flotación, garantizando flujo constante y presión precisa para optimizar la separación mineral.",
+    icon: "⚙️",
+    image: "/images/singlestage_draw.webp",
+    alt: "Soplador centrífugo monoetapa para flotación de minerales en procesos mineros"
+  },
+  {
+    title: "Transporte Neumático",
+    description: "Sopladores de alta eficiencia para el transporte de materiales secos, minimizando pérdidas y asegurando continuidad operacional.",
+    icon: "🌀",
+    image: "/images/multistage_draw.webp",
+    alt: "Compresor centrífugo multietapa para transporte neumático de materiales en minería"
+  },
+  {
+    title: "Combustión",
+    description: "Suministro de aire para procesos de combustión en hornos y calderas industriales, con control preciso de caudal y presión.",
+    icon: "🔥",
+    image: "/images/TCB15_2.webp",
+    alt: "Equipo soplador Continental Blowers TCB15 para sistemas de combustión industrial"
+  },
+  {
+    title: "Biolixiviación",
+    description: "Aireación controlada para procesos de biolixiviación de minerales, optimizando la actividad bacteriana y eficiencia de extracción.",
+    icon: "🧪",
+    image: "/images/aplicacion_mineria.webp",
+    alt: "Sistema de aireación para biolixiviación de minerales con tecnología Continental Blowers"
+  },
+];
+
+// Past projects mockup data
+const pastProjects = [
+  {
+    title: "Sistema de Flotación - Minera Norte",
+    description: "Implementación de sopladores de alta capacidad para optimización de proceso de flotación en planta concentradora.",
+    image: "/images/empresa-conti2.jpg",
+    alt: "Instalaciones de Continental Andes Blowers para sistema de flotación en planta minera",
+    capacity: "1500 m³/h",
+    year: "2024"
+  },
+  {
+    title: "Transporte Neumático - Faena Sur",
+    description: "Instalación de sopladores para transporte de concentrado seco en planta de procesos.",
+    image: "/images/mantenimiento.webp",
+    alt: "Servicio de mantenimiento preventivo de sopladores centrífugos en faena minera",
+    capacity: "2000 m³/h",
+    year: "2023"
+  },
+  {
+    title: "Sistema de Aireación - Proyecto Andino",
+    description: "Equipamiento completo para proceso de biolixiviación con monitoreo y control automatizado.",
+    image: "/images/puesta_en_marcha.webp",
+    alt: "Puesta en marcha de equipos Continental Blowers para biolixiviación en proyecto minero andino",
+    capacity: "3500 m³/h",
+    year: "2023"
+  },
+];
+
+// SEO JSON-LD
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Inicio", "item": `${Astro.url.origin}/` },
+    { "@type": "ListItem", "position": 2, "name": "Industrias", "item": `${Astro.url.origin}/#industrias` },
+    { "@type": "ListItem", "position": 3, "name": "Minería", "item": Astro.url.href }
+  ]
+};
+
+const servicePage = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Sopladores para Minería",
+  "description": pageDescription,
+  "provider": {
+    "@type": "Organization",
+    "name": "Continental Andes Blowers"
+  },
+  "serviceType": "Industrial Blowers and Compressors",
+  "areaServed": ["Chile", "Perú", "Argentina", "Bolivia", "Ecuador"]
+};
+---
+
+<Layout title={pageTitle}>
+  <!-- Hero Section -->
+  <section class="pt-28 md:pt-36 pb-12">
+    <Container size="wide">
+      <div class="max-w-4xl mx-auto text-center">
+        <Title2 as="h1">Soluciones para la <GradiantText>Industria Minera</GradiantText></Title2>
+        <SubTitle2 as="h2" className="mt-6 max-w-3xl mx-auto">
+          Equipos de alta eficiencia y confiabilidad para procesos críticos en minería
+        </SubTitle2>
+        <Paragraph className="mt-6 text-heading-3 max-w-2xl mx-auto">
+          Continental Andes Blowers ofrece soluciones especializadas de sopladores y compresores centrífugos
+          para las demandas más exigentes de la industria minera en toda la región andina.
+        </Paragraph>
+      </div>
+
+      <!-- Hero Image -->
+      <div class="mx-auto mt-12 w-full max-w-[600px] aspect-video rounded-2xl overflow-hidden shadow-lg">
+        <LazyImage
+          src="/images/aplicacion_mineria.webp"
+          alt="Sopladores centrífugos Continental Blowers para aplicaciones mineras en Chile, Perú, Argentina, Bolivia y Ecuador"
+          width="600"
+          height="337"
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </Container>
+  </section>
+
+  <!-- Applications Section -->
+  <section class="py-16 bg-base-50 dark:bg-base-dark-900">
+    <Container size="wide">
+      <div class="text-center mb-12">
+        <Title2>Aplicaciones <GradiantText>Especializadas</GradiantText></Title2>
+        <Paragraph className="mt-4 max-w-2xl mx-auto text-heading-3">
+          Nuestros equipos están diseñados para soportar las condiciones extremas y requerimientos
+          específicos de cada proceso minero.
+        </Paragraph>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {applications.map((app) => (
+          <article class="bg-white dark:bg-base-dark-800 rounded-3xl overflow-hidden shadow-lg dark:shadow-dark border border-primary/10">
+            <div class="aspect-video w-full overflow-hidden">
+              <LazyImage
+                src={app.image}
+                alt={app.alt}
+                width="600"
+                height="337"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-3">
+                <span class="text-3xl">{app.icon}</span>
+                <Title3 as="h3" className="mb-0 text-primary">{app.title}</Title3>
+              </div>
+              <Paragraph className="text-heading-3 leading-relaxed">
+                {app.description}
+              </Paragraph>
+            </div>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="py-16">
+    <Container size="wide">
+      <div class="max-w-4xl mx-auto">
+        <Title2 className="text-center">¿Por qué <GradiantText>Continental Andes</GradiantText>?</Title2>
+        <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="text-center">
+            <div class="text-4xl mb-4">✓</div>
+            <Title3 className="text-primary">Confiabilidad</Title3>
+            <Paragraph className="text-sm text-heading-3">
+              Equipos diseñados para operación continua 24/7 en condiciones extremas
+            </Paragraph>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl mb-4">⚡</div>
+            <Title3 className="text-primary">Eficiencia</Title3>
+            <Paragraph className="text-sm text-heading-3">
+              Menor consumo energético y costos operacionales reducidos
+            </Paragraph>
+          </div>
+          <div class="text-center">
+            <div class="text-4xl mb-4">🛠️</div>
+            <Title3 className="text-primary">Soporte</Title3>
+            <Paragraph className="text-sm text-heading-3">
+              Respaldo técnico y repuestos en toda la región andina
+            </Paragraph>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Past Projects Section -->
+  <section class="py-16 bg-base-50 dark:bg-base-dark-900">
+    <Container size="wide">
+      <div class="text-center mb-12">
+        <Title2>Proyectos <GradiantText>Implementados</GradiantText></Title2>
+        <Paragraph className="mt-4 max-w-2xl mx-auto text-heading-3">
+          Casos de éxito en la industria minera de la región andina
+        </Paragraph>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {pastProjects.map((project) => (
+          <article class="bg-white dark:bg-base-dark-800 rounded-3xl overflow-hidden shadow-lg dark:shadow-dark border border-primary/10">
+            <div class="aspect-[4/3] w-full overflow-hidden">
+              <LazyImage
+                src={project.image}
+                alt={project.alt}
+                width="400"
+                height="300"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6">
+              <Title3 as="h3" className="text-primary mb-2">{project.title}</Title3>
+              <Paragraph className="text-sm text-heading-3 mb-4">
+                {project.description}
+              </Paragraph>
+              <div class="flex justify-between text-xs text-heading-3 opacity-70">
+                <span>Capacidad: {project.capacity}</span>
+                <span>Año: {project.year}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16">
+    <Container size="medium">
+      <div class="bg-gradient-to-br from-primary/10 to-secondary/10 dark:from-primary/5 dark:to-secondary/5 rounded-3xl p-8 md:p-12 text-center border border-primary/20">
+        <Title2 className="mb-4">¿Necesita una solución personalizada?</Title2>
+        <Paragraph className="text-heading-3 mb-8 max-w-2xl mx-auto">
+          Nuestro equipo técnico está listo para asesorarlo en la selección e implementación
+          del equipo ideal para su proyecto minero.
+        </Paragraph>
+        <a
+          href="/#contacto"
+          class="inline-block bg-primary hover:bg-primary-700 text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+        >
+          Solicitar Cotización
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Breadcrumb navigation for UX -->
+  <section class="pb-8">
+    <Container size="wide">
+      <nav aria-label="Breadcrumb" class="text-sm text-heading-3 opacity-80 flex justify-center gap-2">
+        <a href="/" class="hover:text-primary">Inicio</a>
+        <span>/</span>
+        <a href="/#industrias" class="hover:text-primary">Industrias</a>
+        <span>/</span>
+        <span class="text-heading-2">Minería</span>
+      </nav>
+    </Container>
+  </section>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+  <script type="application/ld+json" set:html={JSON.stringify(servicePage)} />
+</Layout>
+
+<style>
+  /* Ensure animations work with Layout's scroll-blur */
+  section {
+    opacity: 1;
+  }
+</style>

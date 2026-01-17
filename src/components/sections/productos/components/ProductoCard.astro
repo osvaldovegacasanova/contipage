@@ -8,9 +8,11 @@ export interface Props {
   description: string;
   location: string;
   visual: string | ImageMetadata;
+  alt?: string;
 }
 
-const { title, description, location, visual } = Astro.props;
+const { title, description, location, visual, alt } = Astro.props;
+const imageAlt = alt || `${title} - Equipos de sopladores y compresores Continental Blowers`;
 ---
 
 <div
@@ -20,7 +22,7 @@ const { title, description, location, visual } = Astro.props;
     <div class="overflow-hidden">
       <LazyImage
         src={visual}
-        alt="Imagen del proyecto"
+        alt={imageAlt}
         height="384"
         width="398"
         class="w-full h-96 object-cover"

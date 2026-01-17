@@ -4,8 +4,7 @@ const photoVanessa = "/images/Vanessa2.png";
 
 export const nosotrosSection = {
   title: "Nosotros",
-  subheading1_1: "Somos un equipo líder altamente especializado y con demostrada experiencia para satisfacer los requerimientos de la industria. Capacitamos a tu equipo en la ",
-  subheading1_2: "Operación y Mantención de cada planta.",
+  subheading1_1: "Somos un equipo líder altamente especializado y con demostrada experiencia para satisfacer los requerimientos de la industria.",
   members: [
     {
       name: "Vanessa Pajares",

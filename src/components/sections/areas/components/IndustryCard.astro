@@ -6,23 +6,38 @@ export interface Props {
   title: string;
   visual: string;
   items: string[];
+  href?: string;
+  alt?: string;
+  objectPosition?: string;
 }
 
-const { title, visual, items } = Astro.props;
+const { title, visual, items, href, alt, objectPosition = "center" } = Astro.props;
+const Tag = href ? "a" : "article";
+const linkProps = href ? { href } : {};
+const imageAlt = alt || `Aplicaciones de sopladores centrífugos Continental Blowers en la industria ${title.toLowerCase()}`;
 ---
 
-<article
-  class="flex h-full flex-col overflow-hidden rounded-3xl border border-primary/10 bg-white shadow-lg dark:bg-base-dark-800 dark:shadow-dark"
+<Tag
+  {...linkProps}
+  class:list={[
+    "flex h-full flex-col overflow-hidden rounded-3xl border border-primary/10",
+    "bg-white shadow-lg dark:bg-base-dark-800 dark:shadow-dark",
+    href && "transition-all duration-300 hover:shadow-xl hover:scale-[1.02] hover:border-primary/30 cursor-pointer"
+  ]}
 >
   <div class="relative aspect-[3/4] w-full overflow-hidden">
     <LazyImage
       src={visual}
-      alt={`Industria ${title}`}
+      alt={imageAlt}
       width="900"
       height="1200"
       class="h-full w-full object-cover"
+      style={`object-position: ${objectPosition};`}
       loading="lazy"
     />
+    {href && (
+      <div class="absolute inset-0 bg-primary/0 hover:bg-primary/5 transition-colors duration-300" />
+    )}
   </div>
   <div class="flex flex-1 flex-col gap-4 p-6">
     <Title3 as="h3" className="text-primary mb-0">
@@ -36,5 +51,15 @@ const { title, visual, items } = Astro.props;
         </li>
       ))}
     </ul>
+    {href && (
+      <div class="mt-auto pt-4">
+        <span class="text-sm font-semibold text-primary flex items-center gap-2">
+          Ver más detalles
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </span>
+      </div>
+    )}
   </div>
-</article>
+</Tag>

@@ -43,7 +43,7 @@ const { className } = Astro.props;
                 >
                   <LazyImage
                     src={service.visual}
-                    alt={service.title}
+                    alt={service.alt || service.title}
                     class="h-full w-full object-cover"
                     height="192"
                     width="192"
@@ -62,31 +62,31 @@ const { className } = Astro.props;
           }
         </ul>
       </div>
-      <div class="relative grid h-full w-full grid-rows-3 gap-6 overflow-hidden rounded-[3rem] border border-primary/15 bg-white p-6 shadow-xl">
-        <div class="relative overflow-hidden rounded-3xl border border-primary/15 bg-white p-4 shadow-lg">
+      <div class="relative grid h-full w-full grid-rows-3 gap-6 overflow-hidden rounded-lg border border-primary/15 bg-white p-6 shadow-xl">
+        <div class="relative overflow-hidden rounded-lg border border-primary/15 bg-white p-4 shadow-lg">
           <LazyImage
             src={primaryServiceImage}
-            alt="Equipo Continental Andes TCB15"
+            alt="Soplador centrífugo multietapa Continental Blowers para aplicaciones industriales de alta presión"
             class="h-full w-full object-cover object-center"
             width="680"
             height="510"
             loading="lazy"
           />
         </div>
-        <div class="relative overflow-hidden rounded-3xl border border-primary/15 bg-white p-4 shadow-lg">
+        <div class="relative overflow-hidden rounded-lg border border-primary/15 bg-white p-4 shadow-lg">
           <LazyImage
             src={secondaryServiceImage}
-            alt="Plaqueta TC25"
+            alt="Placa de características técnicas de compresor centrífugo TC25 Continental Blowers"
             class="h-full w-full object-cover object-center"
             width="510"
             height="340"
             loading="lazy"
           />
         </div>
-        <div class="relative overflow-hidden rounded-3xl border border-primary/15 bg-white p-4 shadow-lg">
+        <div class="relative overflow-hidden rounded-lg border border-primary/15 bg-white p-4 shadow-lg">
           <LazyImage
             src={tertiaryServiceImage}
-            alt="Partes TCH25"
+            alt="Diagrama de componentes y partes del soplador centrífugo TCH25 Continental Blowers"
             class="h-full w-full object-cover object-center"
             width="510"
             height="340"

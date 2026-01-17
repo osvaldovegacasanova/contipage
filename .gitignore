@@ -23,5 +23,9 @@ pnpm-debug.log*
 # local AI/editor tooling
 .claude/
 
+# Backups
+backups/
+backup_list.md
+
 # Windows reserved-name file accidentally created via PowerShell redirection
 NUL
