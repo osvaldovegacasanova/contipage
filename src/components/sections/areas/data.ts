@@ -15,6 +15,9 @@ interface IndustryArea {
   objectPosition?: string;
 }
 
+// Export the interface so TypeScript can properly type the areas array
+export type { IndustryArea };
+
 export const areasSectionData = {
   title: "Industrias",
   subheading: {
@@ -35,7 +38,7 @@ export const areasSectionData = {
         "Sopladores para combustión",
         "Sopladores para biolixiviación",
       ],
-    },
+    } as IndustryArea,
     {
       title: "Manejo de Biogás",
       visual: imgBiogas,
