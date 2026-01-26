@@ -1,0 +1,17 @@
+# robots.txt for Continental Andes Blowers
+# https://continentalandes.com
+
+User-agent: *
+Allow: /
+
+# Disallow utility/development pages
+Disallow: /colores/
+Disallow: /fonts/
+Disallow: /separadores/
+
+# Disallow pages not ready for indexing
+Disallow: /mineria/
+Disallow: /blog/
+
+# Sitemap
+Sitemap: https://continentalandes.com/sitemap.xml
