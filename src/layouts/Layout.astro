@@ -55,31 +55,33 @@ const { title } = Astro.props;
     if (toggleMenu) {
       toggleMenu.addEventListener("click", (e) => {
         e.preventDefault();
-        if (toggleMenu.getAttribute("data-open-nav") === "false") {
+        const isOpen = toggleMenu.getAttribute("data-open-nav") === "true";
+
+        if (!isOpen) {
           toggleMenu.setAttribute("data-open-nav", "true");
+          navbar.setAttribute("data-is-open", "true");
           overlayNav.setAttribute("data-is-visible", "true");
           document.body.classList.add("!overflow-y-hidden");
-          navbar.style.height = `${navbar.scrollHeight}px`;
         } else {
           toggleMenu.setAttribute("data-open-nav", "false");
+          navbar.setAttribute("data-is-open", "false");
           overlayNav.setAttribute("data-is-visible", "false");
           document.body.classList.remove("!overflow-y-hidden");
-          navbar.style.height = "0px";
         }
       });
 
       navbar.addEventListener("click", () => {
         toggleMenu.setAttribute("data-open-nav", "false");
+        navbar.setAttribute("data-is-open", "false");
         overlayNav.setAttribute("data-is-visible", "false");
         document.body.classList.remove("!overflow-y-hidden");
-        navbar.style.height = "0px";
       });
 
       overlayNav.addEventListener("click", () => {
         toggleMenu.setAttribute("data-open-nav", "false");
+        navbar.setAttribute("data-is-open", "false");
         overlayNav.setAttribute("data-is-visible", "false");
         document.body.classList.remove("!overflow-y-hidden");
-        navbar.style.height = "0px";
       });
     }
   </script>
@@ -162,6 +164,49 @@ const { title } = Astro.props;
         },
         { passive: true }
       );
+    })();
+  </script>
+  <script>
+    (function () {
+      if (typeof window === "undefined" || typeof document === "undefined") return;
+
+      const navLinks = document.querySelectorAll('[data-navbar] a[href^="/#"]');
+      if (!navLinks.length) return;
+
+      // Create map of section IDs to nav links
+      const sectionMap = new Map();
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        const sectionId = href.replace('/#', '');
+        const section = document.getElementById(sectionId);
+        if (section) {
+          sectionMap.set(section, link);
+        }
+      });
+
+      // Intersection Observer to track active section
+      const observerOptions = {
+        rootMargin: '-100px 0px -66%',
+        threshold: 0
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const link = sectionMap.get(entry.target);
+          if (!link) return;
+
+          if (entry.isIntersecting) {
+            navLinks.forEach(l => l.classList.remove('nav-active'));
+            link.classList.add('nav-active');
+          }
+        });
+      }, observerOptions);
+
+      // Observe all sections
+      sectionMap.forEach((link, section) => {
+        observer.observe(section);
+      });
     })();
   </script>
   <style is:global>

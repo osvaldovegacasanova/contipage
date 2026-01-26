@@ -109,12 +109,12 @@ const navItems = [
     <div
       data-nav-overlay
       aria-hidden="true"
-      class="fixed hidden inset-0 lg:!hidden bg-box-bg bg-opacity-50 backdrop-filter backdrop-blur-xl"
+      class="fixed hidden inset-0 lg:!hidden bg-box-bg bg-opacity-50 backdrop-filter backdrop-blur-xl opacity-0 transition-opacity duration-300 ease-out"
     >
     </div>
     <div
       data-navbar
-      class="flex h-0 overflow-hidden lg:!h-auto lg:scale-y-100 duration-300 ease-linear flex-col gap-y-6 gap-x-4 lg:flex-row w-full lg:justify-between lg:items-center absolute lg:relative top-full lg:top-0 bg-body lg:bg-transparent border-x border-x-box-border lg:border-x-0"
+      class="flex max-h-0 overflow-hidden lg:!max-h-none lg:!h-auto duration-300 ease-out flex-col gap-y-6 gap-x-4 lg:flex-row w-full lg:justify-between lg:items-center absolute lg:relative top-full lg:top-0 bg-body lg:bg-transparent border-x border-x-box-border lg:border-x-0 transition-[max-height]"
     >
       <ul
         class="border-t border-box-border lg:border-t-0 px-6 lg:px-0 pt-6 lg:pt-0 flex flex-col lg:flex-row gap-y-4 gap-x-3 text-lg text-heading-2 w-full lg:justify-end lg:items-center"
@@ -144,21 +144,22 @@ const navItems = [
       <button
         data-toggle-nav
         data-open-nav="false"
-        class="lg:hidden lg:invisible outline-none w-7 h-auto flex flex-col relative"
+        class="lg:hidden lg:invisible outline-none w-12 h-12 flex flex-col items-center justify-center relative"
+        aria-label="Abrir menú de navegación"
       >
         <span
           id="line1"
-          class="w-6 h-0.5 rounded-full bg-white transition-all duration-300 ease-linear"
+          class="w-7 h-0.5 rounded-full bg-white transition-all duration-300 ease-linear shadow-[0_0_4px_rgba(0,0,0,0.4)]"
         ></span>
         <span
           id="line2"
-          class="w-6 origin-center mt-1 h-0.5 rounded-ful bg-white transition-all duration-300 ease-linear"
+          class="w-7 origin-center mt-1.5 h-0.5 rounded-full bg-white transition-all duration-300 ease-linear shadow-[0_0_4px_rgba(0,0,0,0.4)]"
         ></span>
         <span
           id="line3"
-          class="w-6 mt-1 h-0.5 rounded-ful bg-white transition-all duration-300 ease-linear"
+          class="w-7 mt-1.5 h-0.5 rounded-full bg-white transition-all duration-300 ease-linear shadow-[0_0_4px_rgba(0,0,0,0.4)]"
         ></span>
-        <span class="sr-only">togglenav</span>
+        <span class="sr-only">Abrir menú de navegación</span>
       </button>
     </div>
   </nav>

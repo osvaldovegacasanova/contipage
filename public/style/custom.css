@@ -61,6 +61,7 @@ html {
 [data-nav-overlay][data-is-visible="true"] {
   visibility: visible;
   display: flex;
+  opacity: 1;
 }
 
 .glass {
@@ -75,4 +76,26 @@ html {
   /* border: 2px solid rgba(255, 255, 255, 0.1); */
   box-shadow: 0 0 80px rgba(0, 0, 0, 0.25);
   /* padding: 30px 30px 30px 30px; */
+}
+
+/* Mobile navigation max-height open state */
+[data-navbar][data-is-open="true"] {
+  max-height: 500px;
+}
+
+/* Active navigation indicator - Primary Blue */
+.nav-active {
+  color: #0046ba !important;
+  position: relative;
+}
+
+.nav-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #0046ba;
+  border-radius: 2px;
 }
