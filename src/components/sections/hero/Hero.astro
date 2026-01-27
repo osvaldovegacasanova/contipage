@@ -1,12 +1,11 @@
 ﻿---
-import { Image, Picture } from "astro:assets";
-const heroImg = "/images/hero-hero3.jpg";
-import CtaButton from "../../shared/CtaButton.astro";
+import { Picture } from "astro:assets";
+import heroDesktop from "../../../assets/images/hero-hero3.jpg";
+import heroMobile from "../../../assets/images/slider-bg3.webp";
 import Container from "../../shared/Container.astro";
 import GradiantText from "../../shared/GradiantText.astro";
 import SubTitle from "../../shared/SubTitle.astro";
 import Title from "../../shared/Title.astro";
-import LazyImage from "../../shared/LazyImage.astro";
 
 const heroSection = {
   headline1: "Transformamos el",
@@ -29,21 +28,51 @@ const { className = "" } = Astro.props;
 ---
 
 <section class={`relative ${className} w-full scroll-mt-40 lg:scroll-mt-44 bg-base-100 dark:bg-base-dark-900`} id="hero">
-  {/** Background video: lazy-loaded, reduced motion and save-data aware */}
+  {/** Optimized background image - mobile shows webp, desktop shows jpg */}
   <div class="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+    {/** Mobile background - optimized webp */}
+    <Picture
+      src={heroMobile}
+      alt=""
+      widths={[375, 414, 640]}
+      sizes="100vw"
+      formats={['avif', 'webp']}
+      class="h-full w-full object-cover sm:hidden"
+      loading="eager"
+      fetchpriority="high"
+      pictureAttributes={{
+        class: "h-full w-full sm:hidden"
+      }}
+    />
+    {/** Desktop background - optimized jpg */}
+    <Picture
+      src={heroDesktop}
+      alt=""
+      widths={[768, 1024, 1280, 1536, 1920]}
+      sizes="100vw"
+      formats={['avif', 'webp', 'jpg']}
+      class="hidden sm:block h-full w-full object-cover"
+      loading="eager"
+      fetchpriority="high"
+      pictureAttributes={{
+        class: "hidden sm:block h-full w-full"
+      }}
+    />
+    <div class="absolute inset-0 bg-black/35 backdrop-blur-sm"></div>
+  </div>
+  {/** Background video: lazy-loaded, reduced motion and save-data aware, desktop only */}
+  <div class="pointer-events-none absolute inset-0 z-0 overflow-hidden hidden sm:block">
     <video
       id="hero-bg-video"
-      class="opacity-0 transition-opacity duration-500 h-full w-full object-cover hidden sm:block"
+      class="opacity-0 transition-opacity duration-500 h-full w-full object-cover"
       muted
       playsinline
       loop
       autoplay
       aria-hidden="true"
       preload="none"
-      poster={heroImg}
     >
     </video>
-    <div class="absolute inset-0 bg-black/35 backdrop-blur-sm"></div>
   </div>
   <Container size="wide">
     <div class="pt-28 md:pt-32 lg:pt-40 pb-6 md:pb-8 lg:pb-10 relative z-10">
@@ -139,13 +168,7 @@ const { className = "" } = Astro.props;
   </script>
 
   <style>
-    /* Ensure section has a visual fallback via poster until video loads */
-    :global(#hero) {
-      background-image: url({heroImg});
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
+    /* Background is now handled by the Picture component for better optimization */
     :global(#hero)::after {
       content: "";
       position: absolute;
@@ -155,18 +178,10 @@ const { className = "" } = Astro.props;
       transition: background 0.3s ease;
       z-index: 1;
     }
-    /* Mobile: use the provided slider image, no video */
+    /* Mobile: slightly darker overlay for better text contrast */
     @media (max-width: 640px) {
-      :global(#hero) {
-        background-image: url('/images/slider-bg3.webp');
-      }
       :global(#hero)::after {
         background: rgba(0, 0, 0, 0.55);
-      }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      :global(#hero) {
-        background-attachment: scroll;
       }
     }
   </style>

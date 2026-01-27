@@ -2,7 +2,7 @@ const img = "/images/environment-green-hands.png";
 
 export const environmentalImpactSection = {
   title: "Misión",
-  subheading1_1: "Continental Andes Blowers en la",
+  subheading1_1: "Continental Blowers Andes en la",
   subheading1_2: " Región Andina",
   description:
     "Somos la oficina de Continental Industrie para Chile, Argentina, Uruguay, Bolivia, Paraguay y Ecuador.\nMás de 25 años de experiencia nos permiten comprender las condiciones específicas de cada industria y proyecto.\nContamos con capacidades locales y de alta disponibilidad para Servicios, Dimensionamiento e Ingeniería.",

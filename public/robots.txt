@@ -1,4 +1,4 @@
-# robots.txt for Continental Andes Blowers
+# robots.txt for Continental Blowers Andes
 # https://continentalandes.com
 
 User-agent: *
