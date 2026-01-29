@@ -8,6 +8,26 @@ const link = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
   rel="noopener noreferrer"
   aria-label="Abrir WhatsApp"
   class="fixed bottom-4 right-4 flex items-center justify-center rounded-full bg-green-500 p-3 shadow-lg transition hover:bg-green-600"
+  data-whatsapp-button
+  data-phone={phone}
 >
   <img src="/images/icons8-whatsapp-50.png" alt="WhatsApp" class="h-6 w-6" />
 </a>
+
+<script>
+  import { trackContactClick } from "../utils/analytics";
+
+  // Add click tracking to WhatsApp button
+  document.addEventListener('DOMContentLoaded', () => {
+    const whatsappButton = document.querySelector('[data-whatsapp-button]');
+
+    if (whatsappButton) {
+      whatsappButton.addEventListener('click', (e) => {
+        const target = e.currentTarget as HTMLElement;
+        const phone = target.getAttribute('data-phone') || '';
+
+        trackContactClick('whatsapp', phone);
+      });
+    }
+  });
+</script>
