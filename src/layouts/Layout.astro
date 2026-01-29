@@ -29,7 +29,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         (window as any).dataLayer.push(args);
       }
       gtag('js', new Date());
-      gtag('config', 'G-B91NRW3VKC');
+      gtag('config', 'G-B91NRW3VKC', {
+        'debug_mode': true  // Enable debug mode for GA4 DebugView
+      });
     </script>
 
     <meta charset="utf-8" />

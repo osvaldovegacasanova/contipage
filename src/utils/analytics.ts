@@ -9,7 +9,10 @@
  */
 export function trackEvent(eventName: string, eventParams: Record<string, any> = {}) {
   if (typeof window !== 'undefined' && (window as any).gtag) {
+    console.log('📊 GA Event:', eventName, eventParams);
     (window as any).gtag('event', eventName, eventParams);
+  } else {
+    console.warn('⚠️ gtag not available. Event not sent:', eventName, eventParams);
   }
 }
 
