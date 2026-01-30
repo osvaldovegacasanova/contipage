@@ -30,7 +30,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       }
       gtag('js', new Date());
       gtag('config', 'G-B91NRW3VKC', {
-        'debug_mode': true  // Enable debug mode for GA4 DebugView
+        'debug_mode': window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
       });
     </script>
 
