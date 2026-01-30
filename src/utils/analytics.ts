@@ -3,16 +3,51 @@
  */
 
 /**
+ * Wait for gtag to be available, with timeout
+ */
+function waitForGtag(maxAttempts = 10, interval = 100): Promise<boolean> {
+  return new Promise((resolve) => {
+    let attempts = 0;
+
+    const check = () => {
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        resolve(true);
+      } else if (attempts >= maxAttempts) {
+        resolve(false);
+      } else {
+        attempts++;
+        setTimeout(check, interval);
+      }
+    };
+
+    check();
+  });
+}
+
+/**
  * Send a custom event to Google Analytics
  * @param eventName - The name of the event
  * @param eventParams - Additional parameters for the event
  */
-export function trackEvent(eventName: string, eventParams: Record<string, any> = {}) {
-  if (typeof window !== 'undefined' && (window as any).gtag) {
+export async function trackEvent(eventName: string, eventParams: Record<string, any> = {}) {
+  if (typeof window === 'undefined') return;
+
+  // If gtag is available, send immediately
+  if ((window as any).gtag) {
     console.log('📊 GA Event:', eventName, eventParams);
     (window as any).gtag('event', eventName, eventParams);
+    return;
+  }
+
+  // Otherwise, wait for it to load
+  console.log('⏳ Waiting for gtag to load...');
+  const gtagAvailable = await waitForGtag();
+
+  if (gtagAvailable) {
+    console.log('📊 GA Event (delayed):', eventName, eventParams);
+    (window as any).gtag('event', eventName, eventParams);
   } else {
-    console.warn('⚠️ gtag not available. Event not sent:', eventName, eventParams);
+    console.warn('⚠️ gtag not available after waiting. Event not sent:', eventName, eventParams);
   }
 }
 
