@@ -28,7 +28,7 @@ const { className = "" } = Astro.props;
           role={member.role}
           email={member.email}
           phone={member.phone}
-          photo={member.photo}
+          photo={typeof member.photo === 'string' ? member.photo : member.photo.src}
         />
       ))}
     </div>
