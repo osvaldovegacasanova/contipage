@@ -1,6 +1,6 @@
-﻿const photoCarlos = "/images/Carlos6.png";
-const photoMiguel = "/images/Miguel2.png";
-const photoVanessa = "/images/Vanessa2.png";
+﻿import photoCarlos from "../../../assets/images/Carlos6.png";
+import photoMiguel from "../../../assets/images/Miguel2.png";
+import photoVanessa from "../../../assets/images/Vanessa2.png";
 
 export const nosotrosSection = {
   title: "Nosotros",

@@ -1,4 +1,4 @@
-const img = "/images/environment-green-hands.png";
+import img from "../../../assets/images/environment-green-hands.png";
 
 export const environmentalImpactSection = {
   title: "Misión",

@@ -1,7 +1,8 @@
+import img3 from "../../../assets/images/services-hydro.png";
+import img4 from "../../../assets/images/services-storage.png";
+
 const img1 = "/images/puesta_en_marcha2.webp";
 const img2 = "/images/mantenimiento.webp";
-const img3 = "/images/services-hydro.png";
-const img4 = "/images/services-storage.png";
 const img5 = "/images/services-respuestos_400_533.jpg";
 const img6 = "/images/capacidad_tecnica.webp";
 const img_ingenieria = "/images/slider42-02.jpg";
