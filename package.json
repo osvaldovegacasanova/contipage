@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "images:blog": "node scripts/resize-blog-images.mjs",
+    "images:public": "node scripts/resize-public-images.mjs",
     "prebuild": "npm run images:blog",
     "videos:encode": "node scripts/encode-video.mjs"
   },
