@@ -106,16 +106,14 @@ The hero section (`src/components/sections/hero/Hero.astro`) uses a background v
 
 **Image Optimization**: Use Astro's built-in image optimization for most images. Blog images are pre-processed via Sharp. See `scripts/resize-blog-images.mjs` for blog image processing logic.
 
-**TypeScript**: Project uses TypeScript with strict configuration. All `.astro` files support TypeScript in frontmatter.
+**TypeScript**: Strict mode. All `.astro` frontmatter is TypeScript.
+
+**Formatting**: Prettier with `prettier-plugin-astro` is available but not enforced via a script. No ESLint configured.
 
 ## Common Tasks
 
-**Adding a new section**: Create directory under `src/components/sections/[section-name]`, add main component file, import/render in `src/pages/index.astro`.
-
-**Updating site content**: Reference `SITE_CONTENT_CATALOG.md` to locate the exact component and text. Most content is hardcoded in section components.
-
-**Adding blog posts**: Create new `.md` file in `src/content/blog/` with required frontmatter fields. Add hero image to `src/content/blog/assets/` or `public/images/`. Run `npm run images:blog` if using local assets.
-
-**Modifying colors**: Edit `tailwind.config.mjs` color definitions. Reference the `/colores` page to see all current values.
-
-**Testing changes**: Use `npm run dev` for hot-reload development. Run `npm run build` to verify production build and type-checking pass before committing.
+- **New section**: Create `src/components/sections/[name]/`, add main component, import in `src/pages/index.astro`.
+- **Update copy**: Find the exact component via `SITE_CONTENT_CATALOG.md`, then edit inline strings there.
+- **New blog post**: Add `.md` to `src/content/blog/` with frontmatter (title, description, pubDate, heroImage, tags, author). Place hero image in `src/content/blog/assets/` and run `npm run images:blog`.
+- **Color changes**: Edit `tailwind.config.mjs`; preview at `/colores`.
+- **Verify build**: `npm run build` runs `astro check` + type-check before bundling — always run before committing.
