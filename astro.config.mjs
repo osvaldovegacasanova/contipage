@@ -7,4 +7,7 @@ export default defineConfig({
   site: "https://continentalandes.com",
   base: "",
   integrations: [tailwind(), react()],
+  build: {
+    inlineStylesheets: "always",
+  },
 });
