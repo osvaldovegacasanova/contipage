@@ -84,11 +84,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       [data-toggle-nav][data-open-nav="true"] #line3 {
         transform: translateY(-0.375rem) rotate(-40deg);
       }
-      [data-nav-overlay][data-is-visible="true"] {
-        visibility: visible;
-        display: flex;
-        opacity: 1;
-      }
       .glass {
         background: rgba(255, 255, 255, 0.1) !important;
         backdrop-filter: blur(35px);
@@ -136,39 +131,33 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     })();
   </script>
   <script>
-    const toggleMenu = document.querySelector(
-      "[data-toggle-nav]"
-    ) as HTMLButtonElement;
+    const toggleMenu = document.querySelector("[data-toggle-nav]") as HTMLButtonElement;
     const navbar = document.querySelector("[data-navbar]") as HTMLDivElement;
-    const overlayNav = document.querySelector(
-      "[data-nav-overlay]"
-    ) as HTMLDivElement;
+
+    function closeMenu() {
+      toggleMenu.setAttribute("data-open-nav", "false");
+      navbar.setAttribute("data-is-open", "false");
+    }
+
     if (toggleMenu) {
       toggleMenu.addEventListener("click", (e) => {
-        e.preventDefault();
+        e.stopPropagation();
         const isOpen = toggleMenu.getAttribute("data-open-nav") === "true";
-
         if (!isOpen) {
           toggleMenu.setAttribute("data-open-nav", "true");
           navbar.setAttribute("data-is-open", "true");
-          overlayNav.setAttribute("data-is-visible", "true");
         } else {
-          toggleMenu.setAttribute("data-open-nav", "false");
-          navbar.setAttribute("data-is-open", "false");
-          overlayNav.setAttribute("data-is-visible", "false");
+          closeMenu();
         }
       });
 
-      navbar.addEventListener("click", () => {
-        toggleMenu.setAttribute("data-open-nav", "false");
-        navbar.setAttribute("data-is-open", "false");
-        overlayNav.setAttribute("data-is-visible", "false");
-      });
+      navbar.addEventListener("click", () => closeMenu());
 
-      overlayNav.addEventListener("click", () => {
-        toggleMenu.setAttribute("data-open-nav", "false");
-        navbar.setAttribute("data-is-open", "false");
-        overlayNav.setAttribute("data-is-visible", "false");
+      document.addEventListener("click", (e) => {
+        const header = document.querySelector("header");
+        if (header && !header.contains(e.target as Node)) {
+          closeMenu();
+        }
       });
     }
   </script>
