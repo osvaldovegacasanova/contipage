@@ -152,12 +152,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           toggleMenu.setAttribute("data-open-nav", "true");
           navbar.setAttribute("data-is-open", "true");
           overlayNav.setAttribute("data-is-visible", "true");
-          document.body.classList.add("!overflow-y-hidden");
         } else {
           toggleMenu.setAttribute("data-open-nav", "false");
           navbar.setAttribute("data-is-open", "false");
           overlayNav.setAttribute("data-is-visible", "false");
-          document.body.classList.remove("!overflow-y-hidden");
         }
       });
 
@@ -165,14 +163,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         toggleMenu.setAttribute("data-open-nav", "false");
         navbar.setAttribute("data-is-open", "false");
         overlayNav.setAttribute("data-is-visible", "false");
-        document.body.classList.remove("!overflow-y-hidden");
       });
 
       overlayNav.addEventListener("click", () => {
         toggleMenu.setAttribute("data-open-nav", "false");
         navbar.setAttribute("data-is-open", "false");
         overlayNav.setAttribute("data-is-visible", "false");
-        document.body.classList.remove("!overflow-y-hidden");
       });
     }
   </script>
@@ -182,6 +178,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
       if (prefersReducedMotion) return;
       if (!("IntersectionObserver" in window)) return;
+      if (window.innerWidth < 1024) return;
 
       const targets = document.querySelectorAll("[data-scroll-blur], main img, main h2, main h3");
       if (!targets.length) return;
@@ -213,6 +210,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       if (typeof window === "undefined" || typeof document === "undefined") return;
       const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
       if (prefersReducedMotion) return;
+      if (window.innerWidth < 1024) return;
 
       const breezeTargets = document.querySelectorAll(".scroll-breeze");
       if (!breezeTargets.length) return;
@@ -302,24 +300,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </script>
   <style is:global>
     .scroll-blur {
-      --scroll-blur-translate-y: 30px;
       --scroll-breeze-shift: 0px;
       --scroll-breeze-skew: 0deg;
-      filter: blur(12px);
       opacity: 0;
-      transform: translateY(var(--scroll-blur-translate-y)) translateX(var(--scroll-breeze-shift))
-        skewX(var(--scroll-breeze-skew));
-      transition: filter 0.6s ease, opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(24px) translateX(var(--scroll-breeze-shift)) skewX(var(--scroll-breeze-skew));
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
     .scroll-blur.scroll-blur-visible {
-      filter: blur(0);
       opacity: 1;
-      --scroll-blur-translate-y: 0px;
+      transform: translateY(0px) translateX(var(--scroll-breeze-shift)) skewX(var(--scroll-breeze-skew));
     }
     .scroll-breeze {}
     @media (prefers-reduced-motion: reduce) {
       .scroll-blur {
-        filter: none !important;
         opacity: 1 !important;
         transform: none !important;
       }
