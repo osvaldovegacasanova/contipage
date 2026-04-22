@@ -316,9 +316,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       opacity: 1;
       --scroll-blur-translate-y: 0px;
     }
-    .scroll-breeze {
-      will-change: transform;
-    }
+    .scroll-breeze {}
     @media (prefers-reduced-motion: reduce) {
       .scroll-blur {
         filter: none !important;
