@@ -63,7 +63,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </noscript>
 
     <!-- Inline critical CSS to avoid render blocking -->
-    <style>
+    <style is:global>
       /* Critical CSS inlined for faster initial render */
       html {
         scroll-behavior: smooth;

@@ -7,6 +7,12 @@ export default {
   theme: {
     extend: {
       colors: {
+        body: "#ffffff",
+        "heading-1": "#172554",
+        "heading-2": "#1f2937",
+        "heading-3": "#374151",
+        "box-bg": "#f9fafb",
+        "box-border": "#e5e7eb",
         base: {
           50: "#f9f9f9",
           100: "#efefef",
