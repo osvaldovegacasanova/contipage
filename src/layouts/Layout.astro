@@ -130,36 +130,31 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       } catch {}
     })();
   </script>
-  <script>
-    const toggleMenu = document.querySelector("[data-toggle-nav]") as HTMLButtonElement;
-    const navbar = document.querySelector("[data-navbar]") as HTMLDivElement;
+  <script is:inline>
+    (function () {
+      var btn = document.querySelector("[data-toggle-nav]");
+      var navbar = document.querySelector("[data-navbar]");
+      if (!btn || !navbar) return;
 
-    function closeMenu() {
-      toggleMenu.setAttribute("data-open-nav", "false");
-      navbar.setAttribute("data-is-open", "false");
-    }
+      function close() {
+        btn.setAttribute("data-open-nav", "false");
+        navbar.setAttribute("data-is-open", "false");
+      }
 
-    if (toggleMenu) {
-      toggleMenu.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const isOpen = toggleMenu.getAttribute("data-open-nav") === "true";
-        if (!isOpen) {
-          toggleMenu.setAttribute("data-open-nav", "true");
-          navbar.setAttribute("data-is-open", "true");
+      btn.addEventListener("click", function () {
+        var isOpen = btn.getAttribute("data-open-nav") === "true";
+        if (isOpen) {
+          close();
         } else {
-          closeMenu();
+          btn.setAttribute("data-open-nav", "true");
+          navbar.setAttribute("data-is-open", "true");
         }
       });
 
-      navbar.addEventListener("click", () => closeMenu());
-
-      document.addEventListener("click", (e) => {
-        const header = document.querySelector("header");
-        if (header && !header.contains(e.target as Node)) {
-          closeMenu();
-        }
+      navbar.addEventListener("click", function () {
+        close();
       });
-    }
+    })();
   </script>
   <script>
     (function () {
