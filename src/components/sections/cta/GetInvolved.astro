@@ -32,6 +32,7 @@ const { className } = Astro.props;
               title={initiative.title}
               description={initiative.description}
               icon={initiative.icon}
+              contacts={"contacts" in initiative ? initiative.contacts : undefined}
             />
           );
         })
