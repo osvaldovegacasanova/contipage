@@ -30,7 +30,7 @@ export const areasSectionData = {
     {
       title: "Minería",
       visual: imgMineria,
-      // href: "/mineria", // Temporarily hidden
+      href: "/sopladores-para-mineria",
       alt: "Aplicaciones de sopladores y compresores centrífugos en la industria minera para flotación, transporte neumático y biolixiviación",
       items: [
         "Sopladores para flotación de minerales",

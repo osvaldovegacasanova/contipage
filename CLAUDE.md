@@ -16,6 +16,7 @@ This is an Astro-based marketing website for Continental Andes Blowers, a centri
 
 ### Asset Processing
 - `npm run images:blog` - Process blog images from `src/content/blog/assets` to `public/blog` (500×500 WebP, quality 82)
+- `npm run images:public` - Resize/optimize images in `public/` via `scripts/resize-public-images.mjs`
 - `npm run prebuild` - Automatically runs `images:blog` before every build
 - `npm run videos:encode` - Encode video variants from `public/videos/parte1.mp4`:
   - Desktop WebM (VP9, CRF 32)
@@ -99,6 +100,10 @@ The hero section (`src/components/sections/hero/Hero.astro`) uses a background v
 - Mobile background override: `/images/slider-bg3.webp`
 - Lazy-loaded video sources (WebM and MP4 variants)
 - Sources generated via `npm run videos:encode` script
+
+### Analytics
+
+Google Analytics event tracking is centralized in `src/utils/analytics.ts`. Use `trackContactClick(type, destination)` for WhatsApp/phone/email clicks and `trackEvent(name, params)` for custom events — both no-op safely on the server and wait for `gtag` to load. Setup and troubleshooting notes live in `ANALYTICS_SETUP.md` and `DEBUG_ANALYTICS.md`.
 
 ## Key Technical Patterns
 

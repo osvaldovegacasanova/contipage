@@ -1,0 +1,96 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Container from "../components/shared/Container.astro";
+import Title2 from "../components/shared/Title2.astro";
+import Paragraph from "../components/shared/Paragraph.astro";
+import GradiantText from "../components/shared/GradiantText.astro";
+import IndustryHero from "../components/industrias/IndustryHero.astro";
+import ProcessModule from "../components/industrias/ProcessModule.astro";
+import { industrias } from "../data/industrias";
+
+export function getStaticPaths() {
+  return industrias.map((industry) => ({
+    params: { industria: industry.slug },
+    props: { industry },
+  }));
+}
+
+const { industry } = Astro.props;
+const canonical = new URL(`/${industry.slug}`, Astro.site).href;
+
+// Coverage per current Misión section (Perú intentionally excluded for now).
+const areaServed = ["Chile", "Argentina", "Uruguay", "Bolivia", "Paraguay", "Ecuador"];
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: new URL("/", Astro.site).href },
+    { "@type": "ListItem", position: 2, name: "Industrias", item: new URL("/#industrias", Astro.site).href },
+    { "@type": "ListItem", position: 3, name: industry.navLabel, item: canonical },
+  ],
+};
+
+const servicePage = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: industry.seoTitle,
+  description: industry.metaDescription,
+  provider: {
+    "@type": "Organization",
+    name: "Continental Andes",
+    url: new URL("/", Astro.site).href,
+  },
+  serviceType: "Sopladores y compresores centrífugos industriales",
+  areaServed,
+  url: canonical,
+};
+---
+
+<Layout title={industry.seoTitle} description={industry.metaDescription}>
+  <main class="flex flex-col gap-y-20 pb-20 md:gap-y-32 md:pb-28 overflow-hidden">
+    <IndustryHero hero={industry.hero} breadcrumbLabel={industry.navLabel} />
+
+    <!-- Alternating process modules -->
+    <section id="procesos">
+      <Container size="wide" className="flex flex-col items-center text-center">
+        <Title2 as="h2">
+          {industry.processesHeading.title}{" "}
+          <GradiantText>{industry.processesHeading.titleAccent}</GradiantText>
+        </Title2>
+        <Paragraph className="mt-4 max-w-3xl text-heading-3">
+          {industry.processesHeading.intro}
+        </Paragraph>
+      </Container>
+
+      <Container size="wide">
+        <div class="mt-14 flex flex-col gap-20 md:gap-28">
+          {industry.processes.map((process, index) => (
+            <ProcessModule process={process} index={index} />
+          ))}
+        </div>
+      </Container>
+    </section>
+
+    <!-- CTA -->
+    <section>
+      <Container size="medium">
+        <div class="rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/10 to-secondary/10 p-8 text-center dark:from-primary/5 dark:to-secondary/5 md:p-12">
+          <Title2 as="h2" className="mb-4">{industry.cta.title}</Title2>
+          <Paragraph className="mx-auto mb-8 max-w-2xl text-heading-3">
+            {industry.cta.description}
+          </Paragraph>
+          <a
+            href={industry.cta.buttonHref}
+            class="inline-block rounded-full bg-primary px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-primary-800 hover:shadow-xl"
+          >
+            {industry.cta.buttonText}
+          </a>
+        </div>
+      </Container>
+    </section>
+  </main>
+
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(servicePage)} />
+</Layout>

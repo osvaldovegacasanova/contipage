@@ -1,7 +1,15 @@
 ﻿---
 import Container from "../components/shared/Container.astro";
 import Navitem from "../components/shared/Navitem.astro";
+import NavItemWithSubmenu from "../components/shared/NavItemWithSubmenu.astro";
 import BtnLink from "../components/shared/BtnLink.astro";
+import { industrias } from "../data/industrias";
+
+// Industry landing pages, sourced from the registry so the submenu stays in sync.
+const industriaChildren = industrias.map((i) => ({
+  href: `/${i.slug}`,
+  text: i.navLabel,
+}));
 
 const navItems = [
   {
@@ -23,6 +31,7 @@ const navItems = [
   {
     href: "/#industrias",
     text: "Industrias",
+    children: industriaChildren,
   },
   {
     href: "/#temporal",
@@ -116,6 +125,7 @@ const navItems = [
         {
           navItems.map((item) => {
             if (item.hidden) return null;
+            if (item.children) return <NavItemWithSubmenu {...item} />;
             return <Navitem {...item} />;
           })
         }
