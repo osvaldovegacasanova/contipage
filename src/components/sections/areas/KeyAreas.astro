@@ -4,7 +4,7 @@ import Title2 from "../../shared/Title2.astro";
 import SubTitle2 from "../../shared/SubTitle2.astro";
 import Paragraph from "../../shared/Paragraph.astro";
 import GradiantText from "../../shared/GradiantText.astro";
-import IndustryCard from "./components/IndustryCard.astro";
+import IndustryRow from "./components/IndustryRow.astro";
 import { areasSectionData } from "./data.ts";
 
 export interface Props {
@@ -26,17 +26,10 @@ const { className } = Astro.props;
     </Paragraph>
   </Container>
   <Container size="wide">
-    <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+    <div class="mt-14 flex flex-col gap-20 md:gap-28">
       {
-        areasSectionData.areas.map((industry) => (
-          <IndustryCard
-            title={industry.title}
-            visual={industry.visual}
-            items={industry.items}
-            href={industry.href}
-            alt={industry.alt}
-            objectPosition={industry.objectPosition}
-          />
+        areasSectionData.areas.map((industry, index) => (
+          <IndustryRow area={industry} index={index} />
         ))
       }
     </div>
