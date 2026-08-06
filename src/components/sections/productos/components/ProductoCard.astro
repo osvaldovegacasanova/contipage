@@ -5,27 +5,27 @@ import LazyImage from "../../../shared/LazyImage.astro";
 
 export interface Props {
   title: string;
-  description: string;
+  bullets: string[];
   location: string;
   visual: string | ImageMetadata;
   alt?: string;
 }
 
-const { title, description, location, visual, alt } = Astro.props;
+const { title, bullets, location, visual, alt } = Astro.props;
 const imageAlt = alt || `${title} - Equipos de sopladores y compresores Continental Blowers`;
 ---
 
 <div
   class="group overflow-hidden rounded-lg h-full flex flex-col dark:bg-base-dark-800 shadow-lg dark:shadow-dark ring-1 ring-black/5 pt-2"
 >
-  <div class="relative h-96">
+  <div class="relative h-[307px]">
     <div class="overflow-hidden">
       <LazyImage
         src={visual}
         alt={imageAlt}
-        height="384"
+        height="307"
         width="398"
-        class="w-full h-96 object-cover"
+        class="w-full h-[307px] object-cover"
       />
     </div>
     <svg
@@ -52,10 +52,13 @@ const imageAlt = alt || `${title} - Equipos de sopladores y compresores Continen
     <Title3 as="h2" className="dark:opacity-70">
       {title}
     </Title3>
-    <div>
-      <div class="text-sm opacity-60">
-        {description}
-      </div>
-    </div>
+    <ul class="space-y-2">
+      {bullets.map((item) => (
+        <li class="flex items-start gap-2.5 text-sm leading-relaxed text-heading-3">
+          <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
   </div>
 </div>

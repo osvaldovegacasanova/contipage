@@ -17,6 +17,11 @@ const navItems = [
     text: "Home",
   },
   {
+    href: "/#industrias",
+    text: "Industrias",
+    children: industriaChildren,
+  },
+  {
     href: "/#servicios",
     text: "Servicios",
   },
@@ -27,11 +32,6 @@ const navItems = [
   {
     href: "/#nosotros",
     text: "Nosotros",
-  },
-  {
-    href: "/#industrias",
-    text: "Industrias",
-    children: industriaChildren,
   },
   {
     href: "/#temporal",
@@ -45,7 +45,7 @@ const navItems = [
 ];
 ---
 
-<header class="absolute inset-x-0 top-0 z-50 py-6 px-6 text-white">
+<header data-site-header class="fixed inset-x-0 top-0 z-50 py-6 px-6 text-white transition-all duration-300">
   <!-- <Container> -->
   <nav class="w-full flex justify-between gap-6 relative text-inherit">
     <!-- logo -->
@@ -169,5 +169,35 @@ const navItems = [
   </nav>
   <!-- </Container> -->
 </header>
+
+<style is:global>
+  /* Condensed, solid navbar once the visitor scrolls past the hero.
+     Keeps white logo/text valid by using a branded dark background. */
+  header[data-site-header][data-scrolled="true"] {
+    background: rgba(14, 49, 93, 0.95); /* primary-950 */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var header = document.querySelector("[data-site-header]");
+    if (!header) return;
+    var THRESHOLD = 40;
+    function onScroll() {
+      if (window.scrollY > THRESHOLD) {
+        header.setAttribute("data-scrolled", "true");
+      } else {
+        header.removeAttribute("data-scrolled");
+      }
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  })();
+</script>
 
 

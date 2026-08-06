@@ -164,7 +164,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       if (!("IntersectionObserver" in window)) return;
       if (window.innerWidth < 1024) return;
 
-      const targets = document.querySelectorAll("[data-scroll-blur], main img, main h2, main h3");
+      const targets = document.querySelectorAll("[data-scroll-blur], main img, main h2:not([data-gsap-reveal]), main h3");
       if (!targets.length) return;
 
       const io = new IntersectionObserver(

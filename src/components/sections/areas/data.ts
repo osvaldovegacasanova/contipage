@@ -25,10 +25,11 @@ export type { IndustryArea };
 export const areasSectionData = {
   title: "Industrias",
   subheading: {
-    text1_1: "Aplicaciones en ",
-    text1_2: "Múltiples Industrias",
+    text1_1: "Soluciones de aire y gas ",
+    text1_2: "para cada industria y aplicación",
     text2:
-      "Los equipos Continental Industrie son pieza fundamental en diversos procesos industriales, asegurando eficiencia, confiabilidad y continuidad operacional.",
+      "Sopladores centrífugos Continental Industrie para los procesos más exigentes de la minería, el tratamiento de agua, el biogás y la industria.",
+    text2b: "Eficiencia y continuidad operacional comprobadas.",
   },
   areas: [
     {

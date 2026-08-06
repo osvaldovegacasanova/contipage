@@ -9,24 +9,39 @@ export const productosSection = {
   projects: [
     {
       title: "Sopladores Monoetapa",
-      description:
-        "Los compresores radiales tipo TC de Continental Industrie son equipos modernos diseñados para la compresión de grandes cantidades de aire/gas, desde 1.500 hasta 60.000 m3/h, con presiones de hasta 2,5 bar. Gracias a las tolerancias de alta precisión y al control continuo de los parámetros de operación, nuestros compresores ofrecen una alta confiabilidad durante su funcionamiento. La aplicación de nuevas técnicas derivadas de la tecnología espacial en el mecanizado de los álabes del impulsor garantiza una alta eficiencia de compresión (superior al 85 %) y una alta eficiencia general.",
+      bullets: [
+        "Compresores radiales tipo TC para aire o gas",
+        "Caudales de 1.500 a 60.000 m³/h",
+        "Presiones de hasta 2,5 bar",
+        "Eficiencia de compresión superior al 85 %",
+        "Álabes mecanizados con técnicas de tecnología espacial",
+      ],
       location: "Sopladores",
       visual: imgMono,
       alt: "Soplador centrífugo monoetapa Continental Blowers tipo TC para compresión de aire o gas hasta 35.000 m³/h con alta eficiencia",
     },
     {
       title: "Sopladores Multietapa",
-      description:
-        "Debido a nuestro compromiso con la mejora continua del desempeño y a la dedicación de una parte significativa de nuestros recursos a la investigación, Continental Industrie puede ofrecerle una gama completa de máquinas, que pueden suministrar aire seco, limpio y libre de pulsaciones, con caudales desde 1.000 a 65.000 m3/h alcanzando presiones relativas de hasta 1,8 bar o en vacío de hasta 6.700 mmH2O (WG).",
+      bullets: [
+        "Gama completa respaldada por I+D continua",
+        "Caudales de 1.000 a 65.000 m³/h",
+        "Presiones relativas de hasta 1,8 bar",
+        "Vacío de hasta 6.700 mmH₂O (WG)",
+        "Aire seco, limpio y libre de pulsaciones",
+      ],
       location: "Sopladores",
       visual: imgMulti,
       alt: "Compresor centrífugo multietapa Continental Blowers para caudales de 1.000 a 65.000 m³/h con presiones hasta 1,8 bar",
     },
     {
       title: "Gas Boosters",
-      description:
-        "Nuestro catálogo incluye soluciones para manejo de gases inertes, tóxicos, corrosivos, inflamables y mezcla de gases, con configuraciones diseñadas para servicio continuo, garantizando estabilidad operativa, alta eficiencia energética y un funcionamiento confiable incluso en ambientes exigentes. Conscientes de la importancia crítica de la seguridad en los sistemas de manejo de gases, hemos incorporado diversas características de seguridad en el diseño y la fabricación de nuestros sopladores y extractores, con la finalidad de garantizar una construcción completamente estanca, evitando cualquier fuga. Continental Industrie ofrece sopladores certificados ATEX para zonas EX 1 y 2, especialmente diseñados para aplicaciones en rellenos sanitarios y biogás, respaldados por la experiencia adquirida a partir de miles de equipos ATEX instalados.",
+      bullets: [
+        "Manejo de gases inertes, tóxicos, corrosivos, inflamables y mezclas",
+        "Configuraciones para servicio continuo y alta eficiencia energética",
+        "Construcción completamente estanca, sin fugas",
+        "Certificación ATEX para zonas EX 1 y 2",
+        "Ideales para rellenos sanitarios y biogás",
+      ],
       location: "Sopladores",
       visual: imgGas,
       alt: "Sistema Gas Booster Continental Blowers para manejo y compresión de gases de proceso en aplicaciones industriales",
