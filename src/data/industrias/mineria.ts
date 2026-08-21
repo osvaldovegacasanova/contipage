@@ -2,13 +2,15 @@ import type { IndustryPage } from "./types";
 
 // NOTE: Images below are PLACEHOLDERS reusing existing site assets
 // (flagged with imagePlaceholder: true). Swap for real process photography.
+// Process names follow the taxonomy tree and descriptions/bullets the HUB body
+// of "HUBS POR INDUSTRIA CONTINENTAL.md" (estructura revisada con Carlos, 2026-08-20).
 
 export const mineria: IndustryPage = {
   slug: "sopladores-para-mineria",
   navLabel: "Minería",
   seoTitle: "Sopladores para Minería | Flotación, Transporte Neumático y Biolixiviación | Continental Andes",
   metaDescription:
-    "Sopladores y compresores centrífugos Continental Industrie para minería: flotación de minerales, transporte neumático, combustión y biolixiviación. Alta eficiencia y disponibilidad operacional en la región andina.",
+    "Sopladores y compresores centrífugos Continental Industrie para minería: flotación de minerales, transporte neumático por vacío, combustión, biolixiviación y oxidación. Alta disponibilidad sobre los 3.000 m en la región andina.",
   hero: {
     eyebrow: "Industrias",
     title: "Sopladores para",
@@ -27,55 +29,79 @@ export const mineria: IndustryPage = {
   },
   processes: [
     {
-      name: "Flotación de minerales",
+      name: "Sopladores para flotación de minerales",
       description:
-        "El aire es un insumo crítico en las celdas de flotación: genera las burbujas que adhieren las partículas minerales y determinan la recuperación del proceso. Nuestros sopladores entregan caudal constante y presión estable, condición indispensable para una separación eficiente y una ley de concentrado uniforme.",
+        "En minería, la flotación por espuma separa los minerales de la ganga mediante diferencias hidrofóbicas, proceso que requiere aire inyectado. Los sopladores centrífugos Multietapas Continental Industrie lideran este proceso ofreciendo simplicidad operacional y una eficiencia superior.",
       highlights: [
-        "Caudal y presión estables para recuperación consistente",
-        "Alta eficiencia energética en operación 24/7",
-        "Dimensionamiento según columna de agua y número de celdas",
+        "Caudal de aire variable según demanda",
+        "Presión constante",
+        "Libre de pulsaciones",
+        "Bajo nivel de ruido",
+        "Simplicidad mecánica",
+        "Alta disponibilidad y confiabilidad",
       ],
       image: "/images/aplicacion_mineria.webp",
-      alt: "Soplador centrífugo para aireación de celdas de flotación de minerales",
+      alt: "Soplador centrífugo multietapa para aireación de celdas de flotación de minerales",
       imagePlaceholder: true,
     },
     {
-      name: "Transporte neumático",
+      name: "Sopladores para transporte neumático por vacío",
       description:
-        "Para el traslado de concentrados y materiales secos, el transporte neumático exige aire limpio y libre de pulsaciones a presión controlada. Los equipos Continental Industrie aseguran un flujo continuo que minimiza atascos y pérdidas, manteniendo la línea de proceso en movimiento.",
+        "Los sopladores centrífugos multietapa de Continental Industrie, fabricados en hierro fundido, ofrecen máxima eficiencia, alta fiabilidad mecánica y un diseño simple que resiste mejor el paso de partículas en sistemas de transporte neumático por vacío, siendo ideales en sistemas de limpieza por aspiración centralizada.",
       highlights: [
-        "Aire limpio y libre de pulsaciones",
-        "Presión controlada para líneas largas",
-        "Menor mantenimiento frente a soluciones de desplazamiento positivo",
+        "Aire limpio y libre de aceite",
+        "Libre de pulsaciones",
+        "Caudal variable",
+        "Simplicidad mecánica",
+        "Alta disponibilidad",
       ],
       image: "/images/multistage_draw.webp",
-      alt: "Compresor centrífugo multietapa para transporte neumático de materiales en minería",
+      alt: "Compresor centrífugo multietapa para transporte neumático por vacío y aspiración centralizada en minería",
       imagePlaceholder: true,
     },
     {
-      name: "Combustión",
+      name: "Sopladores para combustión",
       description:
-        "En hornos, calderas y secadores, el suministro de aire de combustión define la eficiencia térmica y la estabilidad de la llama. Aportamos aire a presión con control preciso de caudal, optimizando el consumo de combustible y reduciendo emisiones.",
+        "Sobre los 3.000 metros de altitud, los ventiladores convencionales no logran entregar la presión que requieren los quemadores de calderas, hornos y sistemas de lecho fluidizado. Los sopladores centrífugos de Continental Industrie suministran el carburante con la presión y el caudal requerido por este proceso.",
       highlights: [
+        "Presión constante",
+        "Caudal variable según demanda",
         "Control preciso de aire de combustión",
-        "Mayor eficiencia térmica y menor consumo de combustible",
-        "Operación confiable en procesos de alta temperatura",
+        "Alta disponibilidad sobre los 3.000 mt. sobre el mar",
       ],
       image: "/images/singlestage_draw.webp",
-      alt: "Soplador centrífugo para suministro de aire de combustión en hornos y calderas de minería",
+      alt: "Soplador centrífugo para aire de combustión en calderas, hornos y lecho fluidizado de faenas de altura",
       imagePlaceholder: true,
     },
     {
-      name: "Biolixiviación",
+      name: "Sopladores para biolixiviación",
       description:
-        "La biolixiviación depende de una aireación controlada que mantenga activa la población bacteriana encargada de liberar el metal. Nuestros sopladores entregan el oxígeno necesario de forma uniforme sobre las pilas, optimizando la cinética de extracción y la recuperación del mineral.",
+        "La biolixiviación utiliza microorganismos para extraer cobre y metales de minerales de baja ley, en pilas ubicadas a la intemperie y a gran altitud, donde los ventiladores convencionales no alcanzan la presión necesaria. Al ser un proceso dependiente de oxígeno, los sopladores de Continental Industrie aportan un caudal de aire uniforme sobre toda la pila, con la robustez mecánica que exigen estas condiciones extremas.",
       highlights: [
+        "Caudal variable y Presión constante",
         "Aireación uniforme sobre pilas de lixiviación",
-        "Oxígeno constante para la actividad bacteriana",
-        "Mejor cinética y recuperación de metal",
+        "Simplicidad mecánica y Robustez mecánica",
+        "Alta disponibilidad y confiabilidad en condiciones ambientales desfavorables (polvo, intemperie, altitud)",
+        "Sistema de filtrado a medida",
+        "Opción de modificación de direccionamiento de descarga",
+        "Baja necesidad de mantenimiento",
+        "Opción cabina de insonorización o containerizado plug and play",
       ],
       image: "/images/aplicacion_biogas.webp",
-      alt: "Sistema de aireación para procesos de biolixiviación de minerales",
+      alt: "Sistema de aireación para pilas de biolixiviación de minerales de baja ley",
+      imagePlaceholder: true,
+    },
+    {
+      name: "Sopladores para oxidación y agitación",
+      description:
+        "Ciertos procesos de tratamiento requieren oxidar compuestos disueltos o mantener en agitación estanques y reactores. Los sopladores centrífugos de Continental Industrie aportan el aire necesario, con un diseño que resiste ambientes húmedos y corrosivos.",
+      highlights: [
+        "Caudal variable y presión constante",
+        "Sistemas de control y variador de frecuencia disponibles",
+        "Simplicidad mecánica y alta disponibilidad",
+      ],
+      image: "/images/aplicacion_tratamiento_agua.webp",
+      alt: "Soplador centrífugo para procesos de oxidación y agitación en estanques y reactores mineros",
       imagePlaceholder: true,
     },
   ],

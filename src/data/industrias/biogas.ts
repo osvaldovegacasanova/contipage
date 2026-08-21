@@ -1,0 +1,96 @@
+import type { IndustryPage } from "./types";
+
+// NOTE: Images below are PLACEHOLDERS reusing existing site assets
+// (flagged with imagePlaceholder: true). Swap for real process photography.
+// Process names follow the taxonomy tree and descriptions/bullets the HUB body
+// of "HUBS POR INDUSTRIA CONTINENTAL.md" (estructura revisada con Carlos, 2026-08-20).
+
+export const biogas: IndustryPage = {
+  slug: "sopladores-para-biogas",
+  navLabel: "Manejo de Biogás",
+  seoTitle: "Sopladores para Biogás | Booster de Generación, Quema y Biometano | Continental Andes",
+  metaDescription:
+    "Sopladores y boosters centrífugos ATEX Continental Industrie para manejo de biogás: generación de energía, quema en antorcha, biometano y oxidación de lixiviados. Caudal variable y presión constante en la región andina.",
+  hero: {
+    eyebrow: "Industrias",
+    title: "Sopladores para",
+    titleAccent: "Manejo de Biogás",
+    intro:
+      "Sopladores y boosters para la captación, quema y valorización de biogás. Soluciones seguras y estancas para generación de energía y producción de biometano, con la presión estable que exige cada tecnología.",
+    image: "/images/aplicacion_biogas.webp",
+    alt: "Sopladores centrífugos Continental Industrie aplicados al manejo y valorización de biogás",
+    imagePlaceholder: true,
+  },
+  processesHeading: {
+    title: "Procesos donde nuestros",
+    titleAccent: "sopladores son clave",
+    intro:
+      "Desde el biodigestor hasta el motor o la antorcha, cada etapa del biogás exige caudal y presión específicos. Dimensionamos e integramos el equipo correcto para asegurar continuidad y seguridad operacional.",
+  },
+  processes: [
+    {
+      name: "Booster en generación de energía con biogás",
+      description:
+        "El biogás de rellenos sanitarios y biodigestores debe presurizarse antes de llegar a los motores que generan electricidad. Los sopladores centrífugos multietapa de Continental Industrie actúan como booster, entregando el caudal y presión que exige el motor con máxima confiabilidad.",
+      highlights: [
+        "Caudal de biogás variable",
+        "Presión constante",
+        "Sistema de sellado y rodamientos especiales según aplicación",
+        "Eje fabricado en acero inoxidable",
+        "Recubrimiento anticorrosivo específico para biogás",
+        "Conjunto booster especificado bajo norma ATEX",
+      ],
+      image: "/images/aplicacion_biogas.webp",
+      alt: "Booster centrífugo multietapa para presurización de biogás hacia motores de generación eléctrica",
+      imagePlaceholder: true,
+    },
+    {
+      name: "Sopladores para sistema de quema de biogás",
+      description:
+        "Para reducir el alto impacto ambiental del biogás metano —uno de los más nocivos para la atmósfera— los rellenos sanitarios lo queman para reducir a CO2, de esta forma se reduce el efecto invernadero. Los sopladores Continental Industrie impulsan el gas hasta la antorcha de forma continua y con alta disponibilidad.",
+      highlights: [
+        "Caudal de biogás variable",
+        "Presión constante",
+        "Sistema de sellado y rodamientos especiales según aplicación",
+        "Eje fabricado en acero inoxidable",
+        "Recubrimiento anticorrosivo específico para biogás",
+        "Conjunto booster especificado bajo norma ATEX",
+      ],
+      image: "/images/singlestage_draw.webp",
+      alt: "Soplador centrífugo para sistema de quema de biogás en antorcha de relleno sanitario",
+      imagePlaceholder: true,
+    },
+    {
+      name: "Booster en la generación de biometano",
+      description:
+        "Además de electricidad, el biogás puede purificarse hasta convertirse en biometano, transformándose en un combustible renovable útil para flotas vehiculares, red de gas de ciudad, calderas, entre otros. Los sopladores Continental Industrie aportan la presión estable que exige esta tecnología emergente en Chile, cerrando el ciclo del carbono al transformar un residuo orgánico en energía.",
+      highlights: [
+        "Caudal de biogás variable",
+        "Presión constante",
+        "Sistema de sellado de rodamientos especiales según aplicación",
+        "Eje mandatorio fabricado en acero inoxidable",
+        "Recubrimiento anticorrosivo específico",
+        "Conjunto Booster especificado bajo norma Atex",
+      ],
+      image: "/images/multistage_draw.webp",
+      alt: "Booster centrífugo para la generación y purificación de biometano",
+      imagePlaceholder: true,
+    },
+    {
+      name: "Sopladores para oxidación y agitación",
+      description:
+        "En las plantas de rellenos sanitarios, el lixiviado generado bajo el relleno se recolecta en estanques donde se requiere oxidar compuestos disueltos o mantener en agitación mediante aireación, antes de continuar su tratamiento en piscinas sucesivas. Los sopladores centrífugos Continental Industrie aportan el aire necesario, con un diseño que resiste ambientes húmedos y corrosivos.",
+      highlights: ["Caudal variable y presión constante", "Simplicidad mecánica y alta disponibilidad"],
+      image: "/images/aplicacion_tratamiento_agua.webp",
+      alt: "Soplador centrífugo para oxidación y agitación de lixiviados en estanques de relleno sanitario",
+      imagePlaceholder: true,
+    },
+  ],
+  cta: {
+    title: "¿Necesita una solución para su planta de biogás?",
+    description:
+      "Nuestro equipo técnico dimensiona e integra el booster o soplador ideal para cada etapa del biogás. Cuente con soporte, puesta en marcha y repuestos en toda la región andina.",
+    buttonText: "Solicitar asesoría técnica",
+    buttonHref: "/#contacto",
+  },
+};
