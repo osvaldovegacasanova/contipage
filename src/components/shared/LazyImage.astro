@@ -12,7 +12,21 @@ export interface Props {
   [key: string]: any;
 }
 
-const { src, alt, className = "", width, height, ...attrs } = Astro.props as Props;
+// Accept both `class` and `className`. Every call site in this project passes
+// `class`, which previously fell through to `...attrs` and produced a duplicate
+// `class` attribute on the <img>. HTML keeps the FIRST duplicate, so the empty
+// `className` won and utility classes like `object-cover` were silently dropped.
+const {
+  src,
+  alt,
+  className = "",
+  class: classProp = "",
+  width,
+  height,
+  ...attrs
+} = Astro.props as Props;
+
+const cssClass = [className, classProp].filter(Boolean).join(" ");
 
 const isStringSrc = typeof src === "string";
 
@@ -62,7 +76,7 @@ if (!isStringSrc) {
   <img
     src={src as string}
     alt={alt}
-    class={className}
+    class={cssClass}
     decoding="async"
     loading="lazy"
     height={dimensions.height}
@@ -74,7 +88,7 @@ if (!isStringSrc) {
     src={src as ImageMetadata}
     alt={alt}
     formats={["avif", "webp"]}
-    class={className}
+    class={cssClass}
     decoding="async"
     loading="lazy"
     style={{

@@ -1,0 +1,50 @@
+Archivos eliminados de public/images (limpieza WebP, agosto 2026).
+Todos estaban versionados en git: recuperables con `git checkout HEAD -- <ruta>`.
+
+basura                    0.79 MB  multistage_draw.webp~
+basura                    0.60 MB  gas.webp~
+basura                    0.32 MB  capacidad_tecnica.webp~
+basura                    0.12 MB  slider42-02.jpg~
+basura                    0.11 MB  gasboosters.webp.tmp
+basura                    0.05 MB  singlestage_draw.webp.tmp
+basura                    0.04 MB  empresa-conti2.jpg~
+basura                    0.03 MB  TCH25 PARTES.webp.tmp
+basura                    0.02 MB  PLAQUETTE TC25.webp.tmp
+basura                    0.01 MB  puesta_en_marcha2.webp.tmp
+basura                    0.01 MB  services-respuestos_400_533.jpg.tmp
+basura                    0.01 MB  mantenimiento.webp.tmp
+basura                    0.01 MB  capacidad_tecnica.webp.tmp
+duplicada-en-assets      11.79 MB  environment-green-hands.png
+duplicada-en-assets       6.57 MB  services-hydro.png
+duplicada-en-assets       5.01 MB  services-storage.png
+duplicada-en-assets       1.77 MB  Miguel2.png
+duplicada-en-assets       1.63 MB  Carlos6.png
+duplicada-en-assets       0.66 MB  hero-hero3.jpg
+duplicada-en-assets       0.44 MB  Vanessa2.png
+sin-uso                   3.36 MB  hero-wind3.jpg
+sin-uso                   2.89 MB  innovations-solar2.jpg
+sin-uso                   1.91 MB  innovations-grid.jpg
+sin-uso                   1.14 MB  innovations-wind.jpg
+sin-uso                   0.85 MB  hero-hero2.jpg
+sin-uso                   0.68 MB  Miguel.png
+sin-uso                   0.23 MB  empresa-conti2.jpg
+sin-uso                   0.12 MB  img_respuestos.jpg
+sin-uso                   0.09 MB  innovations-singlestage-turbo-compressor1-1.jpg
+sin-uso                   0.04 MB  biogas2.jpg
+sin-uso                   0.03 MB  biogas.jpg
+sin-uso                   0.01 MB  logo.png
+sin-uso                   0.00 MB  multi.png
+superada-por-webp        19.29 MB  blog-smart-grid.png
+superada-por-webp         6.57 MB  blog-hydro.png
+superada-por-webp         5.20 MB  blog-green.png
+superada-por-webp         5.06 MB  blog-solar3.png
+superada-por-webp         5.01 MB  blog-storage.png
+superada-por-webp         4.15 MB  blog-wind.png
+superada-por-webp         1.14 MB  multistage_draw.png
+superada-por-webp         0.76 MB  TCB15_2.JPG
+superada-por-webp         0.54 MB  PLAQUETTE TC25.jpg
+superada-por-webp         0.53 MB  gas.jpg
+superada-por-webp         0.43 MB  TCH25 PARTES.jpg
+superada-por-webp         0.01 MB  multistage-centrifugal-blowers-home.png
+superada-por-webp         0.01 MB  slider42-02.jpg
+superada-por-webp         0.00 MB  icons8-whatsapp-50.png

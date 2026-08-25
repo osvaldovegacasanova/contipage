@@ -26,13 +26,14 @@ const { className } = Astro.props;
     </p>
   </Container>
   <Container size="wide">
-    <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+    <div class="industry-grid mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
       {
         areasSectionData.areas.map((industry) => (
           <IndustryCard
             title={industry.title}
             visual={industry.visual}
             items={industry.items}
+            intro={industry.intro}
             href={industry.href}
             alt={industry.alt}
             objectPosition={industry.objectPosition}
@@ -42,6 +43,30 @@ const { className } = Astro.props;
     </div>
   </Container>
 </section>
+
+<style>
+  /*
+    Align the four blocks of every card (image / title / intro / bullets) across
+    contiguous cards. Titles wrap to a different number of lines per industry
+    ("Sopladores para Minería" vs "…para Industria Petroquímica"), which
+    otherwise pushes the intro and the bullet list to different heights.
+
+    Each card spans four rows of this grid and adopts them via `subgrid`, so the
+    row heights are shared by the whole row of cards — no fixed heights, works at
+    every breakpoint. `row-gap: 0` keeps the grid gap between cards while letting
+    each card's own padding define its internal spacing.
+
+    Browsers without subgrid keep the card's own `grid-rows-[auto_auto_auto_1fr]`
+    and simply render as before, unaligned but correct.
+  */
+  @supports (grid-template-rows: subgrid) {
+    .industry-grid > :global(.industry-card) {
+      grid-row: span 4;
+      grid-template-rows: subgrid;
+      row-gap: 0;
+    }
+  }
+</style>
 
 <script>
   import gsap from "gsap";

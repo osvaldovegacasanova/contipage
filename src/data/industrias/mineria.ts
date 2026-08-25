@@ -1,7 +1,7 @@
 import type { IndustryPage } from "./types";
 
-// NOTE: Images below are PLACEHOLDERS reusing existing site assets
-// (flagged with imagePlaceholder: true). Swap for real process photography.
+// Images are real process photography, sourced from "images/1. MINERÍA" and
+// processed to WebP under public/images/mineria/. No placeholders remain here.
 // Process names follow the taxonomy tree and descriptions/bullets the HUB body
 // of "HUBS POR INDUSTRIA CONTINENTAL.md" (estructura revisada con Carlos, 2026-08-20).
 
@@ -16,16 +16,15 @@ export const mineria: IndustryPage = {
     title: "Sopladores para",
     titleAccent: "Minería",
     intro:
-      "Aire y gas a presión para los procesos más exigentes de la gran minería. Equipos Continental Industrie diseñados para operación continua, alta eficiencia energética y máxima disponibilidad en faenas de altura y ambientes severos.",
-    image: "/images/aplicacion_mineria.webp",
+      "Más de 300 equipos operando en minería en Chile. Sopladores Multietapa operando sobre los 3.000 m, máxima disponibilidad en faenas de altura y ambientes severos.",
+    image: "/images/mineria/portada.webp",
     alt: "Sopladores centrífugos Continental Industrie aplicados en la industria minera de la región andina",
-    imagePlaceholder: true,
   },
   processesHeading: {
     title: "Procesos donde nuestros",
     titleAccent: "sopladores son clave",
     intro:
-      "Cada proceso minero tiene requerimientos específicos de caudal y presión. Dimensionamos e integramos el equipo correcto para asegurar continuidad operacional y eficiencia.",
+      "Aire y gas a presión para los procesos más exigentes de la gran minería. Equipos Continental Industrie diseñados para operación continua, alta eficiencia energética y máxima disponibilidad en faenas de altura y ambientes severos.",
   },
   processes: [
     {
@@ -40,9 +39,8 @@ export const mineria: IndustryPage = {
         "Simplicidad mecánica",
         "Alta disponibilidad y confiabilidad",
       ],
-      image: "/images/aplicacion_mineria.webp",
+      image: "/images/mineria/flotacion.webp",
       alt: "Soplador centrífugo multietapa para aireación de celdas de flotación de minerales",
-      imagePlaceholder: true,
     },
     {
       name: "Sopladores para transporte neumático por vacío",
@@ -55,9 +53,8 @@ export const mineria: IndustryPage = {
         "Simplicidad mecánica",
         "Alta disponibilidad",
       ],
-      image: "/images/multistage_draw.webp",
+      image: "/images/mineria/transporte-neumatico.webp",
       alt: "Compresor centrífugo multietapa para transporte neumático por vacío y aspiración centralizada en minería",
-      imagePlaceholder: true,
     },
     {
       name: "Sopladores para combustión",
@@ -69,9 +66,8 @@ export const mineria: IndustryPage = {
         "Control preciso de aire de combustión",
         "Alta disponibilidad sobre los 3.000 mt. sobre el mar",
       ],
-      image: "/images/singlestage_draw.webp",
+      image: "/images/mineria/combustion.webp",
       alt: "Soplador centrífugo para aire de combustión en calderas, hornos y lecho fluidizado de faenas de altura",
-      imagePlaceholder: true,
     },
     {
       name: "Sopladores para biolixiviación",
@@ -87,9 +83,8 @@ export const mineria: IndustryPage = {
         "Baja necesidad de mantenimiento",
         "Opción cabina de insonorización o containerizado plug and play",
       ],
-      image: "/images/aplicacion_biogas.webp",
+      image: "/images/mineria/biolixiviacion.webp",
       alt: "Sistema de aireación para pilas de biolixiviación de minerales de baja ley",
-      imagePlaceholder: true,
     },
     {
       name: "Sopladores para oxidación y agitación",
@@ -100,9 +95,8 @@ export const mineria: IndustryPage = {
         "Sistemas de control y variador de frecuencia disponibles",
         "Simplicidad mecánica y alta disponibilidad",
       ],
-      image: "/images/aplicacion_tratamiento_agua.webp",
+      image: "/images/mineria/oxidacion.webp",
       alt: "Soplador centrífugo para procesos de oxidación y agitación en estanques y reactores mineros",
-      imagePlaceholder: true,
     },
   ],
   cta: {

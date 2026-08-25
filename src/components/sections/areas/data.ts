@@ -40,7 +40,7 @@ export const areasSectionData = {
       href: "/sopladores-para-mineria",
       intro:
         "Aire y gas a presión para los procesos críticos de la gran minería. Nuestros sopladores centrífugos aseguran caudal estable y alta eficiencia en faenas de altura y ambientes exigentes.",
-      alt: "Aplicaciones de sopladores y compresores centrífugos en la industria minera para flotación, transporte neumático por vacío y biolixiviación",
+      alt: "Aplicaciones de sopladores multietapa en la industria minera para flotación, transporte neumático por vacío y biolixiviación",
       items: [
         "Sopladores para flotación de minerales",
         "Sopladores para transporte neumático por vacío",

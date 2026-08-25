@@ -3,9 +3,9 @@ import img4 from "../../../assets/images/services-storage.png";
 
 const img1 = "/images/puesta_en_marcha2.webp";
 const img2 = "/images/mantenimiento.webp";
-const img5 = "/images/services-respuestos_400_533.jpg";
+const img5 = "/images/services-respuestos_400_533.webp";
 const img6 = "/images/capacidad_tecnica.webp";
-const img_ingenieria = "/images/slider42-02.jpg";
+const img_ingenieria = "/images/slider42-02.webp";
 
 export const servicesSectionData = {
   title: "Servicios",
