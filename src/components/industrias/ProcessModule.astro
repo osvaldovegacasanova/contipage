@@ -19,7 +19,13 @@ const imageRight = index % 2 === 1;
 <article class="grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
   {/* Image */}
   <div class:list={["relative", imageRight && "md:order-2"]} data-scroll-blur>
-    <div class="relative mx-auto w-4/5 overflow-hidden rounded-3xl shadow-lg dark:shadow-dark">
+    {/*
+      En móvil la imagen sangra a pantalla completa: los márgenes negativos
+      cancelan el padding horizontal de Container (px-5 / sm:px-8), y se quitan
+      los bordes redondeados y la sombra, que a borde de pantalla no tienen
+      sentido. Desde md vuelve la tarjeta centrada al 80% con esquinas y sombra.
+    */}
+    <div class="relative -mx-5 overflow-hidden shadow-none sm:-mx-8 md:mx-auto md:w-4/5 md:rounded-3xl md:shadow-lg md:dark:shadow-dark">
       <div class="aspect-[4/3] w-full">
         <LazyImage
           src={process.image}
