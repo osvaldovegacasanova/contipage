@@ -34,7 +34,7 @@ Run these from `site/` before merging to `test` or `main`, in order:
 
 **The sitemap needs no manual step.** It is generated at build time by `@astrojs/sitemap`, configured in `astro.config.mjs`, and internal pages (`/colores`, `/fonts`, `/separadores`) are filtered out to match `robots.txt`. It used to be a hand-written file in `public/` and drifted to a single URL while the site grew to seventeen pages — do not reintroduce a static one.
 
-Note the version pin: `@astrojs/sitemap` must stay on a release compatible with Astro 4.x. Version 3.7.0 expects a newer build hook API and crashes the build with `Cannot read properties of undefined (reading 'reduce')`.
+Note the version pin: `@astrojs/sitemap` is pinned to an exact `3.1.6`, with no caret. Anything in the 3.7.x line expects a newer build hook API than Astro 4.x provides and crashes the build with `Cannot read properties of undefined (reading 'reduce')`. A caret range would let a fresh install pull 3.7.x and break the deploy, so leave it exact until Astro itself is upgraded.
 
 ## Architecture
 
