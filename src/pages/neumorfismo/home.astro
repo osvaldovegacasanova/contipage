@@ -140,9 +140,9 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
             </div>
           </div>
 
-          <div class="neu-producto-cta">
+          <div class="neu-cta-seccion">
             <p class="neu-intro-respaldo">{servicesSectionData.callToAction}</p>
-            <a href="/#contacto" class="neu-btn">{servicesSectionData.buttonText}</a>
+            <a href="/#contacto" class="neu-btn neu-btn-accent">{servicesSectionData.buttonText}</a>
           </div>
         </section>
 
@@ -173,9 +173,9 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
             ))}
           </div>
 
-          <div class="neu-producto-cta">
+          <div class="neu-cta-seccion">
             <p class="neu-intro-respaldo">{productosSection.callToAction}</p>
-            <a href="/#contacto" class="neu-btn">{productosSection.button}</a>
+            <a href="/#contacto" class="neu-btn neu-btn-accent">{productosSection.button}</a>
           </div>
         </section>
       </div>
@@ -295,11 +295,12 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
   }
   .neu-producto .neu-list { margin-bottom: 0; }
 
-  .neu-producto-cta {
-    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-    gap: 1.5rem; margin-top: 2.5rem;
+  /* Cierre de sección: texto y botón centrados. Lo comparten Servicios y Sopladores. */
+  .neu-cta-seccion {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    gap: 1.5rem; margin-top: 3rem;
   }
-  .neu-producto-cta p { margin: 0; }
+  .neu-cta-seccion p { margin: 0; }
 
   .neu-section-last { margin-bottom: 0; }
 </style>

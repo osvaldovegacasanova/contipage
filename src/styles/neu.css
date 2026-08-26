@@ -105,6 +105,13 @@
 .neu-btn:focus-visible { outline: 2px solid var(--neu-accent); outline-offset: 3px; }
 .neu-btn:disabled { color: var(--neu-muted); box-shadow: var(--neu-flat); cursor: not-allowed; }
 
+/*
+  Regla del sistema: todo botón que lleve a contacto usa la variante de acento.
+  Es la acción principal del sitio, y el botón claro se apoya únicamente en el
+  borde de sombra, que da 1,72:1 contra el fondo: por debajo del 3:1 que WCAG
+  pide para un control, así que casi desaparece hasta que uno lo busca. El
+  acento lleva texto blanco sobre azul de marca, 8,1:1.
+*/
 .neu-btn-accent { background: var(--neu-accent); color: #fff; }
 
 /* ---- Formulario --------------------------------------------------------- */
