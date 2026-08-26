@@ -1,0 +1,411 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Laboratorio de estilo neumórfico. Página aislada: no se enlaza desde el menú
+// y no toca ningún componente del sitio. Sirve para ver el sistema completo
+// antes de decidir qué migrar.
+//
+// Decisiones tomadas respecto de la especificación original:
+//  - Acento: azul de marca #0046ba en vez del púrpura #6c63ff del spec.
+//  - Contexto claro forzado: el spec sólo funciona sobre fondos claros, así que
+//    esta página define sus propios colores y no usa variantes dark:.
+
+const paleta = [
+  { nombre: "Fondo", valor: "#e0e5ec", uso: "Página, tarjetas e inputs. Todo comparte el mismo fondo." },
+  { nombre: "Texto", valor: "#4a5568", uso: "Cuerpo y encabezados.", contraste: "5,94:1", estado: "ok" },
+  { nombre: "Apagado", valor: "#8898aa", uso: "Texto secundario.", contraste: "2,33:1", estado: "falla" },
+  { nombre: "Acento", valor: "#0046ba", uso: "Marca Continental.", contraste: "6,42:1", estado: "ok" },
+  { nombre: "Acento del spec", valor: "#6c63ff", uso: "Púrpura original, descartado.", contraste: "3,41:1", estado: "falla" },
+  { nombre: "Sombra clara", valor: "#ffffff", uso: "Luz desde arriba a la izquierda." },
+  { nombre: "Sombra oscura", valor: "#a3b1c6", uso: "Sombra proyectada.", contraste: "1,72:1", estado: "falla" },
+];
+
+const superficies = [
+  { clase: "neu-raised", titulo: "Elevado", css: "6px 6px 12px #a3b1c6,\n-6px -6px 12px #ffffff" },
+  { clase: "neu-pressed", titulo: "Hundido", css: "inset 4px 4px 8px #a3b1c6,\ninset -4px -4px 8px #ffffff" },
+  { clase: "neu-flat", titulo: "Plano", css: "3px 3px 6px #a3b1c6,\n-3px -3px 6px #ffffff" },
+];
+---
+
+<Layout
+  title="Laboratorio · Neumorfismo | Continental Andes"
+  description="Página interna de exploración del sistema de diseño neumórfico. No forma parte del sitio público."
+>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+  />
+
+  <main class="neu-root">
+    <div class="neu-wrap">
+      <!-- Encabezado -->
+      <header class="neu-header">
+        <span class="neu-eyebrow">Laboratorio interno</span>
+        <h1>Sistema neumórfico</h1>
+        <p class="neu-lead">
+          Superficies blandas que parecen extruidas o hundidas en un fondo único. No hay bordes:
+          toda la profundidad viene de un par de sombras, una clara arriba a la izquierda y una
+          oscura abajo a la derecha.
+        </p>
+        <p class="neu-note">
+          Esta página no está enlazada desde el sitio y no modifica ningún componente existente.
+        </p>
+      </header>
+
+      <!-- Paleta -->
+      <section class="neu-section">
+        <h2>Paleta</h2>
+        <p class="neu-sub">
+          La regla central del estilo: página, tarjetas e inputs comparten exactamente el mismo
+          fondo. La jerarquía no la da el color sino la sombra.
+        </p>
+        <div class="neu-grid neu-grid-3">
+          {paleta.map((c) => (
+            <div class="neu-raised neu-card">
+              <div class="neu-swatch" style={`background:${c.valor}`}></div>
+              <h3>{c.nombre}</h3>
+              <code>{c.valor}</code>
+              <p>{c.uso}</p>
+              {c.contraste && (
+                <p class={`neu-ratio ${c.estado === "falla" ? "is-fail" : "is-ok"}`}>
+                  Contraste {c.contraste} · {c.estado === "falla" ? "no cumple AA" : "cumple AA"}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Superficies -->
+      <section class="neu-section">
+        <h2>Superficies</h2>
+        <p class="neu-sub">Los tres estados sobre los que se construye todo lo demás.</p>
+        <div class="neu-grid neu-grid-3">
+          {superficies.map((s) => (
+            <div class={`${s.clase} neu-card`}>
+              <h3>{s.titulo}</h3>
+              <code class="neu-code-block">{s.css}</code>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Botones -->
+      <section class="neu-section">
+        <h2>Botones</h2>
+        <p class="neu-sub">
+          Al pasar el cursor la sombra crece; al presionar se invierte y el botón se hunde.
+        </p>
+        <div class="neu-row">
+          <button class="neu-btn" type="button">Solicitar asesoría</button>
+          <button class="neu-btn neu-btn-accent" type="button">Contactar</button>
+          <button class="neu-btn" type="button" disabled>Deshabilitado</button>
+        </div>
+      </section>
+
+      <!-- Formulario -->
+      <section class="neu-section">
+        <h2>Campos de formulario</h2>
+        <p class="neu-sub">
+          Los inputs van hundidos, como si el fondo se hubiera presionado hacia adentro. Al
+          enfocarse aparece un anillo del color de acento.
+        </p>
+        <div class="neu-form">
+          <label>
+            <span>Nombre</span>
+            <input class="neu-input" type="text" placeholder="Su nombre" />
+          </label>
+          <label>
+            <span>Correo</span>
+            <input class="neu-input" type="email" placeholder="nombre@empresa.cl" />
+          </label>
+          <label class="neu-form-full">
+            <span>Consulta técnica</span>
+            <textarea class="neu-input" rows="4" placeholder="Cuéntenos sobre su proceso"></textarea>
+          </label>
+        </div>
+      </section>
+
+      <!-- Controles -->
+      <section class="neu-section">
+        <h2>Controles</h2>
+        <div class="neu-grid neu-grid-2">
+          <div class="neu-raised neu-card">
+            <h3>Interruptores</h3>
+            <div class="neu-row neu-row-tight">
+              <span class="neu-toggle" data-toggle role="switch" aria-checked="false" tabindex="0">
+                <span class="neu-toggle-thumb"></span>
+              </span>
+              <span class="neu-toggle is-on" data-toggle role="switch" aria-checked="true" tabindex="0">
+                <span class="neu-toggle-thumb"></span>
+              </span>
+            </div>
+            <p>Pista hundida, perilla elevada. Al activarse se desplaza y toma el acento.</p>
+          </div>
+
+          <div class="neu-raised neu-card">
+            <h3>Barras de progreso</h3>
+            <div class="neu-progress"><span style="width:72%"></span></div>
+            <div class="neu-progress"><span style="width:38%"></span></div>
+            <p>Pista hundida con relleno degradado, sin sombra propia.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Iconos y navegación -->
+      <section class="neu-section">
+        <h2>Iconos y navegación</h2>
+        <div class="neu-grid neu-grid-2">
+          <div class="neu-raised neu-card">
+            <h3>Círculos de icono</h3>
+            <div class="neu-row neu-row-tight">
+              {["M13 10V3L4 14h7v7l9-11h-7z", "M5 13l4 4L19 7", "M12 4v16m8-8H4"].map((d) => (
+                <span class="neu-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d={d} />
+                  </svg>
+                </span>
+              ))}
+            </div>
+            <p>56 px de diámetro, elevados, con el icono en color de acento.</p>
+          </div>
+
+          <div class="neu-raised neu-card">
+            <h3>Navegación</h3>
+            <nav class="neu-nav">
+              <a href="#" class="is-active">Industrias</a>
+              <a href="#">Servicios</a>
+              <a href="#">Sopladores</a>
+            </nav>
+            <p>El enlace activo recibe tratamiento de píldora hundida.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Aplicado al sitio real -->
+      <section class="neu-section">
+        <h2>Aplicado a Continental</h2>
+        <p class="neu-sub">
+          Dos piezas reales del sitio traducidas al estilo, para juzgar el encaje y no sólo los
+          componentes sueltos.
+        </p>
+
+        <div class="neu-grid neu-grid-2">
+          <article class="neu-raised neu-card neu-industry">
+            <div class="neu-pressed neu-photo">
+              <img src="/images/mineria/flotacion.webp" alt="Soplador centrífugo multietapa para flotación de minerales" width="800" height="600" loading="lazy" />
+            </div>
+            <h3>Sopladores para Minería</h3>
+            <p>
+              Aire y gas a presión para los procesos críticos de la gran minería. Caudal estable y
+              alta eficiencia en faenas de altura.
+            </p>
+            <ul class="neu-list">
+              <li>Sopladores para flotación de minerales</li>
+              <li>Sopladores para transporte neumático por vacío</li>
+              <li>Sopladores para combustión</li>
+            </ul>
+            <span class="neu-link">Ver más detalles →</span>
+          </article>
+
+          <div class="neu-raised neu-card neu-cta">
+            <span class="neu-icon neu-icon-lg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </span>
+            <h3>¿Necesita una solución para su faena?</h3>
+            <p>
+              Nuestro equipo técnico dimensiona e integra el soplador ideal para cada proceso.
+              Soporte, puesta en marcha y repuestos en toda la región andina.
+            </p>
+            <button class="neu-btn neu-btn-accent" type="button">Solicitar asesoría técnica</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Accesibilidad -->
+      <section class="neu-section">
+        <h2>Lo que hay que resolver</h2>
+        <div class="neu-pressed neu-card neu-warn">
+          <p>
+            <strong>El borde de sombra da 1,72:1 contra el fondo.</strong> WCAG pide 3:1 para que
+            un control se distinga de lo que lo rodea. Es la premisa del estilo —sombras en vez de
+            bordes— así que no se arregla cambiando la paleta: hay que darle a botones e inputs
+            algún refuerzo propio, sea un borde tenue, un fondo distinto o un contorno de foco
+            permanente.
+          </p>
+          <p>
+            <strong>El gris apagado #8898aa da 2,33:1.</strong> No sirve para texto. Si se necesita
+            un secundario, hay que oscurecerlo hasta pasar 4,5:1.
+          </p>
+          <p>
+            <strong>El estilo asume fondo claro.</strong> Esta página fuerza contexto claro y no
+            usa variantes oscuras. Si el experimento avanza, hay que decidir qué pasa con el
+            conmutador de tema que hoy tiene el sitio.
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>
+
+<style is:global>
+  /* ---- Tokens ------------------------------------------------------------ */
+  .neu-root {
+    --neu-bg: #e0e5ec;
+    --neu-text: #4a5568;
+    --neu-muted: #8898aa;
+    --neu-accent: #0046ba;
+    --neu-light: #ffffff;
+    --neu-dark: #a3b1c6;
+
+    --neu-raised: 6px 6px 12px var(--neu-dark), -6px -6px 12px var(--neu-light);
+    --neu-pressed: inset 4px 4px 8px var(--neu-dark), inset -4px -4px 8px var(--neu-light);
+    --neu-flat: 3px 3px 6px var(--neu-dark), -3px -3px 6px var(--neu-light);
+
+    background: var(--neu-bg);
+    color: var(--neu-text);
+    font-family: "Poppins", "Raleway", system-ui, sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    padding: 8rem 1.5rem 5rem;
+  }
+
+  .neu-wrap { margin: 0 auto; max-width: 72rem; }
+
+  /* ---- Tipografía -------------------------------------------------------- */
+  .neu-root h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 500; line-height: 1.15; }
+  .neu-root h2 { font-size: 1.5rem; font-weight: 500; margin-bottom: 0.5rem; }
+  .neu-root h3 { font-size: 1.0625rem; font-weight: 500; margin-bottom: 0.5rem; }
+  .neu-root p { line-height: 1.7; }
+  .neu-root code { font-family: ui-monospace, "Cascadia Code", monospace; font-size: 0.8125rem; }
+
+  .neu-eyebrow {
+    display: inline-block; font-size: 0.75rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--neu-accent); font-weight: 500; margin-bottom: 0.75rem;
+  }
+  .neu-lead { font-size: 1.0625rem; max-width: 46rem; margin-top: 1rem; }
+  .neu-note { font-size: 0.875rem; color: var(--neu-accent); margin-top: 0.75rem; }
+  .neu-sub { max-width: 46rem; margin-bottom: 1.75rem; }
+
+  .neu-header { margin-bottom: 4rem; }
+  .neu-section { margin-bottom: 4rem; }
+
+  /* ---- Superficies ------------------------------------------------------- */
+  .neu-raised  { border-radius: 1.25rem; box-shadow: var(--neu-raised); }
+  .neu-pressed { border-radius: 1.25rem; box-shadow: var(--neu-pressed); }
+  .neu-flat    { border-radius: 1.25rem; box-shadow: var(--neu-flat); }
+
+  .neu-card { padding: 1.75rem; }
+  .neu-raised.neu-card { transition: box-shadow 0.3s ease; }
+  .neu-raised.neu-card:hover { box-shadow: 8px 8px 16px var(--neu-dark), -8px -8px 16px var(--neu-light); }
+
+  .neu-grid { display: grid; gap: 1.75rem; }
+  .neu-grid-2 { grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); }
+  .neu-grid-3 { grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+  .neu-row { display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; }
+  .neu-row-tight { gap: 1rem; margin-bottom: 1rem; }
+
+  .neu-swatch { height: 3.5rem; border-radius: 0.875rem; box-shadow: var(--neu-flat); margin-bottom: 1rem; }
+  .neu-card p { font-size: 0.875rem; margin-top: 0.5rem; }
+  .neu-code-block { display: block; white-space: pre-line; line-height: 1.6; margin-top: 0.5rem; }
+
+  .neu-ratio { font-size: 0.75rem; font-weight: 500; margin-top: 0.75rem; }
+  .neu-ratio.is-ok { color: var(--neu-accent); }
+  .neu-ratio.is-fail { color: #b42318; }
+
+  /* ---- Botones ----------------------------------------------------------- */
+  .neu-btn {
+    font: inherit; font-weight: 500; color: var(--neu-text);
+    background: var(--neu-bg); border: 0; border-radius: 0.875rem;
+    padding: 0.875rem 1.75rem; cursor: pointer;
+    box-shadow: 5px 5px 10px var(--neu-dark), -5px -5px 10px var(--neu-light);
+    transition: box-shadow 0.25s ease;
+  }
+  .neu-btn:hover:not(:disabled) { box-shadow: 7px 7px 14px var(--neu-dark), -7px -7px 14px var(--neu-light); }
+  .neu-btn:active:not(:disabled) { box-shadow: var(--neu-pressed); }
+  .neu-btn:focus-visible { outline: 2px solid var(--neu-accent); outline-offset: 3px; }
+  .neu-btn:disabled { color: var(--neu-muted); box-shadow: var(--neu-flat); cursor: not-allowed; }
+
+  .neu-btn-accent { background: var(--neu-accent); color: #fff; box-shadow: 5px 5px 10px var(--neu-dark), -5px -5px 10px var(--neu-light); }
+  .neu-btn-accent:hover { box-shadow: 7px 7px 14px var(--neu-dark), -7px -7px 14px var(--neu-light); }
+
+  /* ---- Formulario -------------------------------------------------------- */
+  .neu-form { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+  .neu-form-full { grid-column: 1 / -1; }
+  .neu-form label { display: block; }
+  .neu-form span { display: block; font-size: 0.8125rem; font-weight: 500; margin-bottom: 0.5rem; }
+
+  .neu-input {
+    font: inherit; color: var(--neu-text); width: 100%;
+    background: var(--neu-bg); border: 0; border-radius: 0.875rem; padding: 0.875rem 1.125rem;
+    box-shadow: var(--neu-pressed);
+  }
+  .neu-input::placeholder { color: var(--neu-muted); }
+  .neu-input:focus { outline: 2px solid var(--neu-accent); outline-offset: 2px; }
+
+  /* ---- Interruptor ------------------------------------------------------- */
+  .neu-toggle {
+    display: inline-flex; align-items: center; width: 4rem; height: 2.125rem; padding: 0.25rem;
+    border-radius: 999px; box-shadow: var(--neu-pressed); cursor: pointer;
+  }
+  .neu-toggle-thumb {
+    width: 1.625rem; height: 1.625rem; border-radius: 50%; background: var(--neu-bg);
+    box-shadow: var(--neu-flat); transition: transform 0.25s ease, background 0.25s ease;
+  }
+  .neu-toggle.is-on .neu-toggle-thumb { transform: translateX(1.875rem); background: var(--neu-accent); }
+  .neu-toggle:focus-visible { outline: 2px solid var(--neu-accent); outline-offset: 3px; }
+
+  /* ---- Progreso ---------------------------------------------------------- */
+  .neu-progress { height: 0.875rem; border-radius: 999px; box-shadow: var(--neu-pressed); margin-bottom: 1rem; overflow: hidden; }
+  .neu-progress span { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--neu-accent), #2f6fd0); }
+
+  /* ---- Iconos y navegación ----------------------------------------------- */
+  .neu-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 56px; height: 56px; border-radius: 50%;
+    box-shadow: var(--neu-raised); color: var(--neu-accent);
+  }
+  .neu-icon svg { width: 1.5rem; height: 1.5rem; }
+  .neu-icon-lg { margin-bottom: 1.25rem; }
+
+  .neu-nav { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem; }
+  .neu-nav a { font-size: 0.875rem; font-weight: 500; text-decoration: none; color: var(--neu-text); padding: 0.625rem 1.125rem; border-radius: 999px; }
+  .neu-nav a:hover { box-shadow: var(--neu-flat); }
+  .neu-nav a.is-active { box-shadow: var(--neu-pressed); color: var(--neu-accent); }
+
+  /* ---- Piezas del sitio -------------------------------------------------- */
+  .neu-photo { padding: 0.75rem; margin-bottom: 1.5rem; }
+  .neu-photo img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 0.875rem; }
+
+  .neu-list { list-style: none; padding: 0; margin: 1rem 0 1.5rem; }
+  .neu-list li { position: relative; padding-left: 1.25rem; font-size: 0.875rem; line-height: 1.9; }
+  .neu-list li::before { content: ""; position: absolute; left: 0; top: 0.75rem; width: 6px; height: 6px; border-radius: 50%; background: var(--neu-accent); }
+  .neu-link { font-size: 0.875rem; font-weight: 500; color: var(--neu-accent); }
+
+  .neu-cta { display: flex; flex-direction: column; align-items: flex-start; }
+  .neu-cta .neu-btn { margin-top: 1.5rem; }
+
+  .neu-warn p { font-size: 0.9375rem; margin-bottom: 1rem; }
+  .neu-warn p:last-child { margin-bottom: 0; }
+  .neu-warn strong { font-weight: 600; }
+</style>
+
+<script>
+  // Los interruptores son sólo demostrativos: alternan estado al hacer clic o
+  // con teclado, para poder ver la transición de la perilla.
+  document.querySelectorAll<HTMLElement>("[data-toggle]").forEach((el) => {
+    const alternar = () => {
+      const activo = el.classList.toggle("is-on");
+      el.setAttribute("aria-checked", String(activo));
+    };
+    el.addEventListener("click", alternar);
+    el.addEventListener("keydown", (e) => {
+      if (e.key === " " || e.key === "Enter") {
+        e.preventDefault();
+        alternar();
+      }
+    });
+  });
+</script>
