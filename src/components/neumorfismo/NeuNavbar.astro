@@ -1,6 +1,6 @@
 ---
 import { industrias } from "../../data/industrias";
-import { neuHub, NEU_HOME, NEU_BLOG, NEU_SISTEMA } from "./rutas";
+import { neuHub, NEU_HOME, NEU_BLOG } from "./rutas";
 
 // Barra de navegación del experimento, en estilo neumórfico.
 //
@@ -35,7 +35,8 @@ const enlaces = [
   { href: `${NEU_HOME}#nosotros`, texto: "Nosotros", clave: "nosotros" },
   { href: `${NEU_HOME}#temporal`, texto: "Misión", clave: "mision" },
   { href: NEU_BLOG, texto: "Blog", clave: "blog" },
-  { href: NEU_SISTEMA, texto: "Sistema", clave: "sistema" },
+  // La referencia del sistema queda fuera de la barra: es documentacion
+  // interna, no una seccion del sitio. Sigue accesible en /neumorfismo.
 ];
 
 const esActivo = (e: (typeof enlaces)[number]) =>

@@ -39,12 +39,36 @@ const introCompleto = industria.processesHeading.intro;
 const corte = introCompleto.indexOf(". ");
 const introAfirmacion = corte === -1 ? introCompleto : introCompleto.slice(0, corte + 1);
 const introRespaldo = corte === -1 ? "" : introCompleto.slice(corte + 2);
+
+// Datos estructurados, equivalentes a los del hub real: sin ellos la version
+// nueva perderia el marcado que el buscador ya lee en la actual.
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const areaServed = ["Chile", "Argentina", "Uruguay", "Bolivia", "Paraguay", "Ecuador"];
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: new URL("/", Astro.site).href },
+    { "@type": "ListItem", position: 2, name: "Industrias", item: new URL("/#industrias", Astro.site).href },
+    { "@type": "ListItem", position: 3, name: industria.navLabel, item: canonical },
+  ],
+};
+const servicePage = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: industria.seoTitle,
+  description: industria.metaDescription,
+  provider: { "@type": "Organization", name: "Continental Andes", url: new URL("/", Astro.site).href },
+  serviceType: "Sopladores y compresores centrifugos industriales",
+  areaServed,
+  url: canonical,
+};
 ---
 
 <Layout
   sinNavbar
-  title={`Experimento neumórfico · ${industria.seoTitle}`}
-  description={`Version experimental del hub de ${industria.navLabel} en estilo neumorfico. Pagina interna, no forma parte del sitio publico.`}
+  title={industria.seoTitle}
+  description={industria.metaDescription}
 >
   <link
     rel="stylesheet"
@@ -105,6 +129,9 @@ const introRespaldo = corte === -1 ? "" : introCompleto.slice(corte + 2);
       </div>
     </div>
   </main>
+
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(servicePage)} />
 </Layout>
 
 <style is:global>
