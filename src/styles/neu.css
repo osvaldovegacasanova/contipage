@@ -11,7 +11,14 @@
   página del sitio real aunque el archivo se cargue globalmente.
 */
 
-.neu-root {
+/*
+  Los tokens se declaran aparte de la caja porque no siempre viven juntos: en las
+  paginas con hero la barra de navegacion queda FUERA de .neu-root, para que el
+  hero conserve su sangrado. Si los tokens colgaran solo de .neu-root, ahi las
+  sombras no resolverian y la barra se veria plana.
+*/
+.neu-root,
+.neu-navbar {
   --neu-bg: #e0e5ec;
   --neu-text: #4a5568;
   --neu-muted: #8898aa;
@@ -23,10 +30,13 @@
   --neu-pressed: inset 4px 4px 8px var(--neu-dark), inset -4px -4px 8px var(--neu-light);
   --neu-flat: 3px 3px 6px var(--neu-dark), -3px -3px 6px var(--neu-light);
 
-  background: var(--neu-bg);
   color: var(--neu-text);
   font-family: "Poppins", "Raleway", system-ui, sans-serif;
   font-weight: 300;
+}
+
+.neu-root {
+  background: var(--neu-bg);
   min-height: 100vh;
   padding: 8rem 1.5rem 5rem;
 }
