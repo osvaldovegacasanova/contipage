@@ -25,6 +25,25 @@ const paleta = [
   { nombre: "Sombra oscura", valor: "#a3b1c6", uso: "Sombra proyectada.", contraste: "1,72:1", estado: "falla" },
 ];
 
+const pesos = [
+  { peso: 300, nombre: "Light", uso: "Cuerpo, entradas y listas. El peso por defecto de la página." },
+  { peso: 400, nombre: "Regular", uso: "Reservado. Casi no se usa: entre 300 y 500 no aporta jerarquía." },
+  { peso: 500, nombre: "Medium", uso: "Titulares, antetítulos, enlaces y etiquetas de campo." },
+  { peso: 600, nombre: "SemiBold", uso: "Sólo numerales de proceso y énfasis puntual dentro de un párrafo." },
+];
+
+const escala = [
+  { clase: "neu-t-h1", etiqueta: "h1", muestra: "Sopladores para Minería", tamano: "2 – 3 rem", peso: "500", alto: "1,15", uso: "Título de página. Uno solo por página." },
+  { clase: "neu-t-h2", etiqueta: "h2", muestra: "Procesos donde son clave", tamano: "1,5 rem", peso: "500", alto: "normal", uso: "Título de sección y de módulo de proceso." },
+  { clase: "neu-t-h3", etiqueta: "h3", muestra: "Sopladores para combustión", tamano: "1,0625 rem", peso: "500", alto: "normal", uso: "Título de tarjeta." },
+  { clase: "neu-eyebrow", etiqueta: ".neu-eyebrow", muestra: "Industrias", tamano: "0,75 rem", peso: "500", alto: "normal", uso: "Antetítulo. Mayúsculas, +0,08em, color de acento." },
+  { clase: "neu-lead", etiqueta: ".neu-lead", muestra: "Aire y gas a presión para los procesos más exigentes de la gran minería.", tamano: "1,0625 rem", peso: "300", alto: "1,7", uso: "Entrada bajo el título. Máximo 46 rem de ancho." },
+  { clase: "neu-t-body", etiqueta: "p", muestra: "Los sopladores centrífugos multietapa entregan caudal variable y presión constante en operación continua.", tamano: "1 rem", peso: "300", alto: "1,7", uso: "Cuerpo de texto general." },
+  { clase: "neu-sub", etiqueta: ".neu-sub", muestra: "Cada proceso exige caudal y presión específicos.", tamano: "1 rem", peso: "300", alto: "1,7", uso: "Bajada explicativa de una sección." },
+  { clase: "neu-link", etiqueta: ".neu-link", muestra: "Ver más detalles →", tamano: "0,875 rem", peso: "500", alto: "normal", uso: "Enlace de texto. Siempre en color de acento." },
+  { clase: "neu-note", etiqueta: ".neu-note", muestra: "Página interna, no forma parte del sitio público.", tamano: "0,875 rem", peso: "300", alto: "1,7", uso: "Nota al pie de un bloque, en color de acento." },
+];
+
 const superficies = [
   { clase: "neu-raised", titulo: "Elevado", css: "6px 6px 12px #a3b1c6,\n-6px -6px 12px #ffffff" },
   { clase: "neu-pressed", titulo: "Hundido", css: "inset 4px 4px 8px #a3b1c6,\ninset -4px -4px 8px #ffffff" },
@@ -58,6 +77,48 @@ const superficies = [
           componente existente.
         </p>
       </header>
+
+      <!-- Tipografía -->
+      <section class="neu-section">
+        <h2>Tipografía</h2>
+        <p class="neu-sub">
+          Poppins, con Raleway de reserva. La restricción de pesos es deliberada: en este estilo
+          la profundidad la dan las sombras, no la letra. Espaciado normal salvo en el antetítulo.
+        </p>
+
+        <h3 class="neu-subhead">Pesos</h3>
+        <div class="neu-grid neu-grid-2 neu-weights">
+          {pesos.map((p) => (
+            <div class="neu-raised neu-card">
+              <p class="neu-weight-sample" style={`font-weight:${p.peso}`}>Transformamos el aire</p>
+              <p class="neu-weight-meta"><strong>{p.peso}</strong> · {p.nombre}</p>
+              <p>{p.uso}</p>
+            </div>
+          ))}
+        </div>
+
+        <h3 class="neu-subhead">Escala</h3>
+        <div class="neu-raised neu-card neu-scale">
+          {escala.map((e) => (
+            <div class="neu-scale-row">
+              <div class="neu-scale-sample">
+                <p class={e.clase}>{e.muestra}</p>
+              </div>
+              <div class="neu-scale-meta">
+                <code>{e.etiqueta}</code>
+                <span>{e.tamano} · peso {e.peso} · interlineado {e.alto}</span>
+                <span class="neu-scale-use">{e.uso}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="neu-pressed neu-card neu-rules">
+          <p><strong>Ancho de lectura.</strong> Los bloques de texto se limitan a 46 rem, unos 75 caracteres. Más ancho y el ojo pierde el renglón al volver.</p>
+          <p><strong>Un solo acento por bloque.</strong> El color de marca marca enlaces, antetítulos y notas. Si todo destaca, nada destaca.</p>
+          <p><strong>Sin mayúsculas fuera del antetítulo.</strong> Es el único estilo que las usa, y con +0,08em de espaciado para que respiren.</p>
+        </div>
+      </section>
 
       <!-- Paleta -->
       <section class="neu-section">
@@ -264,7 +325,30 @@ const superficies = [
 </Layout>
 
 <style is:global>
-  /* Sólo lo exclusivo del laboratorio. El sistema vive en src/styles/neu.css */
+  /* Sólo lo exclusivo de esta página. El sistema vive en src/styles/neu.css */
+
+  .neu-subhead { margin: 2.5rem 0 1rem; color: var(--neu-muted); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.75rem; }
+  .neu-weights .neu-weight-sample { font-size: 1.25rem; margin-bottom: 0.5rem; }
+  .neu-weights .neu-weight-meta { font-size: 0.8125rem; color: var(--neu-accent); margin-top: 0; }
+  .neu-weights .neu-weight-meta strong { font-weight: 600; }
+
+  .neu-scale { padding: 0; }
+  .neu-scale-row { display: grid; gap: 1.5rem; padding: 1.5rem 1.75rem; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); align-items: baseline; }
+  .neu-scale-row + .neu-scale-row { box-shadow: inset 0 1px 0 rgba(163, 177, 198, 0.35); }
+  .neu-scale-sample p { margin: 0; }
+  .neu-scale-meta { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.8125rem; color: var(--neu-text); }
+  .neu-scale-meta code { color: var(--neu-accent); }
+  .neu-scale-use { color: var(--neu-text); opacity: 0.75; }
+
+  @media (max-width: 47.99rem) {
+    .neu-scale-row { grid-template-columns: 1fr; gap: 0.75rem; }
+  }
+
+  .neu-rules { margin-top: 2rem; }
+  .neu-rules p { font-size: 0.9375rem; margin-bottom: 0.875rem; }
+  .neu-rules p:last-child { margin-bottom: 0; }
+  .neu-rules strong { font-weight: 600; color: var(--neu-accent); }
+
   .neu-swatch { height: 3.5rem; border-radius: 0.875rem; box-shadow: var(--neu-flat); margin-bottom: 1rem; }
   .neu-card p { font-size: 0.875rem; margin-top: 0.5rem; }
   .neu-code-block { display: block; white-space: pre-line; line-height: 1.6; margin-top: 0.5rem; }

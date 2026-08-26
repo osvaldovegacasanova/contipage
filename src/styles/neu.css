@@ -42,11 +42,18 @@
 .neu-row { display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; }
 .neu-row-tight { gap: 1rem; margin-bottom: 1rem; }
 
-/* ---- Tipografía --------------------------------------------------------- */
-.neu-root h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 500; line-height: 1.15; }
-.neu-root h2 { font-size: 1.5rem; font-weight: 500; margin-bottom: 0.5rem; }
-.neu-root h3 { font-size: 1.0625rem; font-weight: 500; margin-bottom: 0.5rem; }
-.neu-root p { line-height: 1.7; }
+/* ---- Tipografía ---------------------------------------------------------
+  Poppins 300-600. La restricción es deliberada: en este estilo la profundidad
+  la dan las sombras, no el peso de la letra. 500 para titulares, 300 para
+  cuerpo, y espaciado de letra normal salvo en el antetítulo.
+
+  Cada estilo se expone además como clase (.neu-t-*) para poder mostrarlo en la
+  guía sin inventar encabezados falsos ni repetir los valores.
+------------------------------------------------------------------------- */
+.neu-root h1, .neu-root .neu-t-h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 500; line-height: 1.15; }
+.neu-root h2, .neu-root .neu-t-h2 { font-size: 1.5rem; font-weight: 500; margin-bottom: 0.5rem; }
+.neu-root h3, .neu-root .neu-t-h3 { font-size: 1.0625rem; font-weight: 500; margin-bottom: 0.5rem; }
+.neu-root p,  .neu-root .neu-t-body { line-height: 1.7; }
 .neu-root code { font-family: ui-monospace, "Cascadia Code", monospace; font-size: 0.8125rem; }
 
 .neu-eyebrow {
