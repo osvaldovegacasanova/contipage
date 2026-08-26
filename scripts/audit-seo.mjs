@@ -66,6 +66,9 @@ const anota = (severidad, tipo, ruta, detalle = "") =>
   hallazgos.push({ severidad, tipo, ruta, detalle });
 
 let conDatosEstructurados = 0;
+// Las paginas con noindex no van al sitemap por definicion: no cuentan al
+// comparar totales.
+let noIndexadas = 0;
 
 for (const archivo of archivos) {
   const ruta = rutaDe(archivo) === "/." ? "/" : rutaDe(archivo);
@@ -79,6 +82,8 @@ for (const archivo of archivos) {
   const sinAlt = (s.match(/<img(?![^>]*\salt=)[^>]*>/g) || []).length;
   const altVacio = (s.match(/<img[^>]*\salt=""/g) || []).length;
 
+  const noIndexada = /<meta[^>]+name="robots"[^>]+noindex/i.test(s);
+  if (noIndexada) noIndexadas++;
   if (ld > 0) conDatosEstructurados++;
 
   if (!title) anota(ALTA, "sin title", ruta);
@@ -100,6 +105,9 @@ for (const archivo of archivos) {
   const esContenido = /^\/(sopladores-para|blog\/)/.test(ruta);
   if (esContenido && ld === 0) anota(MEDIA, "sin datos estructurados", ruta);
 
+  // Una pagina fuera de buscadores no deberia figurar en el sitemap.
+  if (noIndexada && !/gracias/.test(ruta)) anota(BAJA, "pagina con noindex", ruta);
+
   // Restos de trabajo en curso que no deberían publicarse.
   if (/experimento|neumorfismo|pagina interna|no forma parte del sitio/i.test(title + " " + desc))
     anota(ALTA, "rastros de material de pruebas", ruta);
@@ -115,12 +123,13 @@ if (partes.length) {
     (n, f) => n + (leer(path.join(DIST, f)).match(/<url>/g) || []).length,
     0
   );
-  if (urlsSitemap < archivos.length)
+  const indexables = archivos.length - noIndexadas;
+  if (urlsSitemap < indexables)
     anota(
       ALTA,
       "sitemap incompleto",
       "/sitemap.xml",
-      `declara ${urlsSitemap} URL y el sitio tiene ${archivos.length} paginas publicas`
+      `declara ${urlsSitemap} URL y hay ${indexables} paginas indexables`
     );
 } else {
   anota(ALTA, "sin sitemap generado", "/", "revisar la integracion en astro.config.mjs");
@@ -165,6 +174,7 @@ if (process.argv.includes("--json")) {
 
   console.log("-".repeat(64));
   console.log(`  Datos estructurados: ${conDatosEstructurados} de ${archivos.length} paginas`);
+  if (noIndexadas) console.log(`  Paginas con noindex:  ${noIndexadas}`);
   if (urlsSitemap !== null) console.log(`  URLs en sitemap.xml: ${urlsSitemap}`);
   console.log("");
 }
