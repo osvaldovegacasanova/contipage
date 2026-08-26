@@ -23,6 +23,19 @@ This is an Astro-based marketing website for Continental Andes Blowers, a centri
   - Mobile MP4 (H.264, 1280px, 24fps, CRF 28)
   - Mobile WebM (VP9, 854px, 24fps, CRF 36)
 
+## Before Promoting a Release
+
+Run these from `site/` before merging to `test` or `main`, in order:
+
+1. **`npm run build`** — runs `astro check` + type-check, and regenerates the sitemap.
+2. **`npm run seo`** — audits the built HTML. Exits non-zero on high-severity findings. Read the medium/low ones too; they are advisory, not noise.
+3. **Check the page count** the audit reports against what you expect. A route that silently stopped generating shows up here first.
+4. **Update [`changelog-continental.md`](../changelog-continental.md)** at the repo root, per the rule in the root CLAUDE.md.
+
+**The sitemap needs no manual step.** It is generated at build time by `@astrojs/sitemap`, configured in `astro.config.mjs`, and internal pages (`/colores`, `/fonts`, `/separadores`) are filtered out to match `robots.txt`. It used to be a hand-written file in `public/` and drifted to a single URL while the site grew to seventeen pages — do not reintroduce a static one.
+
+Note the version pin: `@astrojs/sitemap` must stay on a release compatible with Astro 4.x. Version 3.7.0 expects a newer build hook API and crashes the build with `Cannot read properties of undefined (reading 'reduce')`.
+
 ## Architecture
 
 ### Content Management

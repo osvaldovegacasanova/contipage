@@ -107,10 +107,14 @@ for (const archivo of archivos) {
 
 // ---------------------------------------------------------------- sitemap
 
-const sitemap = path.join(DIST, "sitemap.xml");
+// @astrojs/sitemap genera sitemap-index.xml y uno o mas sitemap-N.xml.
+const partes = fs.readdirSync(DIST).filter((f) => /^sitemap-\d+\.xml$/.test(f));
 let urlsSitemap = null;
-if (fs.existsSync(sitemap)) {
-  urlsSitemap = (leer(sitemap).match(/<url>/g) || []).length;
+if (partes.length) {
+  urlsSitemap = partes.reduce(
+    (n, f) => n + (leer(path.join(DIST, f)).match(/<url>/g) || []).length,
+    0
+  );
   if (urlsSitemap < archivos.length)
     anota(
       ALTA,
@@ -119,7 +123,7 @@ if (fs.existsSync(sitemap)) {
       `declara ${urlsSitemap} URL y el sitio tiene ${archivos.length} paginas publicas`
     );
 } else {
-  anota(ALTA, "sin sitemap.xml", "/");
+  anota(ALTA, "sin sitemap generado", "/", "revisar la integracion en astro.config.mjs");
 }
 
 // ---------------------------------------------------------------- salida
