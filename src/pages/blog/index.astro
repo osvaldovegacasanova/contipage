@@ -1,74 +1,84 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Container from "../../components/shared/Container.astro";
-import Title3 from "../../components/shared/Title3.astro";
-import Paragraph from "../../components/shared/Paragraph.astro";
-import { getCollection } from 'astro:content';
+import "../../styles/neu.css";
+import GradiantText from "../../components/shared/GradiantText.astro";
+import { getCollection } from "astro:content";
 
-const posts = (await getCollection('blog')).sort((a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate));
-const PAGE_SIZE = 6;
-const totalPages = Math.ceil(posts.length / PAGE_SIZE);
-const page = 1;
-const sliceStart = (page - 1) * PAGE_SIZE;
-const pagePosts = posts.slice(sliceStart, sliceStart + PAGE_SIZE);
-const allTags = Array.from(new Set(posts.flatMap(p => p.data.tags || [])));
+// Indice de Insights.
+//
+// El contenido sale de la misma coleccion astro:content que alimenta /blog, asi
+// que los articulos no se duplican. Sin paginacion: con los articulos que hay
+// hoy cabe todo en una pagina, y la del sitio real tampoco llega a mostrarse.
+const posts = (await getCollection("blog")).sort(
+  (a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate)
+);
+const etiquetas = Array.from(new Set(posts.flatMap((p) => p.data.tags || [])));
+const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { day: "numeric", month: "long", year: "numeric" });
 ---
 
-<Layout title="Blog">
-  <section class="pt-28 md:pt-32">
-    <Container size="wide">
-      <div class="text-center max-w-2xl mx-auto">
-        <h1 class="text-4xl md:text-5xl title-fw tracking-tight text-heading-1">Blog</h1>
-        <Paragraph className="mt-3 text-heading-3">Noticias, guías y artículos técnicos sobre sopladores y compresores centrífugos.</Paragraph>
-      </div>
-    </Container>
-  </section>
+<Layout
+  navActivo="blog"
+  title="Insights | Continental Blowers Andes"
+  description="Articulos tecnicos sobre sopladores y compresores centrifugos, sus procesos industriales y su mantenimiento."
+>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" />
 
-  <section class="py-6 md:py-10">
-    <Container>
-      {allTags.length > 0 && (
-        <div class="flex flex-wrap gap-2 justify-center">
-          <a href="/blog" class="px-3 py-1 rounded-full border border-box-border bg-box-bg hover:border-primary transition text-sm">Todas</a>
-          {allTags.map((t) => (
-            <a href={`/blog/tag/${encodeURIComponent(t)}/`} class="px-3 py-1 rounded-full border border-box-border bg-box-bg hover:border-primary transition text-sm">#{t}</a>
+  <main class="neu-root">
+    <div class="neu-wrap">
+      <header class="neu-header neu-centrado">
+        <h1>
+          <GradiantText>Insights</GradiantText>
+        </h1>
+        <p class="neu-lead">
+          Sobre sopladores y compresores centrífugos, sus procesos y su mantenimiento.
+        </p>
+      </header>
+
+      {etiquetas.length > 0 && (
+        <nav class="neu-nav neu-etiquetas" aria-label="Filtrar por etiqueta">
+          <a href="/blog" class="is-active">Todas</a>
+          {etiquetas.map((t) => (
+            <a href={`/blog/tag/${encodeURIComponent(t)}/`}>#{t}</a>
           ))}
-        </div>
+        </nav>
       )}
-    </Container>
-  </section>
 
-  <section class="py-4 md:py-8">
-    <Container>
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {pagePosts.map(({ data, slug }) => (
-          <a href={`/blog/${slug}/`} class="group block rounded-2xl border border-box-border hover:border-primary transition p-5 bg-box-bg">
+      <div class="neu-grid neu-cols-3 neu-articulos">
+        {posts.map(({ data, slug }) => (
+          <a class="neu-articulo" href={`/blog/${slug}/`}>
             {data.heroImage && (
-              <img src={data.heroImage} alt={data.title} class="w-full h-44 object-cover rounded-xl mb-4" />
+              <div class="neu-photo neu-articulo-foto">
+                <img src={data.heroImage} alt={data.title} width="800" height="600" loading="lazy" />
+              </div>
             )}
-            <Title3>{data.title}</Title3>
-            <Paragraph className="mt-2 text-heading-3">{data.description}</Paragraph>
-            <div class="mt-3 text-sm opacity-70">{new Date(data.pubDate).toLocaleDateString()}</div>
+            <h2>{data.title}</h2>
+            <p>{data.description}</p>
+            <span class="neu-articulo-fecha">{fecha(data.pubDate)}</span>
           </a>
         ))}
       </div>
-    </Container>
-  </section>
-
-  {totalPages > 1 && (
-    <section class="pb-12">
-      <Container>
-        <div class="flex justify-center gap-2">
-          <a aria-label="Página anterior" class={`px-3 py-1 rounded border ${page === 1 ? 'opacity-40 pointer-events-none' : 'hover:border-primary'}`} href={page === 1 ? undefined : `/blog/page/${page-1}/`}>
-            «
-          </a>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-            <a href={p === 1 ? '/blog' : `/blog/page/${p}/`} class={`px-3 py-1 rounded border ${p === page ? 'bg-primary text-accent-light border-primary' : 'hover:border-primary'}`}>{p}</a>
-          ))}
-          <a aria-label="Página siguiente" class={`px-3 py-1 rounded border ${page === totalPages ? 'opacity-40 pointer-events-none' : 'hover:border-primary'}`} href={page === totalPages ? undefined : `/blog/page/${page+1}/`}>
-            »
-          </a>
-        </div>
-      </Container>
-    </section>
-  )}
+    </div>
+  </main>
 </Layout>
+
+<style is:global>
+  .neu-centrado { text-align: center; }
+  .neu-centrado .neu-lead { margin-left: auto; margin-right: auto; }
+
+  .neu-etiquetas { justify-content: center; margin-bottom: 3rem; }
+  .neu-articulos { align-items: stretch; }
+
+  /*
+    Las entradas van sin tarjeta: en una rejilla de varias, el relieve de cada
+    una compite con el de la siguiente y satura la pagina. Se apoyan directamente
+    sobre el fondo y la unica pieza con cuerpo es la miniatura, que al pasar el
+    cursor se eleva apenas para indicar que el bloque completo es pulsable.
+  */
+  .neu-articulo { display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+  .neu-articulo-foto { margin-bottom: 1.25rem; }
+  .neu-articulo-foto img { transition: box-shadow 0.25s ease; }
+  .neu-articulo:hover .neu-articulo-foto img { box-shadow: var(--neu-flat); }
+  .neu-articulo h2 { font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--neu-accent); }
+  .neu-articulo p { font-size: 0.875rem; }
+  .neu-articulo-fecha { margin-top: auto; padding-top: 1rem; font-size: 0.8125rem; opacity: 0.7; }
+</style>

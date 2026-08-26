@@ -1,0 +1,117 @@
+---
+import { enlacesNav } from "./rutas";
+
+// Barra de navegacion del sitio.
+//
+// Logotipo completo al extremo izquierdo y enlaces a la derecha, con submenu
+// de industrias. Los enlaces usan .neu-nav, que define su aspecto de boton en
+// src/styles/neu.css junto al resto del sistema.
+export interface Props {
+  /** Clave de la página en curso: "sistema", "home", "blog" o el hub corto. */
+  activo?: string;
+}
+
+const { activo } = Astro.props;
+
+const enlaces = enlacesNav;
+
+const esActivo = (e: (typeof enlaces)[number]) =>
+  e.clave === activo || (e.hijos ?? []).some((h) => h.clave === activo);
+---
+
+<header class="neu-navbar">
+  <div class="neu-navbar-interior">
+    <a class="neu-navbar-marca" href="/">
+      <img src="/images/logo-claro.webp" alt="Continental Blowers Andes" width="300" height="62" />
+    </a>
+
+    <nav class="neu-nav neu-navbar-nav" aria-label="Navegacion principal">
+      {enlaces.map((e) => (
+        <span class={e.hijos ? "tiene-submenu" : ""}>
+          <a href={e.href} class={esActivo(e) ? "is-active" : ""} aria-current={esActivo(e) ? "page" : undefined}>
+            {e.texto}
+            {e.hijos && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
+              </svg>
+            )}
+          </a>
+          {e.hijos && (
+            <span class="neu-raised neu-submenu">
+              {e.hijos.map((h) => (
+                <a href={h.href} class={h.clave === activo ? "is-active" : ""}>{h.texto}</a>
+              ))}
+            </span>
+          )}
+        </span>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<style is:global>
+  /*
+    Barra a todo el ancho, no una píldora centrada: replica la disposición de la
+    real, con el logotipo pegado al margen izquierdo y los enlaces a la derecha.
+    Necesita superficie propia porque los botones neumórficos se definen por sus
+    sombras y sobre el hero oscuro no tendrían dónde apoyarse.
+  */
+  .neu-navbar {
+    position: fixed; inset-inline: 0; top: 0; z-index: 50;
+    background: var(--neu-bg, #e0e5ec);
+    box-shadow: 0 6px 18px rgba(163, 177, 198, 0.45);
+  }
+  .neu-navbar-interior {
+    display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+    max-width: 90rem; margin: 0 auto; padding: 0.875rem 1.5rem;
+  }
+
+  /*
+    Logotipo en su tamaño original. Se usa la versión oscura sobre transparente:
+    la del sitio real es blanca, pensada para la barra azul sobre el hero, y
+    sobre la superficie clara del neumorfismo desaparecería.
+  */
+  .neu-navbar-marca { display: inline-flex; align-items: center; flex-shrink: 0; }
+  .neu-navbar-marca img { display: block; height: 2.5rem; width: auto; }
+  @media (min-width: 48rem) {
+    .neu-navbar-marca img { height: 3rem; }
+  }
+
+  /*
+    Los enlaces heredan de .neu-nav el aspecto de botón que define el sistema.
+    Aquí sólo se ajusta el desplazamiento horizontal en pantallas angostas: es un
+    prototipo y un menú desplegable completo no aporta a la decisión de diseño.
+  */
+  .neu-navbar-nav {
+    flex-wrap: nowrap; margin-bottom: 0;
+    overflow-x: auto; scrollbar-width: none; padding: 0.25rem;
+  }
+  .neu-navbar-nav::-webkit-scrollbar { display: none; }
+  .neu-navbar-nav > span { position: relative; display: inline-flex; }
+  .neu-navbar-nav a { white-space: nowrap; gap: 0.375rem; display: inline-flex; align-items: center; }
+  .neu-navbar-nav svg { width: 0.875rem; height: 0.875rem; }
+
+  .neu-submenu {
+    position: absolute; right: 0; top: calc(100% + 0.75rem);
+    display: flex; flex-direction: column; gap: 0.25rem;
+    padding: 0.5rem; min-width: 14rem; border-radius: 1rem;
+    background: var(--neu-bg, #e0e5ec);
+    opacity: 0; visibility: hidden; transform: translateY(-0.375rem);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  }
+  .tiene-submenu:hover .neu-submenu,
+  .tiene-submenu:focus-within .neu-submenu {
+    opacity: 1; visibility: visible; transform: translateY(0);
+  }
+  /*
+    Dentro del submenú, que ya es una superficie elevada, los enlaces van planos:
+    apilar relieve sobre relieve enturbia la lectura, igual que ocurría con los
+    marcos alrededor de las fotos.
+  */
+  .neu-submenu a { box-shadow: none; border-radius: 0.75rem; }
+  .neu-submenu a:hover { box-shadow: var(--neu-flat); }
+
+  @media (max-width: 63.99rem) {
+    .neu-submenu { display: none; }
+  }
+</style>
