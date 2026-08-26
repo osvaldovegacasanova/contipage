@@ -160,8 +160,13 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
             {productosSection.projects.map((producto) => (
               <article class="neu-raised neu-card neu-producto">
                 <div class="neu-producto-visual">
-                  <img src={producto.visual} alt={producto.alt} width="800" height="600" loading="lazy" />
-                  <span class="neu-producto-tag">{producto.location}</span>
+                  <img
+                    src={producto.visual.replace(".webp", "-recorte.webp")}
+                    alt={producto.alt}
+                    width="800"
+                    height="800"
+                    loading="lazy"
+                  />
                 </div>
                 <h3>{producto.title}</h3>
                 <ul class="neu-list">
@@ -278,20 +283,21 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
 
   /* ---- Tarjetas de producto ---- */
   /*
-    Los dibujos técnicos vienen con fondo casi blanco (248,248,248), que sobre la
-    superficie neumórfica se recortaría como un rectángulo. `darken` toma el más
-    oscuro de cada canal: el blanco del dibujo cede ante el fondo y desaparece,
-    mientras el trazo se conserva. Evita tener que reencuadrar los archivos.
+    Excepción deliberada a la regla de superficies: el dibujo va sobre blanco y
+    no sobre el fondo del sistema. Son planos de línea muy clara, dibujados para
+    papel blanco; sobre #e0e5ec pierden contraste y se ven lavados. El home real
+    los muestra sobre #f9f9f9, casi blanco, y por eso ahí se leen bien.
+
+    Antes se usaba mix-blend-mode: darken para disimular el fondo del archivo,
+    pero ese modo aplasta contra el fondo todo píxel más claro que él y arruinaba
+    el dibujo. Ahora se usan recortes con fondo transparente sobre una lámina
+    blanca, así que el trazo conserva su rango completo.
   */
-  .neu-producto-visual { position: relative; margin-bottom: 1.25rem; }
-  .neu-producto-visual img {
-    display: block; width: 100%; height: 13rem;
-    object-fit: contain; mix-blend-mode: darken;
+  .neu-producto-visual {
+    background: #fff; border-radius: 0.875rem; padding: 1rem; margin-bottom: 1.25rem;
   }
-  .neu-producto-tag {
-    position: absolute; top: 0; right: 0;
-    font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.06em;
-    text-transform: uppercase; color: var(--neu-accent); opacity: 0.65;
+  .neu-producto-visual img {
+    display: block; width: 100%; height: 12rem; object-fit: contain;
   }
   .neu-producto .neu-list { margin-bottom: 0; }
 
