@@ -11,7 +11,8 @@
     "images:blog": "node scripts/resize-blog-images.mjs",
     "images:public": "node scripts/resize-public-images.mjs",
     "prebuild": "npm run images:blog",
-    "videos:encode": "node scripts/encode-video.mjs"
+    "videos:encode": "node scripts/encode-video.mjs",
+    "seo": "node scripts/audit-seo.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.4.1",
