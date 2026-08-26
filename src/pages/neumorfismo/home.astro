@@ -1,0 +1,159 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/sections/hero/Hero.astro";
+import GradiantText from "../../components/shared/GradiantText.astro";
+import "../../styles/neu.css";
+import { areasSectionData } from "../../components/sections/areas/data";
+import { productosSection } from "../../components/sections/productos/data";
+
+// Copia experimental del home en estilo neumórfico, por tramos.
+//
+// Traducidas hasta ahora: Industrias y Sopladores. Faltan Servicios, Nosotros,
+// Misión y Contáctenos.
+//
+// Igual que en la copia de Minería, el contenido NO se duplica: se lee de los
+// mismos data.ts que alimentan el home real, así que los textos tienen una sola
+// fuente y las dos versiones no se bifurcan.
+//
+// El hero es el ORIGINAL, sin tocar: video de fondo con capa oscura y titular en
+// degradado, imposible de reproducir en un estilo que exige fondo claro. Queda
+// fuera de .neu-root, que tiene padding propio y anularía su sangrado.
+---
+
+<Layout
+  title="Experimento neumórfico · Home | Continental Andes"
+  description="Versión experimental del home en estilo neumórfico. Página interna, no forma parte del sitio público."
+>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+  />
+
+  <main>
+    {/* Hero original, idéntico al del home real */}
+    <Hero />
+
+    <div class="neu-root neu-below-hero">
+      <div class="neu-wrap">
+        <!-- Industrias -->
+        <section class="neu-section" id="industrias">
+          <div class="neu-processes-intro">
+            <p class="neu-intro-afirmacion">
+              {areasSectionData.subheading.text1_1}
+              <GradiantText>{areasSectionData.subheading.text1_2}</GradiantText>
+            </p>
+            <p class="neu-intro-respaldo">
+              {areasSectionData.subheading.text2} {areasSectionData.subheading.text2b}
+            </p>
+          </div>
+
+          <div class="neu-grid neu-grid-3">
+            {areasSectionData.areas.map((area) => {
+              const Tag = area.href ? "a" : "article";
+              return (
+                <Tag
+                  {...(area.href ? { href: area.href } : {})}
+                  class="neu-raised neu-card neu-industry"
+                >
+                  <div class="neu-photo neu-industry-photo">
+                    <img src={area.visual} alt={area.alt} width="800" height="600" loading="lazy" />
+                  </div>
+                  <h3>Sopladores para {area.title}</h3>
+                  {area.intro && <p class="neu-industry-intro">{area.intro}</p>}
+                  <ul class="neu-list">
+                    {area.items.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                  {area.href && <span class="neu-link neu-industry-link">Ver más detalles →</span>}
+                </Tag>
+              );
+            })}
+          </div>
+        </section>
+
+        <!-- Sopladores -->
+        <section class="neu-section neu-section-last" id="sopladores">
+          <div class="neu-processes-intro">
+            <span class="neu-eyebrow">{productosSection.title}</span>
+            <h1 class="neu-intro-afirmacion">
+              {productosSection.subheading1_1}
+              <GradiantText>{productosSection.subheading1_2}</GradiantText>
+            </h1>
+          </div>
+
+          <div class="neu-grid neu-grid-3">
+            {productosSection.projects.map((producto) => (
+              <article class="neu-raised neu-card neu-producto">
+                <div class="neu-producto-visual">
+                  <img src={producto.visual} alt={producto.alt} width="800" height="600" loading="lazy" />
+                  <span class="neu-producto-tag">{producto.location}</span>
+                </div>
+                <h3>{producto.title}</h3>
+                <ul class="neu-list">
+                  {producto.bullets.map((b) => (
+                    <li>{b}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+
+          <div class="neu-producto-cta">
+            <p class="neu-intro-respaldo">{productosSection.callToAction}</p>
+            <a href="/#contacto" class="neu-btn">{productosSection.button}</a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style is:global>
+  /* Sólo lo propio de esta página. El sistema vive en src/styles/neu.css */
+
+  .neu-below-hero { padding-top: 5rem; min-height: 0; }
+
+  /* Apertura de sección en dos niveles, igual que en la copia de Minería. */
+  .neu-processes-intro { margin-bottom: 3rem; }
+  .neu-intro-afirmacion {
+    font-size: 1.75rem; font-weight: 500; line-height: 1.25;
+    max-width: 38rem; margin-bottom: 1rem;
+  }
+  .neu-intro-respaldo { font-size: 1rem; font-weight: 300; line-height: 1.7; max-width: 44rem; }
+
+  /* ---- Tarjetas de industria ---- */
+  .neu-industry { display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+  .neu-industry-photo { margin-bottom: 1.25rem; }
+  .neu-industry h3 { color: var(--neu-accent); }
+  .neu-industry-intro { font-size: 0.875rem; margin-bottom: 0.5rem; }
+  .neu-industry .neu-list { margin-bottom: 1rem; }
+  .neu-industry-link { margin-top: auto; }
+
+  /* ---- Tarjetas de producto ---- */
+  /*
+    Los dibujos técnicos vienen con fondo casi blanco (248,248,248), que sobre la
+    superficie neumórfica se recortaría como un rectángulo. `darken` toma el más
+    oscuro de cada canal: el blanco del dibujo cede ante el fondo y desaparece,
+    mientras el trazo se conserva. Evita tener que reencuadrar los archivos.
+  */
+  .neu-producto-visual { position: relative; margin-bottom: 1.25rem; }
+  .neu-producto-visual img {
+    display: block; width: 100%; height: 13rem;
+    object-fit: contain; mix-blend-mode: darken;
+  }
+  .neu-producto-tag {
+    position: absolute; top: 0; right: 0;
+    font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--neu-accent); opacity: 0.65;
+  }
+  .neu-producto .neu-list { margin-bottom: 0; }
+
+  .neu-producto-cta {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 1.5rem; margin-top: 2.5rem;
+  }
+  .neu-producto-cta p { margin: 0; }
+
+  .neu-section-last { margin-bottom: 0; }
+</style>
