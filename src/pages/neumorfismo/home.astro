@@ -24,14 +24,15 @@ import { productosSection } from "../../components/sections/productos/data";
 // y dos imágenes importadas de assets/, que llegan como objeto con .src. Sin
 // normalizar, esas dos saldrían con el src vacío.
 // Las tres imágenes del panel lateral, iguales a las del componente real.
-// `contener: true` para el recorte del soplador: viene con fondo transparente y
-// su proporción real es vertical, así que recortarlo para llenar un hueco
-// apaisado le cortaría el silenciador y la bancada. Contenido se ve entero y,
-// al no tener fondo, flota sobre la superficie sin dejar caja.
+// Las tres imágenes del panel son recortes sin fondo, generados por inundación
+// desde los bordes sobre los originales de fondo blanco. Van contenidas y no
+// recortadas: sus proporciones no coinciden con el hueco, así que llenarlo les
+// cortaría partes del equipo. Al no tener fondo, flotan sobre la superficie sin
+// dejar caja, que es justo lo que el estilo pide.
 const panelServicios = [
   { src: "/images/multistage-blower-recorte.webp", alt: "Soplador centrífugo multietapa Continental Blowers para aplicaciones industriales de alta presión", contener: true },
   { src: "/images/plaqueta-tc25-recorte.webp", alt: "Instalación de compresor centrífugo TC25 Continental Blowers con silenciador y tablero de control", contener: true },
-  { src: "/images/TCH25 PARTES.webp", alt: "Diagrama de componentes y partes del soplador centrífugo TCH25 Continental Blowers", contener: false },
+  { src: "/images/tch25-partes-recorte.webp", alt: "Vista seccionada del soplador centrífugo TCH25 Continental Blowers con sus componentes internos", contener: true },
 ];
 
 const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: string }).src);
