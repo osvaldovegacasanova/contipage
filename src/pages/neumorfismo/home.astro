@@ -23,6 +23,13 @@ import { productosSection } from "../../components/sections/productos/data";
 // En services/data.ts el campo `visual` es mixto: cinco rutas de public/ (cadenas)
 // y dos imágenes importadas de assets/, que llegan como objeto con .src. Sin
 // normalizar, esas dos saldrían con el src vacío.
+// Las tres imágenes del panel lateral, iguales a las del componente real.
+const panelServicios = [
+  { src: "/images/multistage-centrifugal-blowers-home.webp", alt: "Soplador centrífugo multietapa Continental Blowers para aplicaciones industriales de alta presión", fondoBlanco: false },
+  { src: "/images/PLAQUETTE TC25.webp", alt: "Placa de características técnicas de compresor centrífugo TC25 Continental Blowers", fondoBlanco: true },
+  { src: "/images/TCH25 PARTES.webp", alt: "Diagrama de componentes y partes del soplador centrífugo TCH25 Continental Blowers", fondoBlanco: true },
+];
+
 const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: string }).src);
 ---
 
@@ -79,28 +86,56 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
         </section>
 
         <!-- Servicios -->
+        {/*
+          Misma distribución que el componente real: dos columnas 3fr/2fr, la
+          lista de servicios a la izquierda con miniatura circular y separador
+          entre ítems, y el panel de tres imágenes apiladas a la derecha.
+        */}
         <section class="neu-section" id="servicios">
-          <div class="neu-processes-intro">
-            <span class="neu-eyebrow">{servicesSectionData.title}</span>
-            <p class="neu-intro-afirmacion">
-              {servicesSectionData.subheading.text1_1}
-              <GradiantText>{servicesSectionData.subheading.text1_2}</GradiantText>
-            </p>
-            <p class="neu-intro-respaldo">{servicesSectionData.subheading.text2}</p>
-          </div>
+          <div class="neu-servicios-grid">
+            <div>
+              <div class="neu-processes-intro">
+                <span class="neu-eyebrow">{servicesSectionData.title}</span>
+                <p class="neu-intro-afirmacion">
+                  {servicesSectionData.subheading.text1_1}
+                  <br />
+                  <GradiantText>{servicesSectionData.subheading.text1_2}</GradiantText>
+                </p>
+                <p class="neu-intro-respaldo">{servicesSectionData.subheading.text2}</p>
+              </div>
 
-          <div class="neu-grid neu-cols-2">
-            {servicesSectionData.services.map((servicio) => (
-              <article class="neu-raised neu-card neu-servicio">
-                <div class="neu-servicio-foto">
-                  <img src={srcDe(servicio.visual)} alt={servicio.alt} width="200" height="200" loading="lazy" />
+              <ul class="neu-servicios-lista">
+                {servicesSectionData.services.map((servicio) => (
+                  <li class="neu-servicio">
+                    <img
+                      class="neu-servicio-foto"
+                      src={srcDe(servicio.visual)}
+                      alt={servicio.alt || servicio.title}
+                      width="192"
+                      height="192"
+                      loading="lazy"
+                    />
+                    <div>
+                      <h3>{servicio.title}</h3>
+                      <p>{servicio.briefDescription}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="neu-raised neu-card neu-servicios-panel">
+              {panelServicios.map((img) => (
+                <div class="neu-panel-slot">
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    loading="lazy"
+                    class={img.fondoBlanco ? "is-blend" : ""}
+                  />
                 </div>
-                <div>
-                  <h3>{servicio.title}</h3>
-                  <p>{servicio.briefDescription}</p>
-                </div>
-              </article>
-            ))}
+              ))}
+            </div>
           </div>
 
           <div class="neu-producto-cta">
@@ -167,20 +202,47 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
   .neu-industry .neu-list { margin-bottom: 1rem; }
   .neu-industry-link { margin-top: auto; }
 
-  /* ---- Fichas de servicio ---- */
+  /* ---- Servicios ---- */
   /*
-    Horizontal, a diferencia de las tarjetas de industria: son seis y el texto es
-    corto, así que apiladas en vertical dejarían la sección enorme y con mucho
-    aire muerto. La miniatura va cuadrada y sin marco, siguiendo la regla de que
-    la imagen se apoya directamente sobre la superficie.
+    Dos columnas 3fr/2fr como en el componente real. La miniatura circular se
+    traduce como foto elevada: la imagen misma es la superficie extruida, no un
+    marco alrededor, así que no contradice la regla de fotografía del sistema.
+    El separador entre ítems no puede ser un borde —el estilo no los usa— y se
+    resuelve con una línea de sombra a baja opacidad.
   */
-  .neu-servicio { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.25rem; align-items: start; }
-  .neu-servicio-foto img {
-    display: block; width: 5rem; height: 5rem;
-    object-fit: cover; border-radius: 0.875rem;
+  .neu-servicios-grid { display: grid; gap: 3rem; align-items: start; }
+  @media (min-width: 64rem) {
+    .neu-servicios-grid { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+  }
+
+  .neu-servicios-lista { list-style: none; padding: 0; margin: 0; }
+  .neu-servicio {
+    display: flex; gap: 1.5rem; align-items: flex-start;
+    padding-bottom: 2rem; margin-bottom: 2rem;
+    box-shadow: inset 0 -1px 0 rgba(163, 177, 198, 0.4);
+  }
+  .neu-servicio:last-child { padding-bottom: 0; margin-bottom: 0; box-shadow: none; }
+  .neu-servicio-foto {
+    width: 6rem; height: 6rem; flex-shrink: 0;
+    border-radius: 50%; object-fit: cover;
+    box-shadow: var(--neu-raised);
   }
   .neu-servicio h3 { color: var(--neu-accent); }
   .neu-servicio p { font-size: 0.875rem; margin-top: 0.25rem; }
+
+  @media (max-width: 39.99rem) {
+    .neu-servicio { flex-direction: column; align-items: center; text-align: center; }
+  }
+
+  /*
+    Panel lateral de tres imágenes. Dos vienen con fondo casi blanco y se funden
+    con `darken`, igual que los dibujos de producto; la tercera es una foto y va
+    tal cual, recortada.
+  */
+  .neu-servicios-panel { display: grid; grid-template-rows: repeat(3, 1fr); gap: 1.5rem; }
+  .neu-panel-slot { display: flex; align-items: center; justify-content: center; min-height: 9rem; }
+  .neu-panel-slot img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 0.875rem; }
+  .neu-panel-slot img.is-blend { mix-blend-mode: darken; border-radius: 0; }
 
   /* ---- Tarjetas de producto ---- */
   /*
