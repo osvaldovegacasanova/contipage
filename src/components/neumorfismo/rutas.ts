@@ -9,11 +9,9 @@ export const enlacesNav = [
     href: "/#industrias",
     texto: "Industrias",
     clave: "industrias",
-    hijos: industrias.map((i) => ({
-      href: `/${i.slug}`,
-      texto: i.navLabel,
-      clave: i.slug.replace("sopladores-para-", ""),
-    })),
+    // Sin submenu, pero se marca activa tambien en las paginas de industria: sin
+    // esto, estando en un hub no quedaria ningun enlace resaltado en la barra.
+    tambien: industrias.map((i) => i.slug.replace("sopladores-para-", "")),
   },
   { href: "/#servicios", texto: "Servicios", clave: "servicios" },
   { href: "/#sopladores", texto: "Sopladores", clave: "sopladores" },
