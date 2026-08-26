@@ -5,9 +5,14 @@ import Footer from "./Footer.astro";
 export interface Props {
   title: string;
   description?: string;
+  /**
+   * Oculta la barra de navegación del sitio. Lo usa el experimento neumórfico,
+   * que aporta la suya. Por omisión no cambia nada.
+   */
+  sinNavbar?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, sinNavbar = false } = Astro.props;
 
 // Default meta description
 const defaultDescription = "Sopladores Monoetapa y Multietapa. Somos los representantes de Continental Industrie en Chile y Latinoamérica";
@@ -116,7 +121,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <body
     class="overflow-hidden overflow-y-auto bg-base dark:bg-base-dark text-accent dark:text-accent-light min-h-screen"
   >
-    <Navbar />
+    {!sinNavbar && <Navbar />}
     <slot />
     <Footer />
   </body>

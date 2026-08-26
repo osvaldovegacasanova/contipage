@@ -1,0 +1,144 @@
+---
+import { industrias } from "../../data/industrias";
+import { neuHub, NEU_HOME, NEU_BLOG, NEU_SISTEMA } from "./rutas";
+
+// Barra de navegación del experimento, en estilo neumórfico.
+//
+// Reemplaza a la del sitio real, que venía del Layout compartido y apuntaba al
+// sitio actual: al primer clic uno salía del prototipo. Además, mientras el
+// resto de la página estaba traducida, la barra superior seguía siendo del
+// diseño viejo, que era el hueco más visible del experimento.
+//
+// Repite la estructura de la barra real —Home, Industrias con submenú,
+// Servicios, Sopladores, Nosotros, Misión— apuntando a las rutas neumórficas, y
+// suma Blog y Sistema, que en el experimento sí forman parte del recorrido.
+export interface Props {
+  /** Clave de la página en curso: "sistema", "home", "blog" o el hub corto. */
+  activo?: string;
+}
+
+const { activo } = Astro.props;
+
+const enlaces = [
+  { href: `${NEU_HOME}#hero`, texto: "Home", clave: "home" },
+  {
+    href: `${NEU_HOME}#industrias`,
+    texto: "Industrias",
+    clave: "industrias",
+    hijos: industrias.map((i) => ({
+      href: neuHub(i.slug),
+      texto: i.navLabel,
+      clave: i.slug.replace("sopladores-para-", ""),
+    })),
+  },
+  { href: `${NEU_HOME}#servicios`, texto: "Servicios", clave: "servicios" },
+  { href: `${NEU_HOME}#sopladores`, texto: "Sopladores", clave: "sopladores" },
+  { href: `${NEU_HOME}#nosotros`, texto: "Nosotros", clave: "nosotros" },
+  { href: `${NEU_HOME}#temporal`, texto: "Misión", clave: "mision" },
+  { href: NEU_BLOG, texto: "Blog", clave: "blog" },
+  { href: NEU_SISTEMA, texto: "Sistema", clave: "sistema" },
+];
+
+const esActivo = (e: (typeof enlaces)[number]) =>
+  e.clave === activo || (e.hijos ?? []).some((h) => h.clave === activo);
+---
+
+<header class="neu-navbar">
+  <nav class="neu-raised neu-navbar-barra" aria-label="Navegación de la versión neumórfica">
+    <a class="neu-navbar-marca" href={NEU_HOME}>
+      <span class="neu-navbar-punto" aria-hidden="true"></span>
+      Continental
+    </a>
+
+    <ul class="neu-navbar-lista">
+      {enlaces.map((e) => (
+        <li class={e.hijos ? "tiene-submenu" : ""}>
+          <a href={e.href} class={esActivo(e) ? "is-active" : ""} aria-current={esActivo(e) ? "page" : undefined}>
+            {e.texto}
+            {e.hijos && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
+              </svg>
+            )}
+          </a>
+          {e.hijos && (
+            <ul class="neu-raised neu-submenu">
+              {e.hijos.map((h) => (
+                <li>
+                  <a href={h.href} class={h.clave === activo ? "is-active" : ""}>{h.texto}</a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<style is:global>
+  .neu-navbar {
+    position: fixed; inset-inline: 0; top: 0; z-index: 50;
+    padding: 1.25rem 1.5rem;
+    /* Sin fondo propio: la barra flota y deja ver el hero por detrás. */
+    pointer-events: none;
+  }
+  .neu-navbar-barra {
+    pointer-events: auto;
+    display: flex; align-items: center; gap: 1.5rem;
+    max-width: 72rem; margin: 0 auto; padding: 0.625rem 1.25rem;
+    background: var(--neu-bg, #e0e5ec); border-radius: 999px;
+  }
+
+  .neu-navbar-marca {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.9375rem; font-weight: 500; text-decoration: none;
+    color: var(--neu-text, #4a5568); white-space: nowrap;
+  }
+  .neu-navbar-punto {
+    width: 0.625rem; height: 0.625rem; border-radius: 50%;
+    background: var(--neu-accent, #0046ba);
+  }
+
+  /*
+    En pantallas angostas la lista se desplaza en horizontal en vez de abrir un
+    menú: es un prototipo y un menú móvil completo no aporta a la decisión de
+    diseño que se está evaluando.
+  */
+  .neu-navbar-lista {
+    list-style: none; display: flex; align-items: center; gap: 0.25rem;
+    margin: 0; padding: 0; overflow-x: auto; scrollbar-width: none;
+  }
+  .neu-navbar-lista::-webkit-scrollbar { display: none; }
+  .neu-navbar-lista > li { position: relative; }
+
+  .neu-navbar-lista a {
+    display: inline-flex; align-items: center; gap: 0.25rem;
+    padding: 0.5rem 0.875rem; border-radius: 999px;
+    font-size: 0.8125rem; font-weight: 500; text-decoration: none;
+    color: var(--neu-text, #4a5568); white-space: nowrap;
+  }
+  .neu-navbar-lista a:hover { box-shadow: var(--neu-flat); }
+  .neu-navbar-lista a.is-active { box-shadow: var(--neu-pressed); color: var(--neu-accent, #0046ba); }
+  .neu-navbar-lista a:focus-visible { outline: 2px solid var(--neu-accent, #0046ba); outline-offset: 2px; }
+  .neu-navbar-lista svg { width: 0.875rem; height: 0.875rem; }
+
+  .neu-submenu {
+    position: absolute; left: 0; top: calc(100% + 0.75rem);
+    list-style: none; margin: 0; padding: 0.5rem;
+    min-width: 13rem; border-radius: 1rem;
+    background: var(--neu-bg, #e0e5ec);
+    opacity: 0; visibility: hidden; transform: translateY(-0.375rem);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  }
+  .tiene-submenu:hover .neu-submenu,
+  .tiene-submenu:focus-within .neu-submenu {
+    opacity: 1; visibility: visible; transform: translateY(0);
+  }
+  .neu-submenu a { display: block; border-radius: 0.75rem; }
+
+  @media (max-width: 63.99rem) {
+    .neu-navbar-barra { border-radius: 1.25rem; }
+    .neu-submenu { display: none; }
+  }
+</style>

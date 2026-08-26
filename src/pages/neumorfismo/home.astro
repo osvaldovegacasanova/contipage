@@ -10,7 +10,7 @@ import { nosotrosSection } from "../../components/sections/nosotros/data";
 import { environmentalImpactSection } from "../../components/sections/environment/data";
 import { getInvolvedSection } from "../../components/sections/cta/data";
 import { Image } from "astro:assets";
-import NeuNav from "../../components/neumorfismo/NeuNav.astro";
+import NeuNavbar from "../../components/neumorfismo/NeuNavbar.astro";
 import { neuHub, NEU_CONTACTO } from "../../components/neumorfismo/rutas";
 
 // Copia experimental del home en estilo neumórfico, por tramos.
@@ -59,6 +59,7 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
 ---
 
 <Layout
+  sinNavbar
   title="Experimento neumórfico · Home | Continental Andes"
   description="Versión experimental del home en estilo neumórfico. Página interna, no forma parte del sitio público."
 >
@@ -68,12 +69,12 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
   />
 
   <main>
+    <NeuNavbar activo="home" />
     {/* Hero original, idéntico al del home real */}
     <Hero />
 
     <div class="neu-root neu-below-hero">
       <div class="neu-wrap">
-        <NeuNav activo="home" />
         <!-- Industrias -->
         <section class="neu-section" id="industrias">
           <div class="neu-processes-intro">

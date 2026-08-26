@@ -3,7 +3,7 @@ import Layout from "../../../layouts/Layout.astro";
 import "../../../styles/neu.css";
 import GradiantText from "../../../components/shared/GradiantText.astro";
 import { getCollection } from "astro:content";
-import NeuNav from "../../../components/neumorfismo/NeuNav.astro";
+import NeuNavbar from "../../../components/neumorfismo/NeuNavbar.astro";
 
 // Copia experimental del indice del blog en estilo neumorfico.
 //
@@ -18,14 +18,15 @@ const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { 
 ---
 
 <Layout
+  sinNavbar
   title="Experimento neumorfico · Blog | Continental Andes"
   description="Version experimental del blog en estilo neumorfico. Pagina interna, no forma parte del sitio publico."
 >
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" />
 
   <main class="neu-root">
+    <NeuNavbar activo="blog" />
     <div class="neu-wrap">
-      <NeuNav activo="blog" />
       <header class="neu-header neu-centrado">
         <h1>
           Noticias y <GradiantText>articulos tecnicos</GradiantText>

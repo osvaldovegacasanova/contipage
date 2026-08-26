@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import IndustryHero from "../../components/industrias/IndustryHero.astro";
 import "../../styles/neu.css";
 import { industrias } from "../../data/industrias";
-import NeuNav from "../../components/neumorfismo/NeuNav.astro";
+import NeuNavbar from "../../components/neumorfismo/NeuNavbar.astro";
 import { NEU_CONTACTO } from "../../components/neumorfismo/rutas";
 
 // Copia experimental de los hubs de industria en estilo neumorfico.
@@ -42,6 +42,7 @@ const introRespaldo = corte === -1 ? "" : introCompleto.slice(corte + 2);
 ---
 
 <Layout
+  sinNavbar
   title={`Experimento neumórfico · ${industria.seoTitle}`}
   description={`Version experimental del hub de ${industria.navLabel} en estilo neumorfico. Pagina interna, no forma parte del sitio publico.`}
 >
@@ -51,12 +52,12 @@ const introRespaldo = corte === -1 ? "" : introCompleto.slice(corte + 2);
   />
 
   <main>
+    <NeuNavbar activo={claveHub} />
     {/* Hero original, idéntico al del hub real */}
     <IndustryHero hero={industria.hero} breadcrumbLabel={industria.navLabel} />
 
     <div class="neu-root neu-below-hero">
       <div class="neu-wrap">
-        <NeuNav activo={claveHub} />
         <!-- Procesos -->
         <section class="neu-section">
           <div class="neu-processes-intro">

@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import "../styles/neu.css";
 import GradiantText from "../components/shared/GradiantText.astro";
-import NeuNav from "../components/neumorfismo/NeuNav.astro";
+import NeuNavbar from "../components/neumorfismo/NeuNavbar.astro";
 
 // Referencia del sistema de diseño neumórfico. Esta página es la fuente de
 // verdad del estilo: lo que se vea acá es lo que rige para las páginas que lo
@@ -53,6 +53,7 @@ const superficies = [
 ---
 
 <Layout
+  sinNavbar
   title="Sistema de diseño · Neumorfismo | Continental Andes"
   description="Referencia del sistema de diseño neumórfico: tokens, superficies y componentes. Página interna, no forma parte del sitio público."
 >
@@ -62,8 +63,8 @@ const superficies = [
   />
 
   <main class="neu-root">
+    <NeuNavbar activo="sistema" />
     <div class="neu-wrap">
-      <NeuNav activo="sistema" />
       <!-- Encabezado -->
       <header class="neu-header">
         <span class="neu-eyebrow">Referencia interna</span>
