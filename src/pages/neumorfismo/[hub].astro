@@ -3,6 +3,8 @@ import Layout from "../../layouts/Layout.astro";
 import IndustryHero from "../../components/industrias/IndustryHero.astro";
 import "../../styles/neu.css";
 import { industrias } from "../../data/industrias";
+import NeuNav from "../../components/neumorfismo/NeuNav.astro";
+import { NEU_CONTACTO } from "../../components/neumorfismo/rutas";
 
 // Copia experimental de los hubs de industria en estilo neumorfico.
 //
@@ -28,6 +30,7 @@ export function getStaticPaths() {
 }
 
 const { industria } = Astro.props;
+const claveHub = industria.slug.replace("sopladores-para-", "");
 
 // El parrafo que abre la seccion son dos frases con jerarquia distinta: la
 // primera afirma, la segunda respalda. Se parten en el primer punto para
@@ -53,6 +56,7 @@ const introRespaldo = corte === -1 ? "" : introCompleto.slice(corte + 2);
 
     <div class="neu-root neu-below-hero">
       <div class="neu-wrap">
+        <NeuNav activo={claveHub} />
         <!-- Procesos -->
         <section class="neu-section">
           <div class="neu-processes-intro">
@@ -94,7 +98,7 @@ const introRespaldo = corte === -1 ? "" : introCompleto.slice(corte + 2);
             </span>
             <h2>{industria.cta.title}</h2>
             <p>{industria.cta.description}</p>
-            <a href={industria.cta.buttonHref} class="neu-btn neu-btn-accent">{industria.cta.buttonText}</a>
+            <a href={NEU_CONTACTO} class="neu-btn neu-btn-accent">{industria.cta.buttonText}</a>
           </div>
         </section>
       </div>

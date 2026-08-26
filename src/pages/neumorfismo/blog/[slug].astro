@@ -2,6 +2,7 @@
 import Layout from "../../../layouts/Layout.astro";
 import "../../../styles/neu.css";
 import { getCollection } from "astro:content";
+import NeuNav from "../../../components/neumorfismo/NeuNav.astro";
 
 // Copia experimental del articulo de blog en estilo neumorfico.
 //
@@ -25,6 +26,7 @@ const fecha = (x: unknown) => new Date(String(x)).toLocaleDateString("es-CL", { 
 
   <main class="neu-root">
     <div class="neu-wrap neu-articulo-wrap">
+      <NeuNav activo="blog" />
       <nav class="neu-nav neu-crumbs" aria-label="Migas de pan">
         <a href="/">Inicio</a>
         <span aria-hidden="true">/</span>

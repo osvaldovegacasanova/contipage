@@ -3,6 +3,7 @@ import Layout from "../../../layouts/Layout.astro";
 import "../../../styles/neu.css";
 import GradiantText from "../../../components/shared/GradiantText.astro";
 import { getCollection } from "astro:content";
+import NeuNav from "../../../components/neumorfismo/NeuNav.astro";
 
 // Copia experimental del indice del blog en estilo neumorfico.
 //
@@ -24,6 +25,7 @@ const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { 
 
   <main class="neu-root">
     <div class="neu-wrap">
+      <NeuNav activo="blog" />
       <header class="neu-header neu-centrado">
         <h1>
           Noticias y <GradiantText>articulos tecnicos</GradiantText>

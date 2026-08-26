@@ -10,6 +10,8 @@ import { nosotrosSection } from "../../components/sections/nosotros/data";
 import { environmentalImpactSection } from "../../components/sections/environment/data";
 import { getInvolvedSection } from "../../components/sections/cta/data";
 import { Image } from "astro:assets";
+import NeuNav from "../../components/neumorfismo/NeuNav.astro";
+import { neuHub, NEU_CONTACTO } from "../../components/neumorfismo/rutas";
 
 // Copia experimental del home en estilo neumórfico, por tramos.
 //
@@ -71,6 +73,7 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
 
     <div class="neu-root neu-below-hero">
       <div class="neu-wrap">
+        <NeuNav activo="home" />
         <!-- Industrias -->
         <section class="neu-section" id="industrias">
           <div class="neu-processes-intro">
@@ -88,7 +91,7 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
               const Tag = area.href ? "a" : "article";
               return (
                 <Tag
-                  {...(area.href ? { href: area.href } : {})}
+                  {...(area.href ? { href: neuHub(area.href.replace("/", "")) } : {})}
                   class="neu-raised neu-card neu-industry"
                 >
                   <div class="neu-photo neu-industry-photo">
@@ -160,7 +163,7 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
 
           <div class="neu-cta-seccion">
             <p class="neu-intro-respaldo">{servicesSectionData.callToAction}</p>
-            <a href="/#contacto" class="neu-btn neu-btn-accent">{servicesSectionData.buttonText}</a>
+            <a href={NEU_CONTACTO} class="neu-btn neu-btn-accent">{servicesSectionData.buttonText}</a>
           </div>
         </section>
 
@@ -202,7 +205,7 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
 
           <div class="neu-cta-seccion">
             <p class="neu-intro-respaldo">{productosSection.callToAction}</p>
-            <a href="/#contacto" class="neu-btn neu-btn-accent">{productosSection.button}</a>
+            <a href={NEU_CONTACTO} class="neu-btn neu-btn-accent">{productosSection.button}</a>
           </div>
         </section>
         <!-- Nosotros -->
