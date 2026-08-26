@@ -7,9 +7,11 @@ export interface Props {
   description?: string;
   /** Clave de la seccion en curso, para marcar el enlace activo de la barra. */
   navActivo?: string;
+  /** Excluye la pagina de los buscadores. Para confirmaciones y similares. */
+  noIndexar?: boolean;
 }
 
-const { title, description, navActivo } = Astro.props;
+const { title, description, navActivo, noIndexar = false } = Astro.props;
 
 // Default meta description
 const defaultDescription = "Sopladores Monoetapa y Multietapa. Somos los representantes de Continental Industrie en Chile y Latinoamérica";
@@ -43,6 +45,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={metaDescription} />
     <link rel="canonical" href={canonicalURL} />
+    {noIndexar && <meta name="robots" content="noindex, follow" />}
     <title>{title}</title>
 
     <!-- Preload critical resources -->

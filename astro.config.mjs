@@ -14,8 +14,9 @@ export default defineConfig({
     // un archivo estatico en public/ que quedo congelado en enero con una sola
     // URL, mientras el sitio crecia a diecisiete paginas.
     sitemap({
-      // Las mismas paginas internas que robots.txt bloquea.
-      filter: (pagina) => !/\/(colores|fonts|separadores)\/?$/.test(pagina),
+      // Paginas internas que robots.txt bloquea, mas la confirmacion del
+      // formulario, que no es contenido que deba aparecer en buscadores.
+      filter: (pagina) => !/\/(colores|fonts|separadores|contacto\/gracias)\/?$/.test(pagina),
     }),
   ],
   build: {

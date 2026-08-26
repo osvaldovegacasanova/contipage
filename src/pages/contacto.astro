@@ -1,0 +1,207 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/neu.css";
+import GradiantText from "../components/shared/GradiantText.astro";
+import { getInvolvedSection } from "../components/sections/cta/data";
+
+// Pagina de contacto con formulario.
+//
+// Campos segun "formulario-cba.md": nombre, correo, empresa, aplicacion y un
+// campo libre que solo aparece al elegir "Otras".
+//
+// Las opciones de aplicacion se escriben tal como figuran en ese documento. No
+// se derivan del registro de industrias porque dos etiquetas no coinciden con
+// las del sitio: alli son "Manejo de Biogas" y "Tratamiento de Agua", y el
+// documento pide "Biogas" y "Tratamiento de Aguas".
+const APLICACIONES = [
+  "Minería",
+  "Biogás",
+  "Tratamiento de Aguas",
+  "Celulosa y Papel",
+  "Industria Alimentaria",
+  "Industria Petroquímica",
+  "Otras",
+];
+
+const ICONOS: Record<string, string> = {
+  office: "M3 21h18M5 21V7l7-4 7 4v14M9 10h1m4 0h1M9 14h1m4 0h1M9 18h1m4 0h1",
+  warehouse: "M20 7l-8-4-8 4m16 0v10l-8 4-8-4V7m16 0l-8 4m0 0L4 7m8 4v10",
+  contact:
+    "M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.5a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.2-.5l4.5 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z",
+};
+---
+
+<Layout
+  navActivo="contacto"
+  title="Contacto | Continental Blowers Andes"
+  description="Escríbanos para dimensionar el soplador o la bomba de vacío que su proceso necesita. Soporte, puesta en marcha y repuestos en Chile y la región andina."
+>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" />
+
+  <main class="neu-root">
+    <div class="neu-wrap">
+      <header class="neu-header">
+        <span class="neu-eyebrow">Contacto</span>
+        <h1>Cuéntenos sobre <GradiantText>su proceso</GradiantText></h1>
+        <p class="neu-lead">
+          Dimensionamos e integramos el equipo adecuado para cada aplicación. Déjenos sus datos y
+          nuestro equipo técnico se pondrá en contacto.
+        </p>
+      </header>
+
+      <div class="neu-contacto-grid">
+        <!-- Formulario -->
+        <form
+          class="neu-raised neu-card neu-formulario"
+          name="contacto"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="empresa-web"
+          action="/contacto/gracias"
+        >
+          {/* Requerido por Netlify para asociar el envio al formulario. */}
+          <input type="hidden" name="form-name" value="contacto" />
+
+          {/*
+            Trampa para robots: es invisible y quien la complete es un envio
+            automatico. Se llama "empresa-web" para que parezca un campo real.
+          */}
+          <p class="neu-trampa">
+            <label>No completar este campo <input name="empresa-web" tabindex="-1" autocomplete="off" /></label>
+          </p>
+
+          <div class="neu-campo">
+            <label for="nombre">Nombre completo</label>
+            <input class="neu-input" type="text" id="nombre" name="nombre" required autocomplete="name" />
+          </div>
+
+          <div class="neu-campo">
+            <label for="correo">Correo electrónico</label>
+            <input
+              class="neu-input"
+              type="email"
+              id="correo"
+              name="correo"
+              required
+              autocomplete="email"
+              placeholder="nombre@empresa.cl"
+            />
+          </div>
+
+          <div class="neu-campo">
+            <label for="empresa">Empresa</label>
+            <input class="neu-input" type="text" id="empresa" name="empresa" required autocomplete="organization" />
+          </div>
+
+          <div class="neu-campo">
+            <label for="aplicacion">Aplicación</label>
+            <select class="neu-input neu-select" id="aplicacion" name="aplicacion" required>
+              <option value="" selected disabled>Seleccione una aplicación</option>
+              {APLICACIONES.map((a) => (
+                <option value={a}>{a}</option>
+              ))}
+            </select>
+          </div>
+
+          {/*
+            Sólo se muestra al elegir "Otras". Empieza oculto y sin `required`;
+            el script lo activa y desactiva junto con la visibilidad, para que un
+            campo invisible nunca bloquee el envío.
+          */}
+          <div class="neu-campo" id="campo-otra" hidden>
+            <label for="otra">¿Cuál?</label>
+            <input class="neu-input" type="text" id="otra" name="otra_aplicacion" />
+          </div>
+
+          <button class="neu-btn neu-btn-accent neu-enviar" type="submit">Enviar consulta</button>
+        </form>
+
+        <!-- Datos de contacto -->
+        <aside class="neu-datos">
+          {getInvolvedSection.initiatives.map((bloque) => (
+            <div class="neu-dato">
+              <span class="neu-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d={ICONOS[bloque.icon]} />
+                </svg>
+              </span>
+              <div>
+                <h2>{bloque.title}</h2>
+                {bloque.description && <p>{bloque.description}</p>}
+                {"contacts" in bloque && bloque.contacts && (
+                  <ul>
+                    {bloque.contacts.map((c) => (
+                      <li><a class="neu-link" href={c.href}>{c.label}</a></li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          ))}
+        </aside>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style is:global>
+  .neu-contacto-grid { display: grid; gap: 3rem; align-items: start; }
+  @media (min-width: 60rem) {
+    .neu-contacto-grid { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+  }
+
+  /* ---- Formulario ---- */
+  .neu-formulario { display: grid; gap: 1.5rem; padding: 2rem; }
+  .neu-campo { display: grid; gap: 0.5rem; }
+  .neu-campo label { font-size: 0.8125rem; font-weight: 500; }
+  .neu-campo input,
+  .neu-campo select { width: 100%; }
+
+  /*
+    El desplegable no hereda la tipografia del sistema por si solo, y el
+    navegador le pone su propia flecha: se reemplaza por una dibujada, para que
+    no aparezca un control con estilo nativo entre campos neumorficos.
+  */
+  .neu-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1.125rem center;
+    background-size: 1rem;
+    padding-right: 2.75rem;
+    cursor: pointer;
+  }
+  .neu-select:invalid { color: var(--neu-muted); }
+
+  .neu-enviar { justify-self: start; margin-top: 0.5rem; }
+
+  /* Trampa para robots: fuera de la vista sin usar display:none, que algunos ignoran. */
+  .neu-trampa { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  /* ---- Datos de contacto ---- */
+  .neu-datos { display: grid; gap: 2rem; }
+  .neu-dato { display: flex; gap: 1.25rem; align-items: flex-start; }
+  .neu-dato h2 { font-size: 1.0625rem; margin-bottom: 0.25rem; }
+  .neu-dato p { font-size: 0.9375rem; }
+  .neu-dato ul { list-style: none; padding: 0; margin: 0.25rem 0 0; display: grid; gap: 0.375rem; }
+</style>
+
+<script>
+  // El campo libre sólo tiene sentido si la aplicación elegida es "Otras".
+  // Se alterna `hidden` y `required` a la vez: un campo oculto y obligatorio
+  // bloquearía el envío sin que se vea por qué.
+  const seleccion = document.querySelector<HTMLSelectElement>("#aplicacion");
+  const campo = document.querySelector<HTMLElement>("#campo-otra");
+  const entrada = document.querySelector<HTMLInputElement>("#otra");
+
+  if (seleccion && campo && entrada) {
+    const sincronizar = () => {
+      const otras = seleccion.value === "Otras";
+      campo.hidden = !otras;
+      entrada.required = otras;
+      if (!otras) entrada.value = "";
+    };
+    seleccion.addEventListener("change", sincronizar);
+    sincronizar();
+  }
+</script>
