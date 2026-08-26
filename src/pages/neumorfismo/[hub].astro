@@ -2,22 +2,34 @@
 import Layout from "../../layouts/Layout.astro";
 import IndustryHero from "../../components/industrias/IndustryHero.astro";
 import "../../styles/neu.css";
-import { mineria } from "../../data/industrias/mineria";
+import { industrias } from "../../data/industrias";
 
-// Copia experimental del hub de Minería en estilo neumórfico.
+// Copia experimental de los hubs de industria en estilo neumorfico.
 //
-// El contenido NO se duplica: se lee del mismo src/data/industrias/mineria.ts
-// que alimenta /sopladores-para-mineria, así que cualquier cambio de texto o de
-// foto en test se refleja aquí solo y las dos versiones no se bifurcan.
+// Una sola plantilla para los seis, igual que hace el sitio real con
+// src/pages/[industria].astro. El contenido NO se duplica: sale del mismo
+// registro src/data/industrias que alimenta las paginas reales, asi que un
+// cambio de texto o de foto en test se refleja aqui solo.
+//
+// La ruta usa una forma corta del slug (mineria, biogas, ...) en vez del slug
+// completo, para que las URL del experimento queden cortas y legibles.
 //
 // El hero es el ORIGINAL, sin tocar: se reutiliza el componente IndustryHero tal
-// cual. Por eso queda fuera de .neu-root, que tiene padding propio y anularía su
-// sangrado a pantalla completa. Lo neumórfico empieza debajo.
+// cual. Por eso queda fuera de .neu-root, que tiene padding propio y anularia su
+// sangrado a pantalla completa. Lo neumorfico empieza debajo.
 //
-// El hub real queda intacto: esta ruta es aparte y no se enlaza desde el menú.
-const industria = mineria;
+// Los hubs reales quedan intactos: estas rutas son aparte y no se enlazan desde
+// el menu.
+export function getStaticPaths() {
+  return industrias.map((industria) => ({
+    params: { hub: industria.slug.replace("sopladores-para-", "") },
+    props: { industria },
+  }));
+}
 
-// El párrafo que abre la sección son dos frases con jerarquía distinta: la
+const { industria } = Astro.props;
+
+// El parrafo que abre la seccion son dos frases con jerarquia distinta: la
 // primera afirma, la segunda respalda. Se parten en el primer punto para
 // tratarlas en dos niveles, sin duplicar el texto del archivo de datos.
 const introCompleto = industria.processesHeading.intro;
@@ -28,7 +40,7 @@ const introRespaldo = corte === -1 ? "" : introCompleto.slice(corte + 2);
 
 <Layout
   title={`Experimento neumórfico · ${industria.seoTitle}`}
-  description="Versión experimental del hub de Minería en estilo neumórfico. Página interna, no forma parte del sitio público."
+  description={`Version experimental del hub de ${industria.navLabel} en estilo neumorfico. Pagina interna, no forma parte del sitio publico.`}
 >
   <link
     rel="stylesheet"

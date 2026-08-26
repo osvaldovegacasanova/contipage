@@ -1,0 +1,75 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import "../../../styles/neu.css";
+import GradiantText from "../../../components/shared/GradiantText.astro";
+import { getCollection } from "astro:content";
+
+// Copia experimental del indice del blog en estilo neumorfico.
+//
+// El contenido sale de la misma coleccion astro:content que alimenta /blog, asi
+// que los articulos no se duplican. Sin paginacion: con los articulos que hay
+// hoy cabe todo en una pagina, y la del sitio real tampoco llega a mostrarse.
+const posts = (await getCollection("blog")).sort(
+  (a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate)
+);
+const etiquetas = Array.from(new Set(posts.flatMap((p) => p.data.tags || [])));
+const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { day: "numeric", month: "long", year: "numeric" });
+---
+
+<Layout
+  title="Experimento neumorfico · Blog | Continental Andes"
+  description="Version experimental del blog en estilo neumorfico. Pagina interna, no forma parte del sitio publico."
+>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" />
+
+  <main class="neu-root">
+    <div class="neu-wrap">
+      <header class="neu-header neu-centrado">
+        <h1>
+          Noticias y <GradiantText>articulos tecnicos</GradiantText>
+        </h1>
+        <p class="neu-lead">
+          Sobre sopladores y compresores centrifugos, sus procesos y su mantenimiento.
+        </p>
+      </header>
+
+      {etiquetas.length > 0 && (
+        <nav class="neu-nav neu-etiquetas" aria-label="Filtrar por etiqueta">
+          <a href="/neumorfismo/blog" class="is-active">Todas</a>
+          {etiquetas.map((t) => (
+            <a href={`/neumorfismo/blog/tag/${encodeURIComponent(t)}/`}>#{t}</a>
+          ))}
+        </nav>
+      )}
+
+      <div class="neu-grid neu-cols-3 neu-articulos">
+        {posts.map(({ data, slug }) => (
+          <a class="neu-raised neu-card neu-articulo" href={`/neumorfismo/blog/${slug}/`}>
+            {data.heroImage && (
+              <div class="neu-photo neu-articulo-foto">
+                <img src={data.heroImage} alt={data.title} width="800" height="600" loading="lazy" />
+              </div>
+            )}
+            <h2>{data.title}</h2>
+            <p>{data.description}</p>
+            <span class="neu-articulo-fecha">{fecha(data.pubDate)}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style is:global>
+  .neu-centrado { text-align: center; }
+  .neu-centrado .neu-lead { margin-left: auto; margin-right: auto; }
+
+  .neu-etiquetas { justify-content: center; margin-bottom: 3rem; }
+  .neu-articulos { align-items: stretch; }
+
+  .neu-articulo { display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+  .neu-articulo-foto { margin-bottom: 1.25rem; }
+  .neu-articulo h2 { font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--neu-accent); }
+  .neu-articulo p { font-size: 0.875rem; }
+  .neu-articulo-fecha { margin-top: auto; padding-top: 1rem; font-size: 0.8125rem; opacity: 0.7; }
+</style>
