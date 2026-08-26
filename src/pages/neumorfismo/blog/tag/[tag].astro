@@ -49,7 +49,7 @@ const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { 
 
       <div class="neu-grid neu-cols-3 neu-articulos">
         {posts.map(({ data, slug }) => (
-          <a class="neu-raised neu-card neu-articulo" href={`/neumorfismo/blog/${slug}/`}>
+          <a class="neu-articulo" href={`/neumorfismo/blog/${slug}/`}>
             {data.heroImage && (
               <div class="neu-photo neu-articulo-foto">
                 <img src={data.heroImage} alt={data.title} width="800" height="600" loading="lazy" />
@@ -70,8 +70,16 @@ const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { 
   .neu-centrado .neu-lead { margin-left: auto; margin-right: auto; }
   .neu-etiquetas { justify-content: center; margin-bottom: 3rem; }
 
+  /*
+    Las entradas van sin tarjeta: en una rejilla de varias, el relieve de cada
+    una compite con el de la siguiente y satura la pagina. Se apoyan directamente
+    sobre el fondo y la unica pieza con cuerpo es la miniatura, que al pasar el
+    cursor se eleva apenas para indicar que el bloque completo es pulsable.
+  */
   .neu-articulo { display: flex; flex-direction: column; text-decoration: none; color: inherit; }
   .neu-articulo-foto { margin-bottom: 1.25rem; }
+  .neu-articulo-foto img { transition: box-shadow 0.25s ease; }
+  .neu-articulo:hover .neu-articulo-foto img { box-shadow: var(--neu-flat); }
   .neu-articulo h2 { font-size: 1.125rem; margin-bottom: 0.5rem; color: var(--neu-accent); }
   .neu-articulo p { font-size: 0.875rem; }
   .neu-articulo-fecha { margin-top: auto; padding-top: 1rem; font-size: 0.8125rem; opacity: 0.7; }
