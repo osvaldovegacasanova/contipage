@@ -37,8 +37,27 @@
 .neu-section { margin-bottom: 4rem; }
 
 .neu-grid { display: grid; gap: 1.75rem; }
+
+/*
+  OJO con estas dos: son auto-fit, así que el número de columnas lo decide el
+  ancho disponible y NO el nombre de la clase. En un contenedor de 72rem,
+  .neu-grid-3 llega a formar cuatro columnas y estrecha demasiado las tarjetas.
+  Sirven para rejillas de fichas pequeñas donde da igual cuántas entren.
+*/
 .neu-grid-2 { grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); }
 .neu-grid-3 { grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+
+/*
+  Cuando el número de columnas es una decisión de diseño y no del ancho, usar
+  estas: fijan el recuento en pantallas anchas y bajan a una sola columna en
+  móvil. Es lo que corresponde para tarjetas con imagen, donde repartir de más
+  achica la foto y estira la tarjeta a lo alto.
+*/
+.neu-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.neu-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 47.99rem) {
+  .neu-cols-2, .neu-cols-3 { grid-template-columns: minmax(0, 1fr); }
+}
 .neu-row { display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; }
 .neu-row-tight { gap: 1rem; margin-bottom: 1rem; }
 
