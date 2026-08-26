@@ -205,10 +205,7 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
     El separador entre ítems no puede ser un borde —el estilo no los usa— y se
     resuelve con una línea de sombra a baja opacidad.
   */
-  .neu-servicios-grid { display: grid; gap: 3rem; align-items: start; }
-  @media (min-width: 64rem) {
-    .neu-servicios-grid { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
-  }
+  .neu-servicios-grid { display: grid; gap: 3rem; }
 
   .neu-servicios-lista { list-style: none; padding: 0; margin: 0; }
   .neu-servicio {
@@ -241,6 +238,21 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
   .neu-servicios-panel { display: grid; gap: 1.5rem; }
   .neu-panel-card { overflow: hidden; }
   .neu-panel-card img { display: block; width: 100%; height: 11rem; object-fit: cover; object-position: center; }
+
+  /*
+    En dos columnas el panel se estira hasta igualar la altura de la lista de la
+    izquierda y reparte esa altura en tres filas iguales, como en el home real.
+    En una sola columna eso no aplica y las imágenes vuelven a su alto fijo.
+  */
+  @media (min-width: 64rem) {
+    .neu-servicios-grid {
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      align-items: stretch;
+    }
+    .neu-servicios-panel { height: 100%; grid-template-rows: repeat(3, minmax(0, 1fr)); }
+    .neu-panel-card { height: 100%; }
+    .neu-panel-card img { height: 100%; }
+  }
 
   /* ---- Tarjetas de producto ---- */
   /*
