@@ -172,6 +172,16 @@ const esActivo = (e: (typeof enlaces)[number]) =>
     .neu-navbar .neu-submenu a { font-size: 0.8125rem; }
   }
 
+  /*
+    Resaltado por seccion al hacer scroll. Usa el mismo hundido que el enlace de
+    pagina activa: la barra anterior lo marcaba con un subrayado azul, que sobre
+    botones neumorficos se leia como un defecto.
+  */
+  .neu-navbar .nav-active {
+    box-shadow: var(--neu-pressed);
+    color: var(--neu-accent, #0046ba);
+  }
+
   /* Dentro del submenu, que ya es superficie elevada, los enlaces van planos. */
   .neu-navbar .neu-submenu a { box-shadow: none; border-radius: 0.75rem; }
   .neu-navbar .neu-submenu a:hover { box-shadow: var(--neu-flat); }

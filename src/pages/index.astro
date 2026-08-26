@@ -56,8 +56,11 @@ const ICONOS: Record<string, string> = {
 const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: string }).src);
 ---
 
+{/*
+  Sin navActivo: en el home el indicador lo lleva el resaltado por seccion, que
+  sigue el scroll. Marcar "Home" ademas dejaria dos enlaces hundidos a la vez.
+*/}
 <Layout
-  navActivo="home"
   title="Sopladores Centrifugos Continental Industrie Chile | Continental Blowers Andes"
   description="Sopladores y compresores centrifugos Continental Industrie para mineria, tratamiento de agua, biogas e industria en Chile y la region andina."
 >
