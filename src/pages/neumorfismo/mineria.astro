@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import IndustryHero from "../../components/industrias/IndustryHero.astro";
 import "../../styles/neu.css";
 import { mineria } from "../../data/industrias/mineria";
 
@@ -7,8 +8,11 @@ import { mineria } from "../../data/industrias/mineria";
 //
 // El contenido NO se duplica: se lee del mismo src/data/industrias/mineria.ts
 // que alimenta /sopladores-para-mineria, así que cualquier cambio de texto o de
-// foto en test se refleja aquí solo y las dos versiones no se bifurcan. Lo único
-// propio de esta página es la traducción visual.
+// foto en test se refleja aquí solo y las dos versiones no se bifurcan.
+//
+// El hero es el ORIGINAL, sin tocar: se reutiliza el componente IndustryHero tal
+// cual. Por eso queda fuera de .neu-root, que tiene padding propio y anularía su
+// sangrado a pantalla completa. Lo neumórfico empieza debajo.
 //
 // El hub real queda intacto: esta ruta es aparte y no se enlaza desde el menú.
 const industria = mineria;
@@ -23,92 +27,64 @@ const industria = mineria;
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
   />
 
-  <main class="neu-root">
-    <div class="neu-wrap">
-      <!-- Aviso de página experimental -->
-      <div class="neu-pressed neu-card neu-flag">
-        <p>
-          <strong>Experimento.</strong> Copia visual del hub de Minería en estilo neumórfico.
-          El contenido viene del mismo archivo de datos que la página real, que está en
-          <a href="/sopladores-para-mineria" class="neu-link">/sopladores-para-mineria</a> y no fue modificada.
-        </p>
+  <main>
+    {/* Hero original, idéntico al del hub real */}
+    <IndustryHero hero={industria.hero} breadcrumbLabel={industria.navLabel} />
+
+    <div class="neu-root neu-below-hero">
+      <div class="neu-wrap">
+        <!-- Aviso de página experimental -->
+        <div class="neu-pressed neu-card neu-flag">
+          <p>
+            <strong>Experimento.</strong> Copia visual del hub de Minería en estilo neumórfico.
+            El hero es el original, sin cambios. El contenido viene del mismo archivo de datos que
+            la página real, que está en
+            <a href="/sopladores-para-mineria" class="neu-link">/sopladores-para-mineria</a> y no fue modificada.
+          </p>
+        </div>
+
+        <!-- Procesos -->
+        <section class="neu-section">
+          <p class="neu-sub neu-processes-intro">{industria.processesHeading.intro}</p>
+
+          <div class="neu-processes">
+            {industria.processes.map((proceso, i) => (
+              <article class={`neu-raised neu-card neu-process ${i % 2 === 1 ? "is-reversed" : ""}`}>
+                <div class="neu-pressed neu-photo neu-process-photo">
+                  <img src={proceso.image} alt={proceso.alt} width="800" height="600" loading="lazy" />
+                </div>
+
+                <div class="neu-process-text">
+                  <span class="neu-step">{String(i + 1).padStart(2, "0")}</span>
+                  <h2>{proceso.name}</h2>
+                  <p>{proceso.description}</p>
+                  {proceso.highlights && proceso.highlights.length > 0 && (
+                    <ul class="neu-list">
+                      {proceso.highlights.map((item) => (
+                        <li>{item}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <!-- Cierre -->
+        <section class="neu-section neu-section-last">
+          <div class="neu-raised neu-card neu-closing">
+            <span class="neu-icon neu-icon-lg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </span>
+            <h2>{industria.cta.title}</h2>
+            <p>{industria.cta.description}</p>
+            <a href={industria.cta.buttonHref} class="neu-btn neu-btn-accent">{industria.cta.buttonText}</a>
+          </div>
+        </section>
       </div>
-
-      <!-- Hero -->
-      <header class="neu-hero">
-        <nav class="neu-nav neu-crumbs" aria-label="Migas de pan">
-          <a href="/">Inicio</a>
-          <span aria-hidden="true">/</span>
-          <a href="/#industrias">Industrias</a>
-          <span aria-hidden="true">/</span>
-          <a href="#" class="is-active">{industria.navLabel}</a>
-        </nav>
-
-        <div class="neu-hero-grid">
-          <div class="neu-hero-text">
-            <span class="neu-eyebrow">{industria.hero.eyebrow}</span>
-            <h1>
-              {industria.hero.title} <span class="neu-accent-text">{industria.hero.titleAccent}</span>
-            </h1>
-            <p class="neu-lead">{industria.hero.intro}</p>
-            <a href={industria.cta.buttonHref} class="neu-btn neu-btn-accent neu-hero-btn">
-              {industria.cta.buttonText}
-            </a>
-          </div>
-
-          <div class="neu-raised neu-photo neu-hero-photo">
-            <img
-              src={industria.hero.image}
-              alt={industria.hero.alt}
-              width="1200"
-              height="900"
-              loading="eager"
-            />
-          </div>
-        </div>
-      </header>
-
-      <!-- Procesos -->
-      <section class="neu-section">
-        <p class="neu-sub neu-processes-intro">{industria.processesHeading.intro}</p>
-
-        <div class="neu-processes">
-          {industria.processes.map((proceso, i) => (
-            <article class={`neu-raised neu-card neu-process ${i % 2 === 1 ? "is-reversed" : ""}`}>
-              <div class="neu-pressed neu-photo neu-process-photo">
-                <img src={proceso.image} alt={proceso.alt} width="800" height="600" loading="lazy" />
-              </div>
-
-              <div class="neu-process-text">
-                <span class="neu-step">{String(i + 1).padStart(2, "0")}</span>
-                <h2>{proceso.name}</h2>
-                <p>{proceso.description}</p>
-                {proceso.highlights && proceso.highlights.length > 0 && (
-                  <ul class="neu-list">
-                    {proceso.highlights.map((item) => (
-                      <li>{item}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <!-- Cierre -->
-      <section class="neu-section">
-        <div class="neu-raised neu-card neu-closing">
-          <span class="neu-icon neu-icon-lg">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-          </span>
-          <h2>{industria.cta.title}</h2>
-          <p>{industria.cta.description}</p>
-          <a href={industria.cta.buttonHref} class="neu-btn neu-btn-accent">{industria.cta.buttonText}</a>
-        </div>
-      </section>
     </div>
   </main>
 </Layout>
@@ -116,24 +92,15 @@ const industria = mineria;
 <style is:global>
   /* Sólo lo propio de esta página. El sistema vive en src/styles/neu.css */
 
+  /*
+    Con el hero original arriba ya no hace falta el hueco que .neu-root reserva
+    para la barra fija, ni forzar una altura mínima de pantalla completa.
+  */
+  .neu-below-hero { padding-top: 4rem; min-height: 0; }
+
   .neu-flag { margin-bottom: 3rem; }
   .neu-flag p { font-size: 0.875rem; }
   .neu-flag strong { font-weight: 600; color: var(--neu-accent); }
-
-  /* ---- Hero ---- */
-  .neu-hero { margin-bottom: 4.5rem; }
-  .neu-crumbs { margin-bottom: 2rem; align-items: center; }
-  .neu-crumbs span { font-size: 0.875rem; color: var(--neu-muted); }
-
-  .neu-hero-grid {
-    display: grid; gap: 2.5rem; align-items: center;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  }
-  .neu-hero-text h1 { margin-bottom: 0.5rem; }
-  .neu-accent-text { color: var(--neu-accent); }
-  .neu-hero-btn { margin-top: 2rem; }
-  .neu-hero-photo { padding: 1rem; }
-  .neu-hero-photo img { aspect-ratio: 3 / 2; }
 
   /* ---- Procesos ---- */
   .neu-processes-intro { margin-bottom: 2.5rem; }
@@ -163,4 +130,5 @@ const industria = mineria;
   .neu-closing { display: flex; flex-direction: column; align-items: flex-start; padding: 2.5rem; }
   .neu-closing h2 { font-size: 1.5rem; }
   .neu-closing p { max-width: 44rem; margin-bottom: 1.75rem; }
+  .neu-section-last { margin-bottom: 0; }
 </style>
