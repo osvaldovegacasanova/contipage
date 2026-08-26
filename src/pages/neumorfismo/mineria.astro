@@ -138,8 +138,11 @@ const introRespaldo = corte === -1 ? "" : introCompleto.slice(corte + 2);
   }
 
   /* ---- Cierre ---- */
-  .neu-closing { display: flex; flex-direction: column; align-items: flex-start; padding: 2.5rem; }
+  .neu-closing {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; padding: 2.5rem;
+  }
   .neu-closing h2 { font-size: 1.5rem; }
-  .neu-closing p { max-width: 44rem; margin-bottom: 1.75rem; }
+  .neu-closing p { max-width: 44rem; margin: 0 auto 1.75rem; }
   .neu-section-last { margin-bottom: 0; }
 </style>
