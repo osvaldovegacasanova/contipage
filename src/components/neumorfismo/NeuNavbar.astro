@@ -6,8 +6,12 @@ import { enlacesNav } from "./rutas";
 // Logotipo completo al extremo izquierdo y enlaces a la derecha, con submenu
 // de industrias. Los enlaces usan .neu-nav, que define su aspecto de boton en
 // src/styles/neu.css junto al resto del sistema.
+//
+// Bajo 1024px los enlaces pasan a un panel desplegable con boton de
+// hamburguesa. El componente es autonomo: marcado, estilos y comportamiento
+// viven aqui, sin depender de scripts sueltos en el Layout.
 export interface Props {
-  /** Clave de la página en curso: "sistema", "home", "blog" o el hub corto. */
+  /** Clave de la seccion en curso, para marcar el enlace activo. */
   activo?: string;
 }
 
@@ -25,27 +29,41 @@ const esActivo = (e: (typeof enlaces)[number]) =>
       <img src="/images/logo-claro.webp" alt="Continental Blowers Andes" width="300" height="62" />
     </a>
 
-    <nav class="neu-nav neu-navbar-nav" aria-label="Navegacion principal">
-      {enlaces.map((e) => (
-        <span class={e.hijos ? "tiene-submenu" : ""}>
-          <a href={e.href} class={esActivo(e) ? "is-active" : ""} aria-current={esActivo(e) ? "page" : undefined}>
-            {e.texto}
+    <button
+      type="button"
+      class="neu-navbar-boton"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="menu-principal"
+    >
+      <span class="neu-navbar-linea"></span>
+      <span class="neu-navbar-linea"></span>
+      <span class="neu-navbar-linea"></span>
+    </button>
+
+    <div class="neu-navbar-panel" id="menu-principal">
+      <nav class="neu-nav neu-navbar-nav" data-navbar aria-label="Navegacion principal">
+        {enlaces.map((e) => (
+          <span class={e.hijos ? "tiene-submenu" : ""}>
+            <a href={e.href} class={esActivo(e) ? "is-active" : ""} aria-current={esActivo(e) ? "page" : undefined}>
+              {e.texto}
+              {e.hijos && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
+                </svg>
+              )}
+            </a>
             {e.hijos && (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6" />
-              </svg>
+              <span class="neu-raised neu-submenu">
+                {e.hijos.map((h) => (
+                  <a href={h.href} class={h.clave === activo ? "is-active" : ""}>{h.texto}</a>
+                ))}
+              </span>
             )}
-          </a>
-          {e.hijos && (
-            <span class="neu-raised neu-submenu">
-              {e.hijos.map((h) => (
-                <a href={h.href} class={h.clave === activo ? "is-active" : ""}>{h.texto}</a>
-              ))}
-            </span>
-          )}
-        </span>
-      ))}
-    </nav>
+          </span>
+        ))}
+      </nav>
+    </div>
   </div>
 </header>
 
@@ -54,70 +72,145 @@ const esActivo = (e: (typeof enlaces)[number]) =>
     Todas las reglas van prefijadas con .neu-navbar. No es cosmetico: las del
     sistema (.neu-nav, .neu-nav a) tienen la misma especificidad y quedan
     despues en el paquete generado, asi que sin el prefijo le ganaban a las de
-    aqui. Eso hacia que en movil los enlaces se apilaran en vertical, porque
-    volvia a aplicarse flex-wrap: wrap.
-
-    Barra a todo el ancho, no una píldora centrada: replica la disposición de la
-    real, con el logotipo pegado al margen izquierdo y los enlaces a la derecha.
-    Necesita superficie propia porque los botones neumórficos se definen por sus
-    sombras y sobre el hero oscuro no tendrían dónde apoyarse.
+    aqui y los enlaces se apilaban en vertical en movil.
   */
   .neu-navbar {
     position: fixed; inset-inline: 0; top: 0; z-index: 50;
     background: var(--neu-bg, #e0e5ec);
     box-shadow: 0 6px 18px rgba(163, 177, 198, 0.45);
   }
-  .neu-navbar-interior {
+  .neu-navbar .neu-navbar-interior {
+    position: relative;
     display: flex; align-items: center; justify-content: space-between; gap: 2rem;
     max-width: 90rem; margin: 0 auto; padding: 0.875rem 1.5rem;
   }
 
   /*
-    Logotipo en su tamaño original. Se usa la versión oscura sobre transparente:
-    la del sitio real es blanca, pensada para la barra azul sobre el hero, y
-    sobre la superficie clara del neumorfismo desaparecería.
+    Logotipo en su tamano original. Se usa la version oscura sobre transparente:
+    la del sitio anterior era blanca, pensada para la barra azul sobre el hero.
   */
-  .neu-navbar-marca { display: inline-flex; align-items: center; flex-shrink: 0; }
+  .neu-navbar .neu-navbar-marca { display: inline-flex; align-items: center; flex-shrink: 0; }
   .neu-navbar .neu-navbar-marca img { display: block; height: 2.5rem; width: auto; }
-  @media (min-width: 48rem) {
-    .neu-navbar-marca img { height: 3rem; }
-  }
 
-  /*
-    Los enlaces heredan de .neu-nav el aspecto de botón que define el sistema.
-    Aquí sólo se ajusta el desplazamiento horizontal en pantallas angostas: es un
-    prototipo y un menú desplegable completo no aporta a la decisión de diseño.
-  */
-  .neu-navbar .neu-navbar-nav {
-    flex-wrap: nowrap; margin-bottom: 0;
-    overflow-x: auto; scrollbar-width: none; padding: 0.25rem;
-  }
-  .neu-navbar .neu-navbar-nav::-webkit-scrollbar { display: none; }
+  .neu-navbar .neu-navbar-nav { margin-bottom: 0; }
   .neu-navbar .neu-navbar-nav > span { position: relative; display: inline-flex; }
   .neu-navbar .neu-navbar-nav a { white-space: nowrap; gap: 0.375rem; display: inline-flex; align-items: center; }
   .neu-navbar .neu-navbar-nav svg { width: 0.875rem; height: 0.875rem; }
 
-  .neu-navbar .neu-submenu {
-    position: absolute; right: 0; top: calc(100% + 0.75rem);
-    display: flex; flex-direction: column; gap: 0.25rem;
-    padding: 0.5rem; min-width: 14rem; border-radius: 1rem;
-    background: var(--neu-bg, #e0e5ec);
-    opacity: 0; visibility: hidden; transform: translateY(-0.375rem);
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  /* Boton de hamburguesa: circulo elevado, como el resto de los botones. */
+  .neu-navbar .neu-navbar-boton {
+    display: none;
+    width: 3rem; height: 3rem; flex-shrink: 0;
+    align-items: center; justify-content: center; gap: 0.3125rem;
+    flex-direction: column; border: 0; border-radius: 50%; cursor: pointer;
+    background: var(--neu-bg, #e0e5ec); box-shadow: var(--neu-flat);
+    transition: box-shadow 0.2s ease;
   }
-  .tiene-submenu:hover .neu-submenu,
-  .neu-navbar .tiene-submenu:focus-within .neu-submenu {
-    opacity: 1; visibility: visible; transform: translateY(0);
+  .neu-navbar .neu-navbar-boton:hover { box-shadow: var(--neu-raised); }
+  .neu-navbar .neu-navbar-boton:focus-visible { outline: 2px solid var(--neu-accent, #0046ba); outline-offset: 3px; }
+  .neu-navbar .neu-navbar-linea {
+    display: block; width: 1.125rem; height: 2px; border-radius: 2px;
+    background: var(--neu-text, #4a5568);
+    transition: transform 0.25s ease, opacity 0.2s ease;
   }
-  /*
-    Dentro del submenú, que ya es una superficie elevada, los enlaces van planos:
-    apilar relieve sobre relieve enturbia la lectura, igual que ocurría con los
-    marcos alrededor de las fotos.
-  */
+  .neu-navbar .neu-navbar-boton[aria-expanded="true"] { box-shadow: var(--neu-pressed); }
+  .neu-navbar .neu-navbar-boton[aria-expanded="true"] .neu-navbar-linea:nth-child(1) { transform: translateY(0.4375rem) rotate(45deg); }
+  .neu-navbar .neu-navbar-boton[aria-expanded="true"] .neu-navbar-linea:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .neu-navbar .neu-navbar-boton[aria-expanded="true"] .neu-navbar-linea:nth-child(3) { transform: translateY(-0.4375rem) rotate(-45deg); }
+
+  /* ---- Escritorio ---- */
+  @media (min-width: 64rem) {
+    .neu-navbar .neu-navbar-marca img { height: 3rem; }
+    .neu-navbar .neu-navbar-nav { flex-wrap: nowrap; padding: 0.25rem; }
+
+    .neu-navbar .neu-submenu {
+      position: absolute; right: 0; top: calc(100% + 0.75rem);
+      display: flex; flex-direction: column; gap: 0.25rem;
+      padding: 0.5rem; min-width: 14rem; border-radius: 1rem;
+      background: var(--neu-bg, #e0e5ec);
+      opacity: 0; visibility: hidden; transform: translateY(-0.375rem);
+      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    }
+    .neu-navbar .tiene-submenu:hover .neu-submenu,
+    .neu-navbar .tiene-submenu:focus-within .neu-submenu {
+      opacity: 1; visibility: visible; transform: translateY(0);
+    }
+  }
+
+  /* ---- Movil ---- */
+  @media (max-width: 63.99rem) {
+    .neu-navbar .neu-navbar-boton { display: flex; }
+
+    /*
+      El panel se despliega bajo la barra. Se anima la altura maxima en vez de
+      alternar display, para que la transicion se vea; el contenido sigue
+      alcanzable con teclado mientras esta abierto.
+    */
+    .neu-navbar .neu-navbar-panel {
+      position: absolute; top: 100%; left: 0; right: 0;
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .neu-navbar .neu-navbar-panel[data-abierto="true"] { max-height: 80vh; overflow-y: auto; }
+
+    .neu-navbar .neu-navbar-nav {
+      flex-direction: column; align-items: stretch; flex-wrap: nowrap;
+      gap: 0.375rem; margin: 0 1.5rem 1.5rem;
+      padding: 1rem; border-radius: 1.25rem;
+      background: var(--neu-bg, #e0e5ec); box-shadow: var(--neu-raised);
+    }
+    .neu-navbar .neu-navbar-nav > span { display: flex; flex-direction: column; }
+    .neu-navbar .neu-navbar-nav a { justify-content: flex-start; }
+
+    /* El submenu se muestra desplegado: en un panel no hay hover que valga. */
+    .neu-navbar .neu-navbar-nav > span > a svg { display: none; }
+    .neu-navbar .neu-submenu {
+      display: flex; flex-direction: column; gap: 0.25rem;
+      margin: 0.375rem 0 0.375rem 1rem; padding: 0;
+      box-shadow: none; background: transparent;
+    }
+    .neu-navbar .neu-submenu a { font-size: 0.8125rem; }
+  }
+
+  /* Dentro del submenu, que ya es superficie elevada, los enlaces van planos. */
   .neu-navbar .neu-submenu a { box-shadow: none; border-radius: 0.75rem; }
   .neu-navbar .neu-submenu a:hover { box-shadow: var(--neu-flat); }
-
-  @media (max-width: 63.99rem) {
-    .neu-submenu { display: none; }
-  }
 </style>
+
+<script>
+  // Menu movil. El componente maneja su propio estado en vez de depender de un
+  // script suelto en el Layout: asi marcado, estilos y comportamiento viven
+  // juntos y no hay accion a distancia.
+  const boton = document.querySelector<HTMLButtonElement>(".neu-navbar-boton");
+  const panel = document.querySelector<HTMLElement>(".neu-navbar-panel");
+
+  if (boton && panel) {
+    const abrir = (si: boolean) => {
+      boton.setAttribute("aria-expanded", String(si));
+      boton.setAttribute("aria-label", si ? "Cerrar menú" : "Abrir menú");
+      panel.setAttribute("data-abierto", String(si));
+    };
+
+    boton.addEventListener("click", () => {
+      abrir(boton.getAttribute("aria-expanded") !== "true");
+    });
+
+    // Al elegir un destino el panel se cierra: si no, tapa la pagina recien abierta.
+    panel.addEventListener("click", (e) => {
+      if ((e.target as HTMLElement).closest("a")) abrir(false);
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && boton.getAttribute("aria-expanded") === "true") {
+        abrir(false);
+        boton.focus();
+      }
+    });
+
+    // Un clic fuera tambien cierra, que es lo que se espera de un panel.
+    document.addEventListener("click", (e) => {
+      const dentro = (e.target as HTMLElement).closest(".neu-navbar");
+      if (!dentro && boton.getAttribute("aria-expanded") === "true") abrir(false);
+    });
+  }
+</script>
