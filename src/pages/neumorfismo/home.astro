@@ -24,10 +24,14 @@ import { productosSection } from "../../components/sections/productos/data";
 // y dos imágenes importadas de assets/, que llegan como objeto con .src. Sin
 // normalizar, esas dos saldrían con el src vacío.
 // Las tres imágenes del panel lateral, iguales a las del componente real.
+// `contener: true` para el recorte del soplador: viene con fondo transparente y
+// su proporción real es vertical, así que recortarlo para llenar un hueco
+// apaisado le cortaría el silenciador y la bancada. Contenido se ve entero y,
+// al no tener fondo, flota sobre la superficie sin dejar caja.
 const panelServicios = [
-  { src: "/images/multistage-centrifugal-blowers-home.webp", alt: "Soplador centrífugo multietapa Continental Blowers para aplicaciones industriales de alta presión" },
-  { src: "/images/PLAQUETTE TC25.webp", alt: "Placa de características técnicas de compresor centrífugo TC25 Continental Blowers" },
-  { src: "/images/TCH25 PARTES.webp", alt: "Diagrama de componentes y partes del soplador centrífugo TCH25 Continental Blowers" },
+  { src: "/images/multistage-blower-recorte.webp", alt: "Soplador centrífugo multietapa Continental Blowers para aplicaciones industriales de alta presión", contener: true },
+  { src: "/images/PLAQUETTE TC25.webp", alt: "Placa de características técnicas de compresor centrífugo TC25 Continental Blowers", contener: false },
+  { src: "/images/TCH25 PARTES.webp", alt: "Diagrama de componentes y partes del soplador centrífugo TCH25 Continental Blowers", contener: false },
 ];
 
 const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: string }).src);
@@ -126,7 +130,7 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
 
             <div class="neu-servicios-panel">
               {panelServicios.map((img) => (
-                <figure class="neu-raised neu-panel-card">
+                <figure class={`neu-raised neu-panel-card ${img.contener ? "is-contain" : ""}`}>
                   <img src={img.src} alt={img.alt} loading="lazy" />
                 </figure>
               ))}
@@ -238,6 +242,8 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
   .neu-servicios-panel { display: grid; gap: 1.5rem; }
   .neu-panel-card { overflow: hidden; }
   .neu-panel-card img { display: block; width: 100%; height: 11rem; object-fit: cover; object-position: center; }
+  .neu-panel-card.is-contain { padding: 0.75rem; }
+  .neu-panel-card.is-contain img { object-fit: contain; }
 
   /*
     En dos columnas el panel se estira hasta igualar la altura de la lista de la
