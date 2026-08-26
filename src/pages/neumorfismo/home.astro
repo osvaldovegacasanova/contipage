@@ -4,12 +4,13 @@ import Hero from "../../components/sections/hero/Hero.astro";
 import GradiantText from "../../components/shared/GradiantText.astro";
 import "../../styles/neu.css";
 import { areasSectionData } from "../../components/sections/areas/data";
+import { servicesSectionData } from "../../components/sections/services/data";
 import { productosSection } from "../../components/sections/productos/data";
 
 // Copia experimental del home en estilo neumórfico, por tramos.
 //
-// Traducidas hasta ahora: Industrias y Sopladores. Faltan Servicios, Nosotros,
-// Misión y Contáctenos.
+// Traducidas hasta ahora, en el orden real del home: Industrias, Servicios y
+// Sopladores. Faltan Nosotros, Misión y Contáctenos.
 //
 // Igual que en la copia de Minería, el contenido NO se duplica: se lee de los
 // mismos data.ts que alimentan el home real, así que los textos tienen una sola
@@ -18,6 +19,11 @@ import { productosSection } from "../../components/sections/productos/data";
 // El hero es el ORIGINAL, sin tocar: video de fondo con capa oscura y titular en
 // degradado, imposible de reproducir en un estilo que exige fondo claro. Queda
 // fuera de .neu-root, que tiene padding propio y anularía su sangrado.
+
+// En services/data.ts el campo `visual` es mixto: cinco rutas de public/ (cadenas)
+// y dos imágenes importadas de assets/, que llegan como objeto con .src. Sin
+// normalizar, esas dos saldrían con el src vacío.
+const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: string }).src);
 ---
 
 <Layout
@@ -69,6 +75,37 @@ import { productosSection } from "../../components/sections/productos/data";
                 </Tag>
               );
             })}
+          </div>
+        </section>
+
+        <!-- Servicios -->
+        <section class="neu-section" id="servicios">
+          <div class="neu-processes-intro">
+            <span class="neu-eyebrow">{servicesSectionData.title}</span>
+            <p class="neu-intro-afirmacion">
+              {servicesSectionData.subheading.text1_1}
+              <GradiantText>{servicesSectionData.subheading.text1_2}</GradiantText>
+            </p>
+            <p class="neu-intro-respaldo">{servicesSectionData.subheading.text2}</p>
+          </div>
+
+          <div class="neu-grid neu-cols-2">
+            {servicesSectionData.services.map((servicio) => (
+              <article class="neu-raised neu-card neu-servicio">
+                <div class="neu-servicio-foto">
+                  <img src={srcDe(servicio.visual)} alt={servicio.alt} width="200" height="200" loading="lazy" />
+                </div>
+                <div>
+                  <h3>{servicio.title}</h3>
+                  <p>{servicio.briefDescription}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div class="neu-producto-cta">
+            <p class="neu-intro-respaldo">{servicesSectionData.callToAction}</p>
+            <a href="/#contacto" class="neu-btn">{servicesSectionData.buttonText}</a>
           </div>
         </section>
 
@@ -129,6 +166,21 @@ import { productosSection } from "../../components/sections/productos/data";
   .neu-industry-intro { font-size: 0.875rem; margin-bottom: 0.5rem; }
   .neu-industry .neu-list { margin-bottom: 1rem; }
   .neu-industry-link { margin-top: auto; }
+
+  /* ---- Fichas de servicio ---- */
+  /*
+    Horizontal, a diferencia de las tarjetas de industria: son seis y el texto es
+    corto, así que apiladas en vertical dejarían la sección enorme y con mucho
+    aire muerto. La miniatura va cuadrada y sin marco, siguiendo la regla de que
+    la imagen se apoya directamente sobre la superficie.
+  */
+  .neu-servicio { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.25rem; align-items: start; }
+  .neu-servicio-foto img {
+    display: block; width: 5rem; height: 5rem;
+    object-fit: cover; border-radius: 0.875rem;
+  }
+  .neu-servicio h3 { color: var(--neu-accent); }
+  .neu-servicio p { font-size: 0.875rem; margin-top: 0.25rem; }
 
   /* ---- Tarjetas de producto ---- */
   /*
