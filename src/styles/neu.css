@@ -154,8 +154,18 @@
 .neu-icon-lg { margin-bottom: 1.25rem; }
 
 .neu-nav { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem; }
-.neu-nav a { font-size: 0.875rem; font-weight: 500; text-decoration: none; color: var(--neu-text); padding: 0.625rem 1.125rem; border-radius: 999px; }
-.neu-nav a:hover { box-shadow: var(--neu-flat); }
+/*
+  Los enlaces de navegación se leen como botones: elevados en reposo, con la
+  sombra creciendo al pasar el cursor y hundidos cuando marcan la página en
+  curso. Antes eran texto plano hasta el hover, y en una barra llena de enlaces
+  no había forma de saber que eran pulsables.
+*/
+.neu-nav a {
+  font-size: 0.875rem; font-weight: 500; text-decoration: none;
+  color: var(--neu-text); padding: 0.625rem 1.125rem; border-radius: 999px;
+  box-shadow: var(--neu-flat); transition: box-shadow 0.2s ease, color 0.2s ease;
+}
+.neu-nav a:hover { box-shadow: var(--neu-raised); }
 .neu-nav a.is-active { box-shadow: var(--neu-pressed); color: var(--neu-accent); }
 
 /* ---- Contenido ---------------------------------------------------------- */
