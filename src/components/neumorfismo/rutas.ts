@@ -1,25 +1,23 @@
 import { industrias } from "../../data/industrias";
 
-// Traduce rutas del sitio real a sus equivalentes dentro del experimento, para
-// que al navegar la versión neumórfica no se salte de vuelta al sitio actual.
-//
-// Los hubs usan la forma corta del slug: /sopladores-para-mineria -> /neumorfismo/mineria
-
-export const neuHub = (slug: string) => `/neumorfismo/${slug.replace("sopladores-para-", "")}`;
-
-export const NEU_HOME = "/neumorfismo/home";
-export const NEU_CONTACTO = `${NEU_HOME}#contacto`;
-export const NEU_BLOG = "/neumorfismo/blog";
-export const NEU_SISTEMA = "/neumorfismo";
-
-/** Enlaces de la barra del experimento, en el orden en que conviene recorrerlo. */
-export const enlacesNeu = [
-  { href: NEU_SISTEMA, texto: "Sistema", clave: "sistema" },
-  { href: NEU_HOME, texto: "Home", clave: "home" },
-  ...industrias.map((i) => ({
-    href: neuHub(i.slug),
-    texto: i.navLabel,
-    clave: i.slug.replace("sopladores-para-", ""),
-  })),
-  { href: NEU_BLOG, texto: "Blog", clave: "blog" },
+// Enlaces de la barra de navegacion. Apuntan a las rutas reales del sitio: la
+// version neumorfica reemplaza al diseno anterior en su lugar, no convive con el
+// en una carpeta aparte.
+export const enlacesNav = [
+  { href: "/#hero", texto: "Home", clave: "home" },
+  {
+    href: "/#industrias",
+    texto: "Industrias",
+    clave: "industrias",
+    hijos: industrias.map((i) => ({
+      href: `/${i.slug}`,
+      texto: i.navLabel,
+      clave: i.slug.replace("sopladores-para-", ""),
+    })),
+  },
+  { href: "/#servicios", texto: "Servicios", clave: "servicios" },
+  { href: "/#sopladores", texto: "Sopladores", clave: "sopladores" },
+  { href: "/#nosotros", texto: "Nosotros", clave: "nosotros" },
+  { href: "/#temporal", texto: "Mision", clave: "mision" },
+  { href: "/blog", texto: "Insights", clave: "blog" },
 ];

@@ -1,16 +1,11 @@
 ---
-import { industrias } from "../../data/industrias";
-import { neuHub, NEU_HOME, NEU_BLOG } from "./rutas";
+import { enlacesNav } from "./rutas";
 
-// Barra de navegación del experimento, en estilo neumórfico.
+// Barra de navegacion del sitio.
 //
-// Reemplaza a la del sitio real, que venía del Layout compartido y apuntaba al
-// sitio actual: al primer clic uno salía del prototipo.
-//
-// Conserva la disposición de la barra real: logotipo completo al extremo
-// izquierdo y enlaces a la derecha. Los enlaces usan .neu-nav, la misma clase
-// que documenta la sección "Iconos y navegación" del sistema, de modo que la
-// referencia y la implementación no puedan divergir.
+// Logotipo completo al extremo izquierdo y enlaces a la derecha, con submenu
+// de industrias. Los enlaces usan .neu-nav, que define su aspecto de boton en
+// src/styles/neu.css junto al resto del sistema.
 export interface Props {
   /** Clave de la página en curso: "sistema", "home", "blog" o el hub corto. */
   activo?: string;
@@ -18,26 +13,7 @@ export interface Props {
 
 const { activo } = Astro.props;
 
-const enlaces = [
-  { href: `${NEU_HOME}#hero`, texto: "Home", clave: "home" },
-  {
-    href: `${NEU_HOME}#industrias`,
-    texto: "Industrias",
-    clave: "industrias",
-    hijos: industrias.map((i) => ({
-      href: neuHub(i.slug),
-      texto: i.navLabel,
-      clave: i.slug.replace("sopladores-para-", ""),
-    })),
-  },
-  { href: `${NEU_HOME}#servicios`, texto: "Servicios", clave: "servicios" },
-  { href: `${NEU_HOME}#sopladores`, texto: "Sopladores", clave: "sopladores" },
-  { href: `${NEU_HOME}#nosotros`, texto: "Nosotros", clave: "nosotros" },
-  { href: `${NEU_HOME}#temporal`, texto: "Misión", clave: "mision" },
-  { href: NEU_BLOG, texto: "Blog", clave: "blog" },
-  // La referencia del sistema queda fuera de la barra: es documentacion
-  // interna, no una seccion del sitio. Sigue accesible en /neumorfismo.
-];
+const enlaces = enlacesNav;
 
 const esActivo = (e: (typeof enlaces)[number]) =>
   e.clave === activo || (e.hijos ?? []).some((h) => h.clave === activo);
@@ -45,11 +21,11 @@ const esActivo = (e: (typeof enlaces)[number]) =>
 
 <header class="neu-navbar">
   <div class="neu-navbar-interior">
-    <a class="neu-navbar-marca" href={NEU_HOME}>
+    <a class="neu-navbar-marca" href="/">
       <img src="/images/logo-claro.webp" alt="Continental Blowers Andes" width="300" height="62" />
     </a>
 
-    <nav class="neu-nav neu-navbar-nav" aria-label="Navegación de la versión neumórfica">
+    <nav class="neu-nav neu-navbar-nav" aria-label="Navegacion principal">
       {enlaces.map((e) => (
         <span class={e.hijos ? "tiene-submenu" : ""}>
           <a href={e.href} class={esActivo(e) ? "is-active" : ""} aria-current={esActivo(e) ? "page" : undefined}>
