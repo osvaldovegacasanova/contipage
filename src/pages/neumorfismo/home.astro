@@ -149,7 +149,11 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
         <!-- Sopladores -->
         <section class="neu-section neu-section-last" id="sopladores">
           <div class="neu-processes-intro">
-            <span class="neu-eyebrow">{productosSection.title}</span>
+            {/*
+              Sin antetítulo: decía "Sopladores" y el titular que sigue ya empieza
+              con esa palabra. En el home real es la píldora de Title2, la misma
+              que se ocultó en los hubs por leerse como etiqueta suelta.
+            */}
             <h1 class="neu-intro-afirmacion">
               {productosSection.subheading1_1}
               <GradiantText>{productosSection.subheading1_2}</GradiantText>
