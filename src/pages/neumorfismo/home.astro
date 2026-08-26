@@ -129,12 +129,14 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
               </ul>
             </div>
 
-            <div class="neu-servicios-panel">
-              {panelServicios.map((img) => (
-                <figure class={`neu-raised neu-panel-card ${img.contener ? "is-contain" : ""}`}>
-                  <img src={img.src} alt={img.alt} loading="lazy" />
-                </figure>
-              ))}
+            <div class="neu-panel-wrap">
+              <div class="neu-servicios-panel">
+                {panelServicios.map((img) => (
+                  <figure class={`neu-raised neu-panel-card ${img.contener ? "is-contain" : ""}`}>
+                    <img src={img.src} alt={img.alt} loading="lazy" />
+                  </figure>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -251,12 +253,25 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
     izquierda y reparte esa altura en tres filas iguales, como en el home real.
     En una sola columna eso no aplica y las imágenes vuelven a su alto fijo.
   */
+  /*
+    En dos columnas el panel se ancla a la altura que fija la lista de la
+    izquierda. Sacarlo del flujo con posición absoluta es lo que lo consigue:
+    si queda en flujo, `height: 100%` no resuelve —ningún ancestro tiene altura
+    definida— y cada imagen se dibuja a su tamaño natural, con lo que el panel
+    crecía por su cuenta y sobrepasaba la lista. Fuera del flujo ya no aporta
+    altura, así que la fila la decide sólo la lista y las tres tarjetas se
+    reparten ese alto en partes iguales.
+  */
   @media (min-width: 64rem) {
     .neu-servicios-grid {
       grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
       align-items: stretch;
     }
-    .neu-servicios-panel { height: 100%; grid-template-rows: repeat(3, minmax(0, 1fr)); }
+    .neu-panel-wrap { position: relative; }
+    .neu-servicios-panel {
+      position: absolute; inset: 0;
+      height: 100%; grid-template-rows: repeat(3, minmax(0, 1fr));
+    }
     .neu-panel-card { height: 100%; }
     .neu-panel-card img { height: 100%; }
   }
