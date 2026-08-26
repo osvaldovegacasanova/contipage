@@ -1,7 +1,9 @@
 import type { IndustryPage } from "./types";
 
-// NOTE: Images below are PLACEHOLDERS reusing existing site assets
-// (flagged with imagePlaceholder: true). Swap for real process photography.
+// Process images are real photography, sourced from "images/3. TRATAMIENTO DE
+// AGUA" and processed to WebP under public/images/agua/. Only the hero still
+// uses a generic asset (flagged with imagePlaceholder: true): that folder ships
+// no cover shot, same call as the Biogás hub.
 // Process names follow the taxonomy tree and descriptions/bullets the HUB body
 // of "HUBS POR INDUSTRIA CONTINENTAL.md" (estructura revisada con Carlos, 2026-08-20).
 
@@ -40,9 +42,8 @@ export const tratamientoAgua: IndustryPage = {
         "Alta disponibilidad",
         "Operación simple",
       ],
-      image: "/images/aplicacion_tratamiento_agua.webp",
+      image: "/images/agua/reactores-biologicos.webp",
       alt: "Soplador centrífugo para aireación de reactores de lodos activados en plantas de aguas servidas",
-      imagePlaceholder: true,
     },
     {
       name: "Sopladores para manejo de biogás",
@@ -56,9 +57,8 @@ export const tratamientoAgua: IndustryPage = {
         "Recubrimiento anticorrosivo específico",
         "Conjunto booster especificado bajo norma ATEX",
       ],
-      image: "/images/aplicacion_biogas.webp",
+      image: "/images/agua/manejo-biogas.webp",
       alt: "Soplador centrífugo para manejo de biogás de biodigestores en plantas de tratamiento de agua",
-      imagePlaceholder: true,
     },
     {
       name: "Sopladores para oxidación y agitación",
@@ -69,9 +69,8 @@ export const tratamientoAgua: IndustryPage = {
         "Simplicidad mecánica y Alta disponibilidad",
         "Suministro de sistemas de seguridad y control de caudal",
       ],
-      image: "/images/multistage_draw.webp",
+      image: "/images/agua/oxidacion.webp",
       alt: "Soplador centrífugo para procesos de oxidación y agitación por burbujeo en estanques y reactores",
-      imagePlaceholder: true,
     },
   ],
   cta: {

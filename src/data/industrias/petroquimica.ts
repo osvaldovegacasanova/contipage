@@ -1,7 +1,9 @@
 import type { IndustryPage } from "./types";
 
-// NOTE: Images below are PLACEHOLDERS reusing existing site assets
-// (flagged with imagePlaceholder: true). Swap for real process photography.
+// The process image is real photography, sourced from "images/6. PETROQUÍMICA"
+// and processed to WebP under public/images/petroquimica/. Only the hero still
+// uses a generic asset (flagged with imagePlaceholder: true): that folder ships
+// no cover shot, same call as the Biogás, Agua and Celulosa hubs.
 // Process names follow the taxonomy tree and descriptions/bullets the HUB body
 // of "HUBS POR INDUSTRIA CONTINENTAL.md" (estructura revisada con Carlos, 2026-08-20).
 // Hero, processesHeading and CTA copy are site-authored, pending review by Karina.
@@ -43,9 +45,8 @@ export const petroquimica: IndustryPage = {
         "Alta disponibilidad y confiabilidad",
         "Sistemas de control integrados",
       ],
-      image: "/images/singlestage_draw.webp",
+      image: "/images/petroquimica/desulfurizacion.webp",
       alt: "Soplador centrífugo monoetapa para desulfurización de gases en procesos petroquímicos",
-      imagePlaceholder: true,
     },
   ],
   cta: {

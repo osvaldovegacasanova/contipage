@@ -1,7 +1,9 @@
 import type { IndustryPage } from "./types";
 
-// NOTE: Images below are PLACEHOLDERS reusing existing site assets
-// (flagged with imagePlaceholder: true). Swap for real process photography.
+// Process images are real photography, sourced from "images/2. BIOGÁS" and
+// processed to WebP under public/images/biogas/. Only the hero still uses a
+// generic asset (flagged with imagePlaceholder: true): that folder ships no
+// cover shot, and reusing a process photo up top was ruled out.
 // Process names follow the taxonomy tree and descriptions/bullets the HUB body
 // of "HUBS POR INDUSTRIA CONTINENTAL.md" (estructura revisada con Carlos, 2026-08-20).
 
@@ -40,9 +42,8 @@ export const biogas: IndustryPage = {
         "Recubrimiento anticorrosivo específico para biogás",
         "Conjunto booster especificado bajo norma ATEX",
       ],
-      image: "/images/aplicacion_biogas.webp",
+      image: "/images/biogas/generacion-energia.webp",
       alt: "Booster centrífugo multietapa para presurización de biogás hacia motores de generación eléctrica",
-      imagePlaceholder: true,
     },
     {
       name: "Sopladores para sistema de quema de biogás",
@@ -56,9 +57,8 @@ export const biogas: IndustryPage = {
         "Recubrimiento anticorrosivo específico para biogás",
         "Conjunto booster especificado bajo norma ATEX",
       ],
-      image: "/images/singlestage_draw.webp",
+      image: "/images/biogas/quema.webp",
       alt: "Soplador centrífugo para sistema de quema de biogás en antorcha de relleno sanitario",
-      imagePlaceholder: true,
     },
     {
       name: "Booster en la generación de biometano",
@@ -72,18 +72,16 @@ export const biogas: IndustryPage = {
         "Recubrimiento anticorrosivo específico",
         "Conjunto Booster especificado bajo norma Atex",
       ],
-      image: "/images/multistage_draw.webp",
+      image: "/images/biogas/biometano.webp",
       alt: "Booster centrífugo para la generación y purificación de biometano",
-      imagePlaceholder: true,
     },
     {
       name: "Sopladores para oxidación y agitación",
       description:
         "En las plantas de rellenos sanitarios, el lixiviado generado bajo el relleno se recolecta en estanques donde se requiere oxidar compuestos disueltos o mantener en agitación mediante aireación, antes de continuar su tratamiento en piscinas sucesivas. Los sopladores centrífugos Continental Industrie aportan el aire necesario, con un diseño que resiste ambientes húmedos y corrosivos.",
       highlights: ["Caudal variable y presión constante", "Simplicidad mecánica y alta disponibilidad"],
-      image: "/images/aplicacion_tratamiento_agua.webp",
+      image: "/images/biogas/oxidacion.webp",
       alt: "Soplador centrífugo para oxidación y agitación de lixiviados en estanques de relleno sanitario",
-      imagePlaceholder: true,
     },
   ],
   cta: {

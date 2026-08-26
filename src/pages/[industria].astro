@@ -3,7 +3,6 @@ import Layout from "../layouts/Layout.astro";
 import Container from "../components/shared/Container.astro";
 import Title2 from "../components/shared/Title2.astro";
 import Paragraph from "../components/shared/Paragraph.astro";
-import GradiantText from "../components/shared/GradiantText.astro";
 import IndustryHero from "../components/industrias/IndustryHero.astro";
 import ProcessModule from "../components/industrias/ProcessModule.astro";
 import { industrias } from "../data/industrias";
@@ -54,11 +53,16 @@ const servicePage = {
     <!-- Alternating process modules -->
     <section id="procesos">
       <Container size="wide" className="flex flex-col items-center text-center">
-        <Title2 as="h2">
-          {industry.processesHeading.title}{" "}
-          <GradiantText>{industry.processesHeading.titleAccent}</GradiantText>
-        </Title2>
-        <Paragraph className="mt-4 max-w-3xl text-heading-3">
+        {/*
+          El encabezado de esta sección se oculta a propósito en todos los hubs:
+          Title2 se renderiza como píldora (border + rounded-full), formato que
+          no funciona con una frase larga como "Procesos donde nuestros
+          sopladores son clave". Los campos `processesHeading.title` y
+          `titleAccent` se conservan en los datos por si se retoma con otro
+          diseño. La jerarquía de encabezados no se resiente: el nombre de cada
+          proceso ya es un <h2> y el título del CTA también.
+        */}
+        <Paragraph className="max-w-3xl text-heading-3">
           {industry.processesHeading.intro}
         </Paragraph>
       </Container>

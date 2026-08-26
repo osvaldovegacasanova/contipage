@@ -1,7 +1,9 @@
 import type { IndustryPage } from "./types";
 
-// NOTE: Images below are PLACEHOLDERS reusing existing site assets
-// (flagged with imagePlaceholder: true). Swap for real process photography.
+// Process images are real photography, sourced from "images/4. CELULOSA Y PAPEL"
+// and processed to WebP under public/images/celulosa/. Only the hero still uses
+// a generic asset (flagged with imagePlaceholder: true): that folder ships no
+// cover shot, same call as the Biogás and Agua hubs.
 // Process names follow the taxonomy tree and descriptions/bullets the HUB body
 // of "HUBS POR INDUSTRIA CONTINENTAL.md" (estructura revisada con Carlos, 2026-08-20).
 // Hero, processesHeading and CTA copy are site-authored, pending review by Karina.
@@ -39,9 +41,8 @@ export const celulosaPapel: IndustryPage = {
         "Mejor relación entre bajo consumo energético y simplicidad mecánica",
         "Alta disponibilidad para operación continua a gran escala",
       ],
-      image: "/images/aplicacion_celulosa.webp",
+      image: "/images/celulosa/tratamiento-riles.webp",
       alt: "Soplador centrífugo para aireación biológica en tratamiento de riles de plantas de celulosa y papel",
-      imagePlaceholder: true,
     },
     {
       name: "Bombas de vacío en corrugado de cartón",
@@ -54,9 +55,8 @@ export const celulosaPapel: IndustryPage = {
         "Boca de entrada opuesta al eje de conducción",
         "Filtros de limpieza específicos para las partículas de polvo que genera el cartón",
       ],
-      image: "/images/multistage_draw.webp",
+      image: "/images/celulosa/corrugado-carton.webp",
       alt: "Bomba de vacío centrífuga para líneas de corrugado de cartón",
-      imagePlaceholder: true,
     },
   ],
   cta: {
