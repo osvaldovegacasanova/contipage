@@ -126,7 +126,12 @@
 .neu-nav a.is-active { box-shadow: var(--neu-pressed); color: var(--neu-accent); }
 
 /* ---- Contenido ---------------------------------------------------------- */
-.neu-photo { padding: 0.75rem; }
+/*
+  Regla del sistema: la fotografía se apoya DIRECTAMENTE sobre la superficie que
+  la contiene. Nada de marcos hundidos ni elevados alrededor de una imagen: la
+  tarjeta ya aporta un borde, la foto aporta el suyo, y un marco intermedio
+  agrega un tercero que ensucia la lectura. Un solo redondeo, sin relleno.
+*/
 .neu-photo img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 0.875rem; }
 
 .neu-list { list-style: none; padding: 0; margin: 1rem 0 1.5rem; }

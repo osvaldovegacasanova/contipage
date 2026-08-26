@@ -2,9 +2,12 @@
 import Layout from "../layouts/Layout.astro";
 import "../styles/neu.css";
 
-// Laboratorio de estilo neumórfico. Página aislada: no se enlaza desde el menú
-// y no toca ningún componente del sitio. Sirve para ver el sistema completo
-// antes de decidir qué migrar.
+// Referencia del sistema de diseño neumórfico. Esta página es la fuente de
+// verdad del estilo: lo que se vea acá es lo que rige para las páginas que lo
+// adopten. Los tokens y componentes viven en src/styles/neu.css.
+//
+// Página aislada: no se enlaza desde el menú y no toca ningún componente del
+// sitio real.
 //
 // Decisiones tomadas respecto de la especificación original:
 //  - Acento: azul de marca #0046ba en vez del púrpura #6c63ff del spec.
@@ -29,8 +32,8 @@ const superficies = [
 ---
 
 <Layout
-  title="Laboratorio · Neumorfismo | Continental Andes"
-  description="Página interna de exploración del sistema de diseño neumórfico. No forma parte del sitio público."
+  title="Sistema de diseño · Neumorfismo | Continental Andes"
+  description="Referencia del sistema de diseño neumórfico: tokens, superficies y componentes. Página interna, no forma parte del sitio público."
 >
   <link
     rel="stylesheet"
@@ -41,7 +44,7 @@ const superficies = [
     <div class="neu-wrap">
       <!-- Encabezado -->
       <header class="neu-header">
-        <span class="neu-eyebrow">Laboratorio interno</span>
+        <span class="neu-eyebrow">Referencia interna</span>
         <h1>Sistema neumórfico</h1>
         <p class="neu-lead">
           Superficies blandas que parecen extruidas o hundidas en un fondo único. No hay bordes:
@@ -49,7 +52,9 @@ const superficies = [
           oscura abajo a la derecha.
         </p>
         <p class="neu-note">
-          Esta página no está enlazada desde el sitio y no modifica ningún componente existente.
+          Esta página es la referencia del sistema: lo que aparece acá es lo que rige para las
+          páginas que adopten el estilo. No está enlazada desde el sitio y no modifica ningún
+          componente existente.
         </p>
       </header>
 
@@ -190,10 +195,16 @@ const superficies = [
           Dos piezas reales del sitio traducidas al estilo, para juzgar el encaje y no sólo los
           componentes sueltos.
         </p>
+        <p class="neu-sub">
+          <strong>Regla de la fotografía:</strong> la imagen se apoya directamente sobre la
+          superficie que la contiene. Sin marcos hundidos ni elevados alrededor: la tarjeta ya
+          aporta un borde y la foto aporta el suyo, así que un marco intermedio agrega un tercero
+          y ensucia la lectura.
+        </p>
 
         <div class="neu-grid neu-grid-2">
           <article class="neu-raised neu-card neu-industry">
-            <div class="neu-pressed neu-photo">
+            <div class="neu-photo">
               <img src="/images/mineria/flotacion.webp" alt="Soplador centrífugo multietapa para flotación de minerales" width="800" height="600" loading="lazy" />
             </div>
             <h3>Sopladores para Minería</h3>

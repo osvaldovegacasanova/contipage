@@ -40,7 +40,7 @@ const industria = mineria;
           <div class="neu-processes">
             {industria.processes.map((proceso, i) => (
               <article class={`neu-raised neu-card neu-process ${i % 2 === 1 ? "is-reversed" : ""}`}>
-                <div class="neu-process-photo">
+                <div class="neu-photo neu-process-photo">
                   <img src={proceso.image} alt={proceso.alt} width="800" height="600" loading="lazy" />
                 </div>
 
@@ -97,16 +97,7 @@ const industria = mineria;
     display: grid; gap: 2rem; align-items: center; padding: 2rem;
     grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
   }
-  /*
-    La imagen va directamente sobre la superficie de la tarjeta. Antes llevaba un
-    marco hundido intermedio, que sumaba un tercer borde entre la foto y el canto
-    de la tarjeta y ensuciaba la lectura.
-  */
-  .neu-process-photo img {
-    display: block; width: 100%;
-    aspect-ratio: 4 / 3; object-fit: cover;
-    border-radius: 0.875rem;
-  }
+  /* La foto usa .neu-photo del sistema: apoyada directamente sobre la tarjeta. */
   .neu-process.is-reversed .neu-process-photo { order: 2; }
 
   .neu-step {
