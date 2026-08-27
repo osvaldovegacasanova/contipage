@@ -26,8 +26,9 @@ export const biogas: IndustryPage = {
   processesHeading: {
     title: "Procesos donde nuestros",
     titleAccent: "sopladores son clave",
+    bajada: "Equipos seguros, sin fugas y con certificación ATEX.",
     intro:
-      "Desde el biodigestor hasta el motor o la antorcha, cada etapa del biogás exige caudal y presión específicos. Dimensionamos e integramos el equipo correcto para asegurar continuidad y seguridad operacional.",
+      "Los sopladores centrífugos multietapa Continental Industrie cumplen con la normativa ATEX e incorporan ejes de acero inoxidable y sellos especializados de alta seguridad contra fugas y corrosión interna. Encargados de presurizar el biogás desde la salida del biodigestor, operan con caudal variable y presión constante para adaptarse eficientemente a las exigencias de los procesos.",
   },
   processes: [
     {
