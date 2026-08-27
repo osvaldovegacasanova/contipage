@@ -76,33 +76,37 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
     <div class="neu-root neu-below-hero">
       <div class="neu-wrap">
         {/*
-          Banda de apertura. Lleva el unico h1 de la pagina y su frase de apoyo.
-          El h1 estaba dentro de la seccion Sopladores, o sea en el tercer bloque:
-          el encabezado principal debe abrir la pagina, no aparecer a mitad de
-          camino. Ademas coincide con el title, asi que refuerza la misma busqueda.
-        
-          La frase de apoyo viene de Industrias y aqui va sin degradado: el h1 ya
-          lo lleva y dos seguidos compiten entre si.
+          Banda de apertura. Solo el h1: es el titulo de la pagina, no necesita
+          una bajada colgando. Estaba dentro de la seccion Sopladores, o sea en
+          el tercer bloque, y el encabezado principal debe abrir la pagina.
+          Coincide ademas con el title, asi que refuerzan la misma busqueda.
         */}
         <section class="neu-section neu-apertura">
           <h1 class="neu-intro-afirmacion">
             {productosSection.subheading1_1}
             <GradiantText>{productosSection.subheading1_2}</GradiantText>
           </h1>
-          <p class="neu-intro-respaldo">
-            {areasSectionData.subheading.text1_1}
-            {areasSectionData.subheading.text1_2}
-          </p>
         </section>
 
         <!-- Industrias -->
         <section class="neu-section" id="industrias">
           <div class="neu-processes-intro">
             {/*
-              Las dos frases van separadas por un salto, como en el componente
-              original. Puestas seguidas quedaban pegadas —"industria.Eficiencia"—
-              porque el espacio entre expresiones se pierde al compilar.
+              "Soluciones de aire y gas para cada industria y aplicacion" titula
+              esta seccion y no otra: describe justo las seis tarjetas que
+              siguen. Llego a estar arriba, junto al h1, y alli sobraba —cuatro
+              lineas de intro apiladas y esta seccion sin encabezado propio,
+              la unica de la pagina.
+
+              Las dos frases de apoyo van separadas por un salto, como en el
+              componente original. Puestas seguidas quedaban pegadas
+              —"industria.Eficiencia"— porque el espacio entre expresiones se
+              pierde al compilar.
             */}
+            <h2 class="neu-intro-afirmacion">
+              {areasSectionData.subheading.text1_1}
+              <GradiantText>{areasSectionData.subheading.text1_2}</GradiantText>
+            </h2>
             <p class="neu-intro-respaldo">
               {areasSectionData.subheading.text2}
               <br />
