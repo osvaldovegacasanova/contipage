@@ -48,5 +48,5 @@ export const productosSection = {
     },
   ],
   callToAction: "Consulte por disponibilidad y especificaciones",
-  button: "Ver sopladores",
+  button: "Solicitar información",
 };

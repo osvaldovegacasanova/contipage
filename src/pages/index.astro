@@ -75,14 +75,28 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
 
     <div class="neu-root neu-below-hero">
       <div class="neu-wrap">
+        {/*
+          Banda de apertura. Solo el h1: es el titulo de la pagina, no necesita
+          una bajada colgando. Estaba dentro de la seccion Sopladores, o sea en
+          el tercer bloque, y el encabezado principal debe abrir la pagina.
+          Coincide ademas con el title, asi que refuerzan la misma busqueda.
+        */}
+        <section class="neu-section neu-apertura">
+          <h1 class="neu-intro-afirmacion">
+            {productosSection.subheading1_1}
+            <GradiantText>{productosSection.subheading1_2}</GradiantText>
+          </h1>
+        </section>
+
         <!-- Industrias -->
         <section class="neu-section" id="industrias">
           <div class="neu-processes-intro">
-            <p class="neu-intro-afirmacion">
-              {areasSectionData.subheading.text1_1}
-              <GradiantText>{areasSectionData.subheading.text1_2}</GradiantText>
-            </p>
             {/*
+              Sin encabezado propio: "Soluciones de aire y gas para cada
+              industria y aplicacion" titula ahora la seccion Sopladores, segun
+              lo definido. Aqui queda la frase de apoyo, y cada tarjeta se
+              titula sola: las seis son h2.
+
               Las dos frases van separadas por un salto, como en el componente
               original. Puestas seguidas quedaban pegadas —"industria.Eficiencia"—
               porque el espacio entre expresiones se pierde al compilar.
@@ -105,7 +119,12 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
                   <div class="neu-photo neu-industry-photo">
                     <img src={area.visual} alt={area.alt} width="800" height="600" loading="lazy" />
                   </div>
-                  <h3>Sopladores para {area.title}</h3>
+                  {/*
+                    h2 y no h3: son los nombres con más peso de búsqueda de la
+                    página, y esta sección no lleva encabezado propio —lo hace la
+                    banda de apertura—, así que cada tarjeta titula su aplicación.
+                  */}
+                  <h2>Sopladores para {area.title}</h2>
                   {area.intro && <p class="neu-industry-intro">{area.intro}</p>}
                   <ul class="neu-list">
                     {area.items.map((item) => (
@@ -130,11 +149,11 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
             <div>
               <div class="neu-processes-intro">
                 <span class="neu-eyebrow">{servicesSectionData.title}</span>
-                <p class="neu-intro-afirmacion">
+                <h2 class="neu-intro-afirmacion">
                   {servicesSectionData.subheading.text1_1}
                   <br />
                   <GradiantText>{servicesSectionData.subheading.text1_2}</GradiantText>
-                </p>
+                </h2>
                 <p class="neu-intro-respaldo">{servicesSectionData.subheading.text2}</p>
               </div>
 
@@ -171,7 +190,7 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
 
           <div class="neu-cta-seccion">
             <p class="neu-intro-respaldo">{servicesSectionData.callToAction}</p>
-            <a href="/#contacto" class="neu-btn neu-btn-accent">{servicesSectionData.buttonText}</a>
+            <a href="/contacto" class="neu-btn neu-btn-accent">{servicesSectionData.buttonText}</a>
           </div>
         </section>
 
@@ -179,14 +198,18 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
         <section class="neu-section" id="sopladores">
           <div class="neu-processes-intro">
             {/*
-              Sin antetítulo: decía "Sopladores" y el titular que sigue ya empieza
-              con esa palabra. En el home real es la píldora de Title2, la misma
-              que se ocultó en los hubs por leerse como etiqueta suelta.
+              Su titular definido —"Sopladores Centrifugos Monoetapa y
+              Multietapa"— es ahora el h1 de la pagina, asi que esta seccion
+              lleva la frase que venia de Industrias. Es lo acordado: las dos
+              intercambian lugar.
+
+              No se usa productosSection.title: ese campo es el antetitulo, la
+              pildora de esquina que decia "Sopladores", no un encabezado.
             */}
-            <h1 class="neu-intro-afirmacion">
-              {productosSection.subheading1_1}
-              <GradiantText>{productosSection.subheading1_2}</GradiantText>
-            </h1>
+            <h2 class="neu-intro-afirmacion">
+              {areasSectionData.subheading.text1_1}
+              <GradiantText>{areasSectionData.subheading.text1_2}</GradiantText>
+            </h2>
           </div>
 
           <div class="neu-grid neu-grid-3">
@@ -213,13 +236,13 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
 
           <div class="neu-cta-seccion">
             <p class="neu-intro-respaldo">{productosSection.callToAction}</p>
-            <a href="/#contacto" class="neu-btn neu-btn-accent">{productosSection.button}</a>
+            <a href="/contacto" class="neu-btn neu-btn-accent">{productosSection.button}</a>
           </div>
         </section>
         <!-- Nosotros -->
         <section class="neu-section" id="nosotros">
           <div class="neu-processes-intro neu-centrado">
-            <p class="neu-intro-afirmacion">{nosotrosSection.subheading1_1}</p>
+            <h2 class="neu-intro-afirmacion">{nosotrosSection.subheading1_1}</h2>
           </div>
 
           <div class="neu-grid neu-cols-3">
@@ -256,10 +279,10 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
           <div class="neu-mision">
             <div>
               <div class="neu-processes-intro">
-                <p class="neu-intro-afirmacion">
+                <h2 class="neu-intro-afirmacion">
                   {environmentalImpactSection.subheading1_1}
                   <GradiantText>{environmentalImpactSection.subheading1_2}</GradiantText>
-                </p>
+                </h2>
                 {parrafosMision.map((t) => (
                   <p class="neu-intro-respaldo neu-mision-parrafo">{t}</p>
                 ))}
@@ -300,10 +323,10 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
         */}
         <section class="neu-section neu-section-last" id="contacto">
           <div class="neu-processes-intro neu-centrado">
-            <p class="neu-intro-afirmacion">
+            <h2 class="neu-intro-afirmacion">
               {getInvolvedSection.subheading1_1}
               <GradiantText>{getInvolvedSection.subheading1_2}</GradiantText>
-            </p>
+            </h2>
           </div>
 
           <div class="neu-grid neu-cols-3">
@@ -346,6 +369,8 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
 
   /* Apertura de sección en dos niveles, igual que en la copia de Minería. */
   .neu-processes-intro { margin-bottom: 3rem; }
+  .neu-apertura { margin-bottom: 4.5rem; }
+  .neu-apertura .neu-intro-respaldo { margin-top: 1rem; }
   .neu-intro-afirmacion {
     font-size: 1.75rem; font-weight: 500; line-height: 1.25;
     max-width: 38rem; margin-bottom: 1rem;
@@ -355,7 +380,7 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
   /* ---- Tarjetas de industria ---- */
   .neu-industry { display: flex; flex-direction: column; text-decoration: none; color: inherit; }
   .neu-industry-photo { margin-bottom: 1.25rem; }
-  .neu-industry h3 { color: var(--neu-accent); }
+  .neu-industry h2 { font-size: 1.0625rem; color: var(--neu-accent); }
   .neu-industry-intro { font-size: 0.875rem; margin-bottom: 0.5rem; }
   .neu-industry .neu-list { margin-bottom: 1rem; }
   .neu-industry-link { margin-top: auto; }
