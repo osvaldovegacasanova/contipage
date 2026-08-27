@@ -26,8 +26,9 @@ export const tratamientoAgua: IndustryPage = {
   processesHeading: {
     title: "Procesos donde nuestros",
     titleAccent: "sopladores son clave",
+    bajada: "Control preciso y simplicidad mecánica.",
     intro:
-      "Cada etapa del tratamiento de aguas servidas tiene requerimientos específicos de caudal y presión. Dimensionamos e integramos el equipo correcto para asegurar continuidad operacional y eficiencia energética.",
+      "Suministramos el aire preciso que requieren los procesos biológicos de degradación para el tratamiento de las aguas. Los sopladores Continental Industrie entregan la mejor relación entre bajo consumo energético y simplicidad mecánica, clave en procesos donde la aireación puede representar hasta el 60% del gasto eléctrico de una planta.",
   },
   processes: [
     {

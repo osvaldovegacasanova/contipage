@@ -28,8 +28,9 @@ export const petroquimica: IndustryPage = {
   processesHeading: {
     title: "Procesos donde nuestros",
     titleAccent: "sopladores son clave",
+    bajada: "Control dinámico de presión y caudal para mayor precisión en procesos de alta exigencia.",
     intro:
-      "Los procesos petroquímicos exigen equipos de gran caudal y presión constante. Dimensionamos e integramos el soplador correcto para asegurar continuidad operacional y seguridad.",
+      "Los procesos petroquímicos de carbon black requieren sopladores de gran tamaño y confiabilidad. En Continental Industrie dimensionamos e integramos el equipo correcto para entregar el caudal, la presión y los sistemas de control que aseguren la continuidad operacional en condiciones exigentes.",
   },
   processes: [
     {

@@ -25,8 +25,11 @@ export const alimentaria: IndustryPage = {
   processesHeading: {
     title: "Procesos donde nuestros",
     titleAccent: "sopladores son clave",
+    bajada: "Presión constante sin pulsaciones.",
+    // Dos párrafos, como en el documento. El salto de línea los separa al renderizar.
     intro:
-      "Cada proceso de la industria alimentaria exige caudal y presión específicos, sin comprometer la higiene. Dimensionamos e integramos el equipo correcto para asegurar continuidad operacional y eficiencia.",
+      "Cada línea de proceso exige parámetros precisos de caudal, presión y estándares de higiene. En Continental Industrie dimensionamos e integramos el equipo adecuado para garantizar la continuidad operacional y el estricto cumplimiento sanitario.\n" +
+      "Nuestros sopladores y extractores de vacío cuentan con diseño 100% libre de aceite (oil-free) y entregan caudal variable y alta disponibilidad para sistemas de aspiración y tratamiento de riles en plantas de alimentos y de producción animal.",
   },
   processes: [
     {

@@ -31,6 +31,9 @@ const claveHub = industria.slug.replace("sopladores-para-", "");
 // Cuando el hub define "bajada" se usan tal cual, que es lo que trae el
 // documento de taxonomia. Los que todavia no la definen conservan el
 // comportamiento anterior: se parte "intro" en su primera frase.
+//
+// El intro admite varios parrafos separados por saltos de linea: Industria
+// Alimentaria trae dos en el documento.
 const { bajada, intro } = industria.processesHeading;
 const corte = intro.indexOf(". ");
 const introAfirmacion = bajada ?? (corte === -1 ? intro : intro.slice(0, corte + 1));
@@ -81,7 +84,11 @@ const servicePage = {
         <section class="neu-section">
           <div class="neu-processes-intro">
             <p class="neu-intro-afirmacion">{introAfirmacion}</p>
-            {introRespaldo && <p class="neu-intro-respaldo">{introRespaldo}</p>}
+            {introRespaldo
+              .split("\n")
+              .map((parrafo: string) => parrafo.trim())
+              .filter(Boolean)
+              .map((parrafo: string) => <p class="neu-intro-respaldo">{parrafo}</p>)}
           </div>
 
           <div class="neu-processes">

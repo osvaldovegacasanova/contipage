@@ -27,8 +27,9 @@ export const celulosaPapel: IndustryPage = {
   processesHeading: {
     title: "Procesos donde nuestros",
     titleAccent: "sopladores son clave",
+    bajada: "Robustez mecánica que resiste altas temperaturas y concentraciones de polvo.",
     intro:
-      "Desde el tratamiento de riles hasta la línea de corrugado, cada proceso exige caudal y presión específicos. Dimensionamos e integramos el equipo correcto para asegurar continuidad operacional y eficiencia energética.",
+      "La industria de celulosa y papel combina aireación biológica de gran volumen con aplicaciones de vacío de alta precisión y sin fluctuaciones que comprometan la calidad del papel en el proceso de corrugado. En Continental Industrie dimensionamos e integramos el equipo correcto para cada etapa, asegurando un bajo consumo energético y continuidad operacional para plantas de mediano y gran tamaño.",
   },
   processes: [
     {
