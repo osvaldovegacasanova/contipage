@@ -26,10 +26,15 @@ const claveHub = industria.slug.replace("sopladores-para-", "");
 // El parrafo que abre la seccion son dos frases con jerarquia distinta: la
 // primera afirma, la segunda respalda. Se parten en el primer punto para
 // tratarlas en dos niveles, sin duplicar el texto del archivo de datos.
-const introCompleto = industria.processesHeading.intro;
-const corte = introCompleto.indexOf(". ");
-const introAfirmacion = corte === -1 ? introCompleto : introCompleto.slice(0, corte + 1);
-const introRespaldo = corte === -1 ? "" : introCompleto.slice(corte + 2);
+// La seccion abre en dos niveles: una frase destacada y un parrafo de apoyo.
+//
+// Cuando el hub define "bajada" se usan tal cual, que es lo que trae el
+// documento de taxonomia. Los que todavia no la definen conservan el
+// comportamiento anterior: se parte "intro" en su primera frase.
+const { bajada, intro } = industria.processesHeading;
+const corte = intro.indexOf(". ");
+const introAfirmacion = bajada ?? (corte === -1 ? intro : intro.slice(0, corte + 1));
+const introRespaldo = bajada ? intro : corte === -1 ? "" : intro.slice(corte + 2);
 
 // Datos estructurados, equivalentes a los del hub real: sin ellos la version
 // nueva perderia el marcado que el buscador ya lee en la actual.

@@ -23,8 +23,9 @@ export const mineria: IndustryPage = {
   processesHeading: {
     title: "Procesos donde nuestros",
     titleAccent: "sopladores son clave",
+    bajada: "Presión constante sobre los 3.000 metros de altura.",
     intro:
-      "Aire y gas a presión para los procesos más exigentes de la gran minería. Equipos Continental Industrie diseñados para operación continua, alta eficiencia energética y máxima disponibilidad en faenas de altura y ambientes severos.",
+      "En procesos sobre 3.000 mts de altura, donde ventiladores convencionales quedan obsoletos, los sopladores Continental Industrie entregan la presión necesaria combinada con simplicidad mecánica e impulsores robustos que resisten polvo, corrosión y ambientes severos manteniendo el caudal requerido.",
   },
   processes: [
     {

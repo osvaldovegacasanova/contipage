@@ -40,8 +40,18 @@ export interface IndustryPage {
   };
   /** Section heading above the alternating process modules. */
   processesHeading: {
+    /** Conservados sin renderizar: el encabezado en píldora se retiró del diseño. */
     title: string;
     titleAccent: string;
+    /**
+     * Frase destacada que abre la sección, en cuerpo grande. Corresponde a
+     * "Bajada" en el documento de taxonomía.
+     *
+     * Mientras algún hub no la defina, la página parte `intro` en la primera
+     * frase para obtenerla, que es como funcionaba antes.
+     */
+    bajada?: string;
+    /** Párrafo de apoyo bajo la bajada. "Intro" en el documento de taxonomía. */
     intro: string;
   };
   /** Processes rendered as alternating image + text modules. */
