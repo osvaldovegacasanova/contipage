@@ -410,8 +410,11 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
   .neu-servicio h3 { color: var(--neu-accent); }
   .neu-servicio p { font-size: 0.875rem; margin-top: 0.25rem; }
 
-  @media (max-width: 39.99rem) {
+  @media (max-width: 47.99rem) {
     .neu-servicio { flex-direction: column; align-items: center; text-align: center; }
+
+    /* La banda de apertura tambien cede aire: 4,5rem son 72px de hueco. */
+    .neu-apertura { margin-bottom: 2rem; }
   }
 
   /*
@@ -428,6 +431,26 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
   .neu-panel-card img { display: block; width: 100%; height: 11rem; object-fit: cover; object-position: center; }
   .neu-panel-card.is-contain { padding: 0.75rem; }
   .neu-panel-card.is-contain img { object-fit: contain; }
+
+  /*
+    Las tres fotos del panel pasan a una tira de tres en movil. Apiladas a ancho
+    completo quedaban como tres imagenes sueltas sin pie, unos 800px de
+    desplazamiento justo antes del CTA: en escritorio se leen como panel porque
+    acompanan a la lista de servicios, y esa lectura se pierde al caer una
+    debajo de otra. En tira conservan su papel de apoyo y cuestan una fraccion
+    del alto.
+
+    Este bloque va aqui, despues de las reglas base, y no arriba con el resto de
+    lo movil: una consulta de medios no aporta especificidad, asi que entre
+    reglas igual de especificas gana la ultima del archivo. Puesto antes, la
+    altura de 11rem de la linea de arriba se imponia sobre la de 5rem y las
+    fotos seguian midiendo lo mismo.
+  */
+  @media (max-width: 47.99rem) {
+    .neu-servicios-panel { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.625rem; }
+    .neu-panel-card img { height: 5rem; }
+    .neu-panel-card.is-contain { padding: 0.375rem; }
+  }
 
   /*
     En dos columnas el panel se estira hasta igualar la altura de la lista de la
@@ -513,13 +536,14 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
     margin-top: 1.25rem;
   }
   .neu-persona-tel svg { width: 1.25rem; height: 1.25rem; }
-  @media (min-width: 40rem) {
+  /* Solo en movil, segun la escala: desaparece a partir de 48rem. */
+  @media (min-width: 48rem) {
     .neu-persona-tel { display: none; }
   }
 
   /* ---- Mision ---- */
   .neu-mision { display: grid; gap: 3rem; align-items: center; }
-  @media (min-width: 55rem) {
+  @media (min-width: 64rem) {
     .neu-mision { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
   }
   .neu-mision-parrafo { margin-bottom: 0.875rem; }

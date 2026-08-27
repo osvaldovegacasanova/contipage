@@ -181,6 +181,30 @@ const servicePage = {
   /* En una columna el orden invertido estorba: la foto vuelve arriba siempre. */
   @media (max-width: 47.99rem) {
     .neu-process.is-reversed .neu-process-photo { order: 0; }
+
+    /*
+      La foto de cada proceso ocupa el ancho completo de la pantalla y pierde
+      las esquinas redondeadas. Para llegar al borde tiene que salvar dos
+      sangrados: el relleno lateral de .neu-root (1,25rem) y el de la propia
+      tarjeta (2rem).
+
+      Se resuelve dejando la tarjeta sin relleno lateral y sacandola con margen
+      negativo hasta el borde; el texto recupera el suyo por dentro. La tarjeta
+      pierde tambien el radio y el relieve: a ancho completo no queda borde
+      donde leer la sombra, y una foto a sangre dentro de un contenedor
+      redondeado se ve rota en las esquinas. Lo que separa un proceso del
+      siguiente pasa a ser el espacio entre ellos y la propia foto.
+    */
+    .neu-process {
+      margin-left: -1.25rem; margin-right: -1.25rem;
+      padding: 0 0 1.75rem;
+      border-radius: 0;
+      box-shadow: none;
+      gap: 1.5rem;
+    }
+    .neu-process:hover { box-shadow: none; }
+    .neu-process-photo img { border-radius: 0; }
+    .neu-process-text { padding: 0 1.25rem; }
   }
 
   /* ---- Cierre ---- */
