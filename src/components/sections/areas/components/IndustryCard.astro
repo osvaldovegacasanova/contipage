@@ -6,31 +6,40 @@ export interface Props {
   title: string;
   visual: string;
   items: string[];
+  /** Short benefit-led paragraph shown above the process bullets. */
+  intro?: string;
   href?: string;
   alt?: string;
   objectPosition?: string;
 }
 
-const { title, visual, items, href, alt, objectPosition = "center" } = Astro.props;
+const { title, visual, items, intro, href, alt, objectPosition = "center" } = Astro.props;
 const Tag = href ? "a" : "article";
 const linkProps = href ? { href } : {};
 const imageAlt = alt || `Aplicaciones de sopladores centrífugos Continental Blowers en la industria ${title.toLowerCase()}`;
 ---
 
+{/*
+  The card is a 4-row grid: image / title / intro / body.
+  KeyAreas.astro upgrades these rows to `subgrid` where supported, so the four
+  blocks line up across contiguous cards even when titles wrap to a different
+  number of lines. Spacing therefore lives in each row's padding (not in a grid
+  gap), so both the subgrid and the non-subgrid rendering look identical.
+*/}
 <Tag
   {...linkProps}
   class:list={[
-    "flex h-full flex-col overflow-hidden rounded-3xl border border-primary/10",
+    "industry-card grid h-full grid-rows-[auto_auto_auto_1fr] overflow-hidden rounded-3xl border border-primary/10",
     "bg-white shadow-lg dark:bg-base-dark-800 dark:shadow-dark",
     href && "transition-all duration-300 hover:shadow-xl hover:scale-[1.02] hover:border-primary/30 cursor-pointer"
   ]}
 >
-  <div class="relative aspect-[3/4] w-full overflow-hidden">
+  <div class="relative aspect-[4/3] w-full overflow-hidden">
     <LazyImage
       src={visual}
       alt={imageAlt}
-      width="900"
-      height="1200"
+      width="1200"
+      height="900"
       class="h-full w-full object-cover"
       style={`object-position: ${objectPosition};`}
       loading="lazy"
@@ -39,10 +48,16 @@ const imageAlt = alt || `Aplicaciones de sopladores centrífugos Continental Blo
       <div class="absolute inset-0 bg-primary/0 hover:bg-primary/5 transition-colors duration-300" />
     )}
   </div>
-  <div class="flex flex-1 flex-col gap-4 p-6">
-    <Title3 as="h3" className="text-primary mb-0">
-      {title}
-    </Title3>
+
+  <Title3 as="h3" className="text-primary mb-0 px-6 pt-6">
+    Sopladores para {title}
+  </Title3>
+
+  <div class="px-6 pt-3">
+    {intro && <p class="text-sm leading-relaxed text-heading-3">{intro}</p>}
+  </div>
+
+  <div class="flex flex-col px-6 pb-6 pt-4">
     <ul class="space-y-2 text-heading-3">
       {items.map((item) => (
         <li class="flex items-start gap-2 text-sm leading-relaxed">

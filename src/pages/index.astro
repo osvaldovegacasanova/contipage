@@ -1,53 +1,515 @@
-﻿---
-import EnvironmentalImpact from "../components/sections/environment/EnvironmentalImpact.astro";
-import Productos from "../components/sections/productos/Productos.astro";
-import GetInvolved from "../components/sections/cta/GetInvolved.astro";
-import Hero from "../components/sections/hero/Hero.astro";
-import KeyServices from "../components/sections/services/KeyServices.astro";
-import KeyAreas from "../components/sections/areas/KeyAreas.astro";
+---
 import Layout from "../layouts/Layout.astro";
-import WhatsAppButton from "../components/WhatsAppButton.astro";
-import Nosotros from "../components/sections/nosotros/Nosotros.astro";
+import Hero from "../components/sections/hero/Hero.astro";
+import GradiantText from "../components/shared/GradiantText.astro";
+import "../styles/neu.css";
+import { areasSectionData } from "../components/sections/areas/data";
+import { servicesSectionData } from "../components/sections/services/data";
+import { productosSection } from "../components/sections/productos/data";
+import { nosotrosSection } from "../components/sections/nosotros/data";
+import { environmentalImpactSection } from "../components/sections/environment/data";
+import { getInvolvedSection } from "../components/sections/cta/data";
+import { Image } from "astro:assets";
+
+// Copia experimental del home en estilo neumórfico, por tramos.
+//
+// Traducidas las siete secciones, en el orden real del home: Industrias,
+// Servicios, Sopladores, Nosotros, Misión y Contáctenos.
+//
+// Igual que en la copia de Minería, el contenido NO se duplica: se lee de los
+// mismos data.ts que alimentan el home real, así que los textos tienen una sola
+// fuente y las dos versiones no se bifurcan.
+//
+// El hero es el ORIGINAL, sin tocar: video de fondo con capa oscura y titular en
+// degradado, imposible de reproducir en un estilo que exige fondo claro. Queda
+// fuera de .neu-root, que tiene padding propio y anularía su sangrado.
+
+// En services/data.ts el campo `visual` es mixto: cinco rutas de public/ (cadenas)
+// y dos imágenes importadas de assets/, que llegan como objeto con .src. Sin
+// normalizar, esas dos saldrían con el src vacío.
+// Las tres imágenes del panel lateral, iguales a las del componente real.
+// Las tres imágenes del panel son recortes sin fondo, generados por inundación
+// desde los bordes sobre los originales de fondo blanco. Van contenidas y no
+// recortadas: sus proporciones no coinciden con el hueco, así que llenarlo les
+// cortaría partes del equipo. Al no tener fondo, flotan sobre la superficie sin
+// dejar caja, que es justo lo que el estilo pide.
+const panelServicios = [
+  { src: "/images/multistage-blower-recorte.webp", alt: "Soplador centrífugo multietapa Continental Blowers para aplicaciones industriales de alta presión", contener: true },
+  { src: "/images/plaqueta-tc25-recorte.webp", alt: "Instalación de compresor centrífugo TC25 Continental Blowers con silenciador y tablero de control", contener: true },
+  { src: "/images/tch25-partes-recorte.webp", alt: "Vista seccionada del soplador centrífugo TCH25 Continental Blowers con sus componentes internos", contener: true },
+];
+
+// Los tres párrafos de la Misión llegan en un solo campo separados por saltos.
+const parrafosMision = environmentalImpactSection.description.split("\n").filter(Boolean);
+
+// Iconos de los cuatro puntos de la Misión y de los tres bloques de contacto.
+const ICONOS: Record<string, string> = {
+  coverage: "M12 21s-6-5.686-6-10a6 6 0 1112 0c0 4.314-6 10-6 10zm0-8a2 2 0 100-4 2 2 0 000 4z",
+  experience: "M12 8v4l2.5 2.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+  processes: "M4 7h11m0 0l-3-3m3 3l-3 3M20 17H9m0 0l3-3m-3 3l3 3",
+  objectives: "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z",
+  office: "M3 21h18M5 21V7l7-4 7 4v14M9 10h1m4 0h1M9 14h1m4 0h1M9 18h1m4 0h1",
+  warehouse: "M20 7l-8-4-8 4m16 0v10l-8 4-8-4V7m16 0l-8 4m0 0L4 7m8 4v10",
+  contact: "M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.5a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.2-.5l4.5 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z",
+};
+
+const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: string }).src);
 ---
 
-<Layout title="Sopladores Centrifugos Continental Industrie Chile | Continental Blowers Andes">
-  <main class="flex flex-col gap-y-20 md:gap-y-40 overflow-hidden">
-    <!-- Hero Section: -->
-    <!-- High-quality image or animation of renewable energy sources. -->
-    <!-- Headline and subheading centered on the page. -->
+{/*
+  Sin navActivo: en el home el indicador lo lleva el resaltado por seccion, que
+  sigue el scroll. Marcar "Home" ademas dejaria dos enlaces hundidos a la vez.
+*/}
+<Layout
+  title="Sopladores Centrifugos Continental Industrie Chile | Continental Blowers Andes"
+  description="Sopladores y compresores centrifugos Continental Industrie para mineria, tratamiento de agua, biogas e industria en Chile y la region andina."
+>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+  />
+
+  <main>
+    {/* Hero original, idéntico al del home real */}
     <Hero />
 
+    <div class="neu-root neu-below-hero">
+      <div class="neu-wrap">
+        <!-- Industrias -->
+        <section class="neu-section" id="industrias">
+          <div class="neu-processes-intro">
+            <p class="neu-intro-afirmacion">
+              {areasSectionData.subheading.text1_1}
+              <GradiantText>{areasSectionData.subheading.text1_2}</GradiantText>
+            </p>
+            {/*
+              Las dos frases van separadas por un salto, como en el componente
+              original. Puestas seguidas quedaban pegadas —"industria.Eficiencia"—
+              porque el espacio entre expresiones se pierde al compilar.
+            */}
+            <p class="neu-intro-respaldo">
+              {areasSectionData.subheading.text2}
+              <br />
+              {areasSectionData.subheading.text2b}
+            </p>
+          </div>
 
+          <div class="neu-grid neu-cols-2">
+            {areasSectionData.areas.map((area) => {
+              const Tag = area.href ? "a" : "article";
+              return (
+                <Tag
+                  {...(area.href ? { href: area.href } : {})}
+                  class="neu-raised neu-card neu-industry"
+                >
+                  <div class="neu-photo neu-industry-photo">
+                    <img src={area.visual} alt={area.alt} width="800" height="600" loading="lazy" />
+                  </div>
+                  <h3>Sopladores para {area.title}</h3>
+                  {area.intro && <p class="neu-industry-intro">{area.intro}</p>}
+                  <ul class="neu-list">
+                    {area.items.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                  {area.href && <span class="neu-link neu-industry-link">Ver más detalles →</span>}
+                </Tag>
+              );
+            })}
+          </div>
+        </section>
 
-    <Productos />
-    <!-- Productos: -->
-    <!-- Destaca soluciones y equipos disponibles, con breve descripcion y ubicacion. -->
-    <!-- Manten un llamado a profundizar en fichas tecnicas o contacto comercial. -->
+        <!-- Servicios -->
+        {/*
+          Misma distribución que el componente real: dos columnas 3fr/2fr, la
+          lista de servicios a la izquierda con miniatura circular y separador
+          entre ítems, y el panel de tres imágenes apiladas a la derecha.
+        */}
+        <section class="neu-section" id="servicios">
+          <div class="neu-servicios-grid">
+            <div>
+              <div class="neu-processes-intro">
+                <span class="neu-eyebrow">{servicesSectionData.title}</span>
+                <p class="neu-intro-afirmacion">
+                  {servicesSectionData.subheading.text1_1}
+                  <br />
+                  <GradiantText>{servicesSectionData.subheading.text1_2}</GradiantText>
+                </p>
+                <p class="neu-intro-respaldo">{servicesSectionData.subheading.text2}</p>
+              </div>
 
-    <KeyServices />
-    <!-- Key Services Overview: -->
-    <!-- Provide a brief overview of your main green energy services. -->
-    <!-- Use engaging visuals and concise text to highlight the benefits. -->
-    <!-- Include a call-to-action button leading to detailed service information. -->
+              <ul class="neu-servicios-lista">
+                {servicesSectionData.services.map((servicio) => (
+                  <li class="neu-servicio">
+                    <img
+                      class="neu-servicio-foto"
+                      src={srcDe(servicio.visual)}
+                      alt={servicio.alt || servicio.title}
+                      width="192"
+                      height="192"
+                      loading="lazy"
+                    />
+                    <div>
+                      <h3>{servicio.title}</h3>
+                      <p>{servicio.briefDescription}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-    <Nosotros />
-    <!-- Nosotros: -->
-    <!-- Presenta al equipo con informacion de contacto directo para soporte. -->
+            <div class="neu-panel-wrap">
+              <div class="neu-servicios-panel">
+                {panelServicios.map((img) => (
+                  <figure class={`neu-raised neu-panel-card ${img.contener ? "is-contain" : ""}`}>
+                    <img src={img.src} alt={img.alt} loading="lazy" />
+                  </figure>
+                ))}
+              </div>
+            </div>
+          </div>
 
-    <KeyAreas />
-    <!-- Industries served: -->
+          <div class="neu-cta-seccion">
+            <p class="neu-intro-respaldo">{servicesSectionData.callToAction}</p>
+            <a href="/#contacto" class="neu-btn neu-btn-accent">{servicesSectionData.buttonText}</a>
+          </div>
+        </section>
 
-    <EnvironmentalImpact />
-    <!-- Environmental Impact: -->
-    <!-- Showcase the positive impact users can make by choosing your services. -->
-    <!-- Use statistics, infographics, or visuals to illustrate the environmental benefits. -->
-    <!-- Emphasize the role your company plays in promoting sustainability. -->
+        <!-- Sopladores -->
+        <section class="neu-section" id="sopladores">
+          <div class="neu-processes-intro">
+            {/*
+              Sin antetítulo: decía "Sopladores" y el titular que sigue ya empieza
+              con esa palabra. En el home real es la píldora de Title2, la misma
+              que se ocultó en los hubs por leerse como etiqueta suelta.
+            */}
+            <h1 class="neu-intro-afirmacion">
+              {productosSection.subheading1_1}
+              <GradiantText>{productosSection.subheading1_2}</GradiantText>
+            </h1>
+          </div>
 
-    <GetInvolved />
-    <!-- Get Involved Section: -->
-    <!-- Invite users to actively participate or learn more about sustainability. -->
-    <!-- Provide information on community initiatives, events, or partnerships. -->
-    <!-- Include a call-to-action for users to join your community or subscribe to updates. -->
+          <div class="neu-grid neu-grid-3">
+            {productosSection.projects.map((producto) => (
+              <article class="neu-raised neu-card neu-producto">
+                <div class="neu-producto-visual">
+                  <img
+                    src={producto.visual.replace(".webp", "-recorte.webp")}
+                    alt={producto.alt}
+                    width="800"
+                    height="800"
+                    loading="lazy"
+                  />
+                </div>
+                <h3>{producto.title}</h3>
+                <ul class="neu-list">
+                  {producto.bullets.map((b) => (
+                    <li>{b}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+
+          <div class="neu-cta-seccion">
+            <p class="neu-intro-respaldo">{productosSection.callToAction}</p>
+            <a href="/#contacto" class="neu-btn neu-btn-accent">{productosSection.button}</a>
+          </div>
+        </section>
+        <!-- Nosotros -->
+        <section class="neu-section" id="nosotros">
+          <div class="neu-processes-intro neu-centrado">
+            <p class="neu-intro-afirmacion">{nosotrosSection.subheading1_1}</p>
+          </div>
+
+          <div class="neu-grid neu-cols-3">
+            {nosotrosSection.members.map((persona) => (
+              <article class="neu-raised neu-card neu-persona">
+                <Image
+                  class="neu-persona-foto"
+                  src={persona.photo}
+                  alt={"Retrato de " + persona.name}
+                  width={420}
+                  height={420}
+                  format="webp"
+                  loading="lazy"
+                />
+                <h3>{persona.name}</h3>
+                <p class="neu-persona-rol">{persona.role}</p>
+                <a class="neu-link" href={"mailto:" + persona.email}>{persona.email}</a>
+                <a
+                  class="neu-btn neu-btn-accent neu-persona-tel"
+                  href={"tel:" + persona.phone.replace(/[^0-9+]/g, "")}
+                  aria-label={"Llamar a " + persona.name + ", " + persona.phone}
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d={ICONOS.contact} />
+                  </svg>
+                </a>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <!-- Misión -->
+        <section class="neu-section" id="temporal">
+          <div class="neu-mision">
+            <div>
+              <div class="neu-processes-intro">
+                <p class="neu-intro-afirmacion">
+                  {environmentalImpactSection.subheading1_1}
+                  <GradiantText>{environmentalImpactSection.subheading1_2}</GradiantText>
+                </p>
+                {parrafosMision.map((t) => (
+                  <p class="neu-intro-respaldo neu-mision-parrafo">{t}</p>
+                ))}
+              </div>
+
+              <ul class="neu-puntos">
+                {environmentalImpactSection.impactPoints.map((punto) => (
+                  <li>
+                    <span class="neu-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d={ICONOS[punto.icon]} />
+                      </svg>
+                    </span>
+                    <span>{punto.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <figure class="neu-raised neu-mision-foto">
+              <Image
+                src={environmentalImpactSection.visual}
+                alt="Continental Blowers Andes y su compromiso con la eficiencia y la continuidad operacional en la region andina"
+                width={900}
+                height={900}
+                format="webp"
+                loading="lazy"
+              />
+            </figure>
+          </div>
+        </section>
+
+        <!-- Contactenos -->
+        {/*
+          El ancla va como "contacto" y no como "cta": es la que usan todos los
+          botones del sitio. En el home real la seccion se llama id="cta", asi que
+          hoy esos enlaces no llevan a ninguna parte.
+        */}
+        <section class="neu-section neu-section-last" id="contacto">
+          <div class="neu-processes-intro neu-centrado">
+            <p class="neu-intro-afirmacion">
+              {getInvolvedSection.subheading1_1}
+              <GradiantText>{getInvolvedSection.subheading1_2}</GradiantText>
+            </p>
+          </div>
+
+          <div class="neu-grid neu-cols-3">
+            {getInvolvedSection.initiatives.map((bloque) => (
+              <article class="neu-raised neu-card neu-contacto">
+                <span class="neu-icon neu-icon-lg">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d={ICONOS[bloque.icon]} />
+                  </svg>
+                </span>
+                <h3>{bloque.title}</h3>
+                {bloque.description && <p>{bloque.description}</p>}
+                {"contacts" in bloque && bloque.contacts && (
+                  <ul class="neu-contacto-datos">
+                    {bloque.contacts.map((c) => (
+                      <li><a class="neu-link" href={c.href}>{c.label}</a></li>
+                    ))}
+                  </ul>
+                )}
+              </article>
+            ))}
+          </div>
+
+          <div class="neu-cta-seccion">
+            <p class="neu-intro-respaldo">{getInvolvedSection.callToAction}</p>
+            <a href="mailto:cba@continentalandes.com" class="neu-btn neu-btn-accent">
+              {getInvolvedSection.button}
+            </a>
+          </div>
+        </section>
+      </div>
+    </div>
   </main>
-  <WhatsAppButton />
 </Layout>
+
+<style is:global>
+  /* Sólo lo propio de esta página. El sistema vive en src/styles/neu.css */
+
+  .neu-below-hero { padding-top: 5rem; min-height: 0; }
+
+  /* Apertura de sección en dos niveles, igual que en la copia de Minería. */
+  .neu-processes-intro { margin-bottom: 3rem; }
+  .neu-intro-afirmacion {
+    font-size: 1.75rem; font-weight: 500; line-height: 1.25;
+    max-width: 38rem; margin-bottom: 1rem;
+  }
+  .neu-intro-respaldo { font-size: 1rem; font-weight: 300; line-height: 1.7; max-width: 44rem; }
+
+  /* ---- Tarjetas de industria ---- */
+  .neu-industry { display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+  .neu-industry-photo { margin-bottom: 1.25rem; }
+  .neu-industry h3 { color: var(--neu-accent); }
+  .neu-industry-intro { font-size: 0.875rem; margin-bottom: 0.5rem; }
+  .neu-industry .neu-list { margin-bottom: 1rem; }
+  .neu-industry-link { margin-top: auto; }
+
+  /* ---- Servicios ---- */
+  /*
+    Dos columnas 3fr/2fr como en el componente real. La miniatura circular se
+    traduce como foto elevada: la imagen misma es la superficie extruida, no un
+    marco alrededor, así que no contradice la regla de fotografía del sistema.
+    El separador entre ítems no puede ser un borde —el estilo no los usa— y se
+    resuelve con una línea de sombra a baja opacidad.
+  */
+  .neu-servicios-grid { display: grid; gap: 3rem; }
+
+  .neu-servicios-lista { list-style: none; padding: 0; margin: 0; }
+  .neu-servicio {
+    display: flex; gap: 1.5rem; align-items: flex-start;
+    padding-bottom: 2rem; margin-bottom: 2rem;
+    box-shadow: inset 0 -1px 0 rgba(163, 177, 198, 0.4);
+  }
+  .neu-servicio:last-child { padding-bottom: 0; margin-bottom: 0; box-shadow: none; }
+  .neu-servicio-foto {
+    width: 6rem; height: 6rem; flex-shrink: 0;
+    border-radius: 50%; object-fit: cover;
+    box-shadow: var(--neu-raised);
+  }
+  .neu-servicio h3 { color: var(--neu-accent); }
+  .neu-servicio p { font-size: 0.875rem; margin-top: 0.25rem; }
+
+  @media (max-width: 39.99rem) {
+    .neu-servicio { flex-direction: column; align-items: center; text-align: center; }
+  }
+
+  /*
+    Cada imagen en su propio contenedor elevado, en vez de las tres dentro de una
+    sola caja. Con esto se elimina el mix-blend-mode que usábamos antes para
+    disimular el fondo blanco: `darken` aplastaba contra el fondo todo píxel más
+    claro que él, no sólo el blanco del borde, y se llevaba puestos los medios
+    tonos de la placa y del diagrama. Ahora la imagen ocupa toda la cara de la
+    tarjeta —recortada, como en el home real— así que no hay blanco que ocultar y
+    el rango tonal queda intacto.
+  */
+  .neu-servicios-panel { display: grid; gap: 1.5rem; }
+  .neu-panel-card { overflow: hidden; }
+  .neu-panel-card img { display: block; width: 100%; height: 11rem; object-fit: cover; object-position: center; }
+  .neu-panel-card.is-contain { padding: 0.75rem; }
+  .neu-panel-card.is-contain img { object-fit: contain; }
+
+  /*
+    En dos columnas el panel se estira hasta igualar la altura de la lista de la
+    izquierda y reparte esa altura en tres filas iguales, como en el home real.
+    En una sola columna eso no aplica y las imágenes vuelven a su alto fijo.
+  */
+  /*
+    En dos columnas el panel se ancla a la altura que fija la lista de la
+    izquierda. Sacarlo del flujo con posición absoluta es lo que lo consigue:
+    si queda en flujo, `height: 100%` no resuelve —ningún ancestro tiene altura
+    definida— y cada imagen se dibuja a su tamaño natural, con lo que el panel
+    crecía por su cuenta y sobrepasaba la lista. Fuera del flujo ya no aporta
+    altura, así que la fila la decide sólo la lista y las tres tarjetas se
+    reparten ese alto en partes iguales.
+  */
+  @media (min-width: 64rem) {
+    .neu-servicios-grid {
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      align-items: stretch;
+    }
+    .neu-panel-wrap { position: relative; }
+    .neu-servicios-panel {
+      position: absolute; inset: 0;
+      height: 100%; grid-template-rows: repeat(3, minmax(0, 1fr));
+    }
+    .neu-panel-card { height: 100%; }
+    .neu-panel-card img { height: 100%; }
+  }
+
+  /* ---- Tarjetas de producto ---- */
+  /*
+    Excepción deliberada a la regla de superficies: el dibujo va sobre blanco y
+    no sobre el fondo del sistema. Son planos de línea muy clara, dibujados para
+    papel blanco; sobre #e0e5ec pierden contraste y se ven lavados. El home real
+    los muestra sobre #f9f9f9, casi blanco, y por eso ahí se leen bien.
+
+    Antes se usaba mix-blend-mode: darken para disimular el fondo del archivo,
+    pero ese modo aplasta contra el fondo todo píxel más claro que él y arruinaba
+    el dibujo. Ahora se usan recortes con fondo transparente sobre una lámina
+    blanca, así que el trazo conserva su rango completo.
+  */
+  .neu-producto-visual {
+    background: #fff; border-radius: 0.875rem; padding: 1rem; margin-bottom: 1.25rem;
+  }
+  .neu-producto-visual img {
+    display: block; width: 100%; height: 12rem; object-fit: contain;
+  }
+  .neu-producto .neu-list { margin-bottom: 0; }
+
+  /* Cierre de sección: texto y botón centrados. Lo comparten Servicios y Sopladores. */
+  .neu-cta-seccion {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .neu-cta-seccion p { margin: 0; }
+
+  /* ---- Nosotros ---- */
+  .neu-centrado { text-align: center; }
+  .neu-centrado .neu-intro-afirmacion { max-width: 46rem; margin-left: auto; margin-right: auto; }
+
+  .neu-persona { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .neu-persona-foto {
+    width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
+    border-radius: 0.875rem; margin-bottom: 1.25rem;
+  }
+  .neu-persona h3 { margin-bottom: 0.125rem; }
+  .neu-persona-rol { font-size: 0.875rem; color: var(--neu-accent); margin-bottom: 0.75rem; }
+  .neu-persona .neu-link { word-break: break-word; }
+  /*
+    Sólo en móvil: en escritorio llamar desde el navegador no lleva a ninguna
+    parte, y el correo de arriba ya cubre el contacto. Mismo criterio que la
+    ficha del sitio real.
+
+    Va sin número y con icono, así que necesita etiqueta accesible propia: sin
+    ella un lector de pantalla anunciaría un enlace vacío. El aria-label incluye
+    el nombre y el número, que es lo que el usuario necesita oír.
+
+    Redondo y en acento, siguiendo la regla del sistema para botones de contacto.
+  */
+  .neu-persona-tel {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 3rem; height: 3rem; padding: 0; border-radius: 50%;
+    margin-top: 1.25rem;
+  }
+  .neu-persona-tel svg { width: 1.25rem; height: 1.25rem; }
+  @media (min-width: 40rem) {
+    .neu-persona-tel { display: none; }
+  }
+
+  /* ---- Mision ---- */
+  .neu-mision { display: grid; gap: 3rem; align-items: center; }
+  @media (min-width: 55rem) {
+    .neu-mision { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+  }
+  .neu-mision-parrafo { margin-bottom: 0.875rem; }
+  .neu-mision-parrafo:last-child { margin-bottom: 0; }
+
+  .neu-puntos { list-style: none; padding: 0; margin: 2.5rem 0 0; display: grid; gap: 1.25rem; }
+  .neu-puntos li { display: flex; gap: 1rem; align-items: center; font-size: 0.9375rem; }
+
+  .neu-mision-foto { overflow: hidden; }
+  .neu-mision-foto img { display: block; width: 100%; height: auto; }
+
+  /* ---- Contactenos ---- */
+  .neu-contacto { display: flex; flex-direction: column; align-items: flex-start; }
+  .neu-contacto p { font-size: 0.9375rem; }
+  .neu-contacto-datos { list-style: none; padding: 0; margin: 0.25rem 0 0; display: grid; gap: 0.5rem; }
+
+  .neu-section-last { margin-bottom: 0; }
+</style>

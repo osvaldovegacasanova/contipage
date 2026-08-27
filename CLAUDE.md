@@ -16,11 +16,25 @@ This is an Astro-based marketing website for Continental Andes Blowers, a centri
 
 ### Asset Processing
 - `npm run images:blog` - Process blog images from `src/content/blog/assets` to `public/blog` (500×500 WebP, quality 82)
+- `npm run images:public` - Resize/optimize images in `public/` via `scripts/resize-public-images.mjs`
 - `npm run prebuild` - Automatically runs `images:blog` before every build
 - `npm run videos:encode` - Encode video variants from `public/videos/parte1.mp4`:
   - Desktop WebM (VP9, CRF 32)
   - Mobile MP4 (H.264, 1280px, 24fps, CRF 28)
   - Mobile WebM (VP9, 854px, 24fps, CRF 36)
+
+## Before Promoting a Release
+
+Run these from `site/` before merging to `test` or `main`, in order:
+
+1. **`npm run build`** — runs `astro check` + type-check, and regenerates the sitemap.
+2. **`npm run seo`** — audits the built HTML. Exits non-zero on high-severity findings. Read the medium/low ones too; they are advisory, not noise.
+3. **Check the page count** the audit reports against what you expect. A route that silently stopped generating shows up here first.
+4. **Update [`changelog-continental.md`](../changelog-continental.md)** at the repo root, per the rule in the root CLAUDE.md.
+
+**The sitemap needs no manual step.** It is generated at build time by `@astrojs/sitemap`, configured in `astro.config.mjs`, and internal pages (`/colores`, `/fonts`, `/separadores`) are filtered out to match `robots.txt`. It used to be a hand-written file in `public/` and drifted to a single URL while the site grew to seventeen pages — do not reintroduce a static one.
+
+Note the version pin: `@astrojs/sitemap` is pinned to an exact `3.1.6`, with no caret. Anything in the 3.7.x line expects a newer build hook API than Astro 4.x provides and crashes the build with `Cannot read properties of undefined (reading 'reduce')`. A caret range would let a fresh install pull 3.7.x and break the deploy, so leave it exact until Astro itself is upgraded.
 
 ## Architecture
 
@@ -99,6 +113,10 @@ The hero section (`src/components/sections/hero/Hero.astro`) uses a background v
 - Mobile background override: `/images/slider-bg3.webp`
 - Lazy-loaded video sources (WebM and MP4 variants)
 - Sources generated via `npm run videos:encode` script
+
+### Analytics
+
+Google Analytics event tracking is centralized in `src/utils/analytics.ts`. Use `trackContactClick(type, destination)` for WhatsApp/phone/email clicks and `trackEvent(name, params)` for custom events — both no-op safely on the server and wait for `gtag` to load. Setup and troubleshooting notes live in `ANALYTICS_SETUP.md` and `DEBUG_ANALYTICS.md`.
 
 ## Key Technical Patterns
 

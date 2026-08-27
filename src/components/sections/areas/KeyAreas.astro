@@ -1,8 +1,5 @@
 ---
 import Container from "../../shared/Container.astro";
-import Title2 from "../../shared/Title2.astro";
-import SubTitle2 from "../../shared/SubTitle2.astro";
-import Paragraph from "../../shared/Paragraph.astro";
 import GradiantText from "../../shared/GradiantText.astro";
 import IndustryCard from "./components/IndustryCard.astro";
 import { areasSectionData } from "./data.ts";
@@ -15,24 +12,28 @@ const { className } = Astro.props;
 ---
 
 <section id="industrias" class=`${className}`>
-  <Container size="wide" className="text-center flex flex-col items-center gap-4">
-    <Title2>{areasSectionData.title}</Title2>
-    <SubTitle2 as="h3" className="max-w-3xl">
+  {/* First content after the hero: a concise benefit-led hook instead of the old
+      pill + "Aplicaciones en Múltiples Industrias" header. */}
+  <Container size="wide" className="flex min-h-[55vh] flex-col items-center justify-center gap-5 py-16 text-center md:py-24">
+    <h2 data-gsap-reveal class="title-fw text-2xl leading-tight text-heading-1 dark:text-white md:text-3xl lg:text-4xl">
       {areasSectionData.subheading.text1_1}
       <GradiantText>{areasSectionData.subheading.text1_2}</GradiantText>
-    </SubTitle2>
-    <Paragraph className="max-w-4xl text-heading-3">
+    </h2>
+    <p data-gsap-reveal class="md:text-lg max-w-3xl text-heading-3">
       {areasSectionData.subheading.text2}
-    </Paragraph>
+      <br />
+      {areasSectionData.subheading.text2b}
+    </p>
   </Container>
   <Container size="wide">
-    <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+    <div class="industry-grid mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
       {
         areasSectionData.areas.map((industry) => (
           <IndustryCard
             title={industry.title}
             visual={industry.visual}
             items={industry.items}
+            intro={industry.intro}
             href={industry.href}
             alt={industry.alt}
             objectPosition={industry.objectPosition}
@@ -42,3 +43,88 @@ const { className } = Astro.props;
     </div>
   </Container>
 </section>
+
+<style>
+  /*
+    Align the four blocks of every card (image / title / intro / bullets) across
+    contiguous cards. Titles wrap to a different number of lines per industry
+    ("Sopladores para Minería" vs "…para Industria Petroquímica"), which
+    otherwise pushes the intro and the bullet list to different heights.
+
+    Each card spans four rows of this grid and adopts them via `subgrid`, so the
+    row heights are shared by the whole row of cards — no fixed heights, works at
+    every breakpoint. `row-gap: 0` keeps the grid gap between cards while letting
+    each card's own padding define its internal spacing.
+
+    Browsers without subgrid keep the card's own `grid-rows-[auto_auto_auto_1fr]`
+    and simply render as before, unaligned but correct.
+  */
+  @supports (grid-template-rows: subgrid) {
+    .industry-grid > :global(.industry-card) {
+      grid-row: span 4;
+      grid-template-rows: subgrid;
+      row-gap: 0;
+    }
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const prefersReduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
+  // Split an element's direct text nodes into inline-block word spans.
+  // Child elements (e.g. the gradient <span>) are kept as a single animated unit
+  // so their styling stays intact; <br> is preserved.
+  function splitIntoWords(el: HTMLElement): HTMLElement[] {
+    const units: HTMLElement[] = [];
+    for (const node of Array.from(el.childNodes)) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const frag = document.createDocumentFragment();
+        for (const part of (node.textContent ?? "").split(/(\s+)/)) {
+          if (part === "") continue;
+          if (part.trim() === "") {
+            frag.appendChild(document.createTextNode(part));
+          } else {
+            const span = document.createElement("span");
+            span.textContent = part;
+            span.style.display = "inline-block";
+            frag.appendChild(span);
+            units.push(span);
+          }
+        }
+        el.replaceChild(frag, node);
+      } else if (node instanceof HTMLElement && node.tagName !== "BR") {
+        node.style.display = "inline-block";
+        units.push(node);
+      }
+    }
+    return units;
+  }
+
+  const section = document.getElementById("industrias");
+  const targets = section
+    ? (Array.from(section.querySelectorAll("[data-gsap-reveal]")) as HTMLElement[])
+    : [];
+
+  if (targets.length && !prefersReduced) {
+    const words = targets.flatMap((el) => splitIntoWords(el));
+    gsap.set(words, { opacity: 0, yPercent: 60, filter: "blur(6px)" });
+    gsap.to(words, {
+      opacity: 1,
+      yPercent: 0,
+      filter: "blur(0px)",
+      duration: 0.6,
+      ease: "power3.out",
+      stagger: 0.035,
+      scrollTrigger: {
+        trigger: targets[0],
+        start: "top 78%",
+        once: true,
+      },
+    });
+  }
+</script>

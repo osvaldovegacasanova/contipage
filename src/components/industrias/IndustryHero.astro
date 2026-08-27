@@ -1,0 +1,55 @@
+---
+import Container from "../shared/Container.astro";
+import GradiantText from "../shared/GradiantText.astro";
+import LazyImage from "../shared/LazyImage.astro";
+import type { IndustryPage } from "../../data/industrias/types";
+
+export interface Props {
+  hero: IndustryPage["hero"];
+  /** Breadcrumb trail label for the current page. */
+  breadcrumbLabel: string;
+}
+
+const { hero, breadcrumbLabel } = Astro.props;
+---
+
+<section class="relative w-full overflow-hidden bg-base-dark-900">
+  {/* Full-bleed background image with overlay */}
+  <div class="pointer-events-none absolute inset-0 z-0">
+    <LazyImage
+      src={hero.image}
+      alt={hero.alt}
+      width="1920"
+      height="900"
+      class="h-full w-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-black/45"></div>
+  </div>
+
+  <Container size="wide" className="relative z-10">
+    <div class="max-w-3xl pb-16 pt-36 text-white md:pb-24 md:pt-44">
+      {/* Breadcrumb */}
+      <nav aria-label="Breadcrumb" class="mb-6 text-sm text-white/70">
+        <ol class="flex flex-wrap items-center gap-2">
+          <li><a href="/" class="transition hover:text-white">Inicio</a></li>
+          <li aria-hidden="true">/</li>
+          <li><a href="/#industrias" class="transition hover:text-white">Industrias</a></li>
+          <li aria-hidden="true">/</li>
+          <li class="text-white" aria-current="page">{breadcrumbLabel}</li>
+        </ol>
+      </nav>
+
+      <p class="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-primary-400">
+        {hero.eyebrow}
+      </p>
+
+      <h1 class="title-fw text-4xl leading-tight sm:text-5xl md:text-6xl">
+        {hero.title} <GradiantText>{hero.titleAccent}</GradiantText>
+      </h1>
+
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-white/85">
+        {hero.intro}
+      </p>
+    </div>
+  </Container>
+</section>

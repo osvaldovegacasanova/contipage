@@ -1,0 +1,47 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import "../../styles/neu.css";
+import GradiantText from "../../components/shared/GradiantText.astro";
+
+// Confirmacion tras enviar el formulario de contacto. Es la pagina a la que
+// redirige el envio, para que quien escribe reciba una respuesta clara en vez de
+// quedarse mirando el formulario sin saber si llego.
+---
+
+<Layout
+  navActivo="contacto"
+  noIndexar
+  title="Consulta recibida | Continental Blowers Andes"
+  description="Su consulta fue recibida. Nuestro equipo tecnico se pondra en contacto."
+>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" />
+  <main class="neu-root">
+    <div class="neu-wrap neu-gracias">
+      <span class="neu-icon neu-icon-lg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </span>
+
+      <h1>Consulta <GradiantText>recibida</GradiantText></h1>
+      <p class="neu-lead">
+        Gracias por escribirnos. Nuestro equipo técnico revisará su aplicación y se pondrá en
+        contacto a la brevedad.
+      </p>
+
+      <div class="neu-gracias-acciones">
+        <a class="neu-btn" href="/">Volver al inicio</a>
+        <a class="neu-btn" href="/#industrias">Ver aplicaciones por industria</a>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style is:global>
+  .neu-gracias {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; padding-top: 3rem;
+  }
+  .neu-gracias .neu-lead { max-width: 34rem; }
+  .neu-gracias-acciones { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2.5rem; }
+</style>

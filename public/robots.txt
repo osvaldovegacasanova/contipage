@@ -14,4 +14,4 @@ Disallow: /mineria/
 Disallow: /blog/
 
 # Sitemap
-Sitemap: https://continentalandes.com/sitemap.xml
+Sitemap: https://continentalandes.com/sitemap-index.xml

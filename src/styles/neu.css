@@ -1,0 +1,193 @@
+/*
+  Sistema de diseño neumórfico — rama design/neumorphism.
+
+  Basado en chrismccoy/claude-design-styles con dos desvíos deliberados:
+    - Acento: azul de marca #0046ba en vez del púrpura #6c63ff del spec
+      (conserva la identidad y sube el contraste de 3,41:1 a 6,42:1).
+    - Contexto claro exclusivo: el estilo no funciona sobre fondos oscuros, así
+      que .neu-root define sus propios colores y aquí no se usan variantes dark:.
+
+  Todo cuelga de .neu-root, de modo que estos estilos no se filtran a ninguna
+  página del sitio real aunque el archivo se cargue globalmente.
+*/
+
+/*
+  Los tokens se declaran aparte de la caja porque no siempre viven juntos: en las
+  paginas con hero la barra de navegacion queda FUERA de .neu-root, para que el
+  hero conserve su sangrado. Si los tokens colgaran solo de .neu-root, ahi las
+  sombras no resolverian y la barra se veria plana.
+*/
+.neu-root,
+.neu-navbar {
+  --neu-bg: #e0e5ec;
+  --neu-text: #4a5568;
+  --neu-muted: #8898aa;
+  --neu-accent: #0046ba;
+  --neu-light: #ffffff;
+  --neu-dark: #a3b1c6;
+
+  --neu-raised: 6px 6px 12px var(--neu-dark), -6px -6px 12px var(--neu-light);
+  --neu-pressed: inset 4px 4px 8px var(--neu-dark), inset -4px -4px 8px var(--neu-light);
+  --neu-flat: 3px 3px 6px var(--neu-dark), -3px -3px 6px var(--neu-light);
+
+  color: var(--neu-text);
+  font-family: "Poppins", "Raleway", system-ui, sans-serif;
+  font-weight: 300;
+}
+
+.neu-root {
+  background: var(--neu-bg);
+  min-height: 100vh;
+  padding: 8rem 1.5rem 5rem;
+}
+
+/* ---- Layout ------------------------------------------------------------- */
+.neu-wrap { margin: 0 auto; max-width: 72rem; }
+.neu-header { margin-bottom: 4rem; }
+.neu-section { margin-bottom: 4rem; }
+
+.neu-grid { display: grid; gap: 1.75rem; }
+
+/*
+  OJO con estas dos: son auto-fit, así que el número de columnas lo decide el
+  ancho disponible y NO el nombre de la clase. En un contenedor de 72rem,
+  .neu-grid-3 llega a formar cuatro columnas y estrecha demasiado las tarjetas.
+  Sirven para rejillas de fichas pequeñas donde da igual cuántas entren.
+*/
+.neu-grid-2 { grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); }
+.neu-grid-3 { grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+
+/*
+  Cuando el número de columnas es una decisión de diseño y no del ancho, usar
+  estas: fijan el recuento en pantallas anchas y bajan a una sola columna en
+  móvil. Es lo que corresponde para tarjetas con imagen, donde repartir de más
+  achica la foto y estira la tarjeta a lo alto.
+*/
+.neu-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.neu-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 47.99rem) {
+  .neu-cols-2, .neu-cols-3 { grid-template-columns: minmax(0, 1fr); }
+}
+.neu-row { display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center; }
+.neu-row-tight { gap: 1rem; margin-bottom: 1rem; }
+
+/* ---- Tipografía ---------------------------------------------------------
+  Poppins 300-600. La restricción es deliberada: en este estilo la profundidad
+  la dan las sombras, no el peso de la letra. 500 para titulares, 300 para
+  cuerpo, y espaciado de letra normal salvo en el antetítulo.
+
+  Cada estilo se expone además como clase (.neu-t-*) para poder mostrarlo en la
+  guía sin inventar encabezados falsos ni repetir los valores.
+------------------------------------------------------------------------- */
+.neu-root h1, .neu-root .neu-t-h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 500; line-height: 1.15; }
+.neu-root h2, .neu-root .neu-t-h2 { font-size: 1.5rem; font-weight: 500; margin-bottom: 0.5rem; }
+.neu-root h3, .neu-root .neu-t-h3 { font-size: 1.0625rem; font-weight: 500; margin-bottom: 0.5rem; }
+.neu-root p,  .neu-root .neu-t-body { line-height: 1.7; }
+.neu-root code { font-family: ui-monospace, "Cascadia Code", monospace; font-size: 0.8125rem; }
+
+.neu-eyebrow {
+  display: inline-block; font-size: 0.75rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--neu-accent); font-weight: 500; margin-bottom: 0.75rem;
+}
+.neu-lead { font-size: 1.0625rem; max-width: 46rem; margin-top: 1rem; }
+.neu-note { font-size: 0.875rem; color: var(--neu-accent); margin-top: 0.75rem; }
+.neu-sub { max-width: 46rem; margin-bottom: 1.75rem; }
+
+/* ---- Superficies -------------------------------------------------------- */
+.neu-raised  { border-radius: 1.25rem; box-shadow: var(--neu-raised); }
+.neu-pressed { border-radius: 1.25rem; box-shadow: var(--neu-pressed); }
+.neu-flat    { border-radius: 1.25rem; box-shadow: var(--neu-flat); }
+
+.neu-card { padding: 1.75rem; }
+.neu-raised.neu-card { transition: box-shadow 0.3s ease; }
+.neu-raised.neu-card:hover { box-shadow: 8px 8px 16px var(--neu-dark), -8px -8px 16px var(--neu-light); }
+
+/* ---- Botones ------------------------------------------------------------ */
+.neu-btn {
+  font: inherit; font-weight: 500; color: var(--neu-text);
+  background: var(--neu-bg); border: 0; border-radius: 0.875rem;
+  padding: 0.875rem 1.75rem; cursor: pointer; display: inline-block; text-decoration: none;
+  box-shadow: 5px 5px 10px var(--neu-dark), -5px -5px 10px var(--neu-light);
+  transition: box-shadow 0.25s ease;
+}
+.neu-btn:hover:not(:disabled) { box-shadow: 7px 7px 14px var(--neu-dark), -7px -7px 14px var(--neu-light); }
+.neu-btn:active:not(:disabled) { box-shadow: var(--neu-pressed); }
+.neu-btn:focus-visible { outline: 2px solid var(--neu-accent); outline-offset: 3px; }
+.neu-btn:disabled { color: var(--neu-muted); box-shadow: var(--neu-flat); cursor: not-allowed; }
+
+/*
+  Regla del sistema: todo botón que lleve a contacto usa la variante de acento.
+  Es la acción principal del sitio, y el botón claro se apoya únicamente en el
+  borde de sombra, que da 1,72:1 contra el fondo: por debajo del 3:1 que WCAG
+  pide para un control, así que casi desaparece hasta que uno lo busca. El
+  acento lleva texto blanco sobre azul de marca, 8,1:1.
+*/
+.neu-btn-accent { background: var(--neu-accent); color: #fff; }
+
+/* ---- Formulario --------------------------------------------------------- */
+.neu-form { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.neu-form-full { grid-column: 1 / -1; }
+.neu-form label { display: block; }
+.neu-form span { display: block; font-size: 0.8125rem; font-weight: 500; margin-bottom: 0.5rem; }
+
+.neu-input {
+  font: inherit; color: var(--neu-text); width: 100%;
+  background: var(--neu-bg); border: 0; border-radius: 0.875rem; padding: 0.875rem 1.125rem;
+  box-shadow: var(--neu-pressed);
+}
+.neu-input::placeholder { color: var(--neu-muted); }
+.neu-input:focus { outline: 2px solid var(--neu-accent); outline-offset: 2px; }
+
+/* ---- Interruptor -------------------------------------------------------- */
+.neu-toggle {
+  display: inline-flex; align-items: center; width: 4rem; height: 2.125rem; padding: 0.25rem;
+  border-radius: 999px; box-shadow: var(--neu-pressed); cursor: pointer;
+}
+.neu-toggle-thumb {
+  width: 1.625rem; height: 1.625rem; border-radius: 50%; background: var(--neu-bg);
+  box-shadow: var(--neu-flat); transition: transform 0.25s ease, background 0.25s ease;
+}
+.neu-toggle.is-on .neu-toggle-thumb { transform: translateX(1.875rem); background: var(--neu-accent); }
+.neu-toggle:focus-visible { outline: 2px solid var(--neu-accent); outline-offset: 3px; }
+
+/* ---- Progreso ----------------------------------------------------------- */
+.neu-progress { height: 0.875rem; border-radius: 999px; box-shadow: var(--neu-pressed); margin-bottom: 1rem; overflow: hidden; }
+.neu-progress span { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--neu-accent), #2f6fd0); }
+
+/* ---- Iconos y navegación ------------------------------------------------ */
+.neu-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 56px; height: 56px; border-radius: 50%;
+  box-shadow: var(--neu-raised); color: var(--neu-accent); flex-shrink: 0;
+}
+.neu-icon svg { width: 1.5rem; height: 1.5rem; }
+.neu-icon-lg { margin-bottom: 1.25rem; }
+
+.neu-nav { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem; }
+/*
+  Los enlaces de navegación se leen como botones: elevados en reposo, con la
+  sombra creciendo al pasar el cursor y hundidos cuando marcan la página en
+  curso. Antes eran texto plano hasta el hover, y en una barra llena de enlaces
+  no había forma de saber que eran pulsables.
+*/
+.neu-nav a {
+  font-size: 0.875rem; font-weight: 500; text-decoration: none;
+  color: var(--neu-text); padding: 0.625rem 1.125rem; border-radius: 999px;
+  box-shadow: var(--neu-flat); transition: box-shadow 0.2s ease, color 0.2s ease;
+}
+.neu-nav a:hover { box-shadow: var(--neu-raised); }
+.neu-nav a.is-active { box-shadow: var(--neu-pressed); color: var(--neu-accent); }
+
+/* ---- Contenido ---------------------------------------------------------- */
+/*
+  Regla del sistema: la fotografía se apoya DIRECTAMENTE sobre la superficie que
+  la contiene. Nada de marcos hundidos ni elevados alrededor de una imagen: la
+  tarjeta ya aporta un borde, la foto aporta el suyo, y un marco intermedio
+  agrega un tercero que ensucia la lectura. Un solo redondeo, sin relleno.
+*/
+.neu-photo img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 0.875rem; }
+
+.neu-list { list-style: none; padding: 0; margin: 1rem 0 1.5rem; }
+.neu-list li { position: relative; padding-left: 1.25rem; font-size: 0.875rem; line-height: 1.9; }
+.neu-list li::before { content: ""; position: absolute; left: 0; top: 0.75rem; width: 6px; height: 6px; border-radius: 50%; background: var(--neu-accent); }
+.neu-link { font-size: 0.875rem; font-weight: 500; color: var(--neu-accent); text-decoration: none; }
