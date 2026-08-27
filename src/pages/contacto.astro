@@ -159,6 +159,15 @@ const ICONOS: Record<string, string> = {
   /* ---- Formulario ---- */
   .neu-formulario { display: grid; gap: 1.5rem; padding: 2rem; }
   .neu-campo { display: grid; gap: 0.5rem; }
+  /*
+    Sin esta regla el campo condicional "¿Cuál?" se veía siempre. El atributo
+    `hidden` del HTML se apoya en la regla `[hidden] { display: none }` del
+    navegador, y esa regla es de la hoja del propio navegador: cualquier hoja
+    nuestra con la misma especificidad le gana. Como `.neu-campo` declara
+    `display: grid`, el atributo quedaba anulado y el campo nunca se ocultaba.
+    El guion sí hacía su trabajo —conmuta `campo.hidden`—, pero no tenía efecto.
+  */
+  .neu-campo[hidden] { display: none; }
   .neu-campo label { font-size: 0.8125rem; font-weight: 500; }
   .neu-campo input,
   .neu-campo select { width: 100%; }
