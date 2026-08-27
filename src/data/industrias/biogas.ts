@@ -90,6 +90,6 @@ export const biogas: IndustryPage = {
     description:
       "Nuestro equipo técnico dimensiona e integra el booster o soplador ideal para cada etapa del biogás. Cuente con soporte, puesta en marcha y repuestos en toda la región andina.",
     buttonText: "Solicitar asesoría técnica",
-    buttonHref: "/#contacto",
+    buttonHref: "/contacto",
   },
 };

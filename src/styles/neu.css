@@ -41,10 +41,38 @@
   padding: 8rem 1.5rem 5rem;
 }
 
+/* ---- Puntos de corte ----------------------------------------------------
+  Solo dos, y se usan en todo el sitio:
+
+    max-width: 47.99rem   movil        (hasta 767px)
+    min-width: 64rem      escritorio   (desde 1024px)
+
+  Entre ambos queda la franja de tableta, que hereda el diseno de una columna.
+
+  Antes habia cinco valores sueltos —39.99, 47.99, 55, 63.99 y 64rem— puestos
+  cada uno por su lado. No rompian nada, pero producian combinaciones que nadie
+  habia decidido: entre 640 y 768px los servicios ya se apilaban mientras las
+  tarjetas seguian en varias columnas.
+------------------------------------------------------------------------- */
+
 /* ---- Layout ------------------------------------------------------------- */
 .neu-wrap { margin: 0 auto; max-width: 72rem; }
 .neu-header { margin-bottom: 4rem; }
 .neu-section { margin-bottom: 4rem; }
+
+/*
+  El ritmo de arriba esta calibrado para pantalla ancha. En un telefono ese
+  mismo aire se lee como huecos vacios: 8rem de relleno superior son 128px antes
+  del primer texto, y 1,5rem a cada lado se comen el 12% de un ancho de 390.
+
+  El relleno superior no puede bajar mucho mas: la barra de navegacion es fija y
+  mide unos 76px, asi que 6rem deja el margen justo para que el primer texto no
+  quede pegado a ella.
+*/
+@media (max-width: 47.99rem) {
+  .neu-root { padding: 6rem 1.25rem 3.5rem; }
+  .neu-section { margin-bottom: 2.75rem; }
+}
 
 .neu-grid { display: grid; gap: 1.75rem; }
 

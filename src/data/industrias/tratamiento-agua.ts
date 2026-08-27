@@ -79,6 +79,6 @@ export const tratamientoAgua: IndustryPage = {
     description:
       "Nuestro equipo técnico dimensiona e integra el soplador ideal para cada etapa del tratamiento de aguas. Cuente con soporte, puesta en marcha y repuestos en toda la región andina.",
     buttonText: "Solicitar asesoría técnica",
-    buttonHref: "/#contacto",
+    buttonHref: "/contacto",
   },
 };

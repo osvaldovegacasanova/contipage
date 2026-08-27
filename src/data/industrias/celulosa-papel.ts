@@ -65,6 +65,6 @@ export const celulosaPapel: IndustryPage = {
     description:
       "Nuestro equipo técnico dimensiona e integra el soplador o la bomba de vacío ideal para cada proceso de celulosa y papel. Cuente con soporte, puesta en marcha y repuestos en toda la región andina.",
     buttonText: "Solicitar asesoría técnica",
-    buttonHref: "/#contacto",
+    buttonHref: "/contacto",
   },
 };
