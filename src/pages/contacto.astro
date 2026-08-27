@@ -77,11 +77,17 @@ const ICONOS: Record<string, string> = {
 
           <div class="neu-campo">
             <label for="correo">Correo electrónico</label>
+            {/*
+              El campo se llama "email" y no "correo" a proposito: Netlify usa
+              un campo con ese nombre exacto para poner el Reply-To del aviso.
+              Con otro nombre, responder ese correo contesta a Netlify y no a
+              quien escribio. La etiqueta visible sigue en castellano.
+            */}
             <input
               class="neu-input"
               type="email"
               id="correo"
-              name="correo"
+              name="email"
               required
               autocomplete="email"
               placeholder="nombre@empresa.cl"
