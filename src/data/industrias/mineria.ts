@@ -23,7 +23,7 @@ export const mineria: IndustryPage = {
   processesHeading: {
     title: "Procesos donde nuestros",
     titleAccent: "sopladores son clave",
-    bajada: "Presión constante sobre los 3.000 metros de altura.",
+    bajada: "Presión constante aun sobre los 3.000 metros de altura.",
     intro:
       "En procesos sobre 3.000 mts de altura, donde ventiladores convencionales quedan obsoletos, los sopladores Continental Industrie entregan la presión necesaria combinada con simplicidad mecánica e impulsores robustos que resisten polvo, corrosión y ambientes severos manteniendo el caudal requerido.",
   },

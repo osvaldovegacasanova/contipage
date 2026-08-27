@@ -196,6 +196,15 @@ const servicePage = {
       siguiente pasa a ser el espacio entre ellos y la propia foto.
     */
     .neu-process {
+      /*
+        Una sola columna en todo el rango movil. La rejilla base es auto-fit con
+        minimo de 18rem, asi que a partir de unos 576px ya formaba dos columnas
+        por su cuenta: la foto caia en la de la izquierda, pegada al borde por
+        el margen negativo y flotando en un hueco vacio, sin tarjeta visible
+        alrededor que la sujetara. Debajo de 576px no se notaba porque solo
+        cabia una columna.
+      */
+      grid-template-columns: minmax(0, 1fr);
       margin-left: -1.25rem; margin-right: -1.25rem;
       padding: 0 0 1.75rem;
       border-radius: 0;
