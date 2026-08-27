@@ -37,6 +37,6 @@ export const getInvolvedSection = {
   ],
   visual: "get-involved-section-image.jpg",
   callToAction: "Envíenos su consulta técnica o comercial",
-  button: "Escríbanos",
+  button: "Solicitar información",
   emailFormHidden: true,
 };
