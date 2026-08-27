@@ -61,6 +61,6 @@ export const alimentaria: IndustryPage = {
     description:
       "Nuestro equipo técnico dimensiona e integra la bomba de vacío o el soplador ideal para cada proceso alimentario. Cuente con soporte, puesta en marcha y repuestos en toda la región andina.",
     buttonText: "Solicitar asesoría técnica",
-    buttonHref: "/#contacto",
+    buttonHref: "/contacto",
   },
 };
