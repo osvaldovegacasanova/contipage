@@ -82,8 +82,15 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
               {areasSectionData.subheading.text1_1}
               <GradiantText>{areasSectionData.subheading.text1_2}</GradiantText>
             </p>
+            {/*
+              Las dos frases van separadas por un salto, como en el componente
+              original. Puestas seguidas quedaban pegadas —"industria.Eficiencia"—
+              porque el espacio entre expresiones se pierde al compilar.
+            */}
             <p class="neu-intro-respaldo">
-              {areasSectionData.subheading.text2} {areasSectionData.subheading.text2b}
+              {areasSectionData.subheading.text2}
+              <br />
+              {areasSectionData.subheading.text2b}
             </p>
           </div>
 
