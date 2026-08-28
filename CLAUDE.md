@@ -31,6 +31,7 @@ Run these from `site/` before merging to `test` or `main`, in order:
 2. **`npm run seo`** — audits the built HTML. Exits non-zero on high-severity findings. Read the medium/low ones too; they are advisory, not noise.
 3. **Check the page count** the audit reports against what you expect. A route that silently stopped generating shows up here first.
 4. **Update [`changelog-continental.md`](../changelog-continental.md)** at the repo root, per the rule in the root CLAUDE.md.
+5. **Only when merging to `main`: bump `version_sitio`** in [src/config/site.ts](src/config/site.ts), which is what the footer shows. Decimal for ordinary changes, integer for large ones. Full rule in the root CLAUDE.md. Merges to `test` do not touch it.
 
 **The sitemap needs no manual step.** It is generated at build time by `@astrojs/sitemap`, configured in `astro.config.mjs`, and internal pages (`/colores`, `/fonts`, `/separadores`) are filtered out to match `robots.txt`. It used to be a hand-written file in `public/` and drifted to a single URL while the site grew to seventeen pages — do not reintroduce a static one.
 
