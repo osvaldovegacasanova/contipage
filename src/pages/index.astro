@@ -256,6 +256,7 @@ const srcDe = (v: unknown): string => (typeof v === "string" ? v : (v as { src: 
                   height={420}
                   format="webp"
                   loading="lazy"
+                  style={"encuadre" in persona ? `object-position: ${persona.encuadre};` : undefined}
                 />
                 <h3>{persona.name}</h3>
                 <p class="neu-persona-rol">{persona.role}</p>
