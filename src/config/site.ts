@@ -12,5 +12,5 @@ export const nombre_empresa = "Continental Andes";
   "version_sitio", en vez de tener que dar con la línea suelta entre los enlaces
   de redes sociales.
 */
-export const version_sitio = "1.0";
+export const version_sitio = "1.1";
 
