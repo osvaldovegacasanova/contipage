@@ -13,7 +13,13 @@ const posts = (await getCollection("blog")).sort(
   (a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate)
 );
 const etiquetas = Array.from(new Set(posts.flatMap((p) => p.data.tags || [])));
-const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { day: "numeric", month: "long", year: "numeric" });
+/*
+  `timeZone: "UTC"` no es opcional. Un `pubDate` sin hora, como "2026-08-29", se
+  interpreta a medianoche UTC; al formatearlo en la zona del servidor
+  (America/Santiago, UTC-4) retrocede al día anterior. Sin esto, todos los
+  artículos mostraban un día menos del que llevan en el frontmatter.
+*/
+const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 ---
 
 <Layout
