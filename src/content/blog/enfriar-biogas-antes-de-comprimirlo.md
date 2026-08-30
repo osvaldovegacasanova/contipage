@@ -4,7 +4,7 @@ description: "El enfriamiento previo del biogás cambia la densidad de succión,
 pubDate: 2026-08-29
 heroImage: "/images/blog-biogas-boosters.webp"
 tags: ["biogás", "sopladores", "ingeniería"]
-author: "Continental Andes Blowers"
+author: "Continental Blowers Andes"
 ---
 
 Un booster de biogás se especifica frecuentemente con dos números: caudal y presión de descarga. La temperatura y la humedad del gas en la succión suelen quedar fuera de la hoja de datos, y son las que terminan definiendo cuántas etapas de compresión se requieren y cuál puede ser la vida útil del equipo. Este artículo describe qué cambia dentro del soplador cuando el gas se enfría antes de entrar, y cómo revisar ese punto en una instalación que ya está operando.
@@ -83,7 +83,7 @@ Una temperatura de succión por sobre la de diseño, sostenida, indica que hay p
 
 ## Caso de referencia
 
-En una planta de biogás de relleno sanitario, CBA especificó un booster para 2.700 m³/h con 350 mbar manométricos de descarga, accionado por motor eléctrico de velocidad variable para seguir la producción del relleno. La especificación incorporó, sobre el requerimiento original, un filtro desarrollado para el proyecto y un sistema de deshumidificación aguas arriba del soplador. La reducción de temperatura obtenida, cercana a 15 °C, aumentó la presión disponible por etapa y eliminó la condensación interna en el equipo. El filtro de siloxanos que protege a los motogeneradores es parte de la línea y proviene de otro proveedor.
+En una planta de biogás de relleno sanitario, Continental Blowers Andes especificó un booster para 2.700 m³/h con 350 mbar manométricos de descarga, accionado por motor eléctrico de velocidad variable para seguir la producción del relleno. La especificación incorporó, sobre el requerimiento original, un filtro desarrollado para el proyecto y un sistema de deshumidificación aguas arriba del soplador. La reducción de temperatura obtenida, cercana a 15 °C, aumentó la presión disponible por etapa y eliminó la condensación interna en el equipo. El filtro de siloxanos que protege a los motogeneradores es parte de la línea y proviene de otro proveedor.
 
 ## Preguntas frecuentes
 

@@ -1,4 +1,4 @@
-export const nombre_empresa = "Continental Andes";
+export const nombre_empresa = "Continental Blowers Andes";
 
 /*
   Versión que se muestra en el pie. "Celeste" es el nombre de esta etapa del

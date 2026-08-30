@@ -9,7 +9,7 @@ import type { IndustryPage } from "./types";
 export const alimentaria: IndustryPage = {
   slug: "sopladores-para-industria-alimentaria",
   navLabel: "Industria Alimentaria",
-  seoTitle: "Sopladores para Industria Alimentaria | Bombas de Vacío y Tratamiento de Riles | Continental Andes",
+  seoTitle: "Sopladores para Industria Alimentaria | Bombas de Vacío y Tratamiento de Riles | Continental Blowers Andes",
   metaDescription:
     "Bombas de vacío y sopladores centrífugos Continental Industrie para la industria alimentaria y de producción animal: aspiración y limpieza de líneas de proceso y aireación biológica de riles. Diseño higiénico y alta disponibilidad.",
   hero: {

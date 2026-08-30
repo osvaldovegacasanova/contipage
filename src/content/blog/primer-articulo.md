@@ -4,7 +4,7 @@ description: "Introducción técnica a los principios de operación, componentes
 pubDate: 2025-01-15
 heroImage: "/images/blog-wind.webp"
 tags: ["compresores", "centrífugo", "ingeniería"]
-author: "Continental Andes Blowers"
+author: "Continental Blowers Andes"
 ---
 
 # ¿Qué es un compresor centrífugo?

@@ -10,7 +10,7 @@ import type { IndustryPage } from "./types";
 export const tratamientoAgua: IndustryPage = {
   slug: "sopladores-para-tratamiento-de-agua",
   navLabel: "Tratamiento de Agua",
-  seoTitle: "Sopladores para Tratamiento de Agua | Aireación de Reactores Biológicos | Continental Andes",
+  seoTitle: "Sopladores para Tratamiento de Agua | Aireación de Reactores Biológicos | Continental Blowers Andes",
   metaDescription:
     "Sopladores centrífugos Continental Industrie para plantas de tratamiento de aguas servidas: aireación en reactores de lodos activados, manejo de biogás, oxidación y agitación. Alta eficiencia energética y caudal variable.",
   hero: {

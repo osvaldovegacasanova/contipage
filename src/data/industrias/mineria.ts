@@ -8,7 +8,7 @@ import type { IndustryPage } from "./types";
 export const mineria: IndustryPage = {
   slug: "sopladores-para-mineria",
   navLabel: "Minería",
-  seoTitle: "Sopladores para Minería | Flotación, Transporte Neumático y Biolixiviación | Continental Andes",
+  seoTitle: "Sopladores para Minería | Flotación, Transporte Neumático y Biolixiviación | Continental Blowers Andes",
   metaDescription:
     "Sopladores y compresores centrífugos Continental Industrie para minería: flotación de minerales, transporte neumático por vacío, combustión, biolixiviación y oxidación. Alta disponibilidad sobre los 3.000 m en la región andina.",
   hero: {
