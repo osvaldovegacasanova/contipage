@@ -63,6 +63,23 @@ Cinco preguntas que debe realizar para revisar su plan:
 | ¿El equipo tiene sensor de colmatación de filtro? | Umbral de referencia de 30 a 50 mm de columna de agua |
 | ¿Cuántas inspecciones integrales se realizan al año? | Mínimo una, idealmente dos |
 
-Una visita de mantenimiento preventivo integral cubre inspección y monitoreo (revisión visual, datos de vibración, registro de parámetros operacionales, termografía, chequeo de instrumentación, análisis físico de aceites usados) y tareas preventivas (cambio de aceite, drenaje de condensado, mantención de válvulas de succión y bypass, control de alineación, reemplazo de elementos filtrantes).
+Una visita de mantenimiento preventivo integral cubre dos frentes.
+
+**Inspección y monitoreo**
+
+- Revisión visual
+- Datos de vibración
+- Registro de parámetros operacionales
+- Termografía
+- Chequeo de instrumentación
+- Análisis físico de aceites usados
+
+**Tareas preventivas**
+
+- Cambio de aceite
+- Drenaje de condensado
+- Mantención de válvulas de succión y bypass
+- Control de alineación
+- Reemplazo de elementos filtrantes
 
 El mantenimiento por condición es efectivo cuando existe un historial que permita leer y evaluar una tendencia. En un equipo recién puesto en marcha, o en uno sin registros previos, el calendario del fabricante es la referencia válida hasta acumular mediciones suficientes.
