@@ -15,7 +15,7 @@ This is an Astro-based marketing website for Continental Andes Blowers, a centri
 - `npm run astro` - Run Astro CLI commands directly
 
 ### Asset Processing
-- `npm run images:blog` - Process blog images from `src/content/blog/assets` to `public/blog` (500×500 WebP, quality 82)
+- `npm run images:blog` - Process blog images from `src/content/insights/assets` to `public/insights` (500×500 WebP, quality 82)
 - `npm run images:public` - Resize/optimize images in `public/` via `scripts/resize-public-images.mjs`
 - `npm run prebuild` - Automatically runs `images:blog` before every build
 - `npm run videos:encode` - Encode video variants from `public/videos/parte1.mp4`:
@@ -90,17 +90,17 @@ Always reference this file when updating site copy or understanding content stru
 - Applied automatically to `[data-scroll-blur]`, `main img`, and heading elements
 - Respects `prefers-reduced-motion`
 
-### Blog System
+### Insights System
 
-**Content Collection** (`src/content/blog`):
+**Content Collection** (`src/content/insights`, collection name `insights`):
 - Markdown posts with frontmatter: title, description, pubDate, heroImage, tags, author
-- Assets stored in `src/content/blog/assets/` (automatically processed to WebP on build)
+- Assets stored in `src/content/insights/assets/` (automatically processed to WebP on build)
 
 **Routes**:
-- `/blog` - Main blog index with tag filtering
-- `/blog/page/[page]` - Paginated blog listing
-- `/blog/tag/[tag]` - Filter by tag
-- `/blog/[slug]` - Individual post using BlogLayout
+- `/insights` - Main index with tag filtering
+- `/insights/page/[page]` - Paginated listing
+- `/insights/tag/[tag]` - Filter by tag
+- `/insights/[slug]` - Individual article
 
 **SEO**: BlogLayout adds Article and BreadcrumbList JSON-LD structured data to every post.
 
@@ -134,6 +134,6 @@ Google Analytics event tracking is centralized in `src/utils/analytics.ts`. Use 
 
 - **New section**: Create `src/components/sections/[name]/`, add main component, import in `src/pages/index.astro`.
 - **Update copy**: Find the exact component via `SITE_CONTENT_CATALOG.md`, then edit inline strings there.
-- **New blog post**: Add `.md` to `src/content/blog/` with frontmatter (title, description, pubDate, heroImage, tags, author). Place hero image in `src/content/blog/assets/` and run `npm run images:blog`.
+- **New blog post**: Add `.md` to `src/content/insights/` with frontmatter (title, description, pubDate, heroImage, tags, author). Place hero image in `src/content/insights/assets/` and run `npm run images:blog`.
 - **Color changes**: Edit `tailwind.config.mjs`; preview at `/colores`.
 - **Verify build**: `npm run build` runs `astro check` + type-check before bundling — always run before committing.

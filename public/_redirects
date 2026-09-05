@@ -1,2 +1,11 @@
 /download/CENTRIFUGOS-MONOETAPAS.pdf    /#productos    301
 /download/CENTRIFUGOS-MULTIETAPAS.pdf   /#productos    301
+
+# La seccion de articulos paso de /blog/ a /insights/ el 2026-09-05, y la
+# entrada de lubricacion habia cambiado de slug ese mismo dia. Netlify aplica
+# la primera regla que calza, asi que las dos rutas del articulo van antes
+# que el comodin de la seccion.
+/blog/cada-cuanto-lubricar-un-soplador-centrifugo        /insights/importancia-de-la-lubricacion-en-un-soplador-centrifugo    301
+/insights/cada-cuanto-lubricar-un-soplador-centrifugo    /insights/importancia-de-la-lubricacion-en-un-soplador-centrifugo    301
+/blog                                                   /insights                                                     301
+/blog/*                                                 /insights/:splat                                              301

@@ -1,53 +1,57 @@
 ---
-import Layout from "../../../layouts/Layout.astro";
-import "../../../styles/neu.css";
-import GradiantText from "../../../components/shared/GradiantText.astro";
+import Layout from "../../layouts/Layout.astro";
+import "../../styles/neu.css";
+import GradiantText from "../../components/shared/GradiantText.astro";
 import { getCollection } from "astro:content";
 
-// Listado de articulos por etiqueta.
-
-export async function getStaticPaths() {
-  const posts = await getCollection("blog");
-  const etiquetas = Array.from(new Set(posts.flatMap((p) => p.data.tags || [])));
-  return etiquetas.map((tag) => ({
-    params: { tag },
-    props: {
-      tag,
-      posts: posts
-        .filter((p) => (p.data.tags || []).includes(tag))
-        .sort((a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate)),
-    },
-  }));
-}
-
-const { tag, posts } = Astro.props as { tag: string; posts: Awaited<ReturnType<typeof getCollection>> };
-const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { day: "numeric", month: "long", year: "numeric" });
+// Indice de Insights.
+//
+// El contenido sale de la misma coleccion astro:content que alimenta /insights, asi
+// que los articulos no se duplican. Sin paginacion: con los articulos que hay
+// hoy cabe todo en una pagina, y la del sitio real tampoco llega a mostrarse.
+const posts = (await getCollection("insights")).sort(
+  (a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate)
+);
+const etiquetas = Array.from(new Set(posts.flatMap((p) => p.data.tags || [])));
+/*
+  `timeZone: "UTC"` no es opcional. Un `pubDate` sin hora, como "2026-08-29", se
+  interpreta a medianoche UTC; al formatearlo en la zona del servidor
+  (America/Santiago, UTC-4) retrocede al día anterior. Sin esto, todos los
+  artículos mostraban un día menos del que llevan en el frontmatter.
+*/
+const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 ---
 
 <Layout
-  navActivo="blog"
-  title={`${tag} | Insights | Continental Blowers Andes`}
-  description={`Articulos tecnicos sobre ${tag}: sopladores y compresores centrifugos Continental Industrie.`}
+  navActivo="insights"
+  title="Insights | Continental Blowers Andes"
+  description="Articulos tecnicos sobre sopladores y compresores centrifugos, sus procesos industriales y su mantenimiento."
 >
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" />
 
   <main class="neu-root">
     <div class="neu-wrap">
       <header class="neu-header neu-centrado">
-        <h1>Artículos sobre <GradiantText>{tag}</GradiantText></h1>
+        <h1>
+          <GradiantText>Insights</GradiantText>
+        </h1>
         <p class="neu-lead">
-          {posts.length === 1 ? "1 artículo publicado" : `${posts.length} artículos publicados`}
+          Sobre sopladores y compresores centrífugos, sus procesos y su mantenimiento.
         </p>
       </header>
 
-      <nav class="neu-nav neu-etiquetas" aria-label="Filtrar por etiqueta">
-        <a href="/blog">Todas</a>
-        <a href={`/blog/tag/${encodeURIComponent(tag)}/`} class="is-active">#{tag}</a>
-      </nav>
+      {etiquetas.length > 0 && (
+        <nav class="neu-nav neu-etiquetas" aria-label="Filtrar por etiqueta">
+          <a href="/insights" class="is-active">Todas</a>
+          {etiquetas.map((t) => (
+            <a href={`/insights/tag/${encodeURIComponent(t)}/`}>#{t}</a>
+          ))}
+        </nav>
+      )}
 
       <div class="neu-grid neu-cols-3 neu-articulos">
         {posts.map(({ data, slug }) => (
-          <a class="neu-articulo" href={`/blog/${slug}/`}>
+          <a class="neu-articulo" href={`/insights/${slug}/`}>
             {data.heroImage && (
               <div class="neu-photo neu-articulo-foto">
                 <img src={data.heroImage} alt={data.title} width="800" height="600" loading="lazy" />
@@ -66,7 +70,9 @@ const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { 
 <style is:global>
   .neu-centrado { text-align: center; }
   .neu-centrado .neu-lead { margin-left: auto; margin-right: auto; }
+
   .neu-etiquetas { justify-content: center; margin-bottom: 3rem; }
+  .neu-articulos { align-items: stretch; }
 
   /*
     Las entradas van sin tarjeta: en una rejilla de varias, el relieve de cada

@@ -9,13 +9,13 @@ import { getCollection } from "astro:content";
 const PAGE_SIZE = 6;
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await getCollection("insights");
   const total = Math.max(1, Math.ceil(posts.length / 6));
   return Array.from({ length: total }, (_, i) => ({ params: { page: String(i + 1) } }));
 }
 
 const pagina = Number(Astro.params.page ?? "1");
-const posts = (await getCollection("blog")).sort(
+const posts = (await getCollection("insights")).sort(
   (a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate)
 );
 const totalPaginas = Math.max(1, Math.ceil(posts.length / PAGE_SIZE));
@@ -26,7 +26,7 @@ const fecha = (d: unknown) =>
 ---
 
 <Layout
-  navActivo="blog"
+  navActivo="insights"
   title={`Insights · Página ${pagina} | Continental Blowers Andes`}
   description="Articulos tecnicos sobre sopladores y compresores centrifugos, sus procesos industriales y su mantenimiento."
 >
@@ -41,7 +41,7 @@ const fecha = (d: unknown) =>
 
       <div class="neu-grid neu-cols-3 neu-articulos">
         {enPagina.map(({ data, slug }) => (
-          <a class="neu-articulo" href={`/blog/${slug}/`}>
+          <a class="neu-articulo" href={`/insights/${slug}/`}>
             {data.heroImage && (
               <div class="neu-photo neu-articulo-foto">
                 <img src={data.heroImage} alt={data.title} width="800" height="600" loading="lazy" />
@@ -58,7 +58,7 @@ const fecha = (d: unknown) =>
         <nav class="neu-nav neu-paginacion" aria-label="Paginación">
           {Array.from({ length: totalPaginas }, (_, i) => i + 1).map((n) => (
             <a
-              href={n === 1 ? "/blog" : `/blog/page/${n}/`}
+              href={n === 1 ? "/insights" : `/insights/page/${n}/`}
               class={n === pagina ? "is-active" : ""}
               aria-current={n === pagina ? "page" : undefined}
             >

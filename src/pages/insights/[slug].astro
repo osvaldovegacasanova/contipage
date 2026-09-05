@@ -10,7 +10,7 @@ import { getCollection } from "astro:content";
 // Los estilos del cuerpo se aplican por descendencia sobre .neu-prosa, porque el
 // markdown no lleva clases propias.
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await getCollection("insights");
   return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
 }
 
@@ -34,7 +34,7 @@ const migas = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Inicio", item: new URL("/", Astro.site).href },
-    { "@type": "ListItem", position: 2, name: "Insights", item: new URL("/blog", Astro.site).href },
+    { "@type": "ListItem", position: 2, name: "Insights", item: new URL("/insights", Astro.site).href },
     { "@type": "ListItem", position: 3, name: d.title, item: canonical },
   ],
 };
@@ -48,7 +48,7 @@ const migas = {
 const fecha = (x: unknown) => new Date(String(x)).toLocaleDateString("es-CL", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 ---
 
-<Layout navActivo="blog" title={`${d.title} | Insights | Continental Blowers Andes`} description={d.description}>
+<Layout navActivo="insights" title={`${d.title} | Insights | Continental Blowers Andes`} description={d.description}>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" />
 
   <main class="neu-root">
@@ -56,7 +56,7 @@ const fecha = (x: unknown) => new Date(String(x)).toLocaleDateString("es-CL", { 
       <nav class="neu-nav neu-crumbs" aria-label="Migas de pan">
         <a href="/">Inicio</a>
         <span aria-hidden="true">/</span>
-        <a href="/blog">Blog</a>
+        <a href="/insights">Insights</a>
       </nav>
 
       <header class="neu-header">
@@ -69,7 +69,7 @@ const fecha = (x: unknown) => new Date(String(x)).toLocaleDateString("es-CL", { 
         {d.tags && d.tags.length > 0 && (
           <nav class="neu-nav neu-etiquetas-articulo" aria-label="Etiquetas">
             {d.tags.map((t: string) => (
-              <a href={`/blog/tag/${encodeURIComponent(t)}/`}>#{t}</a>
+              <a href={`/insights/tag/${encodeURIComponent(t)}/`}>#{t}</a>
             ))}
           </nav>
         )}
@@ -85,10 +85,28 @@ const fecha = (x: unknown) => new Date(String(x)).toLocaleDateString("es-CL", { 
         <Content />
       </article>
 
-      <div class="neu-cta-seccion">
-        <p class="neu-intro-respaldo">¿Tiene una consulta técnica sobre este proceso?</p>
-        <a href="mailto:cba@continentalandes.com" class="neu-btn neu-btn-accent">Escríbanos</a>
-      </div>
+      {/*
+        Cierre del artículo. Usa la misma tarjeta de cierre que los hubs de
+        industria (.neu-closing dentro de .neu-raised .neu-card), para que el
+        remate sea el mismo en todo el sitio.
+
+        Antes era un párrafo suelto con un botón, sin ninguna regla que lo
+        separara del texto: .neu-cta-seccion sólo está definida dentro del home,
+        de modo que aquí llegaba sin estilo y el botón quedaba pegado al último
+        párrafo. El enlace tampoco iba al formulario, sino a un mailto.
+      */}
+      <aside class="neu-articulo-cierre" aria-labelledby="cierre-titulo">
+        <div class="neu-raised neu-card neu-closing">
+          <span class="neu-icon neu-icon-lg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </span>
+          <h2 id="cierre-titulo">¿Tiene una consulta técnica sobre este proceso?</h2>
+          <p>Cuéntenos qué equipo opera y en qué condiciones. Revisamos su caso y le respondemos con una recomendación concreta.</p>
+          <a href="/contacto" class="neu-btn neu-btn-accent">Hablemos de su caso</a>
+        </div>
+      </aside>
     </div>
   </main>
 
@@ -172,4 +190,45 @@ const fecha = (x: unknown) => new Date(String(x)).toLocaleDateString("es-CL", { 
     border-bottom: 1px solid rgba(163, 177, 198, 0.35);
   }
   .neu-prosa tbody tr:last-child td { border-bottom: 0; }
+
+  /*
+    Cierre del artículo. La separación es el punto: el último párrafo del texto
+    y la llamada a la acción son dos cosas distintas, y sin aire entre medio se
+    leen como si la invitación fuera parte del artículo.
+
+    La regla horizontal es de una sola línea y con desvanecido en los extremos,
+    para marcar el corte sin introducir un borde duro, que rompe con el resto de
+    las superficies del sistema.
+  */
+  .neu-articulo-cierre {
+    display: block;
+    max-width: 44rem;
+    margin: 4.5rem 0 0;
+    padding-top: 3.5rem;
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(
+      to right,
+      transparent,
+      rgba(163, 177, 198, 0.6) 20%,
+      rgba(163, 177, 198, 0.6) 80%,
+      transparent
+    ) 1;
+  }
+
+  .neu-articulo-cierre .neu-closing {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; padding: 2.75rem 2rem;
+  }
+  .neu-articulo-cierre .neu-closing h2 {
+    font-size: 1.375rem; margin: 0 0 0.75rem; color: var(--neu-text);
+  }
+  .neu-articulo-cierre .neu-closing p {
+    max-width: 32rem; margin: 0 0 2rem; opacity: 0.85;
+  }
+
+  @media (max-width: 40rem) {
+    .neu-articulo-cierre { margin-top: 3rem; padding-top: 2.5rem; }
+    .neu-articulo-cierre .neu-closing { padding: 2rem 1.25rem; }
+    .neu-articulo-cierre .neu-closing .neu-btn { width: 100%; text-align: center; }
+  }
 </style>
