@@ -1,4 +1,11 @@
-import { readdirSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
+
+const carpetaInsights = new URL("./src/content/insights/", import.meta.url);
+
+// Lee el frontmatter a mano porque astro.config.mjs corre antes de que exista
+// la coleccion de contenido: aqui no hay getCollection al que preguntarle.
+const esBorrador = (nombre) =>
+  /^draft:\s*true\s*$/m.test(readFileSync(new URL(nombre, carpetaInsights), "utf8"));
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
@@ -28,10 +35,14 @@ export default defineConfig({
   // porque lo resuelve Netlify en produccion y no el build.
   redirects: {
     ...Object.fromEntries(
-      readdirSync(new URL("./src/content/insights/", import.meta.url))
-        .filter((archivo) => archivo.endsWith(".md"))
-        .map((archivo) => {
-          const slug = archivo.replace(/\.md$/, "");
+      readdirSync(carpetaInsights, { withFileTypes: true })
+        .filter((entrada) => entrada.isFile() && entrada.name.endsWith(".md"))
+        // Un articulo en borrador no se construye, asi que redirigir hacia el
+        // dejaria la ruta antigua apuntando a un 404. Mejor que caiga en el
+        // comodin /blog/* de _redirects, que lleva al indice de la seccion.
+        .filter((entrada) => !esBorrador(entrada.name))
+        .map((entrada) => {
+          const slug = entrada.name.replace(/\.md$/, "");
           return [`/blog/${slug}`, `/insights/${slug}`];
         }),
     ),

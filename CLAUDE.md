@@ -93,7 +93,9 @@ Always reference this file when updating site copy or understanding content stru
 ### Insights System
 
 **Content Collection** (`src/content/insights`, collection name `insights`):
-- Markdown posts with frontmatter: title, description, pubDate, heroImage, tags, author
+- Markdown posts with frontmatter: title, description, pubDate, heroImage, tags, author, draft
+- `draft: true` hides an article completely: it drops out of the index, pagination, tag listings and sitemap, its URL 404s, and no `/blog/` redirect is generated for it. The file stays in the repo; removing the field republishes it.
+- **Never call `getCollection("insights")` from a page.** Use `articulosPublicados()` from `src/utils/insights.ts`, which applies the draft filter and sorts newest first. An unfiltered call silently re-exposes hidden articles.
 - Assets stored in `src/content/insights/assets/` (automatically processed to WebP on build)
 
 **Routes**:
@@ -134,6 +136,6 @@ Google Analytics event tracking is centralized in `src/utils/analytics.ts`. Use 
 
 - **New section**: Create `src/components/sections/[name]/`, add main component, import in `src/pages/index.astro`.
 - **Update copy**: Find the exact component via `SITE_CONTENT_CATALOG.md`, then edit inline strings there.
-- **New blog post**: Add `.md` to `src/content/insights/` with frontmatter (title, description, pubDate, heroImage, tags, author). Place hero image in `src/content/insights/assets/` and run `npm run images:blog`.
+- **New blog post**: Add `.md` to `src/content/insights/` with frontmatter (title, description, pubDate, heroImage, tags, author; optional `draft: true` to keep it hidden). Place hero image in `src/content/insights/assets/` and run `npm run images:blog`.
 - **Color changes**: Edit `tailwind.config.mjs`; preview at `/colores`.
 - **Verify build**: `npm run build` runs `astro check` + type-check before bundling — always run before committing.

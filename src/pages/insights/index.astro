@@ -2,16 +2,14 @@
 import Layout from "../../layouts/Layout.astro";
 import "../../styles/neu.css";
 import GradiantText from "../../components/shared/GradiantText.astro";
-import { getCollection } from "astro:content";
+import { articulosPublicados } from "../../utils/insights";
 
 // Indice de Insights.
 //
 // El contenido sale de la misma coleccion astro:content que alimenta /insights, asi
 // que los articulos no se duplican. Sin paginacion: con los articulos que hay
 // hoy cabe todo en una pagina, y la del sitio real tampoco llega a mostrarse.
-const posts = (await getCollection("insights")).sort(
-  (a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate)
-);
+const posts = await articulosPublicados();
 const etiquetas = Array.from(new Set(posts.flatMap((p) => p.data.tags || [])));
 /*
   `timeZone: "UTC"` no es opcional. Un `pubDate` sin hora, como "2026-08-29", se

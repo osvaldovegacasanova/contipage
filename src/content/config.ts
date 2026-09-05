@@ -10,6 +10,13 @@ const insights = defineCollection({
     heroImage: z.string().optional(),
     tags: z.array(z.string()).default([]),
     author: z.string().optional(),
+    /*
+      Un articulo con draft: true no se construye. Sale del indice, de la
+      paginacion, de los listados por etiqueta y del sitemap, y su URL devuelve
+      404. El archivo se queda en el repositorio, listo para volver.
+      El filtro vive en src/utils/insights.ts.
+    */
+    draft: z.boolean().default(false),
   }),
 });
 

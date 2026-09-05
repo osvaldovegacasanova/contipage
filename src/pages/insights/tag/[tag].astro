@@ -2,25 +2,23 @@
 import Layout from "../../../layouts/Layout.astro";
 import "../../../styles/neu.css";
 import GradiantText from "../../../components/shared/GradiantText.astro";
-import { getCollection } from "astro:content";
+import { articulosPublicados } from "../../../utils/insights";
 
 // Listado de articulos por etiqueta.
 
 export async function getStaticPaths() {
-  const posts = await getCollection("insights");
+  const posts = await articulosPublicados();
   const etiquetas = Array.from(new Set(posts.flatMap((p) => p.data.tags || [])));
   return etiquetas.map((tag) => ({
     params: { tag },
     props: {
       tag,
-      posts: posts
-        .filter((p) => (p.data.tags || []).includes(tag))
-        .sort((a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate)),
+      posts: posts.filter((p) => (p.data.tags || []).includes(tag)),
     },
   }));
 }
 
-const { tag, posts } = Astro.props as { tag: string; posts: Awaited<ReturnType<typeof getCollection>> };
+const { tag, posts } = Astro.props as { tag: string; posts: Awaited<ReturnType<typeof articulosPublicados>> };
 const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { day: "numeric", month: "long", year: "numeric" });
 ---
 

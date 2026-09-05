@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import "../../styles/neu.css";
-import { getCollection } from "astro:content";
+import { articulosPublicados } from "../../utils/insights";
 
 // Pagina de articulo.
 //
@@ -10,11 +10,11 @@ import { getCollection } from "astro:content";
 // Los estilos del cuerpo se aplican por descendencia sobre .neu-prosa, porque el
 // markdown no lleva clases propias.
 export async function getStaticPaths() {
-  const posts = await getCollection("insights");
+  const posts = await articulosPublicados();
   return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
 }
 
-const { post } = Astro.props as { post: Awaited<ReturnType<typeof getCollection>>[number] };
+const { post } = Astro.props as { post: Awaited<ReturnType<typeof articulosPublicados>>[number] };
 const { Content } = await post.render();
 const d = post.data;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
