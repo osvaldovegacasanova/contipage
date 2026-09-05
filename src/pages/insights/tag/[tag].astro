@@ -2,30 +2,28 @@
 import Layout from "../../../layouts/Layout.astro";
 import "../../../styles/neu.css";
 import GradiantText from "../../../components/shared/GradiantText.astro";
-import { getCollection } from "astro:content";
+import { articulosPublicados } from "../../../utils/insights";
 
 // Listado de articulos por etiqueta.
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = await articulosPublicados();
   const etiquetas = Array.from(new Set(posts.flatMap((p) => p.data.tags || [])));
   return etiquetas.map((tag) => ({
     params: { tag },
     props: {
       tag,
-      posts: posts
-        .filter((p) => (p.data.tags || []).includes(tag))
-        .sort((a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate)),
+      posts: posts.filter((p) => (p.data.tags || []).includes(tag)),
     },
   }));
 }
 
-const { tag, posts } = Astro.props as { tag: string; posts: Awaited<ReturnType<typeof getCollection>> };
+const { tag, posts } = Astro.props as { tag: string; posts: Awaited<ReturnType<typeof articulosPublicados>> };
 const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { day: "numeric", month: "long", year: "numeric" });
 ---
 
 <Layout
-  navActivo="blog"
+  navActivo="insights"
   title={`${tag} | Insights | Continental Blowers Andes`}
   description={`Articulos tecnicos sobre ${tag}: sopladores y compresores centrifugos Continental Industrie.`}
 >
@@ -41,13 +39,13 @@ const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { 
       </header>
 
       <nav class="neu-nav neu-etiquetas" aria-label="Filtrar por etiqueta">
-        <a href="/blog">Todas</a>
-        <a href={`/blog/tag/${encodeURIComponent(tag)}/`} class="is-active">#{tag}</a>
+        <a href="/insights">Todas</a>
+        <a href={`/insights/tag/${encodeURIComponent(tag)}/`} class="is-active">#{tag}</a>
       </nav>
 
       <div class="neu-grid neu-cols-3 neu-articulos">
         {posts.map(({ data, slug }) => (
-          <a class="neu-articulo" href={`/blog/${slug}/`}>
+          <a class="neu-articulo" href={`/insights/${slug}/`}>
             {data.heroImage && (
               <div class="neu-photo neu-articulo-foto">
                 <img src={data.heroImage} alt={data.title} width="800" height="600" loading="lazy" />

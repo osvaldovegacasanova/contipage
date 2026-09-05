@@ -4,10 +4,10 @@ import path from 'path';
 async function main() {
   const sharp = await import('sharp').then(m => m.default || m);
   const root = path.resolve(process.cwd());
-  const srcDir = path.join(root, 'src', 'content', 'blog', 'assets');
-  const outDir = path.join(root, 'public', 'blog');
+  const srcDir = path.join(root, 'src', 'content', 'insights', 'assets');
+  const outDir = path.join(root, 'public', 'insights');
   if (!fs.existsSync(srcDir)) {
-    console.log(`[images:blog] Source not found: ${srcDir}`);
+    console.log(`[images:insights] Source not found: ${srcDir}`);
     return;
   }
   fs.mkdirSync(outDir, { recursive: true });
@@ -20,9 +20,9 @@ async function main() {
         .resize(500, 500, { fit: 'cover', position: 'centre' })
         .webp({ quality: 82 })
         .toFile(outPath);
-      console.log(`[images:blog] Wrote ${path.relative(root, outPath)}`);
+      console.log(`[images:insights] Wrote ${path.relative(root, outPath)}`);
     } catch (e) {
-      console.error(`[images:blog] Failed ${file}:`, e.message);
+      console.error(`[images:insights] Failed ${file}:`, e.message);
     }
   });
   await Promise.all(tasks);

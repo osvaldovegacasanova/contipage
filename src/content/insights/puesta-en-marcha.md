@@ -4,6 +4,7 @@ description: "Lista de verificación para una puesta en marcha segura y eficient
 pubDate: 2025-01-20
 heroImage: "/images/blog-solar3.webp"
 tags: ["puesta en marcha", "mantenimiento", "seguridad"]
+draft: true
 author: "Equipo de Servicios"
 ---
 

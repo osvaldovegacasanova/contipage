@@ -2,22 +2,26 @@
 import Layout from "../../layouts/Layout.astro";
 import "../../styles/neu.css";
 import GradiantText from "../../components/shared/GradiantText.astro";
-import { getCollection } from "astro:content";
+import { articulosPublicados } from "../../utils/insights";
 
 // Indice de Insights.
 //
-// El contenido sale de la misma coleccion astro:content que alimenta /blog, asi
+// El contenido sale de la misma coleccion astro:content que alimenta /insights, asi
 // que los articulos no se duplican. Sin paginacion: con los articulos que hay
 // hoy cabe todo en una pagina, y la del sitio real tampoco llega a mostrarse.
-const posts = (await getCollection("blog")).sort(
-  (a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate)
-);
+const posts = await articulosPublicados();
 const etiquetas = Array.from(new Set(posts.flatMap((p) => p.data.tags || [])));
-const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { day: "numeric", month: "long", year: "numeric" });
+/*
+  `timeZone: "UTC"` no es opcional. Un `pubDate` sin hora, como "2026-08-29", se
+  interpreta a medianoche UTC; al formatearlo en la zona del servidor
+  (America/Santiago, UTC-4) retrocede al día anterior. Sin esto, todos los
+  artículos mostraban un día menos del que llevan en el frontmatter.
+*/
+const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 ---
 
 <Layout
-  navActivo="blog"
+  navActivo="insights"
   title="Insights | Continental Blowers Andes"
   description="Articulos tecnicos sobre sopladores y compresores centrifugos, sus procesos industriales y su mantenimiento."
 >
@@ -30,22 +34,26 @@ const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { 
           <GradiantText>Insights</GradiantText>
         </h1>
         <p class="neu-lead">
-          Sobre sopladores y compresores centrífugos, sus procesos y su mantenimiento.
+          Continental Blowers Andes con 25 años de operación en Chile y región andina ha
+          recogido experiencias y junto a su equipo de expertos ha acumulado conocimiento de
+          alto nivel, que se encuentra permanentemente a disposición de las industrias que
+          cuentan con sopladores centrífugos Continental Industrie como parte vital de su
+          operación
         </p>
       </header>
 
       {etiquetas.length > 0 && (
         <nav class="neu-nav neu-etiquetas" aria-label="Filtrar por etiqueta">
-          <a href="/blog" class="is-active">Todas</a>
+          <a href="/insights" class="is-active">Todas</a>
           {etiquetas.map((t) => (
-            <a href={`/blog/tag/${encodeURIComponent(t)}/`}>#{t}</a>
+            <a href={`/insights/tag/${encodeURIComponent(t)}/`}>#{t}</a>
           ))}
         </nav>
       )}
 
       <div class="neu-grid neu-cols-3 neu-articulos">
         {posts.map(({ data, slug }) => (
-          <a class="neu-articulo" href={`/blog/${slug}/`}>
+          <a class="neu-articulo" href={`/insights/${slug}/`}>
             {data.heroImage && (
               <div class="neu-photo neu-articulo-foto">
                 <img src={data.heroImage} alt={data.title} width="800" height="600" loading="lazy" />

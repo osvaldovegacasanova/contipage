@@ -1,2 +1,17 @@
 /download/CENTRIFUGOS-MONOETAPAS.pdf    /#productos    301
 /download/CENTRIFUGOS-MULTIETAPAS.pdf   /#productos    301
+
+# La seccion de articulos paso de /blog/ a /insights/ el 2026-09-05, y la
+# entrada de lubricacion habia cambiado de slug ese mismo dia. Netlify aplica
+# la primera regla que calza, asi que las dos rutas del articulo van antes
+# que el comodin de la seccion.
+/blog/cada-cuanto-lubricar-un-soplador-centrifugo        /insights/importancia-de-la-lubricacion-en-un-soplador-centrifugo    301
+/insights/cada-cuanto-lubricar-un-soplador-centrifugo    /insights/importancia-de-la-lubricacion-en-un-soplador-centrifugo    301
+# Los dos articulos heredados de la plantilla se ocultaron el 2026-09-05 y sus
+# URLs devuelven 404. Sin estas dos lineas el comodin de abajo los mandaria a
+# /insights/<slug>, que tampoco existe: una redireccion que termina en 404. Van
+# al indice de la seccion, que es un destino real.
+/blog/primer-articulo                                   /insights                                                     301
+/blog/puesta-en-marcha                                  /insights                                                     301
+/blog                                                   /insights                                                     301
+/blog/*                                                 /insights/:splat                                              301

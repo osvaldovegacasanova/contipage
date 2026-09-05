@@ -17,6 +17,6 @@ export const enlacesNav = [
   { href: "/#sopladores", texto: "Sopladores", clave: "sopladores" },
   { href: "/#nosotros", texto: "Nosotros", clave: "nosotros" },
   { href: "/#temporal", texto: "Mision", clave: "mision" },
-  { href: "/blog", texto: "Insights", clave: "blog" },
+  { href: "/insights", texto: "Insights", clave: "insights" },
   { href: "/contacto", texto: "Contacto", clave: "contacto" },
 ];

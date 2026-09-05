@@ -2,31 +2,27 @@
 import Layout from "../../../layouts/Layout.astro";
 import "../../../styles/neu.css";
 import GradiantText from "../../../components/shared/GradiantText.astro";
-import { getCollection } from "astro:content";
+import { articulosPublicados, ARTICULOS_POR_PAGINA } from "../../../utils/insights";
 
 // Paginacion de Insights. Con los articulos que hay hoy no llega a mostrarse
 // mas que la pagina 1, pero queda lista para cuando el blog crezca.
-const PAGE_SIZE = 6;
-
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
-  const total = Math.max(1, Math.ceil(posts.length / 6));
+  const posts = await articulosPublicados();
+  const total = Math.max(1, Math.ceil(posts.length / ARTICULOS_POR_PAGINA));
   return Array.from({ length: total }, (_, i) => ({ params: { page: String(i + 1) } }));
 }
 
 const pagina = Number(Astro.params.page ?? "1");
-const posts = (await getCollection("blog")).sort(
-  (a, b) => +new Date(b.data.pubDate) - +new Date(a.data.pubDate)
-);
-const totalPaginas = Math.max(1, Math.ceil(posts.length / PAGE_SIZE));
-const desde = (pagina - 1) * PAGE_SIZE;
-const enPagina = posts.slice(desde, desde + PAGE_SIZE);
+const posts = await articulosPublicados();
+const totalPaginas = Math.max(1, Math.ceil(posts.length / ARTICULOS_POR_PAGINA));
+const desde = (pagina - 1) * ARTICULOS_POR_PAGINA;
+const enPagina = posts.slice(desde, desde + ARTICULOS_POR_PAGINA);
 const fecha = (d: unknown) =>
   new Date(String(d)).toLocaleDateString("es-CL", { day: "numeric", month: "long", year: "numeric" });
 ---
 
 <Layout
-  navActivo="blog"
+  navActivo="insights"
   title={`Insights · Página ${pagina} | Continental Blowers Andes`}
   description="Articulos tecnicos sobre sopladores y compresores centrifugos, sus procesos industriales y su mantenimiento."
 >
@@ -41,7 +37,7 @@ const fecha = (d: unknown) =>
 
       <div class="neu-grid neu-cols-3 neu-articulos">
         {enPagina.map(({ data, slug }) => (
-          <a class="neu-articulo" href={`/blog/${slug}/`}>
+          <a class="neu-articulo" href={`/insights/${slug}/`}>
             {data.heroImage && (
               <div class="neu-photo neu-articulo-foto">
                 <img src={data.heroImage} alt={data.title} width="800" height="600" loading="lazy" />
@@ -58,7 +54,7 @@ const fecha = (d: unknown) =>
         <nav class="neu-nav neu-paginacion" aria-label="Paginación">
           {Array.from({ length: totalPaginas }, (_, i) => i + 1).map((n) => (
             <a
-              href={n === 1 ? "/blog" : `/blog/page/${n}/`}
+              href={n === 1 ? "/insights" : `/insights/page/${n}/`}
               class={n === pagina ? "is-active" : ""}
               aria-current={n === pagina ? "page" : undefined}
             >

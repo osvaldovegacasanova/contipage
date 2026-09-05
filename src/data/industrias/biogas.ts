@@ -10,7 +10,7 @@ import type { IndustryPage } from "./types";
 export const biogas: IndustryPage = {
   slug: "sopladores-para-biogas",
   navLabel: "Manejo de Biogás",
-  seoTitle: "Sopladores para Biogás | Booster de Generación, Quema y Biometano | Continental Andes",
+  seoTitle: "Sopladores para Biogás | Booster de Generación, Quema y Biometano | Continental Blowers Andes",
   metaDescription:
     "Sopladores y boosters centrífugos ATEX Continental Industrie para manejo de biogás: generación de energía, quema en antorcha, biometano y oxidación de lixiviados. Caudal variable y presión constante en la región andina.",
   hero: {

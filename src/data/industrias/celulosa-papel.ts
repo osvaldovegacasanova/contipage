@@ -11,7 +11,7 @@ import type { IndustryPage } from "./types";
 export const celulosaPapel: IndustryPage = {
   slug: "sopladores-para-celulosa-y-papel",
   navLabel: "Celulosa y Papel",
-  seoTitle: "Sopladores para Celulosa y Papel | Aireación de Riles y Bombas de Vacío | Continental Andes",
+  seoTitle: "Sopladores para Celulosa y Papel | Aireación de Riles y Bombas de Vacío | Continental Blowers Andes",
   metaDescription:
     "Sopladores y bombas de vacío centrífugas Continental Industrie para la industria de celulosa y papel: aireación en tratamiento de riles y vacío en corrugado de cartón. Bajo consumo energético y operación continua.",
   hero: {

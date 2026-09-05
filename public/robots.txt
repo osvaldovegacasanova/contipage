@@ -9,9 +9,10 @@ Disallow: /colores/
 Disallow: /fonts/
 Disallow: /separadores/
 
-# Disallow pages not ready for indexing
-Disallow: /mineria/
-Disallow: /blog/
+# /mineria/ y /blog/ estuvieron bloqueados aqui mientras el blog solo tenia los
+# articulos de la plantilla. Insights ya publica contenido propio, y bloquearlo
+# contradecia al sitemap, que declaraba esas mismas URLs.
+# /mineria/ ademas no es ninguna ruta del sitio: el hub es /sopladores-para-mineria.
 
 # Sitemap
 Sitemap: https://continentalandes.com/sitemap-index.xml

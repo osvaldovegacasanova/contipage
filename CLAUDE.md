@@ -15,7 +15,7 @@ This is an Astro-based marketing website for Continental Andes Blowers, a centri
 - `npm run astro` - Run Astro CLI commands directly
 
 ### Asset Processing
-- `npm run images:blog` - Process blog images from `src/content/blog/assets` to `public/blog` (500×500 WebP, quality 82)
+- `npm run images:blog` - Process blog images from `src/content/insights/assets` to `public/insights` (500×500 WebP, quality 82)
 - `npm run images:public` - Resize/optimize images in `public/` via `scripts/resize-public-images.mjs`
 - `npm run prebuild` - Automatically runs `images:blog` before every build
 - `npm run videos:encode` - Encode video variants from `public/videos/parte1.mp4`:
@@ -32,6 +32,7 @@ Run these from `site/` before merging to `test` or `main`, in order:
 3. **Check the page count** the audit reports against what you expect. A route that silently stopped generating shows up here first.
 4. **Update [`changelog-continental.md`](../changelog-continental.md)** at the repo root, per the rule in the root CLAUDE.md.
 5. **Only when merging to `main`: bump `version_sitio`** in [src/config/site.ts](src/config/site.ts), which is what the footer shows. Decimal for ordinary changes, integer for large ones. Full rule in the root CLAUDE.md. Merges to `test` do not touch it.
+6. **If the release changes content: update the matching document** in `sitio2/textos-cba-web/`, so it reflects what is now published. Full rule in the root CLAUDE.md. Those files sit outside the repo, so no commit carries them.
 
 **The sitemap needs no manual step.** It is generated at build time by `@astrojs/sitemap`, configured in `astro.config.mjs`, and internal pages (`/colores`, `/fonts`, `/separadores`) are filtered out to match `robots.txt`. It used to be a hand-written file in `public/` and drifted to a single URL while the site grew to seventeen pages — do not reintroduce a static one.
 
@@ -89,17 +90,19 @@ Always reference this file when updating site copy or understanding content stru
 - Applied automatically to `[data-scroll-blur]`, `main img`, and heading elements
 - Respects `prefers-reduced-motion`
 
-### Blog System
+### Insights System
 
-**Content Collection** (`src/content/blog`):
-- Markdown posts with frontmatter: title, description, pubDate, heroImage, tags, author
-- Assets stored in `src/content/blog/assets/` (automatically processed to WebP on build)
+**Content Collection** (`src/content/insights`, collection name `insights`):
+- Markdown posts with frontmatter: title, description, pubDate, heroImage, tags, author, draft
+- `draft: true` hides an article completely: it drops out of the index, pagination, tag listings and sitemap, its URL 404s, and no `/blog/` redirect is generated for it. The file stays in the repo; removing the field republishes it.
+- **Never call `getCollection("insights")` from a page.** Use `articulosPublicados()` from `src/utils/insights.ts`, which applies the draft filter and sorts newest first. An unfiltered call silently re-exposes hidden articles.
+- Assets stored in `src/content/insights/assets/` (automatically processed to WebP on build)
 
 **Routes**:
-- `/blog` - Main blog index with tag filtering
-- `/blog/page/[page]` - Paginated blog listing
-- `/blog/tag/[tag]` - Filter by tag
-- `/blog/[slug]` - Individual post using BlogLayout
+- `/insights` - Main index with tag filtering
+- `/insights/page/[page]` - Paginated listing
+- `/insights/tag/[tag]` - Filter by tag
+- `/insights/[slug]` - Individual article
 
 **SEO**: BlogLayout adds Article and BreadcrumbList JSON-LD structured data to every post.
 
@@ -133,6 +136,6 @@ Google Analytics event tracking is centralized in `src/utils/analytics.ts`. Use 
 
 - **New section**: Create `src/components/sections/[name]/`, add main component, import in `src/pages/index.astro`.
 - **Update copy**: Find the exact component via `SITE_CONTENT_CATALOG.md`, then edit inline strings there.
-- **New blog post**: Add `.md` to `src/content/blog/` with frontmatter (title, description, pubDate, heroImage, tags, author). Place hero image in `src/content/blog/assets/` and run `npm run images:blog`.
+- **New blog post**: Add `.md` to `src/content/insights/` with frontmatter (title, description, pubDate, heroImage, tags, author; optional `draft: true` to keep it hidden). Place hero image in `src/content/insights/assets/` and run `npm run images:blog`.
 - **Color changes**: Edit `tailwind.config.mjs`; preview at `/colores`.
 - **Verify build**: `npm run build` runs `astro check` + type-check before bundling — always run before committing.

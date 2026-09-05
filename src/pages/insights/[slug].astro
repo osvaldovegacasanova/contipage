@@ -1,0 +1,248 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import "../../styles/neu.css";
+import { articulosPublicados } from "../../utils/insights";
+
+// Pagina de articulo.
+//
+// El cuerpo del articulo es el mismo markdown de la coleccion astro:content, sin
+// duplicar: se renderiza con <Content /> dentro de una superficie neumorfica.
+// Los estilos del cuerpo se aplican por descendencia sobre .neu-prosa, porque el
+// markdown no lleva clases propias.
+export async function getStaticPaths() {
+  const posts = await articulosPublicados();
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+
+const { post } = Astro.props as { post: Awaited<ReturnType<typeof articulosPublicados>>[number] };
+const { Content } = await post.render();
+const d = post.data;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const articulo = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: d.title,
+  description: d.description,
+  datePublished: String(d.pubDate),
+  author: { "@type": "Organization", name: d.author || "Continental Blowers Andes" },
+  publisher: { "@type": "Organization", name: "Continental Blowers Andes", url: new URL("/", Astro.site).href },
+  mainEntityOfPage: canonical,
+  ...(d.heroImage ? { image: new URL(d.heroImage, Astro.site).href } : {}),
+};
+const migas = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: new URL("/", Astro.site).href },
+    { "@type": "ListItem", position: 2, name: "Insights", item: new URL("/insights", Astro.site).href },
+    { "@type": "ListItem", position: 3, name: d.title, item: canonical },
+  ],
+};
+
+/*
+  `timeZone: "UTC"` no es opcional. Un `pubDate` sin hora, como "2026-08-29", se
+  interpreta a medianoche UTC; al formatearlo en la zona del servidor
+  (America/Santiago, UTC-4) retrocede al día anterior. Sin esto, todos los
+  artículos mostraban un día menos del que llevan en el frontmatter.
+*/
+const fecha = (x: unknown) => new Date(String(x)).toLocaleDateString("es-CL", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+---
+
+<Layout navActivo="insights" title={`${d.title} | Insights | Continental Blowers Andes`} description={d.description}>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" />
+
+  <main class="neu-root">
+    <div class="neu-wrap neu-articulo-wrap">
+      <nav class="neu-nav neu-crumbs" aria-label="Migas de pan">
+        <a href="/">Inicio</a>
+        <span aria-hidden="true">/</span>
+        <a href="/insights">Insights</a>
+      </nav>
+
+      <header class="neu-header">
+        <h1>{d.title}</h1>
+        {d.description && <p class="neu-lead">{d.description}</p>}
+        <p class="neu-articulo-meta">
+          {fecha(d.pubDate)}
+          {d.author && <span> · {d.author}</span>}
+        </p>
+        {d.tags && d.tags.length > 0 && (
+          <nav class="neu-nav neu-etiquetas-articulo" aria-label="Etiquetas">
+            {d.tags.map((t: string) => (
+              <a href={`/insights/tag/${encodeURIComponent(t)}/`}>#{t}</a>
+            ))}
+          </nav>
+        )}
+      </header>
+
+      {d.heroImage && (
+        <figure class="neu-raised neu-articulo-hero">
+          <img src={d.heroImage} alt={d.title} loading="eager" />
+        </figure>
+      )}
+
+      <article class="neu-prosa">
+        <Content />
+      </article>
+
+      {/*
+        Cierre del artículo. Usa la misma tarjeta de cierre que los hubs de
+        industria (.neu-closing dentro de .neu-raised .neu-card), para que el
+        remate sea el mismo en todo el sitio.
+
+        Antes era un párrafo suelto con un botón, sin ninguna regla que lo
+        separara del texto: .neu-cta-seccion sólo está definida dentro del home,
+        de modo que aquí llegaba sin estilo y el botón quedaba pegado al último
+        párrafo. El enlace tampoco iba al formulario, sino a un mailto.
+      */}
+      <aside class="neu-articulo-cierre" aria-labelledby="cierre-titulo">
+        <div class="neu-raised neu-card neu-closing">
+          <span class="neu-icon neu-icon-lg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </span>
+          <h2 id="cierre-titulo">¿Tiene una consulta técnica sobre este proceso?</h2>
+          <p>Cuéntenos qué equipo opera y en qué condiciones. Revisamos su caso y le respondemos con una recomendación concreta.</p>
+          <a href="/contacto" class="neu-btn neu-btn-accent">Hablemos de su caso</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articulo)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(migas)} />
+
+  {/*
+    Envuelve cada tabla del markdown en una caja con desplazamiento propio. Sin
+    esto, una tabla ancha estira el documento entero y aparece barra horizontal
+    en toda la página, que es justo lo que no debe pasar en móvil.
+  */}
+  <script is:inline>
+    document.querySelectorAll(".neu-prosa table").forEach((tabla) => {
+      if (tabla.parentElement?.classList.contains("tabla-scroll")) return;
+      const caja = document.createElement("div");
+      caja.className = "tabla-scroll";
+      tabla.replaceWith(caja);
+      caja.appendChild(tabla);
+    });
+  </script>
+</Layout>
+
+<style is:global>
+  .neu-articulo-wrap { max-width: 52rem; }
+  .neu-crumbs { align-items: center; margin-bottom: 2rem; }
+  .neu-crumbs span { font-size: 0.875rem; color: var(--neu-muted); }
+
+  .neu-articulo-meta { font-size: 0.875rem; opacity: 0.75; margin-top: 1rem; }
+  .neu-etiquetas-articulo { margin-top: 1.25rem; }
+
+  .neu-articulo-hero { overflow: hidden; margin-bottom: 3rem; }
+  .neu-articulo-hero img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+
+  /*
+    El markdown no trae clases, asi que sus estilos se aplican por descendencia.
+    El h1 del articulo ya esta en la cabecera, de modo que aqui se degrada el h1
+    del cuerpo para que no compita.
+  */
+  .neu-prosa { max-width: 44rem; }
+  .neu-prosa h1 { font-size: 1.75rem; margin: 2.5rem 0 1rem; }
+  .neu-prosa h2 { font-size: 1.375rem; margin: 2.5rem 0 0.75rem; color: var(--neu-accent); }
+  .neu-prosa h3 { margin: 2rem 0 0.5rem; }
+  .neu-prosa p { margin-bottom: 1.25rem; }
+  .neu-prosa strong { font-weight: 600; }
+  .neu-prosa ul { list-style: none; padding: 0; margin: 0 0 1.5rem; }
+
+  /*
+    Etiqueta de una lista. La línea de negrita que encabeza un grupo de viñetas
+    es un párrafo normal en el markdown, así que heredaba el 1,25 rem de
+    separación inferior de cualquier párrafo: quedaba más cerca de la lista
+    anterior que de la suya, y los dos grupos se leían como uno solo.
+
+    Se acerca a su lista y se aleja de lo de arriba. La regla editorial pide que
+    las enumeraciones relevantes vayan en viñetas bajo su propio encabezado, y
+    sin este ajuste el encabezado no se ve como tal.
+  */
+  .neu-prosa p:has(+ ul) { margin-top: 2rem; margin-bottom: 0.5rem; }
+  .neu-prosa h2 + p:has(+ ul),
+  .neu-prosa h3 + p:has(+ ul) { margin-top: 0; }
+  .neu-prosa ul li { position: relative; padding-left: 1.25rem; line-height: 1.9; }
+  .neu-prosa ul li::before {
+    content: ""; position: absolute; left: 0; top: 0.8rem;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--neu-accent);
+  }
+  .neu-prosa figure { margin: 2.5rem 0; }
+  .neu-prosa figure img {
+    display: block; width: 100%; height: auto;
+    border-radius: 0.875rem; box-shadow: var(--neu-raised);
+  }
+  .neu-prosa figcaption { margin-top: 0.75rem; font-size: 0.8125rem; opacity: 0.7; text-align: center; }
+  .neu-prosa a { color: var(--neu-accent); }
+
+  /*
+    Tablas. No existían hasta el artículo sobre enfriamiento del biogás, que trae
+    tres, así que hasta ahora se dibujaban sin estilo alguno.
+
+    El envoltorio con desplazamiento propio es lo que impide que una tabla de tres
+    columnas con celdas largas empuje el ancho de toda la página en un teléfono:
+    lo que desborda es la tabla dentro de su caja, y no el cuerpo del documento.
+    Astro no envuelve las tablas del markdown, así que el envoltorio lo pone un
+    guion al cargar la página.
+  */
+  .neu-prosa .tabla-scroll { overflow-x: auto; margin: 2rem 0; }
+  .neu-prosa table {
+    border-collapse: collapse; width: 100%; min-width: 34rem;
+    font-size: 0.875rem; line-height: 1.6;
+  }
+  .neu-prosa thead th {
+    text-align: left; font-weight: 500; color: var(--neu-accent);
+    padding: 0.75rem 1rem; border-bottom: 1px solid var(--neu-dark);
+    white-space: nowrap;
+  }
+  .neu-prosa tbody td {
+    padding: 0.75rem 1rem; vertical-align: top;
+    border-bottom: 1px solid rgba(163, 177, 198, 0.35);
+  }
+  .neu-prosa tbody tr:last-child td { border-bottom: 0; }
+
+  /*
+    Cierre del artículo. La separación es el punto: el último párrafo del texto
+    y la llamada a la acción son dos cosas distintas, y sin aire entre medio se
+    leen como si la invitación fuera parte del artículo.
+
+    La regla horizontal es de una sola línea y con desvanecido en los extremos,
+    para marcar el corte sin introducir un borde duro, que rompe con el resto de
+    las superficies del sistema.
+  */
+  .neu-articulo-cierre {
+    display: block;
+    max-width: 44rem;
+    margin: 4.5rem 0 0;
+    padding-top: 3.5rem;
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(
+      to right,
+      transparent,
+      rgba(163, 177, 198, 0.6) 20%,
+      rgba(163, 177, 198, 0.6) 80%,
+      transparent
+    ) 1;
+  }
+
+  .neu-articulo-cierre .neu-closing {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; padding: 2.75rem 2rem;
+  }
+  .neu-articulo-cierre .neu-closing h2 {
+    font-size: 1.375rem; margin: 0 0 0.75rem; color: var(--neu-text);
+  }
+  .neu-articulo-cierre .neu-closing p {
+    max-width: 32rem; margin: 0 0 2rem; opacity: 0.85;
+  }
+
+  @media (max-width: 40rem) {
+    .neu-articulo-cierre { margin-top: 3rem; padding-top: 2.5rem; }
+    .neu-articulo-cierre .neu-closing { padding: 2rem 1.25rem; }
+    .neu-articulo-cierre .neu-closing .neu-btn { width: 100%; text-align: center; }
+  }
+</style>

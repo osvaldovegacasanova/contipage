@@ -36,11 +36,21 @@ const BAJA = "baja";
 
 const leer = (p) => fs.readFileSync(p, "utf8");
 
+/*
+  Pagina de redireccion emitida por el bloque `redirects` de astro.config.mjs.
+  Es un stub de tres lineas con un meta refresh, un canonical al destino y
+  noindex: no tiene descripcion, ni H1, ni datos estructurados, y no debe
+  tenerlos. Auditarla como contenido produce hallazgos graves por cada ruta
+  antigua que se conserva, que es justo lo contrario de lo que se quiere
+  incentivar.
+*/
+const esRedireccion = (html) => /<meta\s+http-equiv="refresh"/i.test(html);
+
 function paginas(dir, acc = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     const p = path.join(dir, e.name);
     if (e.isDirectory()) paginas(p, acc);
-    else if (e.name === "index.html" && !EXCLUIDAS.some((r) => r.test(p))) acc.push(p);
+    else if (e.name === "index.html" && !EXCLUIDAS.some((r) => r.test(p)) && !esRedireccion(leer(p))) acc.push(p);
   }
   return acc;
 }

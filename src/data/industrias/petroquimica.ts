@@ -12,7 +12,7 @@ import type { IndustryPage } from "./types";
 export const petroquimica: IndustryPage = {
   slug: "sopladores-para-industria-petroquimica",
   navLabel: "Industria Petroquímica",
-  seoTitle: "Sopladores para Industria Petroquímica | Desulfurización de Gases | Continental Andes",
+  seoTitle: "Sopladores para Industria Petroquímica | Desulfurización de Gases | Continental Blowers Andes",
   metaDescription:
     "Sopladores centrífugos monoetapa Continental Industrie para la industria petroquímica: desulfurización de gases en procesos como la producción de negro de humo (carbon black). Gran tamaño, presión constante y control integrado.",
   hero: {
