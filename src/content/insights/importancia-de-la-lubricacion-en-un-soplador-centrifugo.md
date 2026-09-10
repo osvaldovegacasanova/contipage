@@ -5,6 +5,7 @@ pubDate: 2026-08-29
 updatedDate: 2026-09-05
 heroImage: "/images/blog-lubricacion-diagrama.webp"
 tags: ["mantenimiento", "lubricación", "sopladores"]
+draft: true
 author: "Continental Blowers Andes"
 ---
 
@@ -50,36 +51,3 @@ Un cambio de rodamientos toma tres días totales en sopladores pequeños y media
 Por el contrario, cuando la sustitución se ejecuta como reacción a una falla, el alcance deja de ser predecible. La misma intervención exige además evaluar en detalle las tolerancias del eje y del alojamiento del rodamiento, para determinar si hay otras partes que reemplazar.
 
 La lubricación periódica y el cambio de aceite son las tareas que separan un escenario del otro. Son también las de menor costo y las de menor visibilidad dentro del plan.
-
-## ¿Cómo revisar su plan actual?
-
-Cinco preguntas que debe realizar para revisar su plan:
-
-| Pregunta | Referencia |
-|---|---|
-| ¿El intervalo de aceite corresponde al régimen real del equipo? | 3.000 horas en uso intensivo, 6.000 en uso ligero |
-| ¿Se cumple el límite anual cuando las horas de uso del manual no se alcanzan? | Mínimo una vez al año, si no se alcanzan las horas de uso señaladas en el manual |
-| ¿Hay historial periódico de vibración y temperatura, o mediciones sueltas? | El monitoreo periódico nos entrega la tendencia que permite interpretar y decidir |
-| ¿El equipo tiene sensor de colmatación de filtro? | Umbral de referencia de 30 a 50 mm de columna de agua |
-| ¿Cuántas inspecciones integrales se realizan al año? | Mínimo una, idealmente dos |
-
-Una visita de mantenimiento preventivo integral cubre dos frentes.
-
-**Inspección y monitoreo**
-
-- Revisión visual
-- Datos de vibración
-- Registro de parámetros operacionales
-- Termografía
-- Chequeo de instrumentación
-- Análisis físico de aceites usados
-
-**Tareas preventivas**
-
-- Cambio de aceite
-- Drenaje de condensado
-- Mantención de válvulas de succión y bypass
-- Control de alineación
-- Reemplazo de elementos filtrantes
-
-El mantenimiento por condición es efectivo cuando existe un historial que permita leer y evaluar una tendencia. En un equipo recién puesto en marcha, o en uno sin registros previos, el calendario del fabricante es la referencia válida hasta acumular mediciones suficientes.

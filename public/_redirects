@@ -1,6 +1,18 @@
 /download/CENTRIFUGOS-MONOETAPAS.pdf    /#productos    301
 /download/CENTRIFUGOS-MULTIETAPAS.pdf   /#productos    301
 
+# TEMPORAL, 2026-09-10. El articulo de lubricacion esta oculto mientras se
+# prepara una revision nueva. Estas cuatro rutas llevaban a el y quedarian en
+# 404, asi que van al indice. Con 302 y no 301: el 301 se cachea como
+# definitivo y el articulo va a volver a la primera de estas direcciones.
+#
+# Al republicarlo hay que borrar este bloque, o las cuatro rutas seguiran
+# yendo al indice en vez de al articulo.
+/insights/importancia-de-la-lubricacion-en-un-soplador-centrifugo    /insights    302
+/insights/cada-cuanto-lubricar-un-soplador-centrifugo                /insights    302
+/blog/importancia-de-la-lubricacion-en-un-soplador-centrifugo        /insights    302
+/blog/cada-cuanto-lubricar-un-soplador-centrifugo                    /insights    302
+
 # La seccion de articulos paso de /blog/ a /insights/ el 2026-09-05, y la
 # entrada de lubricacion habia cambiado de slug ese mismo dia. Netlify aplica
 # la primera regla que calza, asi que las dos rutas del articulo van antes

@@ -33,11 +33,11 @@ El biogás de relleno sale saturado de humedad. Si entra al soplador en esa cond
 
 Enfriar el gas antes de la succión hace dos cosas a la vez. Baja el punto de rocío, y permite retirar el condensado en un punto del proceso donde el drenaje es simple. El gas llega entonces al equipo con menos agua disponible, y la compresión, que además eleva la temperatura, lo aleja todavía más de la saturación.
 
-El mismo enfriamiento condiciona la etapa siguiente. Los filtros de siloxanos trabajan dentro de una ventana definida de temperatura y humedad, así que el pre-acondicionamiento determina el rendimiento de la remoción de siloxanos aguas abajo. Los siloxanos forman sílice en los motores, de modo que esa remoción protege al generador tanto como el enfriamiento protege al soplador.
+El mismo enfriamiento condiciona la etapa siguiente. Los filtros de siloxanos trabajan dentro de una ventana definida de temperatura y humedad, así que el pre-acondicionamiento determina el rendimiento de la remoción de siloxanos en etapas posteriores. Los siloxanos forman sílice en los motores, de modo que esa remoción protege al generador tanto como el enfriamiento protege al soplador.
 
 ## Dónde va el pre-acondicionamiento en la línea
 
-El orden habitual en una línea de relleno sanitario es este:
+El orden habitual en una línea de relleno sanitario es el siguiente:
 
 | Etapa | Función | Qué se controla |
 |---|---|---|
