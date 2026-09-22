@@ -13,21 +13,3 @@ const link = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 >
   <img src="/images/icons8-whatsapp-50.webp" alt="WhatsApp" class="h-6 w-6" />
 </a>
-
-<script>
-  import { trackContactClick } from "../utils/analytics";
-
-  // Add click tracking to WhatsApp button
-  document.addEventListener('DOMContentLoaded', () => {
-    const whatsappButton = document.querySelector('[data-whatsapp-button]');
-
-    if (whatsappButton) {
-      whatsappButton.addEventListener('click', (e) => {
-        const target = e.currentTarget as HTMLElement;
-        const phone = target.getAttribute('data-phone') || '';
-
-        trackContactClick('whatsapp', phone);
-      });
-    }
-  });
-</script>

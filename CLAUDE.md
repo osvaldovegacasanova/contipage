@@ -120,7 +120,15 @@ The hero section (`src/components/sections/hero/Hero.astro`) uses a background v
 
 ### Analytics
 
-Google Analytics event tracking is centralized in `src/utils/analytics.ts`. Use `trackContactClick(type, destination)` for WhatsApp/phone/email clicks and `trackEvent(name, params)` for custom events — both no-op safely on the server and wait for `gtag` to load. Setup and troubleshooting notes live in `ANALYTICS_SETUP.md` and `DEBUG_ANALYTICS.md`.
+GA4 property `G-B91NRW3VKC`. Event helpers live in `src/utils/analytics.ts`: `trackEvent(name, params)`, `trackContactClick(type, destination)` and `trackLead(origin)`. All no-op safely on the server.
+
+Three events ship today: automatic `page_view`, `contact_click` on any `tel:`/`mailto:`/WhatsApp link, and `generate_lead` on `/contacto/gracias`.
+
+- **The contact listener is delegated on `document`, in `Layout.astro`.** Do not add per-element click handlers for contact links — new `tel:` or `mailto:` links anywhere in the site are picked up automatically. Per-element handlers are how phone and email went untracked for months.
+- **`window.gtag` must be assigned explicitly** in the inline snippet. Google's library does not define it; the official snippet's top-level `function gtag()` is what creates the global. Declaring it inside any function (a `load` callback, an IIFE) silently breaks every custom event while pageviews keep working — exactly the bug fixed on 2026-09-22.
+- **`generate_lead` still needs to be marked as a key event** in the GA4 interface before it counts as a conversion.
+
+Full notes, including how to verify in DebugView, live in `ANALYTICS_SETUP.md` and `DEBUG_ANALYTICS.md`.
 
 ## Key Technical Patterns
 

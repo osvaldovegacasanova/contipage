@@ -1,225 +1,99 @@
-# Google Analytics Event Tracking Setup
+# Google Analytics 4 — seguimiento de eventos
 
-## Overview
+## Qué se mide
 
-This document describes the Google Analytics 4 (GA4) event tracking implementation for contact button clicks on the Continental Andes website.
+Propiedad GA4: `G-B91NRW3VKC`, declarada en [`src/layouts/Layout.astro`](src/layouts/Layout.astro).
 
-## Events Being Tracked
+| Evento | Cuándo se dispara | Dónde vive el código |
+|---|---|---|
+| `page_view` | Automático, en las 21 páginas reales | Fragmento inline del `Layout` |
+| `contact_click` | Clic en cualquier enlace `tel:`, `mailto:` o de WhatsApp | Listener delegado del `Layout` |
+| `generate_lead` | Carga de `/contacto/gracias`, la confirmación de envío del formulario | [`src/pages/contacto/gracias.astro`](src/pages/contacto/gracias.astro) |
 
-The following contact interactions are tracked:
+Las 5 páginas de redirección no llevan el fragmento, a propósito: no son contenido.
 
-1. **WhatsApp Button Click** - Floating button on bottom-right
-2. **Phone Number Click** - In the "Contacto" card
-3. **Email Click** - In the "Contacto" card
-
-## Event Structure
-
-All contact clicks send a custom event to GA4 with the following structure:
+### `contact_click`
 
 ```javascript
 {
-  event: 'contact_click',
   contact_type: 'whatsapp' | 'phone' | 'email',
-  contact_destination: '<phone_number_or_email>',
+  contact_destination: '<número o correo, sin el esquema>',
   event_category: 'engagement',
-  event_label: '<type>_contact'
+  event_label: '<tipo>_contact'
 }
 ```
 
-### Event Parameters
+### `generate_lead`
 
-- **event**: `contact_click` (custom event name)
-- **contact_type**: Type of contact method (`whatsapp`, `phone`, or `email`)
-- **contact_destination**: The actual phone number or email address
-- **event_category**: `engagement` (for grouping in GA4)
-- **event_label**: Descriptive label (e.g., `whatsapp_contact`, `phone_contact`, `email_contact`)
-
-## Implementation Details
-
-### Files Modified/Created
-
-1. **`src/utils/analytics.ts`** (NEW)
-   - Utility functions for GA4 event tracking
-   - `trackEvent()` - Generic event tracking function
-   - `trackContactClick()` - Specific function for contact clicks
-
-2. **`src/components/WhatsAppButton.astro`** (MODIFIED)
-   - Added click event listener
-   - Tracks WhatsApp button clicks with phone number
-
-3. **`src/components/sections/cta/data.ts`** (MODIFIED)
-   - Restructured contact data to include clickable links
-   - Added separate phone and email entries with proper href attributes
-
-4. **`src/components/sections/cta/components/InvolvementCard.astro`** (MODIFIED)
-   - Added support for clickable contact links
-   - Added icons for phone and email
-   - Integrated GA4 tracking on link clicks
-
-## Testing the Implementation
-
-### 1. Local Testing
-
-1. Build and run the site locally:
-   ```bash
-   npm run dev
-   ```
-
-2. Open browser console (F12)
-
-3. Click on each contact button:
-   - WhatsApp floating button
-   - Phone number link
-   - Email link
-
-4. Check console for `gtag` calls (you can add `console.log` in `analytics.ts` for debugging)
-
-### 2. Testing with GA4 DebugView
-
-1. Install the **Google Analytics Debugger** Chrome extension
-2. Enable debug mode
-3. Navigate to your GA4 property → **Admin → DebugView**
-4. Open your website
-5. Click on contact buttons
-6. View real-time events in DebugView
-
-### 3. Production Testing
-
-After deployment:
-
-1. Go to GA4 property → **Reports → Realtime**
-2. Click on contact buttons on the live site
-3. Events should appear in real-time within seconds
-
-## Viewing Events in Google Analytics 4
-
-### Real-time Reports
-
-1. Navigate to **Reports → Realtime**
-2. Look for `contact_click` events
-3. Click on event to see parameters
-
-### Custom Report
-
-Create a custom report to analyze contact clicks:
-
-1. Go to **Explore** in GA4
-2. Create a new exploration
-3. Add dimensions:
-   - Event name
-   - Contact type (custom parameter)
-   - Contact destination (custom parameter)
-4. Add metrics:
-   - Event count
-   - Users
-5. Filter by event name = `contact_click`
-
-### Setting up Conversions (Optional)
-
-To track contact clicks as conversions:
-
-1. Go to **Admin → Events**
-2. Find `contact_click` event
-3. Toggle "Mark as conversion"
-
-## Event Data Examples
-
-### WhatsApp Button Click
 ```javascript
 {
-  event: 'contact_click',
-  contact_type: 'whatsapp',
-  contact_destination: '56927068834',
+  form_origin: 'contacto',
   event_category: 'engagement',
-  event_label: 'whatsapp_contact'
+  event_label: 'contact_form'
 }
 ```
 
-### Phone Number Click
-```javascript
-{
-  event: 'contact_click',
-  contact_type: 'phone',
-  contact_destination: '+56224619418',
-  event_category: 'engagement',
-  event_label: 'phone_contact'
-}
-```
+`generate_lead` es un nombre recomendado por GA4, así que se puede marcar como
+evento clave desde la interfaz sin definir nada a mano. **Hay que marcarlo**:
+Administrar → Eventos → marcar como evento clave. Mientras no se haga, se
+registra pero no cuenta como conversión en los informes.
 
-### Email Click
-```javascript
-{
-  event: 'contact_click',
-  contact_type: 'email',
-  contact_destination: 'cba@continentalandes.com',
-  event_category: 'engagement',
-  event_label: 'email_contact'
-}
-```
+## Cómo está construido
 
-## Advanced Usage
+**El fragmento del `Layout`** abre `window.dataLayer`, asigna `window.gtag` y
+llama a `config` de forma síncrona en el `<head>`. La librería pesada se pide
+aparte, en `DOMContentLoaded`. Los eventos que ocurran antes de que descargue se
+acumulan en la cola y se procesan después, sin perderse.
 
-### Adding More Tracked Elements
+**El listener de contacto va delegado en el documento**, no por elemento. Los
+enlaces de teléfono y correo están repartidos entre el home, la página de
+contacto y los datos de la sección CTA. Un listener por elemento obliga a
+acordarse de cada sitio nuevo, y así fue como el teléfono y el correo estuvieron
+sin medir mientras este documento afirmaba lo contrario.
 
-To track additional contact buttons:
+**[`src/utils/analytics.ts`](src/utils/analytics.ts)** expone `trackEvent`,
+`trackContactClick` y `trackLead`. Ninguna hace nada en el servidor, y si
+`window.gtag` no existe descartan el evento en silencio en vez de retrasar el
+clic.
 
-1. Import the tracking function:
-   ```javascript
-   import { trackContactClick } from "../utils/analytics";
-   ```
+## Dos fallos corregidos el 22 de septiembre de 2026
 
-2. Add click handler:
-   ```javascript
-   element.addEventListener('click', () => {
-     trackContactClick('phone', '+56224619418');
-   });
-   ```
+Vale la pena conocerlos, porque los dos son fáciles de reintroducir.
 
-### Custom Events
+**`window.gtag` no existía.** El fragmento declaraba `function gtag()` dentro
+del callback del evento `load`, de modo que quedaba en el ámbito de esa función
+y nunca llegaba a ser global. Las visitas seguían llegando, porque `config`
+empuja a `dataLayer` igual, pero `analytics.ts` comprobaba `window.gtag` antes
+de enviar, esperaba un segundo y abandonaba. **Ningún evento personalizado se
+registró desde la instalación hasta esa fecha.**
 
-To track other events, use the generic `trackEvent` function:
+La librería de Google no define esa global por su cuenta: el fragmento oficial
+declara la función en el nivel superior del script, y de ahí sale. Se comprobó
+descargando el script real de esta propiedad, medio millón de caracteres, sin
+una sola asignación a `window.gtag`.
 
-```javascript
-import { trackEvent } from "../utils/analytics";
+**La cobertura era una fracción de lo documentado.** Este archivo afirmaba que
+se medían WhatsApp, teléfono y correo. En el código solo existía WhatsApp, y el
+formulario no tenía ningún evento, de modo que no había forma de contar
+conversiones.
 
-trackEvent('custom_event_name', {
-  parameter1: 'value1',
-  parameter2: 'value2'
-});
-```
+## Cómo verificar
 
-## Troubleshooting
+1. `npm run dev` y abrir el sitio en `localhost`. El fragmento activa
+   `debug_mode` solo en `localhost` y `127.0.0.1`.
+2. En GA4: Administrar → DebugView. Los eventos aparecen en segundos.
+3. En la consola del navegador, `typeof window.gtag` debe decir `"function"`.
+   Si dice `"undefined"`, el fallo del ámbito volvió.
+4. Hacer clic en un teléfono, un correo y el botón de WhatsApp. Deben aparecer
+   tres `contact_click` con distinto `contact_type`.
+5. Enviar el formulario de contacto. Al llegar a `/contacto/gracias` debe
+   aparecer un `generate_lead`.
 
-### Events Not Appearing in GA4
+En desarrollo, `analytics.ts` escribe cada evento en la consola. En producción
+no escribe nada.
 
-1. **Check GA4 Measurement ID**: Verify `G-B91NRW3VKC` in Layout.astro is correct
-2. **Check gtag is loaded**: Open console and type `window.gtag` - should be a function
-3. **Ad blockers**: Disable ad blockers during testing
-4. **Check DebugView**: Use GA4 DebugView for real-time validation
-5. **Wait time**: Real-time reports may have 1-5 second delay
+## Consideración pendiente
 
-### Script Errors
-
-If you see JavaScript errors:
-- Clear browser cache
-- Check that `src/utils/analytics.ts` is properly compiled
-- Verify Astro is processing the scripts correctly
-
-## Performance Considerations
-
-- Events are sent asynchronously and don't block user interactions
-- Failed tracking calls won't affect user experience
-- Server-side rendering protection is included (checks for `window`)
-
-## Privacy & GDPR
-
-Consider adding:
-1. Cookie consent banner before tracking
-2. Privacy policy disclosure about analytics
-3. Option to opt-out of tracking
-
-## Support
-
-For issues or questions about the analytics setup:
-- Check GA4 documentation: https://support.google.com/analytics/answer/9267735
-- Review implementation in `src/utils/analytics.ts`
+No hay gestión de consentimiento ni banner de cookies. GA4 se carga para todo
+visitante. Si el sitio pasa a recibir tráfico europeo de forma relevante,
+habría que añadir el modo de consentimiento de Google.

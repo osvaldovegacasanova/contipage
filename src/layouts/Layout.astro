@@ -24,20 +24,45 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 <html lang="es">
   <head>
-    <!-- Google Analytics — loaded after page paint to avoid forced reflows on critical path -->
+    <!--
+      Google Analytics 4.
+
+      `window.gtag` se asigna de forma explicita. La libreria de Google NO la
+      define: el fragmento oficial declara `function gtag()` en el nivel
+      superior del script, y de ahi sale la global. Cuando esa declaracion
+      queda dentro de una funcion, como estuvo hasta el 2026-09-22, la cola de
+      `dataLayer` sigue funcionando y las visitas llegan, pero cualquier codigo
+      que compruebe `window.gtag` antes de enviar (src/utils/analytics.ts) no
+      la encuentra y descarta el evento. Asi se perdieron todos los eventos
+      personalizados desde la instalacion.
+
+      La cola se abre de inmediato y el script pesado se pide en cuanto el
+      documento esta listo. Antes se esperaba al evento `load`, que aguarda a
+      que terminen todas las imagenes: en el home, con video de fondo, una
+      visita corta podia irse antes de que existiera GA. Los `gtag()` llamados
+      mientras tanto se acumulan en `dataLayer` y se procesan al cargar.
+    -->
     <script is:inline>
-      window.addEventListener('load', function () {
-        var s = document.createElement('script');
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-B91NRW3VKC';
-        s.async = true;
-        document.head.appendChild(s);
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { window.dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-B91NRW3VKC', {
-          debug_mode: location.hostname === 'localhost' || location.hostname === '127.0.0.1'
-        });
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', 'G-B91NRW3VKC', {
+        debug_mode: location.hostname === 'localhost' || location.hostname === '127.0.0.1'
       });
+
+      (function () {
+        function cargarGA() {
+          var s = document.createElement('script');
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-B91NRW3VKC';
+          s.async = true;
+          document.head.appendChild(s);
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', cargarGA);
+        } else {
+          cargarGA();
+        }
+      })();
     </script>
 
     <meta charset="utf-8" />
@@ -105,6 +130,42 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     */}
     <WhatsAppButton />
   </body>
+  <script>
+    /*
+      Clics en canales de contacto directo.
+
+      Va delegado en el documento y no como listener por elemento, porque los
+      enlaces de telefono y correo estan repartidos por el home, la pagina de
+      contacto y los datos de la seccion CTA. Uno por elemento obliga a acordarse
+      de cada sitio nuevo, y asi fue como el telefono y el correo quedaron sin
+      medir mientras la documentacion afirmaba lo contrario.
+
+      Cubre tambien WhatsApp, de modo que el boton flotante no necesita script
+      propio.
+    */
+    import { trackContactClick, type CanalContacto } from "../utils/analytics";
+
+    const canalDe = (href: string): CanalContacto | null => {
+      if (href.startsWith("tel:")) return "phone";
+      if (href.startsWith("mailto:")) return "email";
+      if (href.includes("wa.me") || href.includes("api.whatsapp.com")) return "whatsapp";
+      return null;
+    };
+
+    document.addEventListener("click", (evento) => {
+      const enlace = (evento.target as Element | null)?.closest?.("a[href]");
+      if (!enlace) return;
+
+      const href = enlace.getAttribute("href") || "";
+      const canal = canalDe(href);
+      if (!canal) return;
+
+      // El destino sin el esquema ni los parametros: "+56224619418" y no
+      // "tel:+56224619418", para que en el informe se lea como un contacto.
+      const destino = href.replace(/^(tel:|mailto:)/, "").split("?")[0];
+      trackContactClick(canal, destino);
+    });
+  </script>
   <script>
     // Force the site to always render in light theme.
     // This also overrides any previously-saved "dark" preference in localStorage.

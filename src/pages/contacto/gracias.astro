@@ -37,6 +37,26 @@ import GradiantText from "../../components/shared/GradiantText.astro";
   </main>
 </Layout>
 
+<script>
+  /*
+    Conversion del formulario de contacto.
+
+    Se dispara aqui y no en el submit porque esta pagina es la confirmacion a la
+    que Netlify redirige despues de aceptar el envio: llegar hasta aca es la
+    unica senal fiable de que el formulario se envio de verdad, y deja fuera los
+    intentos que fallan la validacion o el honeypot.
+
+    `generate_lead` es un nombre recomendado por GA4 y se puede marcar como
+    evento clave desde la interfaz, sin definir nada a mano.
+
+    Hasta el 2026-09-22 esta pagina no enviaba ningun evento, asi que no habia
+    forma de contar cuantos contactos generaba el sitio.
+  */
+  import { trackLead } from "../../utils/analytics";
+
+  trackLead("contacto");
+</script>
+
 <style is:global>
   .neu-gracias {
     display: flex; flex-direction: column; align-items: center;
