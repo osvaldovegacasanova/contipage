@@ -51,20 +51,6 @@ export default defineConfig({
     "/blog/cada-cuanto-lubricar-un-soplador-centrifugo": "/insights/importancia-de-la-lubricacion-en-un-soplador-centrifugo",
     "/insights/cada-cuanto-lubricar-un-soplador-centrifugo": "/insights/importancia-de-la-lubricacion-en-un-soplador-centrifugo",
     "/blog": "/insights",
-    // TEMPORAL, 2026-09-10. El articulo de lubricacion esta oculto mientras se
-    // prepara una revision nueva, asi que su URL y las dos de su slug anterior
-    // no llevan a ninguna parte. Van al indice con 302 y no con 301: el 301 se
-    // cachea como definitivo y el articulo va a volver a esta misma direccion.
-    //
-    // Al republicarlo hay que borrar este bloque, o las tres rutas seguiran
-    // yendo al indice en vez de al articulo.
-    ...Object.fromEntries(
-      [
-        "/insights/importancia-de-la-lubricacion-en-un-soplador-centrifugo",
-        "/insights/cada-cuanto-lubricar-un-soplador-centrifugo",
-        "/blog/cada-cuanto-lubricar-un-soplador-centrifugo",
-      ].map((ruta) => [ruta, { status: 302, destination: "/insights" }]),
-    ),
   },
   integrations: [
     tailwind(),

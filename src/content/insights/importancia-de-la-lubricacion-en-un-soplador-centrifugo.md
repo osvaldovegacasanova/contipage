@@ -1,53 +1,55 @@
 ---
-title: "La importancia crítica de la lubricación en un soplador centrífugo multietapas"
-description: "El manual entrega el punto de partida. El régimen de operación y la condición medida son los que definen el intervalo real de lubricación."
+title: "Buenas prácticas de lubricación en sopladores Continental Industrie"
+description: "Intervalos, lubricante especificado, cantidades y limpieza. Las prácticas que preservan los rodamientos de un soplador, y cómo el monitoreo las respalda."
 pubDate: 2026-08-29
-updatedDate: 2026-09-05
+updatedDate: 2026-09-22
 heroImage: "/images/blog-lubricacion-diagrama.webp"
 tags: ["mantenimiento", "lubricación", "sopladores"]
-draft: true
 author: "Continental Blowers Andes"
 ---
 
-En el plan de mantenimiento de un soplador centrífugo multietapa, la lubricación suele relegarse a una tarea secundaria frente a actividades de mayor visibilidad. Si bien el manual del fabricante establece el punto de partida, son el régimen de operación y el monitoreo de condición los que definen el intervalo real de servicio.
+Entre las tareas de mantenimiento de un soplador en planta, la lubricación suele quedar reducida a una tarea menor frente a actividades de mayor visibilidad, como el cambio de rodamientos o el overhaul completo del equipo. Sin embargo, se trata de una de las prácticas más importantes para preservar la confiabilidad y vida útil de sus componentes.
 
-## ¿Dónde está el aceite en una máquina "libre de aceite"?
+Según estadísticas publicadas por SKF, aproximadamente el **36% de las fallas prematuras de rodamientos están relacionadas con una lubricación inadecuada**. Los sopladores centrífugos multietapa no son ajenos a esta problemática: una lubricación deficiente puede provocar un aumento de temperatura, desgaste y vibraciones en los rodamientos y, si no se detecta y corrige oportunamente, evolucionar hasta una falla que obligue a detener el equipo de manera no programada.
 
-El soplador centrífugo multietapas entrega aire limpio y libre de aceite porque el aire de proceso nunca entra en contacto con el lubricante. El aire circula por la carcasa e impulsores sin contacto entre el rotor y el cuerpo del equipo; esa ausencia de fricción interna es la que mantiene el rendimiento estable a lo largo de la vida útil del equipo.
+Un adecuado programa de lubricación, complementado con el monitoreo de condición, permite detectar desviaciones con anticipación, planificar las intervenciones y reducir el riesgo de paradas inesperadas.
 
-La presencia de aceite o grasa se limita exclusivamente a las cajas portarodamientos, una zona mecánica aislada del paso del aire de proceso mediante un sistema de sellos. Toda la lubricación ocurre ahí. Aunque la zona lubricada representa una fracción pequeña del equipo, concentra componentes críticos que traducen cualquier deficiencia de lubricación en vibración medible.
+## Respetar los intervalos de cambio de aceite
 
-## El calendario base del fabricante
+El manual de los sopladores establece intervalos de cambio de aceite de entre **3.000 y 6.000 horas de operación**, según el régimen de carga del soplador. Aplicar un intervalo de 3.000 horas a un equipo que opera bajo condiciones de baja exigencia puede resultar en cambios anticipados e innecesarios; por el contrario, extender el intervalo hasta 6.000 horas en un equipo sometido a un régimen de operación intensivo puede acelerar la degradación del lubricante y aumentar el riesgo de desgaste de sus componentes.
 
-Dentro del calendario base que entrega el fabricante, hay dos tareas que se suelen omitir en los planes de mantención.
+Estos intervalos conviven con el **límite anual establecido por el fabricante**, prevaleciendo el criterio que se cumpla primero, independientemente de las horas acumuladas.
 
-La primera es que el intervalo en el cambio de aceite tiene dos valores, y la diferencia entre 3.000 y 6.000 horas va a depender del régimen de carga del equipo. Un plan que aplica 3.000 horas a un soplador de uso ligero adelanta cambios innecesarios, y uno que aplica 6.000 a un equipo de uso intensivo llega tarde.
+Una de las principales malas prácticas de lubricación consiste, precisamente, en no respetar los intervalos de cambio de aceite definidos por el fabricante. El lubricante se degrada progresivamente durante la operación, por lo que prolongar su uso más allá del período recomendado puede afectar la protección de los rodamientos y favorecer procesos de desgaste.
 
-La segunda es que el límite anual convive con el de horas, prevaleciendo el criterio que se cumpla primero. Un equipo con pocas horas acumuladas igual requiere un cambio de aceite dentro del año.
+## Utilizar el lubricante especificado
 
-Sin embargo, fijar las intervenciones solo por calendario es un enfoque incompleto. Realizar mantenimiento por condición real permite detectar anomalías en una fase temprana, antes de que escalen a un daño crítico.
+Otra práctica errónea observada recurrentemente en terreno es utilizar lubricantes distintos a los especificados en el manual del soplador para compensar el consumo de aceite. Esto puede incluir la mezcla de diferentes tipos o marcas de lubricantes dentro de las cajas portarodamientos, así como el relleno de los vasos lubricadores con aceite usado disponible en la sala de máquinas después de un cambio de aceite.
 
-## Monitoreo de condición: parámetros de diagnóstico y criterio de intervención
+La mezcla o incorporación de un lubricante no especificado puede alterar las propiedades del aceite y afectar su capacidad de lubricación. En particular, el uso de aceite usado puede introducir contaminantes y productos de degradación que aceleran el deterioro del lubricante y contribuyen al desgaste de los rodamientos.
 
-El cambio de rodamientos se define por la condición real del componente. El calendario indica la frecuencia del monitoreo, mientras que los parámetros de medición determinan cuándo intervenir.
+## Respetar las cantidades y procedimientos de lubricación
 
-| Qué se mide | Qué detecta | Qué decisión habilita |
-|---|---|---|
-| Vibración en los soportes del soplador | Desbalance, desalineación, falla de rodamiento, problemas de transmisión, problemas estructurales y de resonancia | Cuándo sustituir un componente, con una intervención planificada |
-| Análisis cualitativo de aceite usado | Partículas por contaminación externa o por desgaste de partes internas, variación de viscosidad, presencia de agua, coloración y sedimentos | Condición interna de las cajas portarodamientos y del lubricante |
-| Termografía con cámara infrarroja | Anomalías de temperatura en operación | Confirmación cruzada del diagnóstico dinámico |
-| Presión diferencial del filtro de entrada | Colmatación del elemento filtrante | Cuándo reemplazar el elemento |
+También es fundamental respetar el procedimiento de lubricación indicado por el fabricante durante el cambio de aceite. Una cantidad excesiva de lubricante puede provocar un aumento de temperatura, mayores pérdidas por fricción y deterioro acelerado del aceite, mientras que una cantidad insuficiente puede reducir la capacidad de formar una película lubricante adecuada y aumentar el riesgo de desgaste prematuro.
 
-Los tres primeros se complementan. El análisis de aceite describe lo que ocurre dentro de la caja portarodamientos, la vibración describe la evolución dinámica de la máquina, y la termografía confirma o descarta el diagnóstico.
+Es importante utilizar el lubricante correcto y más aún **aplicar la cantidad adecuada, siguiendo el procedimiento establecido por el fabricante**.
 
-**La ventana de decisión.** El monitoreo frecuente permite detectar el inicio de una falla de rodamiento con meses de anticipación, incluso hasta un año. Esa ventana es la que convierte el cambio de rodamientos en una tarea programada, con repuestos, especialistas y parada coordinados.
+## Evitar la contaminación del lubricante
 
-La condición para que la ventana exista es el historial. Una medición aislada entrega un valor, y la tendencia de varias mediciones entrega la pendiente que nos permite tomar decisiones.
+La limpieza durante las operaciones de mantenimiento es un aspecto fundamental. Tanto al realizar cambios de aceite como al rellenar los vasos compensadores, se debe evitar el ingreso de polvo, partículas, humedad u otros contaminantes a las cajas portarodamientos.
 
-## Consecuencias de un plan de lubricación deficiente
+Una contaminación que puede parecer menor durante una intervención puede acelerar significativamente el desgaste de los rodamientos y reducir su vida útil. Por este motivo, es importante mantener limpios los elementos utilizados durante la lubricación y evitar que recipientes, herramientas o superficies de trabajo entren en contacto con contaminantes antes de realizar la intervención.
 
-Un cambio de rodamientos toma tres días totales en sopladores pequeños y medianos, y cinco días en sopladores de mayores dimensiones, según la complejidad de la instalación, y se puede programar para realizar tanto en sitio como en taller.
+## Complementar la lubricación con monitoreo de condición
 
-Por el contrario, cuando la sustitución se ejecuta como reacción a una falla, el alcance deja de ser predecible. La misma intervención exige además evaluar en detalle las tolerancias del eje y del alojamiento del rodamiento, para determinar si hay otras partes que reemplazar.
+Realizar la lubricación siguiendo exclusivamente el calendario o el contador de horas ofrece una visión incompleta del estado real del equipo. Si bien los intervalos y procedimientos establecidos por el fabricante deben respetarse, **complementar el mantenimiento programado con un monitoreo basado en la condición permite conocer cómo está evolucionando realmente el soplador y sus componentes**.
 
-La lubricación periódica y el cambio de aceite son las tareas que separan un escenario del otro. Son también las de menor costo y las de menor visibilidad dentro del plan.
+Técnicas predictivas como el **análisis de vibraciones, el análisis de aceite y la termografía** permiten detectar desviaciones en etapas tempranas, anticipándose a posibles fallas que evolucionen hacia daños mayores. Además, el seguimiento periódico de estas variables permite evaluar mediante datos la condición de los rodamientos y la efectividad de la estrategia de lubricación a lo largo del tiempo.
+
+De esta manera, la lubricación deja de ser una tarea aislada y pasa a formar parte de una **estrategia integral de mantenimiento y confiabilidad**, orientada a maximizar la disponibilidad y vida útil del soplador.
+
+## La lubricación como parte de la confiabilidad
+
+Una correcta estrategia de lubricación va mucho más allá de agregar aceite. Implica **utilizar el lubricante especificado por el fabricante, respetar los intervalos y cantidades establecidos, seguir los procedimientos de mantenimiento y mantener condiciones adecuadas de limpieza durante cada intervención**.
+
+Estas prácticas, complementadas con un adecuado monitoreo de condición, contribuyen a preservar la confiabilidad, disponibilidad y vida útil del soplador.
