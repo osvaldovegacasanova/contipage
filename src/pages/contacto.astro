@@ -119,6 +119,28 @@ const ICONOS: Record<string, string> = {
             <input class="neu-input" type="text" id="otra" name="otra_aplicacion" />
           </div>
 
+          {/*
+            Unico campo opcional del formulario. Escribir texto libre cuesta mas
+            que elegir de una lista, y es donde mas gente abandona: la aplicacion
+            ya da contexto suficiente para responder, asi que esto suma cuando
+            esta y no bloquea cuando no.
+
+            El texto guia va con ejemplos concretos y no con un "escriba su
+            mensaje": sin pistas la gente escribe "necesito informacion", que no
+            adelanta nada.
+          */}
+          <div class="neu-campo">
+            <label for="requerimiento">Requerimiento <span class="neu-opcional">(opcional)</span></label>
+            <textarea
+              class="neu-input neu-textarea"
+              id="requerimiento"
+              name="requerimiento"
+              rows="4"
+              maxlength="1500"
+              placeholder="Cuéntenos brevemente qué necesita. Por ejemplo: equipo a reemplazar, caudal y presión requeridos, o la falla que está enfrentando."
+            ></textarea>
+          </div>
+
           <button class="neu-btn neu-btn-accent neu-enviar" type="submit">Enviar consulta</button>
         </form>
 
@@ -170,7 +192,26 @@ const ICONOS: Record<string, string> = {
   .neu-campo[hidden] { display: none; }
   .neu-campo label { font-size: 0.8125rem; font-weight: 500; }
   .neu-campo input,
-  .neu-campo select { width: 100%; }
+  .neu-campo select,
+  .neu-campo textarea { width: 100%; }
+
+  /*
+    El area de texto hereda el estilo de `.neu-input`, que esta pensado para una
+    linea. Faltan tres cosas: heredar la tipografia, que en un `textarea` el
+    navegador impone su fuente monoespaciada por defecto; permitir que crezca a
+    lo alto pero no a lo ancho, porque arrastrar el borde derecho rompe la
+    tarjeta; y un alto minimo coherente con las cuatro filas.
+  */
+  .neu-textarea {
+    font: inherit; line-height: 1.6;
+    resize: vertical; min-height: 6.5rem;
+  }
+
+  /*
+    Marca de campo no obligatorio. Va en la etiqueta y no como texto suelto para
+    que los lectores de pantalla la anuncien junto al nombre del campo.
+  */
+  .neu-opcional { font-weight: 400; color: var(--neu-muted); }
 
   /*
     El desplegable no hereda la tipografia del sistema por si solo, y el
