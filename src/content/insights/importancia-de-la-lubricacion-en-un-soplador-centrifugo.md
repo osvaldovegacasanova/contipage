@@ -2,8 +2,8 @@
 title: "Buenas prácticas de lubricación en sopladores Continental Industrie"
 description: "Intervalos, lubricante especificado, cantidades y limpieza. Las prácticas que preservan los rodamientos de un soplador, y cómo el monitoreo las respalda."
 pubDate: 2026-08-29
-updatedDate: 2026-09-22
-heroImage: "/images/blog-lubricacion-diagrama.webp"
+updatedDate: 2026-09-30
+heroImage: "/images/blog-lubricacion-soplador-portada.webp"
 tags: ["mantenimiento", "lubricación", "sopladores"]
 author: "Continental Blowers Andes"
 ---
@@ -15,6 +15,11 @@ Según estadísticas publicadas por SKF, aproximadamente el **36% de las fallas 
 Un adecuado programa de lubricación, complementado con el monitoreo de condición, permite detectar desviaciones con anticipación, planificar las intervenciones y reducir el riesgo de paradas inesperadas.
 
 ## Respetar los intervalos de cambio de aceite
+
+<figure>
+  <img src="/images/blog-lubricacion-aceite-previo-cambio.webp" alt="Caja portarodamientos de un soplador Continental con su vaso lubricador, antes de un cambio de aceite" width="1280" height="960" loading="lazy" />
+  <figcaption>Caja portarodamientos y su vaso lubricador, antes de un cambio de aceite.</figcaption>
+</figure>
 
 El manual de los sopladores establece intervalos de cambio de aceite de entre **3.000 y 6.000 horas de operación**, según el régimen de carga del soplador. Aplicar un intervalo de 3.000 horas a un equipo que opera bajo condiciones de baja exigencia puede resultar en cambios anticipados e innecesarios; por el contrario, extender el intervalo hasta 6.000 horas en un equipo sometido a un régimen de operación intensivo puede acelerar la degradación del lubricante y aumentar el riesgo de desgaste de sus componentes.
 
@@ -30,13 +35,34 @@ La mezcla o incorporación de un lubricante no especificado puede alterar las pr
 
 ## Respetar las cantidades y procedimientos de lubricación
 
+<div class="neu-figura-par">
+  <figure>
+    <img src="/images/blog-lubricacion-vaso-sin-aceite.webp" alt="Vaso lubricador de vidrio completamente vacío, sin aceite visible en su interior" width="1100" height="825" loading="lazy" />
+    <figcaption>Vaso lubricador sin aceite.</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/blog-lubricacion-vaso-nivel-correcto.webp" alt="Vaso lubricador con aceite limpio de color ámbar al nivel correcto, tras un cambio" width="1100" height="825" loading="lazy" />
+    <figcaption>Nivel correcto tras el cambio.</figcaption>
+  </figure>
+</div>
+
 También es fundamental respetar el procedimiento de lubricación indicado por el fabricante durante el cambio de aceite. Una cantidad excesiva de lubricante puede provocar un aumento de temperatura, mayores pérdidas por fricción y deterioro acelerado del aceite, mientras que una cantidad insuficiente puede reducir la capacidad de formar una película lubricante adecuada y aumentar el riesgo de desgaste prematuro.
 
 Es importante utilizar el lubricante correcto y más aún **aplicar la cantidad adecuada, siguiendo el procedimiento establecido por el fabricante**.
 
 ## Evitar la contaminación del lubricante
 
+<figure>
+  <img src="/images/blog-lubricacion-vaso-contaminado.webp" alt="Vaso lubricador cubierto de fibras y polvo adheridos a su superficie exterior" width="1280" height="960" loading="lazy" />
+  <figcaption>Fibras y polvo acumulados sobre el vaso lubricador, en la ruta por la que entra el aceite.</figcaption>
+</figure>
+
 La limpieza durante las operaciones de mantenimiento es un aspecto fundamental. Tanto al realizar cambios de aceite como al rellenar los vasos compensadores, se debe evitar el ingreso de polvo, partículas, humedad u otros contaminantes a las cajas portarodamientos.
+
+<figure class="neu-figura-estrecha">
+  <img src="/images/blog-lubricacion-particulas-microscopio.webp" alt="Vista al microscopio de una muestra de aceite usado, con partículas metálicas y contaminantes en suspensión" width="1000" height="1007" loading="lazy" />
+  <figcaption>Muestra de aceite usado al microscopio, con partículas de desgaste y contaminantes.</figcaption>
+</figure>
 
 Una contaminación que puede parecer menor durante una intervención puede acelerar significativamente el desgaste de los rodamientos y reducir su vida útil. Por este motivo, es importante mantener limpios los elementos utilizados durante la lubricación y evitar que recipientes, herramientas o superficies de trabajo entren en contacto con contaminantes antes de realizar la intervención.
 
@@ -44,7 +70,17 @@ Una contaminación que puede parecer menor durante una intervención puede acele
 
 Realizar la lubricación siguiendo exclusivamente el calendario o el contador de horas ofrece una visión incompleta del estado real del equipo. Si bien los intervalos y procedimientos establecidos por el fabricante deben respetarse, **complementar el mantenimiento programado con un monitoreo basado en la condición permite conocer cómo está evolucionando realmente el soplador y sus componentes**.
 
+<figure class="neu-figura-estrecha">
+  <img src="/images/blog-lubricacion-termografia.webp" alt="Cámara termográfica mostrando la imagen térmica de la caja portarodamientos de un soplador en operación" width="900" height="1200" loading="lazy" />
+  <figcaption>Inspección termográfica de la caja portarodamientos.</figcaption>
+</figure>
+
 Técnicas predictivas como el **análisis de vibraciones, el análisis de aceite y la termografía** permiten detectar desviaciones en etapas tempranas, anticipándose a posibles fallas que evolucionen hacia daños mayores. Además, el seguimiento periódico de estas variables permite evaluar mediante datos la condición de los rodamientos y la efectividad de la estrategia de lubricación a lo largo del tiempo.
+
+<figure class="neu-figura-estrecha">
+  <img src="/images/blog-lubricacion-espectro-vibraciones.webp" alt="Analizador portátil de vibraciones mostrando un espectro FFT durante una inspección en terreno" width="900" height="1200" loading="lazy" />
+  <figcaption>Espectro de vibraciones (FFT) obtenido con un analizador portátil durante una inspección en terreno.</figcaption>
+</figure>
 
 De esta manera, la lubricación deja de ser una tarea aislada y pasa a formar parte de una **estrategia integral de mantenimiento y confiabilidad**, orientada a maximizar la disponibilidad y vida útil del soplador.
 
