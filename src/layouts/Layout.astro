@@ -10,9 +10,18 @@ export interface Props {
   navActivo?: string;
   /** Excluye la pagina de los buscadores. Para confirmaciones y similares. */
   noIndexar?: boolean;
+  /**
+   * Carga el script de Google que dibuja el boton "fuente preferida".
+   *
+   * Va por pagina y no en todo el sitio a proposito: es un script de un tercero,
+   * y hoy el sitio solo carga fuentes de Google y Analytics. Solo tiene sentido
+   * donde alguien acaba de leer algo, o sea en Insights; en una pagina de
+   * producto el boton no significa nada y el costo seria el mismo.
+   */
+  fuentePreferida?: boolean;
 }
 
-const { title, description, navActivo, noIndexar = false } = Astro.props;
+const { title, description, navActivo, noIndexar = false, fuentePreferida = false } = Astro.props;
 
 // Default meta description
 const defaultDescription = "Sopladores Monoetapa y Multietapa. Somos los representantes de Continental Industrie en Chile y Latinoamérica";
@@ -64,6 +73,20 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         }
       })();
     </script>
+
+    {/*
+      Fuentes preferidas de Google. Un lector marca el sitio y a partir de ahi
+      ve su contenido con mas frecuencia y con una insignia en Top Stories y en
+      las respuestas generativas.
+
+      No hace falta nada de esto para ser elegible: Google lo dice expresamente,
+      y la elegibilidad es a nivel de dominio. El boton solo le ahorra al lector
+      tener que buscar la opcion. Se dibuja solo, traducido, y se oculta donde
+      no aplica.
+    */}
+    {fuentePreferida && (
+      <script async is:inline src="https://news.google.com/swg/js/v1/publisher.js"></script>
+    )}
 
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />

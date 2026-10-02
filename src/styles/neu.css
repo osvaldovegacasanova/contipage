@@ -119,6 +119,24 @@
 }
 .neu-lead { font-size: 1.0625rem; max-width: 46rem; margin-top: 1rem; }
 .neu-note { font-size: 0.875rem; color: var(--neu-accent); margin-top: 0.75rem; }
+
+/*
+  Bloque de fuente preferida de Google. Lo usan el indice de Insights y la
+  plantilla de articulo, por eso vive aqui y no en el bloque de estilos de una de
+  las dos: cada pagina trae su propio `<style is:global>`, que no alcanza a la
+  otra.
+
+  Discreto a proposito. Es un gesto opcional y va despues del cierre de contacto,
+  que es la accion que de verdad persigue la pagina. El boton lo dibuja Google y
+  no sigue el sistema visual del sitio, asi que va suelto bajo una linea de texto
+  y no dentro de una tarjeta, donde el contraste se notaria mas.
+*/
+.neu-fuente-preferida {
+  margin: 2.5rem auto 0; max-width: 46rem;
+  display: flex; flex-direction: column; align-items: center; gap: 0.875rem;
+  text-align: center;
+}
+.neu-fuente-preferida p { font-size: 0.875rem; color: var(--neu-accent); margin: 0; }
 .neu-sub { max-width: 46rem; margin-bottom: 1.75rem; }
 
 /* ---- Superficies -------------------------------------------------------- */

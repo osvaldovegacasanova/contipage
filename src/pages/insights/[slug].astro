@@ -48,7 +48,7 @@ const migas = {
 const fecha = (x: unknown) => new Date(String(x)).toLocaleDateString("es-CL", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 ---
 
-<Layout navActivo="insights" title={`${d.title} | Insights | Continental Blowers Andes`} description={d.description}>
+<Layout navActivo="insights" fuentePreferida title={`${d.title} | Insights | Continental Blowers Andes`} description={d.description}>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" />
 
   <main class="neu-root">
@@ -106,6 +106,20 @@ const fecha = (x: unknown) => new Date(String(x)).toLocaleDateString("es-CL", { 
           <p>Cuéntenos qué equipo opera y en qué condiciones. Revisamos su caso y le respondemos con una recomendación concreta.</p>
           <a href="/contacto" class="neu-btn neu-btn-accent">Hablemos de su caso</a>
         </div>
+      </aside>
+
+      {/*
+        Va despues del bloque de contacto y no antes: el objetivo de la pagina es
+        que escriban, y marcar el sitio en Google es un gesto secundario que no
+        debe competir con el boton principal.
+
+        El boton lo dibuja Google, asi que no sigue el sistema visual del sitio.
+        Por eso va suelto bajo una linea de texto y no dentro de una tarjeta,
+        donde el contraste se notaria mas.
+      */}
+      <aside class="neu-fuente-preferida">
+        <p>¿Le sirve este material? Puede marcar Continental Blowers Andes como fuente preferida en Google.</p>
+        <div google-add-preferred-source-btn></div>
       </aside>
     </div>
   </main>

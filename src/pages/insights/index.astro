@@ -22,6 +22,7 @@ const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { 
 
 <Layout
   navActivo="insights"
+  fuentePreferida
   title="Insights | Continental Blowers Andes"
   description="Articulos tecnicos sobre sopladores y compresores centrifugos, sus procesos industriales y su mantenimiento."
 >
@@ -65,6 +66,15 @@ const fecha = (d: unknown) => new Date(String(d)).toLocaleDateString("es-CL", { 
           </a>
         ))}
       </div>
+
+      {/*
+        Mismo bloque que cierra cada articulo. Aqui cierra el listado, para quien
+        recorre la seccion entera sin entrar a ninguno.
+      */}
+      <aside class="neu-fuente-preferida">
+        <p>¿Le sirve este material? Puede marcar Continental Blowers Andes como fuente preferida en Google.</p>
+        <div google-add-preferred-source-btn></div>
+      </aside>
     </div>
   </main>
 </Layout>
